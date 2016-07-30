@@ -86,6 +86,67 @@
   <div class="post-content">
     
       </p>
+<h3 id="在设置canvas的宽度与高度时-不能使用px后缀。"><a href="#在设置canvas的宽度与高度时-不能使用px后缀。" class="headerlink" title="在设置canvas的宽度与高度时,不能使用px后缀。"></a>在设置canvas的宽度与高度时,不能使用px后缀。</h3><p>在默认情况下,浏览器所创建的canvas元素的尺寸是:300px*150px。</p>
+<p>可以通过设置canvas元素的width和height属性来改变canvas的尺寸,width和height的值均不带单位,且为非负整数,例如:</p>
+<pre><code>&lt;canvas id=&quot;canvas&quot; width=&quot;600&quot; height=&quot;300&quot;&gt;您的浏览器不支持Canvas!&lt;/canvas&gt;
+</code></pre><p>也可以通过设置CSS设置canvas的尺寸,例如:</p>
+<pre><code>#canvas{
+    width: 600px;
+    height: 300px;
+}
+</code></pre><p>canvas元素实际是有两种尺寸的:</p>
+<ul>
+<li>元素本身的大小;</li>
+<li>元素的绘图表面的大小。</li>
+</ul>
+<p>因此上述两种设置canvas尺寸的方式是有区别的:</p>
+<ul>
+<li>使用直接设置canvas元素的width和height属性这种方式,将会同时修改canvas的两种尺寸。</li>
+<li>使用CSS修改canvas元素尺寸的方式,将会只改变canvas元素本身的带下,浏览器会相应的对绘图表面进行缩放。</li>
+</ul>
+<p>下图是通过两种方式将canvas元素设置为同样大小时的效果,可以看到,第二种方式由于只修改了canvas元素本身的大小,浏览器对canvas的绘图表面进行了放大,因此应尽量使用第一种方式调整canvas的尺寸。<br><img style="width: 50%" src="http://7xtoaz.com1.z0.glb.clouddn.com/Canvas-Basic01.png" /></p>
+<h3 id="Canvas的API"><a href="#Canvas的API" class="headerlink" title="Canvas的API"></a>Canvas的API</h3><p>canvas元素并未提供很多API,实际上,它只提供了两个属性和三个方法:</p>
+<ul>
+<li>两个属性:<ul>
+<li>width,非负整数,默认值为300</li>
+<li>height,非负整数,默认值为150</li>
+</ul>
+</li>
+<li>三个方法:<ul>
+<li>getContext(),获取绘图环境对象。</li>
+<li>toDataURL(type, quality),返回一个数据地址,你可以将它设定为img元素的src属性值。</li>
+<li>toBlob(callback, type, args),创建一个用于表示此canvas元素图像文件的Blob。</li>
+</ul>
+</li>
+</ul>
+<h3 id="getContext-‘2d’"><a href="#getContext-‘2d’" class="headerlink" title="getContext(‘2d’)"></a>getContext(‘2d’)</h3><p>在JavaScript中很少直接使用到canvas元素本身,而会通过getContext()获取到绘图的上下文环境,这个绘图环境提供了很多功能强大的API,可以用来绘制图形与文本,显示并修改图像等。例如:</p>
+<pre><code>var canvas = document.getElementById(&#39;canvas&#39;),
+    context = canvas.getContext(&#39;2d&#39;);
+</code></pre><p>canvas的绘图环境目前只支持’2d’(只能为小写)。</p>
+<p>CanvasRenderingContext2D对象所含的属性:</p>
+<ul>
+<li>canvas:指向该绘图环境所属的对象。</li>
+<li>fillStyle:指定该绘图环境在后续的图形填充操作中所使用的颜色、渐变色或图案。</li>
+<li>globalAlpha:全局透明度设定,值为0(完全透明)-1.0(完全不透明)之间的值。浏览器会将每个像素的alpha值与该值相乘,在绘制图像时也是如此。</li>
+<li>globalCompiteOperation:该值决定了浏览器将某个物件绘制在其他物体之上时,所采用的绘制方式。</li>
+<li>lineCap:该值告诉浏览器如何绘制线段的端点。取值为:butt(默认)、round、square。</li>
+<li>lineWidth:该值决定了canvas在绘制线段时画笔的宽度。值为非负、非无穷的double值。默认值为1.0。</li>
+<li>lineJoin:告诉浏览器在两条线段相交时如何绘制交点。取值为:bevel、round、miter(默认)。</li>
+<li>miterLimit:告诉浏览器如何绘制miter形式的线段交点。</li>
+<li>shadowBlur:该值决定了浏览器该如何延伸阴影效果。值越高,阴影效果延伸的越远。值为非负、非无穷的doble值。默认值为0。</li>
+<li>shadowColor:该值决定了浏览器使用哪种颜色来绘制绘制阴影。</li>
+<li>shadowOffsetX:该值决定了阴影效果的水平方向偏移量。</li>
+<li>shadowOffsetY:该值决定了阴影效果的垂直方向偏移量。</li>
+<li>strokeStyle:该值指定了对路径进行描边时所使用的绘制风格。该值可被设定为某个颜色、渐变色或图案。</li>
+<li>textAlign:决定了以fillText()或strokeText()方法进行绘制时,所画文本的水平对齐方式。</li>
+<li>textBaseline:决定了以fillText()或strokeText()方法进行绘制时,所画文本的垂直对齐方式。</li>
+</ul>
+<h3 id="保存与恢复canvas状态"><a href="#保存与恢复canvas状态" class="headerlink" title="保存与恢复canvas状态"></a>保存与恢复canvas状态</h3><p>canvas开发时两个常用的方法:</p>
+<ul>
+<li>save()</li>
+<li>restore()</li>
+</ul>
+<p>绘图环境的save()方法会将当前的绘图环境压入堆栈顶部。对应的restore方法则会从堆栈顶部弹出一组状态信息,并据此恢复当前绘图环境的各个状态。这意味着可以嵌套式的调用这两个方法。</p>
     
   </div>
   
