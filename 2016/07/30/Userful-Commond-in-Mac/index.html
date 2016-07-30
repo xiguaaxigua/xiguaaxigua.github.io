@@ -103,10 +103,171 @@
 <pre><code>sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;
 </code></pre><p>8.重新排列launchpad图标</p>
 <pre><code>defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
-</code></pre><h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><p>1.新建文件</p>
-<pre><code>touch xxx.txt
-</code></pre><p>2.打开目录</p>
-<pre><code>open ~/www
+</code></pre><p>9.显示隐藏文件</p>
+<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool true
+killall Finder
+</code></pre><p>10.恢复隐藏文件</p>
+<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool false
+killall Finder
+</code></pre><p>11.常用快捷键</p>
+<pre><code># 隐藏窗口
+Command + H
+
+# 最小化窗口
+Command + M
+
+# 新建
+Command + N
+
+# 打开
+Command + O
+
+# 保存
+Command + S
+
+# 另存
+Command + Shift + S
+
+# 打印
+Command + P
+
+# 关闭
+Command + W
+
+# 退出
+Command + Q
+
+# 截屏
+# 截取整个屏幕
+Command + Shift + 3
+# 截取选择区域
+Command + Shift + 4
+# 截取选择窗口
+Command + Shift + 4 + Space
+</code></pre><p>12.文件管理</p>
+<pre><code># 选择全部
+Command + A
+
+# 显示简介
+Command + I
+
+# 新建文件夹
+Command + N
+
+# 搜索
+Command + F
+
+# 复制
+Command + C
+
+# 粘贴
+Command + V
+
+# 删除
+Command + Delete
+
+# 清空回收站
+Command + Shift + delete
+</code></pre><p>13.浏览器</p>
+<pre><code># 放大
+Command + &#39;+&#39;
+
+# 缩小
+Command + &#39;-&#39;
+
+# 新建一个选项卡
+Command + T
+
+# 刷新
+Command + R
+
+# 搜索
+Command + F
+
+# 关闭当前选项卡
+Command + W
+</code></pre><p>14.系统</p>
+<pre><code># 关闭显示器
+Control + Shift + 推出键
+
+# 强制退出程序
+Command + Option + Esc
+
+# 睡眠
+Command + option + 推出键
+
+# 关闭所有应用程序并重新启动
+Command + Control + 推出键
+
+# 用当前选中的文字生成便签
+Command + Shift + Y
+
+# 切换输入法
+Command + Space
+</code></pre><h1 id="前往指定文件夹"><a href="#前往指定文件夹" class="headerlink" title="前往指定文件夹"></a>前往指定文件夹</h1><p>Shift + Command + G</p>
+<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><pre><code># 列出文件
+ls
+
+# 转换目录
+cd
+
+# 新建目录
+mkdir dirName
+
+# 删除目录
+rmdir dirName
+
+# 新建文件
+touch fileName
+
+# 删除文件
+rm options fielName
+
+# 移动文件
+mv fileName targetDirName
+# 例如:
+# mv ~/aaa/demo.txt ~/bbb
+
+# 复制文件
+cp fileName1 fileName2
+
+# 显示或者连接文件
+cat fileName
+
+# 显示文件的最初几行
+head -20 fileName
+
+# 显示文件的最后几行
+tail -20 fileName
+
+# 比较两个文件的差异
+diff fileName1 fileName2
+
+# 去掉文件中重复的行
+
+# 编辑文本
+nano fileName
+
+# nano保存编辑文件
+Control + O
+
+# nano剪切
+Control + K
+
+# nano粘贴
+Control + U
+
+# nano搜索
+Control + W
+
+# 退出nano
+Control + X
+
+# 新建.sh文件
+touch demo.sh
+
+# 执行.sh文件
+sh demo.sh
 </code></pre>
     
   </div>
@@ -124,7 +285,7 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/30/Userful-
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/07/30/Canvas-Basics/">
+        <a class="btn btn-success" role="button" href="/2016/07/28/Gulp-Introduction/">
           上一篇
         </a></li>
       
