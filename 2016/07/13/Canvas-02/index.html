@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第二个Canvas—倒计时 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="第二个Canvas—倒计时"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">第二个Canvas—倒计时</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-13T12:05:45.000Z">2016-07-13</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Canvas/">Canvas</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p>学习的第一步是模仿，先来个效果图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/canvas2.jpg" alt=""></p>
+<p>Canvas-倒计时Demo页面：<a href="http://7xtoaz.com1.z0.glb.clouddn.com/Canvas2.html">点击访问</a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="整体逻辑"><a href="#整体逻辑" class="headerlink" title="整体逻辑"></a>整体逻辑</h3><ul>
+<li>1.事先设定好一个时间，推算出需要倒计时的时间。博主的Demo里写死的3个小时。</li>
+<li>2.根据点阵数组（姑且这么叫吧，看到<a href="http://7xtoaz.com1.z0.glb.clouddn.com/canvas2-Digit.js">源代码</a>你就知道怎么回事了）绘制每一个时间元素及冒号，比如：<code>12:01:00</code> 中，每一个数字和冒号都要依序绘制。</li>
+<li>3.检测时间的变化，并重新绘制canvas，实现倒计时的效果。</li>
+<li>4.检测时间的变化，在变化的数字处生成随机颜色、随机速度、随机加速度的小球。</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>Demo分为三个文件：</p>
+<ul>
+<li>demo.html</li>
+<li>digit.js</li>
+<li>demo.js</li>
+</ul>
+<p>demo.html部分：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Canvas-倒计时&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id=&quot;canvas&quot; style=&quot;margin: 0 auto&quot;&gt;&lt;/canvas&gt;
+
+    &lt;script src=&quot;digit.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;demo.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>digit.js部分不再赘述，自己查看源代码。</p>
+<p>demo.js部分：</p>
+<pre><code>!(function() {
+    var canvasWidth = 900;
+    var canvasHeight = 300;
+    var canvasMarginTop = 20;
+    var canvasMarginLeft = 120;
+    var nowTime = new Date();
+    var endTime = new Date(nowTime.getTime() + 3 * 60 * 60 * 1000);
+    var digitColor = &#39;rgba(29, 149, 49, 0.5)&#39;;
+    var digitRadius = 5;
+    var balls = [];
+    var colors = [&quot;#980000&quot;, &quot;#ff0000&quot;, &quot;#ffff00&quot;, &quot;#00ff00&quot;, &quot;#00ffff&quot;, &quot;#4a86e8&quot;, &quot;#0000ff&quot;, &quot;#9900ff&quot;, &quot;#ff00ff&quot;];
+    var textLeft = 120;
+    var textTop = 200;
+    var text = &#39;— Hello Canvas!&#39;;
+
+    var canvas = document.getElementById(&#39;canvas&#39;);
+    var context = canvas.getContext(&#39;2d&#39;);
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    canvas.style.display = &#39;block&#39;;
+    canvas.style.margin = &#39;0 auto&#39;;
+
+    var showTime = getCurrentTime();
+
+    setInterval(
+        function() {
+            render(showTime, context);
+            update(context);
+        }, 50);
+
+    // 返回倒计时的时间
+    function getCurrentTime() {
+        var currentTime = new Date();
+
+        // getTime()获得时间戳
+        var res = endTime.getTime() - currentTime.getTime();
+
+        // 获得秒数
+        res = Math.round(res / 1000);
+
+        return res &gt;= 0 ? res : 0;
+    }
+
+    // 渲染当前时间
+    function render(showTime, context) {
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+        var hours = parseInt(showTime / 3600);
+        var minutes = parseInt((showTime - hours * 3600) / 60);
+        var seconds = showTime % 60;
+
+        // 小时
+        renderDigit(canvasMarginLeft, canvasMarginTop, parseInt(hours / 10), context);
+        renderDigit(canvasMarginLeft + 15 * (digitRadius + 1), canvasMarginTop, parseInt(hours % 10), context);
+
+        // 冒号
+        renderDigit(canvasMarginLeft + 30 * (digitRadius + 1), canvasMarginTop, 10, context);
+
+        // 分钟
+        renderDigit(canvasMarginLeft + 39 * (digitRadius + 1), canvasMarginTop, parseInt(minutes / 10), context);
+        renderDigit(canvasMarginLeft + 54 * (digitRadius + 1), canvasMarginTop, parseInt(minutes % 10), context);
+
+        //冒号
+        renderDigit(canvasMarginLeft + 69 * (digitRadius + 1), canvasMarginTop, 10, context);
+        renderDigit(canvasMarginLeft + 78 * (digitRadius + 1), canvasMarginTop, parseInt(seconds / 10), context);
+        renderDigit(canvasMarginLeft + 93 * (digitRadius + 1), canvasMarginTop, parseInt(seconds % 10), context);
+
+        for (var i = 0; i &lt; balls.length; i++) {
+            context.fillStyle = balls[i].color;
+
+            context.beginPath();
+            context.arc(balls[i].x, balls[i].y, digitRadius, 0, 2 * Math.PI, true);
+            context.closePath();
+
+            context.fill();
+        }
+    }
+
+    // 渲染球
+    function renderDigit(x, y, num, context) {
+
+        context.fillStyle = digitColor;
+
+        for (var i = 0; i &lt; digit[num].length; i++) {
+            for (var j = 0; j &lt; digit[num][i].length; j++) {
+
+                if (digit[num][i][j] == 1) {
+                    context.beginPath();
+                    context.arc(x + j * 2 * (digitRadius + 1) + (digitRadius + 1), y + i * 2 * (digitRadius + 1) + (digitRadius + 1), digitRadius, 0, 2 * Math.PI)
+                    context.closePath();
+
+                    context.fill();
+                }
+            }
+        }
+    }
+
+    function update(context) {
+        var nextShowTime = getCurrentTime();
+
+        var nextHours = parseInt(nextShowTime / 3600);
+        var nextMinutes = parseInt((nextShowTime - nextHours * 3600) / 60);
+        var nextSeconds = nextShowTime % 60;
+
+        var hours = parseInt(showTime / 3600);
+        var minutes = parseInt((showTime - hours * 3600) / 60);
+        var seconds = showTime % 60;
+
+        if (nextSeconds != seconds) {
+            if (parseInt(hours / 10) != parseInt(nextHours / 10)) {
+                addBalls(canvasMarginLeft, canvasMarginTop, parseInt(hours / 10));
+            }
+            if (parseInt(hours % 10) != parseInt(nextHours % 10)) {
+                addBalls(canvasMarginLeft + 15 * (digitRadius + 1), canvasMarginTop, parseInt(hours / 10));
+            }
+            if (parseInt(minutes / 10) != parseInt(nextMinutes / 10)) {
+                addBalls(canvasMarginLeft + 39 * (digitRadius + 1), canvasMarginTop, parseInt(minutes / 10));
+            }
+            if (parseInt(minutes % 10) != parseInt(nextMinutes % 10)) {
+                addBalls(canvasMarginLeft + 54 * (digitRadius + 1), canvasMarginTop, parseInt(minutes % 10));
+            }
+            if (parseInt(seconds / 10) != parseInt(nextSeconds / 10)) {
+                addBalls(canvasMarginLeft + 54 * (digitRadius + 1), canvasMarginTop, parseInt(seconds % 10));
+            }
+            if (parseInt(seconds % 10) != parseInt(nextSeconds % 10)) {
+                addBalls(canvasMarginLeft + 93 * (digitRadius + 1), canvasMarginTop, parseInt(seconds % 10));
+            }
+            showTime = nextShowTime;
+        }
+        updateBalls();
+        renderText(context);
+    }
+
+    function updateBalls() {
+        for (var i = 0; i &lt; balls.length; i++) {
+            balls[i].x += balls[i].vx;
+            balls[i].y += balls[i].vy;
+            balls[i].vy += balls[i].g;
+
+            // 碰撞检测
+            if (balls[i].y &gt;= canvasHeight - digitRadius) {
+                balls[i].y = canvasHeight - digitRadius;
+                balls[i].vy = -balls[i].vy * 0.6;
+            }
+        }
+    }
+
+    function addBalls(x, y, num) {
+        for (var i = 0; i &lt; digit[num].length; i++) {
+            for (var j = 0; j &lt; digit[num][i].length; j++) {
+
+                if (digit[num][i][j] == 1) {
+                    var aBall = {
+                        x: x + j * 2 * (digitRadius + 1) + (digitRadius + 1),
+                        y: y + i * 2 * (digitRadius + 1) + (digitRadius + 1),
+                        g: 1.5 + Math.random(),
+                        vx: Math.pow(-1, Math.ceil(Math.random() * 1000)) * 5,
+                        vy: -5,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    }
+                    balls.push(aBall);
+                }
+            }
+        }
+    }
+
+    function renderText(context) {
+        // 文字
+        context.font = &#39;30px 微软雅黑&#39;;
+        context.fillStyle = &#39;#1d9531&#39;;
+        context.fillText(text, textLeft, textTop);
+    }
+
+})();
+</code></pre><h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ul>
+<li><code>var endTime = new Date(2016, 6, 14, 00, 00, 00)</code> 当前创建的时间中的月份是7月而不是6月！0是一月，好坑啊。</li>
+<li>随机获取 <code>5</code> 或者 <code>-5</code>：<pre><code>  var randNum= Math.pow(-1, Math.ceil(Math.random() * 1000)) * 5;
+</code></pre></li>
+<li>清空指定canvas中指定位置的图像：<a href="http://www.w3school.com.cn/tags/canvas_clearrect.asp">W3C中的解释</a><pre><code>  var canvasWidth = 1000;
+  var canvasHeight = 500;
+  var canvas = document.getElementById(&#39;canvas&#39;);
+  var context = canvas.getContext(&#39;2d&#39;);
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  context.clearRect(0, 0, canvasWidth, canvasHeight);
+</code></pre></li>
+<li>循环：<code>setInterval(function(){}, 100);</code> 。</li>
+<li>圆的绘制：<a href="http://www.w3school.com.cn/tags/canvas_arc.asp">W3C中的解释</a><pre><code>  context.arc(圆心x坐标, 圆心y坐标, 半径, 起始角, 结束角, 绘制方向);
+</code></pre></li>
+<li>文字的绘制：<a href="http://www.w3school.com.cn/tags/canvas_filltext.asp">W3C中的解释</a><pre><code>  context.fillText(要绘制的文本, 开始绘制处的x坐标, 开始绘制处的y坐标, 允许的最大文本宽度);
+</code></pre></li>
+<li>获取时间，通过时间戳获取秒数，并计算小时、分钟、秒数。</li>
+</ul>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>Canvas是JavaScript和高数的碰撞！</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/13/Canvas-02/" data-addthis-title="第二个Canvas—倒计时">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/12/Canvas-01/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/14/Canvas-03/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/13/Canvas-02/" data-title="第二个Canvas—倒计时" data-url="http://xiguaaxigua.cn/2016/07/13/Canvas-02/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>版本控制和差异分析 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="版本控制和差异分析"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">版本控制和差异分析</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-06-24T14:50:13.000Z">2016-06-24</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/工具/">工具</a>, <a class="tag-a" href="/tags/工作记录/">工作记录</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p>工作中难免要和同事共同开发，版本控制显得尤为重要，博主经常用到的版本控制工具有TortoiseSVN（传说中的“小乌龟”）和GIT，用到的处理代码冲突的工具有Beyond Compare。写到这里，夜深了，突然想起来好久都没有听过歌了，这里放一首Beyond的《海阔天空》吧，</p>
+<audio src="http://7xtoaz.com1.z0.glb.clouddn.com/%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA.mp3" controls></audio>
+
+<h2 id="小乌龟"><a href="#小乌龟" class="headerlink" title="小乌龟"></a>小乌龟</h2><p><a href="https://tortoisesvn.net/">官网地址</a>，很好用的SVN工具，在处理代码冲突的时候比GIT好用。</p>
+<p>拉代码的步骤如下：</p>
+<p>1.安装成功后如图，打开“TortoiseSVN Repository Brower”。</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/svn1.png" alt=""></p>
+<p>2.打开键入你环境的地址，输入你的账号密码即可。</p>
+<p>3.待续吧。。。</p>
+<h2 id="新时代新青年的选择——Git"><a href="#新时代新青年的选择——Git" class="headerlink" title="新时代新青年的选择——Git"></a>新时代新青年的选择——Git</h2><h3 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h3><p>Git是一个免费的、分布式的版本控制工具，或是一个强调了速度快的源代码工具。</p>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><ul>
+<li><code>git clone &lt;url&gt;</code>克隆远程仓库到本地</li>
+<li><code>git init</code>初始化</li>
+<li><code>git pull</code>更新远程仓库到本地</li>
+<li><code>git push</code>将本地代码上传到远程仓库</li>
+<li><code>git revert</code>还原一个版本的修改，必须提供一个具体的git版本号</li>
+<li><code>git log</code>查看历史记录</li>
+<li><code>git commit</code>提交</li>
+<li><code>git rm</code>从当前的工作空间中删除文件</li>
+<li><code>git add</code>添加文件到缓存区</li>
+</ul>
+<h3 id="基本指令-1"><a href="#基本指令-1" class="headerlink" title="基本指令"></a>基本指令</h3><ul>
+<li><code>git config --global user.name &quot;Your Name&quot;</code></li>
+<li><code>git config --global user.email &quot;by_openwater@163.com&quot;</code></li>
+<li><code>git config --global core.editor Sublime</code></li>
+<li><code>git init</code>初始化一个新仓库</li>
+<li><code>git help &lt;command&gt;</code>获取某个指令的帮助信息</li>
+</ul>
+<h3 id="Commit指令"><a href="#Commit指令" class="headerlink" title="Commit指令"></a>Commit指令</h3><p>commit的时候发生了什么？<br><img src="https://i.imgur.com/B0w11nb.png" alt=""></p>
+<p>Working Directory开发目录<br>Staging Area缓存区<br>Repository远程仓库</p>
+<ul>
+<li><code>git add Demo.html</code>添加一个文件到缓存区</li>
+<li><code>git add .</code>添加所有文件到缓存区</li>
+<li><code>git add *.js</code>添加所有的js文件到缓存区</li>
+<li><code>git rm --cached Demo.html</code>删除缓存区中的<code>demo.html</code>文件</li>
+<li><code>git commit -m &quot;Your Notes&quot;</code>提交文件并注释</li>
+<li><code>git log</code>查看提交记录</li>
+</ul>
+<h3 id="缓存区指令"><a href="#缓存区指令" class="headerlink" title="缓存区指令"></a>缓存区指令</h3><ul>
+<li><code>git reset HEAD &lt;fileName&gt;</code>从缓存区删除一个文件</li>
+<li><code>git reset HEAD</code>清空缓存区</li>
+<li><code>git checkout &lt;filename&gt;</code>撤回对该文件的修改（并从缓存区删除该文件）</li>
+<li><code>git commit -m &quot;A demo commit&quot; --amend</code>添加/修改在缓存区的最后一次提交的文件</li>
+<li><code>git commit -v -a --amend</code>添加/修改在缓存区的最后一次提交的文件</li>
+<li>.gitignore 设置不想被git管理的文件</li>
+<li><code>git diff &lt;filename&gt;</code>查看当前文件与仓库中文件的差异</li>
+<li><code>git diff</code>查看所有文件与仓库中文件的差异</li>
+<li><code>git reset HEAD~2 --soft</code>从仓库中删除最近两次提交，但是不舍弃这些文件的更改</li>
+<li><code>git reset HEAD~2 --hard</code>从仓库中删除最近两次提价，并舍弃这些文件的更改</li>
+<li><code>git reset &lt;commit&gt; --soft --hard</code><ul>
+<li><code>--soft</code>将所有被更改的文件复原到“待提交”的状态</li>
+<li><code>--hard</code>commit之后，对被git管理的文件的任何更改都被丢弃</li>
+</ul>
+</li>
+<li><code>git reflog</code>显示所有commit（包括被删除的）</li>
+<li><code>git merge &lt;commit hash&gt;</code>重新commit</li>
+<li><code>git clean -f</code>删除开发目录中没有被git管理的文件</li>
+</ul>
+<h3 id="储藏区指令"><a href="#储藏区指令" class="headerlink" title="储藏区指令"></a>储藏区指令</h3><ul>
+<li><code>git stash</code>将缓存区的文件移动到储藏区（类似于另一种类型的工作区）</li>
+<li><code>git stash list</code>查看储藏队列</li>
+<li><code>git stash apply</code>将最近一次储藏恢复到缓存区</li>
+<li><code>git stash clean</code>清空储藏队列</li>
+<li><code>git stash save &quot;Name of Stash&quot;</code>命名一个储藏区</li>
+<li><code>git stash pop</code>将最近一次储藏恢复到缓存区并从储藏队列删除此储藏</li>
+<li><code>git stash drop</code>从储藏队列删除最后一次储藏</li>
+<li><code>git stash drop stash@{2}</code>从储藏队列删除指定储藏</li>
+</ul>
+<h3 id="分支指令，对本质的增、删、查等操作。"><a href="#分支指令，对本质的增、删、查等操作。" class="headerlink" title="分支指令，对本质的增、删、查等操作。"></a>分支指令，对本质的增、删、查等操作。</h3><ul>
+<li><code>git branch &lt;branchName&gt;</code>创建一个名为branchName分支（将切换为当前分支）</li>
+<li><code>git branch</code>查看所有分支</li>
+<li><code>git checkout master</code>切换到主分支</li>
+<li><code>git merge &lt;branch&gt;</code>合并分支</li>
+<li><code>git rebase master</code>现将master上的更改合并到当前分支，再添加当前分支的更改，如果有冲突，解决冲突后加<code>--continue</code>参数继续合并</li>
+<li><code>git branch -d &lt;branch&gt;</code>删除分支，-D则强制删除分支</li>
+<li><code>git merge &lt;branch&gt; --squash</code>将多次提价合并成一个，其流程如下：</li>
+</ul>
+<pre><code># Go to the `master` branch
+git checkout master
+
+# Create a temp branch
+git checkout -b temp
+
+# Merge the feature/x branch into the temp using --squash
+git merge feature/x --squash
+
+# See the new modifications/files in the Staging Area
+git status
+
+# Create the unified commit
+git commit -m &quot;Add feature/x&quot;
+
+# Delete the feature/x branch
+git branch -D feature/x
+</code></pre><p>rebase和merge的区别：</p>
+<ul>
+<li>rebase：<ul>
+<li>提交历史是线性的</li>
+<li>缺点：会删除最近一个commit，然后创建一次新的commit</li>
+<li>如果已提交到远程，不要使用rebase</li>
+</ul>
+</li>
+<li>merge：<ul>
+<li>提交历史是分叉的</li>
+<li>对于两个分支的合并，会创建一次新的commit</li>
+</ul>
+</li>
+</ul>
+<h3 id="远程仓库管理"><a href="#远程仓库管理" class="headerlink" title="远程仓库管理"></a>远程仓库管理</h3><ul>
+<li><code>git remote add &lt;name&gt; &lt;url&gt;</code>添加一个将被追踪的远程仓库</li>
+<li><code>git remote rm &lt;name&gt;</code>移除一个远程仓库</li>
+<li><code>git push &lt;remote&gt; &lt;remote-branch&gt;</code>将当前分支的本地commit推送到远程仓库</li>
+<li><code>git fetch &lt;remote&gt; &lt;remote-branch&gt;</code>拉取远程仓库的最新commit到当前分支，不会合并</li>
+<li><code>git pull &lt;remote&gt; &lt;remote-branch&gt;</code>拉取远程仓库的最新commit到当前分支，并自动merge</li>
+<li><code>git pull --rebase</code>以rebase的方式进行合并，而不是merge</li>
+</ul>
+<h3 id="其他有用的命令"><a href="#其他有用的命令" class="headerlink" title="其他有用的命令"></a>其他有用的命令</h3><ul>
+<li><code>git tag &lt;name&gt;</code>创建一个tag</li>
+<li><code>git push --tags</code>将本地tags推送到远程仓库</li>
+<li><code>git push &lt;tags&gt;</code>推送到指定的本地tag到远程</li>
+</ul>
+<h2 id="冲突分析工具——Beyond-Compare"><a href="#冲突分析工具——Beyond-Compare" class="headerlink" title="冲突分析工具——Beyond Compare"></a>冲突分析工具——Beyond Compare</h2>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/06/24/Version-Controller-And-Difference-Analysis/" data-addthis-title="版本控制和差异分析">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/06/23/A-Fucking-Hole-in-the-Array-of-JavaScript/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/06/25/How-did-I-Complete-Search-and-Save-it/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/06/24/Version-Controller-And-Difference-Analysis/" data-title="版本控制和差异分析" data-url="http://xiguaaxigua.cn/2016/06/24/Version-Controller-And-Difference-Analysis/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

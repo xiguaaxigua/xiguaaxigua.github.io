@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Zepto中tap事件的“穿透”问题 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="Zepto中tap事件的“穿透”问题"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">Zepto中tap事件的“穿透”问题</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-17T08:12:24.000Z">2016-07-17</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/框架/">框架</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="“穿透”是什么"><a href="#“穿透”是什么" class="headerlink" title="“穿透”是什么"></a>“穿透”是什么</h2><p>代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+    .inner{
+        width: 100px;
+        height: 100px;
+        background: #f00;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .outter{
+        width: 200px;
+        height: 200px;
+        background: green;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;outter&quot;&gt;
+
+    &lt;/div&gt;
+    &lt;div class=&quot;inner&quot;&gt;
+
+    &lt;/div&gt;
+    &lt;script src=&quot;../zepto.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+
+        $(&#39;.inner&#39;).tap(function(){
+            $(this).hide();
+        });
+        $(&#39;.outter&#39;).click(function(){
+            alert(&#39;你点到我了&#39;);
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>可以看到，当点击inner的时候，inner会消失，但是也会触发绑定在outter上的alert事件。这就是Zepto中tap事件的“穿透”bug。</p>
+<h3 id="解决办法1"><a href="#解决办法1" class="headerlink" title="解决办法1"></a>解决办法1</h3><p>用touchend事件代替tap事件，并阻止touchend默认的行为。</p>
+<pre><code>$(&#39;.inner&#39;).on(&#39;touchend&#39;, function(e){
+    $(this).hide();
+
+    e.preventDefault();
+});
+</code></pre><h3 id="解决办法2"><a href="#解决办法2" class="headerlink" title="解决办法2"></a>解决办法2</h3><p>延迟处理tap后需要处理的事件。这种方式适合添加一些渐变，但大多数情况下并没有解决“300ms延迟”的问题。</p>
+<pre><code>$(&#39;.inner&#39;).on(&#39;tap&#39;, function(e){
+
+    setTimeout(function(){
+        $(&#39;.inner&#39;).hide();
+    }, 320);
+});
+</code></pre><h3 id="解决办法3"><a href="#解决办法3" class="headerlink" title="解决办法3"></a>解决办法3</h3><p>使用FastClick插件，项目地址：<a href="https://github.com/ftlabs/fastclick">https://github.com/ftlabs/fastclick</a>。</p>
+<p>原生js：</p>
+<pre><code>window.addEventListener(&#39;load&#39;, function() {
+  FastClick.attach(document.body);
+}, false);
+</code></pre><p>Zepto中：</p>
+<pre><code>$(function() {
+  FastClick.attach(document.body);
+});
+</code></pre><p>RequireJS中：</p>
+<pre><code>var attachFastClick = require(&#39;fastclick&#39;);
+attachFastClick(document.body);
+</code></pre><h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>既然Zepto存在bug为什么这么久了都没有人修复呢？为什么不借鉴FastClick的思想呢？</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/17/Zepto-tap-event-bug/" data-addthis-title="Zepto中tap事件的“穿透”问题">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/16/some-confusions-in-developing-plugins/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/18/SeaJS-notes/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/17/Zepto-tap-event-bug/" data-title="Zepto中tap事件的“穿透”问题" data-url="http://xiguaaxigua.cn/2016/07/17/Zepto-tap-event-bug/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

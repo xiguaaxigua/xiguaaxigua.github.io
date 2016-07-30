@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>017-使用过滤器格式化数据-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="017-使用过滤器格式化数据-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">017-使用过滤器格式化数据-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-13T03:55:08.000Z">2016-05-13</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>数据的格式化（过滤器）与处理数据的逻辑是无关的，过滤器应该存放在模板中，这点类似于Smarty。</li>
+<li>本文讲述Angular中Filter的使用。</li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>你可以使用过滤器来声明应该如何变换数据格式，然后再显示给用户，你只要在模板中使用一个插值变量即可。使用过滤器的语法是：</p>
+<pre><code>{{expression | filterName : parameter1 : ... parameterN}}
+</code></pre><p>这里的表达式可以是任意的Angular表达式，filterName是你需要使用的过滤器名称，过滤器的多个参数之间使用冒号分隔。这些参数自身也可以是任何合法的Angular表达式。</p>
+<p>Angular内置了很多过滤器，例如我们在前面见过的currency：</p>
+<pre><code>{{12.9 | currency}}
+</code></pre><p>以上代码将会显示如下结果：</p>
+<p>$12.9</p>
+<p>我们把插值变量声明在视图里面（而不是在控制器或者模型里面），里面数字前面的美元符号对人类来说很重要，而对我们用来处理数值的逻辑来说是没有意义的。</p>
+<p>Angular内置的其他过滤器还有date、number、uppercase等。</p>
+<p>在绑定的过程中，可以用管道符号把过滤器连接起来。例如，对于上面这个例子，我们可以加一个number过滤器来把小数点后边的数值格式化掉，number过滤器会把数值作为参数传递给round函数。所以：</p>
+<pre><code>{{12.9 | currency | number:0}}
+</code></pre><p>将会显示成：</p>
+<p>$13</p>
+<p>你不必受限于内置的过滤器，自己编写过滤器也非常简单。例如，如果我们需要为标题文字创建首字母大写的字符串，可以像下面这样做：</p>
+<pre><code>var homeModule = angular.module(&#39;HomeModule&#39;, []);
+
+homeModule.filter(&#39;titleCase&#39;, function(){
+    var titleCaseFilter = function(input){
+        var words = input.split(&#39; &#39;);
+
+        for(var i=0; i&lt;words.length; i++){
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+        }
+
+        return words.join(&#39; &#39;);
+    }
+
+    return titleCaseFilter;
+})
+</code></pre><p>对应的模板如下：</p>
+<pre><code>&lt;body ng-app=&quot;HomeModule&quot; ng-controller=&quot;HomeController&quot;&gt;
+    &lt;h1&gt;{{pageHeading | titleCase}}&lt;/h1&gt;
+&lt;/body&gt;
+</code></pre><p>然后通过控制器把pageHeading作为一个模型变量插入进去：</p>
+<pre><code>function HomeController($scope){
+    $scope.pageHeading = &#39;behold the majesty of your page title&#39;;
+}
+</code></pre><p>我们将会看到如下图所示效果：</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/xigua_angular_007" alt=""></p>
+<p>完整代码如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=&quot;myApp&quot; ng-controller=&quot;HomeController&quot;&gt;
+    &lt;h1&gt;{{pageHeading | titleCase}}&lt;/h1&gt;
+
+    &lt;script&gt;
+        var app = angular.module(&#39;myApp&#39;, []);
+
+        app.filter(&#39;titleCase&#39;, function(){
+            var titleCaseFilter = function(input){
+                var words = input.split(&#39; &#39;);
+
+                for(var i=0; i&lt;words.length; i++){
+                    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+                }
+
+                return words.join(&#39; &#39;);
+            }
+
+            return titleCaseFilter;
+        });
+
+        app.controller(&#39;HomeController&#39;, function($scope){
+            $scope.pageHeading = &#39;behold the majesty of your page title&#39;;
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/13/angular-note-017/" data-addthis-title="017-使用过滤器格式化数据-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-016/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/13/angular-note-018/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/13/angular-note-017/" data-title="017-使用过滤器格式化数据-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/13/angular-note-017/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

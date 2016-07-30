@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第四个Canvas—小黄人 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="第四个Canvas—小黄人"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">第四个Canvas—小黄人</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-20T13:11:22.000Z">2016-07-20</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Canvas/">Canvas</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p>效果图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/canvas4.jpg" alt=""></p>
+<p>Canvas-小黄人页面，<a href="http://7xtoaz.com1.z0.glb.clouddn.com/Canvas-Minions.html">点击访问</a>。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>实现思路，小黄人是像素画，可以看到由黄色、黑色、蓝色的正方形组成。因此，只要在合适的位置画一个正方形就可以了。</p>
+<p>先定义几个颜色：</p>
+<pre><code>var white = &#39;#fff&#39;,
+    yellow = &#39;#FCFA3A&#39;, 
+    blue = &#39;#4FAAFB&#39;, 
+    black = &#39;#0F0E0F&#39;,
+    green = &#39;#1d9531&#39;;
+</code></pre><p>那么怎么确定正方形的位置呢？我把这些位置定义在了一个二维数组中。arr[i]代表小黄人的每一行，arr[i][j]代表每一行里的每一个方块。0表示填充颜色为白色，1表示填充颜色为黄色，2表示填充颜色为黑色，3表示填充颜色为蓝色。</p>
+<pre><code>var arr = [
+    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 2, 1, 1, 2, 1, 1, 0],
+    [0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
+    [0, 1, 1, 2, 1, 1, 2, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [1, 1, 1, 1, 2, 2, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+    [0, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+    [0, 0, 3, 3, 3, 3, 3, 3, 0, 0],
+    [0, 0, 0, 3, 0, 0, 3, 0, 0, 0],
+    [0, 0, 2, 2, 0, 0, 2, 2, 0, 0]
+];
+</code></pre><p>再写一个画正方形的方法：x为起点横坐标，y为起点纵坐标，color为当前正方形的填充颜色，context为上下文环境。</p>
+<pre><code>function drawSquare(x, y, color, context){
+    context.beginPath();
+    context.fillStyle = color;
+    context.fillRect(x+2, y+2, 16, 16);
+    context.closePath();
+}
+</code></pre><p>万事俱备，现在开始循环数组：</p>
+<pre><code>for(var i=0; i&lt; arr.length; i++){
+    var x = 0;
+    var y = 0;
+    var color = &#39;&#39;;
+    y = 20 * i;
+
+    for(var j=0; j&lt; arr[i].length; j++){
+        x = 20 * j;
+        switch (arr[i][j]){
+            case 0:
+                color = white;
+                break;
+            case 1:
+                color = yellow;
+                break;
+            case 2: 
+                color = black;
+                break;
+            case 3:
+                color = blue;
+                break;
+        }
+        drawSquare(x, y, color, context);
+    }
+}
+</code></pre><p>怎么样？是不是好简单？快去画一个哄孩子哄女友吧（然而并不好使）。</p>
+<p>完整代码：</p>
+<p>HTML:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Canvas-小黄人&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id=&quot;canvas&quot; width=&quot;200&quot; height=&quot;370&quot;&gt;&lt;/canvas&gt;
+
+    &lt;script src=&quot;demo.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>js:</p>
+<pre><code>
+var canvas = document.getElementById(&#39;canvas&#39;);
+canvas.style.display = &#39;block&#39;;
+canvas.style.margin = &#39;0 auto&#39;;
+var context = canvas.getContext(&#39;2d&#39;);
+
+var white = &#39;#fff&#39;,
+    yellow = &#39;#FCFA3A&#39;, 
+    blue = &#39;#4FAAFB&#39;, 
+    black = &#39;#0F0E0F&#39;,
+    green = &#39;#1d9531&#39;;
+
+function drawSquare(x, y, color, context){
+    context.beginPath();
+    context.fillStyle = color;
+    context.fillRect(x+2, y+2, 16, 16);
+    context.closePath();
+}
+
+function drawText(green, context){
+    context.font = &#39;18px 微软雅黑&#39;;
+    context.fillStyle = green;
+    context.fillText(&#39;Hello Minions!&#39;, 37, 350);
+}
+
+var arr = [
+    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 2, 1, 1, 2, 1, 1, 0],
+    [0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
+    [0, 1, 1, 2, 1, 1, 2, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [1, 1, 1, 1, 2, 2, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+    [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+    [0, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+    [0, 0, 3, 3, 3, 3, 3, 3, 0, 0],
+    [0, 0, 0, 3, 0, 0, 3, 0, 0, 0],
+    [0, 0, 2, 2, 0, 0, 2, 2, 0, 0]
+];
+
+for(var i=0; i&lt; arr.length; i++){
+    var x = 0;
+    var y = 0;
+    var color = &#39;&#39;;
+    y = 20 * i;
+
+    for(var j=0; j&lt; arr[i].length; j++){
+        x = 20 * j;
+        switch (arr[i][j]){
+            case 0:
+                color = white;
+                break;
+            case 1:
+                color = yellow;
+                break;
+            case 2: 
+                color = black;
+                break;
+            case 3:
+                color = blue;
+                break;
+        }
+        drawSquare(x, y, color, context);
+    }
+
+}
+drawText(green, context);
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/20/Canvas-Minions/" data-addthis-title="第四个Canvas—小黄人">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/19/JavaScript-module/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/21/Flexbox-notes/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/20/Canvas-Minions/" data-title="第四个Canvas—小黄人" data-url="http://xiguaaxigua.cn/2016/07/20/Canvas-Minions/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

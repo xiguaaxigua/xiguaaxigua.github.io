@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>温习Zepto | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="温习Zepto"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">温习Zepto</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-15T12:08:58.000Z">2016-07-15</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/框架/">框架</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/zepto.jpg" alt=""></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>由于工作原因，不得已暂停Canvas大计。</p>
+<p>jQuery玩的多了，有时候在移动端顺手就写下了各种click事件，然而，click事件在移动端有两三百毫秒的延迟。至于这个延迟是怎么来的，可以参考这篇文章，<a href="http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay">What Exactly Is….. The 300ms Click Delay</a>。简单的说：Safari为了区分单击和双击，在用户点击页面后，会等待300ms，以判断用户是否点击第二次（在300ms内再次点击即为双击）。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><a href="http://zeptojs.com/">Zepto官网API</a>，这里有个坑请注意，请看下面这张图，Zepto共有17个模块，默认下载的包里只有5个模块，而且没有最重要的touch模块！我还得去Build一个自己的版本，你妹的！<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/zeptoModule.jpg" alt=""></p>
+<p>分享一下Build好的版本，<a href="http://7xtoaz.com1.z0.glb.clouddn.com/zeptoBuild.rar">点击下载</a>。<br>该版本加入了以下几个模块：</p>
+<ul>
+<li>fx_methods：让 <code>show()</code> 增加动画效果，如：<code>show(&#39;fast&#39;)</code> 。</li>
+<li>assets：移除img元素后做一些特殊处理，用来清理内存。</li>
+<li>touch：这个不多说了。</li>
+<li>selector：为了得到更多的选择器的支持。</li>
+<li>data：提供对.data()方法的完整支持，像jQuery一样用内存对象存储。</li>
+</ul>
+<p>使用Zepto的几个注意事项：</p>
+<ul>
+<li>请用tap事件代替click事件，但是Zepto的tap事件会触发击穿的bug。</li>
+<li>对于 <code>display:none</code> 的元素，使用 <code>width()</code> 或者 <code>height()</code> 返回的值是0！</li>
+<li>默认下载的zepto，不支持 <code>show()</code> 的动画效果。</li>
+</ul>
+<p>博主自作聪明的把Zepto的API按照功能归类了一番，全文分为三部分：DOM相关的API、JavaScript相关的API、核心API。</p>
+<h2 id="DOM相关"><a href="#DOM相关" class="headerlink" title="DOM相关"></a>DOM相关</h2><p>众所周知，jQuery操作DOM十分方便，作为小型jQuery的Zepto同样。<br>把DOM相关的API归类为：获取DOM和操作DOM两种类型。</p>
+<h3 id="Part1-获取DOM"><a href="#Part1-获取DOM" class="headerlink" title="Part1.获取DOM"></a>Part1.获取DOM</h3><p>通过各种条件，获取DOM。</p>
+<h4 id=""><a href="#" class="headerlink" title="$()"></a>$()</h4><p>三个功能：</p>
+<ul>
+<li>1.获取对象，和jQuery一样；<pre><code>      $(&#39;h1&#39;) // 返回所有h1元素的集合
+      $(&#39;.demoClass&#39;) // 选择类选择器为demoClass的元素集合
+      $(&#39;#demoId&#39;) // 选择ID选择器为demoId的元素集合
+      $(&#39;.sunClass&#39;, &#39;.fatherClass&#39;) // 选择fatherClass下的sunClass的元素集合，等价于：$(&#39;.fatherClass&#39;).find(&#39;.sunClass&#39;
+</code></pre></li>
+<li>2.生成元素；<pre><code>      $(&#39;&lt;p&gt;Hello!&lt;/p&gt;&#39;) // 创建一个新的p元素
+      $(&#39;&lt;p /&gt;&#39;, {text: &#39;Hello!&#39;, id: &#39;welcome&#39;, css:{color: &#39;#f00&#39;, font-size:&#39;12px&#39;}}) 
+      //创建一个带有属性的p元素，&lt;p id=&quot;welcome&quot; style=&quot;color: rgb(255, 0, 0); font-size: 12px;&quot;&gt;Hello!&lt;/p&gt;
+</code></pre></li>
+<li>3.页面加载完毕，执行回调。<code>$</code> 默认指向Zepto本身。<pre><code>  Zepto(function($){
+      console.log(&#39;Hello Zepto!&#39;);
+  })
+</code></pre></li>
+</ul>
+<h4 id="children"><a href="#children" class="headerlink" title="children()"></a>children()</h4><p>在当前匹配到的元素的子元素中查找。</p>
+<pre><code>// 选中ul下的奇数个li
+$(&#39;ul&#39;).children(&#39;li:nth-child(2n)&#39;).css(&#39;backdround&#39;, &#39;#000&#39;);
+</code></pre><h4 id="contents"><a href="#contents" class="headerlink" title="contents()"></a>contents()</h4><p>和children()很类似，只不过contents()包括文字和注释节点。</p>
+<h4 id="closest"><a href="#closest" class="headerlink" title="closest()"></a>closest()</h4><h4 id="eq-index"><a href="#eq-index" class="headerlink" title="eq(index)"></a>eq(index)</h4><p>返回当前匹配到的元素的索引为index的子元素。</p>
+<h4 id="filter-selector"><a href="#filter-selector" class="headerlink" title="filter(selector)"></a>filter(selector)</h4><pre><code>&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;h1 class=&quot;black&quot;&gt;Hello&lt;/h1&gt;
+&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;script&gt;
+$(&#39;h1&#39;).filter(&#39;.black&#39;).html(&#39;World&#39;);
+&lt;script&gt;
+
+运行结果：
+&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;h1 class=&quot;black&quot;&gt;World&lt;/h1&gt;
+&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;h1&gt;Hello&lt;/h1&gt;
+</code></pre><h4 id="find-selector"><a href="#find-selector" class="headerlink" title="find(selector)"></a>find(selector)</h4><p>在当前匹配到的元素的子元素中查找选择器为selector的元素。</p>
+<h4 id="has-selector-或者has-node"><a href="#has-selector-或者has-node" class="headerlink" title="has(selector)或者has(node)"></a>has(selector)或者has(node)</h4><p>判断当前匹配到的元素中是否包含选择器为selector的元素。如果有返回当前匹配到的元素。如果没有，也有返回值，但是不知道那是什么鬼。</p>
+<pre><code>&lt;h1&gt;Hello &lt;i&gt;World&lt;/i&gt;&lt;/h1&gt;
+&lt;script&gt;
+$(&#39;h1&#39;).has(&#39;i&#39;).css(&#39;color&#39;, &#39;#f00&#39;); // 注意，返回的是h1，而不是i。即当前运行结果为：h1变为红色
+&lt;/script&gt;
+</code></pre><h4 id="height-amp-width"><a href="#height-amp-width" class="headerlink" title="height() &amp; width()"></a>height() &amp; width()</h4><p>返回当前匹配到的元素中的第一个子元素的高度，或者设置当前匹配到的元素的高度。</p>
+<h4 id="index-index"><a href="#index-index" class="headerlink" title="index(index)"></a>index(index)</h4><p>两个用法：</p>
+<ul>
+<li>无参数index：获取当前匹配到的元素的索引。从0开始计数。</li>
+<li>有参数index：返回索引为index的元素在当前匹配到的元素中的位置，没有则返回-1。</li>
+</ul>
+<h4 id="indexOf-index-fromIndex"><a href="#indexOf-index-fromIndex" class="headerlink" title="indexOf(index, [fromIndex])"></a>indexOf(index, [fromIndex])</h4><ul>
+<li>无参数fromIndex时，在当前匹配到的元素中查找索引为index的元素，没有则返回-1。</li>
+<li>有参数formIndex时，从fromIndex向后查找，返回基于0的索引值，没有则返回-1。</li>
+</ul>
+<h4 id="last"><a href="#last" class="headerlink" title="last()"></a>last()</h4><p>返回当前匹配的元素集合中的最后一个元素。</p>
+<h4 id="next-与-prev-相反"><a href="#next-与-prev-相反" class="headerlink" title="next() 与 prev()相反"></a>next() 与 prev()相反</h4><p>获取当前匹配到的元素的下一个兄弟节点。</p>
+<h4 id="siblings"><a href="#siblings" class="headerlink" title="siblings()"></a>siblings()</h4><p>获取当前匹配到的元素的所有兄弟节点。</p>
+<h4 id="not-selector"><a href="#not-selector" class="headerlink" title="not(selector)"></a>not(selector)</h4><p>过滤掉当前匹配到的元素集合中选择器为selector的元素。</p>
+<h4 id="offsetParent"><a href="#offsetParent" class="headerlink" title="offsetParent()"></a>offsetParent()</h4><p>返回当前匹配到的元素最近的祖先定位元素。</p>
+<h4 id="parent"><a href="#parent" class="headerlink" title="parent()"></a>parent()</h4><p>返回当前匹配到的元素的直接父元素。</p>
+<h4 id="position"><a href="#position" class="headerlink" title="position()"></a>position()</h4><p>返回当前匹配到的元素的第一个子元素的位置。</p>
+<h3 id="Part2-操作DOM"><a href="#Part2-操作DOM" class="headerlink" title="Part2.操作DOM"></a>Part2.操作DOM</h3><p>对获取到的DOM进行操作的API。</p>
+<h4 id="css"><a href="#css" class="headerlink" title="css()"></a>css()</h4><p>设置或者获取样式。</p>
+<h4 id="data"><a href="#data" class="headerlink" title="data()"></a>data()</h4><p>获取自定义属性 <code>data-*</code> 中 <code>*</code> 部分的值。</p>
+<pre><code>&lt;h1 data-demo=&quot;demo&quot;&gt;Hello&lt;/h1&gt;
+&lt;script&gt;
+    console.log($(&#39;h1&#39;).data(&#39;demo&#39;)); // demo
+&lt;/script&gt;
+</code></pre><h4 id="empty"><a href="#empty" class="headerlink" title="empty()"></a>empty()</h4><p>清空当前匹配到的元素的内容，包括所有文本和节点。</p>
+<pre><code>&lt;h1&gt;Hello &lt;i&gt;World&lt;/i&gt;&lt;/h1&gt;
+&lt;script&gt;
+$(&#39;h1&#39;).empty();
+&lt;script&gt;
+
+运行结果：
+&lt;h1&gt;&lt;/h1&gt;
+</code></pre><h4 id="show-amp-hide"><a href="#show-amp-hide" class="headerlink" title="show() &amp; hide()"></a>show() &amp; hide()</h4><p>通过设置 <code>display</code> 实现显示和隐藏。</p>
+<h4 id="toggle-setting"><a href="#toggle-setting" class="headerlink" title="toggle([setting])"></a>toggle([setting])</h4><p>显示或者隐藏元素。<br>如果setting设置为true，相当于show()。<br>如果设置为false，相当于hide()。</p>
+<h4 id="toggleClass-className-setting"><a href="#toggleClass-className-setting" class="headerlink" title="toggleClass(className, [setting])"></a>toggleClass(className, [setting])</h4><p>添加或删除样式。如果存在className就删除，不存在则添加。<br>如果setting设置为true，相当于addClass()。<br>如果设置为false，相当于removeClass()。</p>
+<h4 id="html-content"><a href="#html-content" class="headerlink" title="html(content)"></a>html(content)</h4><p>获取或设置当前匹配到的元素的HTML内容。</p>
+<h4 id="text-content"><a href="#text-content" class="headerlink" title="text(content)"></a>text(content)</h4><p>获取或设置当前匹配到的元素的文本内容。</p>
+<h4 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h4><p>获取或设置当前匹配元素的值。</p>
+<h4 id="hasClass-className"><a href="#hasClass-className" class="headerlink" title="hasClass(className)"></a>hasClass(className)</h4><p>判断当前匹配到的元素中是否包含class为className的元素，返回布尔值。</p>
+<pre><code>&lt;h1 class=&#39;black&#39;&gt;Hello &lt;i&gt;World&lt;/i&gt;&lt;/h1&gt;
+&lt;script&gt;
+console.log($(&#39;h1&#39;).hasClass(&#39;black&#39;)); // true
+console.log($(&#39;h1&#39;).hasClass(&#39;white&#39;)); // false
+&lt;/script&gt;
+</code></pre><h4 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h4><p>删除当前匹配到的元素中的所有元素。</p>
+<h4 id="removeAttr"><a href="#removeAttr" class="headerlink" title="removeAttr()"></a>removeAttr()</h4><p>删除属性值。</p>
+<h4 id="removeClass"><a href="#removeClass" class="headerlink" title="removeClass()"></a>removeClass()</h4><p>删除class。</p>
+<h4 id="replaceWidth"><a href="#replaceWidth" class="headerlink" title="replaceWidth()"></a>replaceWidth()</h4><p>用给定的内容替换当前匹配到的元素。</p>
+<pre><code>&lt;h1&gt;hello&lt;/h1&gt;
+&lt;script&gt;
+$(&#39;h1&#39;).replaceWith(&#39;&lt;i&gt;hello&lt;/i&gt;&#39;);
+&lt;/script&gt;
+
+运行结果：
+&lt;i&gt;hello&lt;/i&gt;
+</code></pre><h4 id="scrollLeft"><a href="#scrollLeft" class="headerlink" title="scrollLeft()"></a>scrollLeft()</h4><p>获取或设置页面向右滚动的距离。</p>
+<h4 id="scrollTop"><a href="#scrollTop" class="headerlink" title="scrollTop()"></a>scrollTop()</h4><p>获取或设置页面向下滚动的距离。</p>
+<h2 id="JavaScript相关"><a href="#JavaScript相关" class="headerlink" title="JavaScript相关"></a>JavaScript相关</h2><p>与JavaScript相关的API，一般不涉及DOM操作。只对JavaScript的数据类型进行操作。</p>
+<h4 id="数据类型检测函数"><a href="#数据类型检测函数" class="headerlink" title="数据类型检测函数"></a>数据类型检测函数</h4><p>分为：</p>
+<ul>
+<li>$.isArray();检测是否为数组</li>
+<li>$.isFunction();检测是否为函数</li>
+<li>$.isWindow();检测是否为Window对象<pre><code>  var obj = {}
+  console.log($.isWindow(obj)); // false
+  console.log($.isWindow(window)); // true
+</code></pre></li>
+<li>$.isPlainObject();检测是否为纯粹的对象<pre><code>  // 纯粹的对象是指通过常量表达式{}或者new Object()创建的
+  var obj = {};
+  console.log($.isPlainObject(obj)); // true
+  console.log($.isPlainObject(Window)); // false
+  console.log($.isPlainObject(new Date())); // false
+  var o1 = new Object();
+  console.log($.isPlainObject(o1)); // true
+</code></pre></li>
+<li>$.type();除了区分对象不靠谱外，其它都很好，比typeof强多了。<pre><code>  console.log($.type(123)); // number
+  console.log($.type(&#39;Hello&#39;)); // string
+  console.log($.type(true)); // boolean
+  console.log($.type(null)); // null
+  console.log($.type(function(){})); //function
+  console.log($.type(undefined)); // undefined
+  console.log($.type({})); // object
+  console.log($.type([1, 2, 3])); // array
+  var reg = new RegExp(&quot;e&quot;);
+  console.log($.type(reg)); // regexp
+  var date = new Date();
+  console.log($.type(date)); // date
+</code></pre></li>
+</ul>
+<h4 id="camelCase"><a href="#camelCase" class="headerlink" title="$.camelCase()"></a>$.camelCase()</h4><p>将一个字符串转化为驼峰命名法，一直不明白这个方法是什么鬼。</p>
+<pre><code>var str1 = &#39;hello-world&#39;;
+console.log($.camelCase(str1));// helloWorld
+var str2 = &#39;hello*world&#39;;
+console.log($.camelCase(str2));// hello*world
+var str3 = &#39;helloWorld&#39;;
+console.log($.camelCase(str3)); // helloWorld
+var str4 = &#39;welcome-come-to-shang-hai&#39;;
+console.log($.camelCase(str4)); // welcomeComeToShangHai
+</code></pre><h4 id="extend-targetObj-sourceObj"><a href="#extend-targetObj-sourceObj" class="headerlink" title="$.extend(targetObj, sourceObj)"></a>$.extend(targetObj, sourceObj)</h4><p>扩展，经常用来写插件。将targetObj的属性赋给sourceObj。如果属性相同，源对象将会覆盖目标对象。</p>
+<pre><code>// 目标对象
+var targetObj = {man: &#39;男人&#39;, fly: &#39;不会飞&#39;};
+
+// 源对象
+var sourceObj = {skills: &#39;生孩子&#39;, fly: &#39;会飞&#39;};
+
+var superManObj = $.extend(targetObj, sourceObj);
+console.log(superManObj.skills); // 生孩子
+console.log(superManObj.fly); // 生孩子
+</code></pre><h4 id="fn"><a href="#fn" class="headerlink" title="$.fn"></a>$.fn</h4><p>$.fn是一个对象，就像Zepto对象的影子拥有和Zepto对象一样的属性，向这个对象添加方法，所有的Zepto对象都能调用该方法。</p>
+<pre><code>&lt;h1&gt;你好&lt;/h1&gt;
+&lt;script&gt;
+$.fn.welcome = function(){
+    return &#39;Hello World!!&#39;;
+}
+
+// $(&#39;h1&#39;)是$的一个实例，可以调用到welcome()方法
+$(&#39;h1&#39;).html($(&#39;h1&#39;).welcome());
+&lt;/script&gt;
+</code></pre><h4 id="inArray-element-array-fromIndex"><a href="#inArray-element-array-fromIndex" class="headerlink" title="$.inArray(element, array, [fromIndex])"></a>$.inArray(element, array, [fromIndex])</h4><p>检测数组中有没有某个元素，有的话返回该元素的索引，没有的话返回-1。可选参数fromIndex代表从fromIndex这个索引开始查找。</p>
+<pre><code>var arr = [&#39;red&#39;, &#39;black&#39;, &#39;blue&#39;, &#39;yellow&#39;];
+var bool1 = $.inArray(&#39;black&#39;, arr);
+console.log(bool1); // 1
+var bool2 = $.inArray(&#39;black&#39;, arr, 1);
+console.log(bool2); // 1
+var bool3 = $.inArray(&#39;black&#39;, arr, 2);
+console.log(bool2); // -1
+</code></pre><h4 id="each-arr-function-index-item-回调函数"><a href="#each-arr-function-index-item-回调函数" class="headerlink" title="$.each(arr, function(index, item){ // 回调函数 })"></a>$.each(arr, function(index, item){ // 回调函数 })</h4><p>遍历数组中的元素，回调函数返回false时停止遍历。</p>
+<pre><code>var arr = [&#39;red&#39;, &#39;black&#39;, &#39;blue&#39;, &#39;yellow&#39;];
+$.each(arr, function(index, item){
+    console.log(&#39;第%d个颜色是%s&#39;,index, item);
+});
+/*
+第0个颜色是red
+第1个颜色是black
+第2个颜色是blue
+第3个颜色是yellow
+*/
+</code></pre><h4 id="map"><a href="#map" class="headerlink" title="$.map()"></a>$.map()</h4><p>遍历数组，返回回调函数处理后的新数组。</p>
+<pre><code>var numArr = [1, 2, 3, 4, null, 5, undefined, 6];
+var newNumArr = $.map(numArr, function(item, index){
+    if(item){
+        return item*item;
+    }
+});
+console.log(newNumArr); // [1, 4, 9, 16, 25, 36]
+</code></pre><h4 id="强行插入：-each-和-map-的区别"><a href="#强行插入：-each-和-map-的区别" class="headerlink" title="强行插入：$.each()和$.map()的区别"></a>强行插入：$.each()和$.map()的区别</h4><p>区别很简单：</p>
+<ul>
+<li><code>$.each()</code> 不会创建新数组，会在原始数组上进行操作。</li>
+<li><code>$.map()</code> 将会创建一个新数组，不操作原始数组。</li>
+<li>在没有必要的情况下使用 <code>$.map()</code> 可能会造成内存浪费。</li>
+</ul>
+<h4 id="parseJSON-string"><a href="#parseJSON-string" class="headerlink" title="$.parseJSON(string)"></a>$.parseJSON(string)</h4><p>将标准的JSON数据<b>字符串</b>转换为JavaScript的对象。<i>注意：此处传入的参数是一个字符串。</i></p>
+<p>浏览器支持的转换方式：<code>JSON.parse(str);</code> 。效果相同。</p>
+<pre><code>// json字符串
+var jsonStr = &#39;{&quot;name&quot;: &quot;老王&quot;}&#39;;
+
+// 很容易就将json写成了这种格式，这会被JavaScript认为是一个对象，因此在执行$.parseJSON()时会报错。
+var jsonObj = {&quot;name&quot;: &quot;老王&quot;};
+
+console.log($.parseJSON(jsonStr)); // 返回：Object {name: &quot;老王&quot;}
+console.log($.parseJSON(jsonObj)); // Uncaught SyntaxError: Unexpected token o in JSON at position 1
+</code></pre><p>JSON转字符串：<code>JSON.stringify(jsonObj)</code>。</p>
+<h4 id="trim"><a href="#trim" class="headerlink" title="$.trim()"></a>$.trim()</h4><p>删除字符串<b>首尾</b>的空白字符。</p>
+<pre><code>var str = &#39; Hello World &#39;;
+console.log(str.length); // 13
+var trimStr = $.trim(str);
+console.log(trimStr.length); // 11
+</code></pre><h4 id="offset"><a href="#offset" class="headerlink" title="offset()"></a>offset()</h4><p>两个功能：</p>
+<ul>
+<li>获取当前元素相对于document的位置。返回一个对象含有：top、right、bottom、left。</li>
+<li>设置当前元素相对于document的位置。</li>
+</ul>
+<h4 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h4><p>添加元素到当前对象集合的后边。</p>
+<pre><code>var arr = [1, 2, 3];
+arr.push(4);
+console.log(arr);// [1, 2, 3, 4]
+</code></pre><h4 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h4><p>拆分数组，两种用法。从1开始计数。</p>
+<ul>
+<li>slice(startIndex)返回到startIndex之后的元素组成的数组。</li>
+<li>slice(startIndex, endIndex)返回startIndex到endIndex之间的元素组成的数组。<pre><code>  var arr = [111, 222, 333, 444, 555];
+  console.log(arr.slice(2)); //[333, 444, 555]
+  console.log(arr.slice(2,5)); //[333, 444, 555]
+</code></pre><h2 id="核心API"><a href="#核心API" class="headerlink" title="核心API"></a>核心API</h2>包括AJAX、事件处理、FROM等比较重要的API及Zepto特有的API。</li>
+</ul>
+<h3 id="检测设备相关的API"><a href="#检测设备相关的API" class="headerlink" title="检测设备相关的API"></a>检测设备相关的API</h3><p>注意：需要引入detect模块。</p>
+<pre><code>$.os.phone; // 检测是否为手机，成功返回true，失败返回false
+$.os.tablet; // 检测是否为平板，成功返回true，失败返回false
+
+// 检测系统
+$.os.ios; // 检测是否为ios系统，成功返回true，失败返回undefined
+$.os.android;  // 检测是否为android系统，成功返回true，失败返回undefined
+$.os.webos;
+$.os.blackberry;
+$.os.bb10;
+$.os.rimtabletos;
+
+// 检测具体的设备
+$.os.iphone; // 检测是否为iphone，成功返回true，失败返回undefined
+$.os.ipad; // 检测是否为ipad，成功返回true，失败返回undefined
+$.os.ipod; // 检测是否为ipod，成功返回true，失败返回undefined
+$.os.touchpad;
+$.os.kindle;
+
+// 检测浏览器
+$.browser.chrome; // 检测是否为chrome浏览器，成功返回true，失败返回undefined
+$.browser.firefox;
+$.browser.safari;
+$.browser.webview;
+$.browser.silk;
+$.browser.playbook;
+$.browser.ie;
+
+// 检测版本
+$.os.version;
+$.browser.version;
+</code></pre><h3 id="事件处理相关的API"><a href="#事件处理相关的API" class="headerlink" title="事件处理相关的API"></a>事件处理相关的API</h3><h4 id="on"><a href="#on" class="headerlink" title="on"></a>on</h4><p>绑定事件。</p>
+<h4 id="off"><a href="#off" class="headerlink" title="off"></a>off</h4><p>移除事件。</p>
+<h4 id="one"><a href="#one" class="headerlink" title="one"></a>one</h4><p>绑定一次事件，执行一次后移除绑定。</p>
+<p>难以理解的部分：</p>
+<ul>
+<li>$.Event</li>
+<li>$.proxy</li>
+<li>trigger</li>
+<li>triggerHandler</li>
+<li>event.isDefaultPrevented</li>
+<li>event.isImmediatePropagationStopped</li>
+<li>event.isPropagationStopped</li>
+</ul>
+<h3 id="AJAX相关的API"><a href="#AJAX相关的API" class="headerlink" title="AJAX相关的API"></a>AJAX相关的API</h3><p>这部分没什么好说的，基本功。</p>
+<h3 id="表单相关的API"><a href="#表单相关的API" class="headerlink" title="表单相关的API"></a>表单相关的API</h3><h4 id="serialize"><a href="#serialize" class="headerlink" title="serialize"></a>serialize</h4><p>在Ajax post请求中将用作提交的表单元素的值编译成URL编码的字符串。</p>
+<h4 id="serializeArray"><a href="#serializeArray" class="headerlink" title="serializeArray"></a>serializeArray</h4><p>将用作提交的表单元素的值编译成拥有name和value对象组成的数组。不能使用的表单元素，buttons，未选中的radio buttons/checkboxs 将会被跳过。结果不包含file inputs的数据。</p>
+<h4 id="submit"><a href="#submit" class="headerlink" title="submit"></a>submit</h4><p>为submit事件绑定一个处理函数。</p>
+<h3 id="效果相关的API"><a href="#效果相关的API" class="headerlink" title="效果相关的API"></a>效果相关的API</h3><h4 id="fx"><a href="#fx" class="headerlink" title="$.fx"></a>$.fx</h4><p>全局的动画设置：</p>
+<ul>
+<li>$.fx.off</li>
+<li>$.fx.speeds：设置动画的时间<ul>
+<li>_defaults（400ms）</li>
+<li>fast（200ms）</li>
+<li>slow（600ms）</li>
+</ul>
+</li>
+</ul>
+<h4 id="animate"><a href="#animate" class="headerlink" title="animate"></a>animate</h4><p>动画的具体效果。    </p>
+<h3 id="Touch"><a href="#Touch" class="headerlink" title="Touch"></a>Touch</h3><p>注意：需要引入touch模块。</p>
+<pre><code>&lt;div class=&quot;demo&quot; &gt;&lt;/div&gt;
+
+&lt;script&gt;
+$(&#39;.demo&#39;).longTap(function(){
+    alert(&#39;hello touch&#39;);
+})
+&lt;/script&gt;
+</code></pre><p>可检测单击与双击。</p>
+<ul>
+<li>tap点击触发，单击双击均可。</li>
+<li>singleTap单击触发。</li>
+<li>doubleTap双击触发。</li>
+<li>longTap长按触发。</li>
+<li>swipe滑动触发。</li>
+</ul>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>一个一个Demo跑完了以后发现这是一篇索然无味的文章，Zepto的API基本和jQuery相同。</p>
+<p>不过在移动端，Zepto显然更有优势，轻量是很重要的一点，为移动端量身定做的touch事件显然十分重要。</p>
+<p>Zeopto官网的API是按照字母序排列的，自作聪明的将这些API归了下类，也许更适合新人拿来当闲书看吧。</p>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><p>Build自己的zepto的方法。<br>1.从github下载完整安装包，<a href="https://github.com/madrobby/zepto/archive/master.zip">点击下载</a>。<br>2.找到安装包里的make文件，修改下边这行代码，填入自己想要的模块。</p>
+<pre><code>modules = (env[&#39;MODULES&#39;] || &#39;zepto event ajax form ie detect fx_methods data selector touch&#39;).split(&#39; &#39;)
+</code></pre><p>3.运行<code>npm run-script dist</code> ，然后你就可以在dist文件夹下找到你的zepto版本。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/15/Zepto-review/" data-addthis-title="温习Zepto">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/14/Canvas-03/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/16/some-confusions-in-developing-plugins/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/15/Zepto-review/" data-title="温习Zepto" data-url="http://xiguaaxigua.cn/2016/07/15/Zepto-review/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

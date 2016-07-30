@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常用原生JS方法总结（兼容性写法） | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="常用原生JS方法总结（兼容性写法）"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">常用原生JS方法总结（兼容性写法）</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-05T03:51:26.000Z">2016-05-05</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/文摘/">文摘</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="添加事件方法"><a href="#添加事件方法" class="headerlink" title="添加事件方法"></a>添加事件方法</h3><pre><code class="javascript">addHandler：function(element,type,handler){
+
+    if(element.addEventListener){//检测是否为DOM2级方法
+
+        element.addEventListener(type, handler,false);
+
+    }elseif(element.attachEvent){//检测是否为IE级方法
+
+        element.attachEvent(&quot;on&quot;+ type, handler);
+
+    }else{//检测是否为DOM0级方法
+
+        element[&quot;on&quot;+ type] = handler;
+
+    }
+
+}
+</code></pre>
+<h3 id="移除之前添加的事件方法"><a href="#移除之前添加的事件方法" class="headerlink" title="移除之前添加的事件方法"></a>移除之前添加的事件方法</h3><pre><code class="javascript">removeHandler：function(element, type, handler){
+
+    if(element.removeEventListener){
+
+        element.removeEventListener(type, handler,false);
+
+    }elseif(element.detachEvent){
+
+        element.detachEvent(&quot;on&quot;+ type, handler);
+
+    }else{
+
+        element[&quot;on&quot;+ type] =null;
+
+    }
+
+}
+</code></pre>
+<h3 id="获取事件及事件对象目标"><a href="#获取事件及事件对象目标" class="headerlink" title="获取事件及事件对象目标"></a>获取事件及事件对象目标</h3><pre><code class="javascript">//获取事件对象的兼容性写法
+
+getEvent:function(event){
+
+    returnevent ? event : window.event;
+
+},
+
+//获取事件对象目标的兼容性写法
+
+getTarget:function(event){
+
+    returnevent.target || event.srcElement;
+
+}
+</code></pre>
+<h3 id="阻止浏览器默认事件的兼容性写法"><a href="#阻止浏览器默认事件的兼容性写法" class="headerlink" title="阻止浏览器默认事件的兼容性写法"></a>阻止浏览器默认事件的兼容性写法</h3><pre><code class="javascript">preventDefault:function(event){
+
+    if(event.preventDefault){
+
+        event.preventDefault();
+
+    }else{
+
+        event.returnValue =false;
+
+    }
+
+}
+</code></pre>
+<h3 id="阻止事件冒泡的兼容性写法"><a href="#阻止事件冒泡的兼容性写法" class="headerlink" title="阻止事件冒泡的兼容性写法"></a>阻止事件冒泡的兼容性写法</h3><pre><code class="javascript">stopPropagation:function(event){
+
+    if(event.stopPropagation){
+
+        event.stopPropagation();
+
+    }else{
+
+        event.cancelBubble =true;
+
+    }
+
+}
+</code></pre>
+<h3 id="mouseover和mouseout-事件才包含的获取相关元素的方法"><a href="#mouseover和mouseout-事件才包含的获取相关元素的方法" class="headerlink" title="mouseover和mouseout 事件才包含的获取相关元素的方法"></a>mouseover和mouseout 事件才包含的获取相关元素的方法</h3><pre><code class="javascript">//mouseover和mouseout 事件才包含的获取相关元素的方法
+
+getRelatedTarget:function(event){
+
+    if(event.relatedTarget){
+
+        returnevent.relatedTarget;
+
+    }elseif(event.toElement){
+
+        returnevent.toElement;
+
+    }elseif(event.fromElement){
+
+        returnevent.fromElement;
+
+    }else{
+
+        returnnull;
+
+    }
+
+}
+</code></pre>
+<h3 id="鼠标滚轮判断"><a href="#鼠标滚轮判断" class="headerlink" title="鼠标滚轮判断"></a>鼠标滚轮判断</h3><pre><code class="javascript">/*对于mousedown 和mouseup 事件来说，则在其event 对象存在一个button 属性，
+
+表示按下或释放的按钮。DOM的button 属性可能有如下3 个值：0 表示主鼠标按钮，1 表示中间的鼠
+
+标按钮（鼠标滚轮按钮），2 表示次鼠标按钮。在常规的设置中，主鼠标按钮就是鼠标左键，而次鼠标
+
+按钮就是鼠标右键。
+
+IE8 及之前版本也提供了button 属性，但这个属性的值与DOM 的button 属性有很大差异。
+
+ 0：表示没有按下按钮。
+
+ 1：表示按下了主鼠标按钮。
+
+ 2：表示按下了次鼠标按钮。
+
+ 3：表示同时按下了主、次鼠标按钮。
+
+ 4：表示按下了中间的鼠标按钮。
+
+ 5：表示同时按下了主鼠标按钮和中间的鼠标按钮。
+
+ 6：表示同时按下了次鼠标按钮和中间的鼠标按钮。
+
+ 7：表示同时按下了三个鼠标按钮。*/
+
+getButton:function(event){
+
+    if(document.implementation.hasFeature(&quot;MouseEvents&quot;,&quot;2.0&quot;)){
+
+        returnevent.button;
+
+    }else{
+
+        switch(event.button){
+
+            case0:
+
+            case1:
+
+            case3:
+
+            case5:
+
+            case7:
+
+            return0;
+
+            case2:
+
+            case6:
+
+            return2;
+
+            case4:
+
+            return1;
+
+            }
+
+    }
+
+}
+</code></pre>
+<h3 id="能够取得鼠标滚轮增量值（delta）的方法"><a href="#能够取得鼠标滚轮增量值（delta）的方法" class="headerlink" title="能够取得鼠标滚轮增量值（delta）的方法"></a>能够取得鼠标滚轮增量值（delta）的方法</h3><pre><code class="javascript">getWheelDelta:function(event){
+
+    if(event.wheelDelta){
+
+        return(client.engine.opera &amp;&amp; client.engine.opera &lt; 9.5 ?
+
+        -event.wheelDelta : event.wheelDelta);
+
+    }else{
+
+        return-event.detail * 40;//firefox中的值为+3表示向上滚，-3表示向下滚
+
+    }
+
+}
+</code></pre>
+<h3 id="跨浏览器的方式取得字符编码"><a href="#跨浏览器的方式取得字符编码" class="headerlink" title="跨浏览器的方式取得字符编码"></a>跨浏览器的方式取得字符编码</h3><pre><code class="javascript">getCharCode:function(event){
+
+    if(typeofevent.charCode ==&quot;number&quot;){
+
+        returnevent.charCode;
+
+    }else{
+
+        returnevent.keyCode;
+
+    }
+
+}
+</code></pre>
+<h3 id="访问剪贴板中的数据"><a href="#访问剪贴板中的数据" class="headerlink" title="访问剪贴板中的数据"></a>访问剪贴板中的数据</h3><pre><code class="javascript">getClipboardText:function(event){
+
+    varclipboardData = (event.clipboardData || window.clipboardData);
+
+    returnclipboardData.getData(&quot;text&quot;);
+
+}
+</code></pre>
+<h3 id="设置剪贴板中的数据"><a href="#设置剪贴板中的数据" class="headerlink" title="设置剪贴板中的数据"></a>设置剪贴板中的数据</h3><pre><code class="javascript">setClipboardText:function(event, value){
+
+    if(event.clipboardData){
+
+        returnevent.clipboardData.setData(&quot;text/plain&quot;, value);
+
+    }elseif(window.clipboardData){
+
+        returnwindow.clipboardData.setData(&quot;text&quot;, value);
+
+    }
+
+}
+</code></pre>
+<p style="text-align: right;"><a href="http://www.kuqin.com/shuoit/20160427/351759.html">原文地址</a></p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/05/native-js-summary/" data-addthis-title="常用原生JS方法总结（兼容性写法）">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/04/angular-note-003/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/07/angular-note-004/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/05/native-js-summary/" data-title="常用原生JS方法总结（兼容性写法）" data-url="http://xiguaaxigua.cn/2016/05/05/native-js-summary/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

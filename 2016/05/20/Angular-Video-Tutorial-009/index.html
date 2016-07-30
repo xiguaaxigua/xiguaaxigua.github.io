@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第一个指令 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="第一个指令"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">第一个指令</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-20T03:00:12.000Z">2016-05-20</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/教程/">教程</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h2><video src="http://7xtoaz.com1.z0.glb.clouddn.com/8.Built%20in%20Filter.mp4" controls="true" width="100%"></video>
+
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="目录结构："><a href="#目录结构：" class="headerlink" title="目录结构："></a>目录结构：</h3><p>demo/<br>——app.js<br>——index.html</p>
+<h3 id="index-html的代码："><a href="#index-html的代码：" class="headerlink" title="index.html的代码："></a>index.html的代码：</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;First Directive&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/angular.js/1.5.5/angular.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div ng-app=&quot;superhero&quot;&gt;
+        &lt;superman&gt;&lt;/superman&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="app-js的代码"><a href="#app-js的代码" class="headerlink" title="app.js的代码"></a>app.js的代码</h3><pre><code>var app = angular.module(&#39;superhero&#39;, []);
+
+app.directive(&quot;superman&quot;, function(){
+
+    return {
+        restrict: &quot;E&quot;,
+        template: &quot;&lt;div&gt;Here I am to save the day&lt;/div&gt;&quot;    
+    }
+});
+</code></pre><h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p><b>1.指令的作用：实现语义化标签</b></p>
+<p>我们常用的HTML标签是这样的：</p>
+<pre><code>&lt;div&gt;
+    &lt;span&gt;内容&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><p>而使用Angular的directive指令可以实现以下效果的标签：</p>
+<pre><code>&lt;div&gt;
+    &lt;superman&gt;内容&lt;/superman&gt;
+&lt;/div&gt;
+</code></pre><p>很类似于JSP或者Struts框架里的tablib。</p>
+<p><b>2.举个栗子！</b></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;First Demo&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/angular.js/1.5.5/angular.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div ng-app=&quot;helloworld&quot;&gt;
+        &lt;hello&gt;&lt;/hello&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = angular.module(&#39;helloworld&#39;, []);
+
+        app.directive(&quot;hello&quot;, function(){
+
+            return {
+                restrict: &quot;E&quot;,
+                template: &quot;&lt;div&gt;Hello World!&lt;/div&gt;&quot;    ,
+                replace: true
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>下面介绍restrict配置：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/xigua_angular_010" alt=""></p>
+<p>关于replace：</p>
+<ul>
+<li>如果值为true，将会替换hello，也就是说页面中不会出现<code>&lt;hello&gt;&lt;/hello&gt;</code>。</li>
+<li>如果值为false，将不会替换hello。</li>
+<li>默认值为false。</li>
+</ul>
+<p>可见：<b>指令的作用是把我们自定义的语义化标签替换成浏览器能够认识的HTML标签。</b></p>
+<h3 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h3><ul>
+<li><a href="http://damoqiongqiu.iteye.com/blog/1917971">《AngularJS》5个实例详解Directive（指令）机制</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/20/Angular-Video-Tutorial-009/" data-addthis-title="第一个指令">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/20/Angular-Video-Tutorial-008/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/21/Angular-Video-Tutorial-010/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/20/Angular-Video-Tutorial-009/" data-title="第一个指令" data-url="http://xiguaaxigua.cn/2016/05/20/Angular-Video-Tutorial-009/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SeaJS笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="SeaJS笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">SeaJS笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-18T11:17:30.000Z">2016-07-18</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/框架/">框架</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/seajs.jpg" alt=""></p>
+<h2 id="SeaJS"><a href="#SeaJS" class="headerlink" title="SeaJS"></a>SeaJS</h2><h3 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h3><p>经常使用的API有：define、require、require.async、exports、module.exports等。</p>
+<h4 id="define-factory"><a href="#define-factory" class="headerlink" title="define(factory)"></a>define(factory)</h4><p><code>define</code> 是一个全局函数，用来定义模块。 <code>factory</code> 可以是一个函数，也可以是一个对象或字符串。</p>
+<p><code>factory</code> 为对象、字符串时，表示模块的接口就是该对象、字符串。比如可以如下定义一个 <code>JSON</code> 数据模块：</p>
+<pre><code>define({ &quot;foo&quot;: &quot;bar&quot; });
+</code></pre><p>也可以通过字符串定义模板模块：</p>
+<pre><code>define(&#39;I am a template. My name is {{name}}.&#39;);
+</code></pre><p><code>factory</code> 为函数时，表示是模块的构造方法。执行该构造方法，可以得到模块向外提供的接口。<code>factory</code> 方法在执行时，默认会传入三个参数：<code>require</code>、<code>exports</code> 和 <code>module</code>：</p>
+<pre><code>define(function(require, exports, module) {
+
+  // 模块代码
+
+});
+</code></pre><h4 id="require-id"><a href="#require-id" class="headerlink" title="require(id)"></a>require(id)</h4><p>require是一个方法，接受模块标识作为唯一参数，用来获取其他模块提供的接口。</p>
+<pre><code>define(function(require, exports, module)(
+
+    // 获取a模块的接口
+    var a = require(&#39;./a&#39;);
+
+    // 调用a模块的方法
+    a.doSomething();
+));
+</code></pre><p>在SeaJS中使用require时，需要遵循一些约定：</p>
+<ul>
+<li>factory的第一个参数必须为require，且不能缩写；</li>
+<li>不允许覆盖require函数；</li>
+<li>require的参数必须为字符串直接量。</li>
+</ul>
+<h4 id="require-async-id-callback"><a href="#require-async-id-callback" class="headerlink" title="require.async(id, [callback])"></a>require.async(id, [callback])</h4><p>用来在模块内部异步加载另一个模块，并且在加载成功时执行callback回调函数。</p>
+<p>和require的区别：</p>
+<ul>
+<li>require是同步往下执行。</li>
+<li>require.async是异步回调执行，一般用来加载可延迟异步加载的模块。</li>
+</ul>
+<h4 id="export"><a href="#export" class="headerlink" title="export"></a>export</h4><p>export是一个对象，用来向外提供模块接口。</p>
+<pre><code>define(function(require, exports, module){
+
+    function welcome(name){
+        this.name = name;
+    }
+
+    welcome.prototype.sayHello = function(){
+        console.log(&#39;Hello &#39; + this.name);
+    }
+
+    module.exports = welcome;
+});
+</code></pre><p>除了使用exports向外提供接口，还可以使用return：</p>
+<pre><code>define(function(require, exports, module){
+
+    // 通过return向外提供接口
+    return {
+        name: &#39;World&#39;,
+        sayHello: function(){
+            console.log(&#39;Hello &#39; + this.name);
+        };
+    }
+});
+</code></pre><p>如果return语句是模块中的唯一代码，还可以更简单：</p>
+<pre><code>// 这种格式很适合用来定义JSONP模块
+define({
+    name: &#39;World&#39;,
+    sayHello: function(){
+        console.log(&#39;Hello &#39; + this.name);
+    }
+})
+</code></pre><h4 id="module"><a href="#module" class="headerlink" title="module"></a>module</h4><p>module是一个对象，上面存储了与当前模块相关联的一些属性和方法。</p>
+<h4 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h4><p>当前模块向外提供的接口。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/18/SeaJS-notes/" data-addthis-title="SeaJS笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/17/Zepto-tap-event-bug/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/19/JavaScript-module/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/18/SeaJS-notes/" data-title="SeaJS笔记" data-url="http://xiguaaxigua.cn/2016/07/18/SeaJS-notes/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

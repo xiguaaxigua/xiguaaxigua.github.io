@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-13T04:24:26.000Z">2016-05-13</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>虽然从技术上来说AJAX应用确实是单页面应用（即在第一个请求时加载一个HTML页面，后面只刷新DOM中的局部区域），但是很多时候，出于各种原因，我们需要为用户展示或者隐藏一些子页面视图。</p>
+<p>我们可以利用Angular的$route服务来管理这种场景。你可以利用路由服务来定义这样一种东西：对于浏览器所指向的特定URL，Angular将会加载并显示一个模板，并实例化一个控制器来为模板提供内容。</p>
+<p>在应用中，你可以通过调用$routeProvider服务上的函数来创建路由，把需要创建的路由当成一个配置块传递给这些函数即可。创建过程类似下面的伪代码：</p>
+<pre><code>var someModule = angular.module(&#39;someModule&#39;, [... module dependencies ...]);
+
+someModule.config(function ($routeProvider){
+    when(&#39;url&#39;, {controller: aController, templateUrl: &#39;/path/to/tempate&#39;}).
+    when(... other mappings for your app ...).
+
+    ...
+
+    otherwise(... what to do if nothing else matches ...);
+})
+</code></pre><p>以上代码是说，当浏览器中的URL变成指定的取值时，Angular将会加载/path/to/tempate路径下的模板，然后把这个模板中的根元素关联到aController上（因为我们在模板中写了ng-controller=aController）。</p>
+<p>最后一行中的otherwise()调用可以告诉路由，在没有配置到任何东西时跳转到哪里。</p>
+<p>我们来把这一技术投入应用，构建一款email应用，这款应用将会轻松超越Gmail、Hotmail，以及一切mail，我们把它叫做AMail。现在我们从最简单的功能入手。我们会有一个首页视图，里面将会展示邮件列表，其中带有日期、标题和发件人。当点击一份邮件时，将会打开一个新视图来展示邮件内容。</p>
+<p>如果你想自己尝试运行以上代码，由于浏览器由安全限制，因此需要把代码放到web服务器中，而不是仅仅使用file://方式来访问。如果你安装了Python，就可以在工作目录来执行python -m SimpleHTTPServer 8888来启动服务器。</p>
+<p>在主模板中，我们会做一些不同的东西。我们不会把所有东西都放在第一个加载的页面中，而是仅仅创建一个布局模板，然后再用这个模板来容纳各种视图。在主视图中，我们想回把多个视图共有的东西都放在里面，例如菜单。在这个例子中，我们仅仅把应用的标题放在里面，然后再用ng-view指令来告诉Angular把视图显示在哪儿。</p>
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; ng-app=&quot;AMail&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;AMail&lt;/title&gt;
+    &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;controller.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;A-Mail&lt;/h1&gt;
+    &lt;div ng-view&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>由于所有视图模板都会被插入刚才所创建的外壳中，所以可以把它们都编写成HTML文档片段。对于邮件列表视图而言，我们将会使用ng-repeat指令来遍历邮件列表，然后把它们渲染到一个table中。</p>
+<h3 id="list-html"><a href="#list-html" class="headerlink" title="list.html"></a>list.html</h3><pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;b&gt;Sender&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;Subject&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;Date&lt;/b&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr ng-repeat=&quot;message in messages&quot;&gt;
+        &lt;td&gt;{{message.sender}}&lt;/td&gt;
+        &lt;td&gt;&lt;a href=&quot;#/view/{{message.id}}&quot;&gt;{{message.subject}}&lt;/a&gt;&lt;/td&gt;
+        &lt;td&gt;{{message.date}}&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><p>注意这里，我们想要实现用户点击一个主题就能被导航到相应的邮件中。我们已经在URL和message.id之间进行了数据绑定，所以用户点击id=1的邮件就会被导航到#/view/1。<b>这种根据URL导航的方式也叫作深度链接</b>，我们将会在邮件详细视图控制器中使用这种方法，从而实现把一份可用的邮件链接到对应的详细视图上的功能。</p>
+<p>为了创建这个邮件详情视图，需要创建一个模板，用来展示单个邮件对象上的属性。</p>
+<h3 id="detail-html"><a href="#detail-html" class="headerlink" title="detail.html"></a>detail.html</h3><pre><code>&lt;div&gt;&lt;b&gt;Subject:&lt;/b&gt;{{message.subject}}&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;Sender:&lt;/b&gt;{{message.sender}}&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;Date:&lt;/b&gt;{{message.date}}&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;b&gt;To:&lt;/b&gt;
+    &lt;span ng-repeat=&quot;recipient in recipients&quot;&gt;{{recipient}}&lt;/span&gt;
+    &lt;div&gt;{{message.message}}&lt;/div&gt;
+    &lt;a href=&quot;#/&quot;&gt;Back to message list&lt;/a&gt;
+&lt;/div&gt;
+</code></pre><p>为了把这些模板关联到对应控制器上，我们将会给$routeProvider配置一个URL，$routeProvider将会负责调用控制器和模板。</p>
+<h3 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h3><pre><code>//为核心的AMail服务创建模块
+var aMailServices = angular.module(&#39;AMail&#39;, []);
+
+//在URL、模板和控制器之间建立映射关系
+function emailRouteConfig($routeProvider){
+    $routeProvider.
+    when(&#39;/&#39;, {
+        controller: ListController,
+        templateUrl: &#39;list.html&#39;
+    }).
+
+    //注意，为了创建详情视图，我们在id前面加了一个冒号，从而指定了一个参数化的URL组件
+    when(&#39;/view/:id&#39;, {
+        controller: DetailController,
+        templateUrl: &#39;detail.html&#39;
+    }).
+
+    otherwise({
+        redirectTo: &#39;/&#39;
+    })
+};
+
+//配置我们的路由，以便AMail服务能够找到它
+aMailServices.config(emailRouteConfig);
+
+//一些虚拟的邮件
+messages = [
+    {
+        id: 0,
+        sender: &#39;000@sender.com&#39;,
+        subject: &#39;第一封邮件&#39;,
+        date: &#39;2016-07-01&#39;,
+        recipients: [&#39;000@recipients.com&#39;],
+        message: &#39;Hello Angular！&#39;
+    },
+    {
+        id: 1,
+        sender: &#39;111@sender.com&#39;,
+        subject: &#39;第一封邮件&#39;,
+        date: &#39;2016-07-01&#39;,
+        recipients: [&#39;111@recipients.com&#39;],
+        message: &#39;Hello Angular！&#39;
+    },
+    {
+        id: 2,
+        sender: &#39;222@sender.com&#39;,
+        subject: &#39;第一封邮件&#39;,
+        date: &#39;2016-07-01&#39;,
+        recipients: [&#39;222@recipients.com&#39;],
+        message: &#39;Hello Angular！&#39;
+    },
+    {
+        id: 3,
+        sender: &#39;333@sender.com&#39;,
+        subject: &#39;第一封邮件&#39;,
+        date: &#39;2016-07-01&#39;,
+        recipients: [&#39;333@recipients.com&#39;],
+        message: &#39;Hello Angular！&#39;
+    }
+];
+
+//把我们的邮件发布给邮件列表模板
+function ListController($scope){
+    $scope.message = messages;
+}
+
+//从路由信息（从URL中解析出来的）中获取邮件id，然后用它找到正确的邮件对象
+function DetailController($scope, $routeParams){
+    $scope.message = messages[$routeParams.id];
+}
+</code></pre><p>我们已经为应用搭好了基本的框架，这款应用带有很多视图，可以通过修改URL的方式来切换视图。这意味着对用户来说前进和后退按钮能够真正运行起来了。用户可以把应用内部的视图链接加入书签或者通过邮件发送出去，而实际上这里只有唯一一个真实的HTML页面。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/13/angular-note-018/" data-addthis-title="018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/13/angular-note-017/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/14/angular-note-019/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/13/angular-note-018/" data-title="018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/13/angular-note-018/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>014-使用$watch监控数据模型的变化-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="014-使用$watch监控数据模型的变化-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">014-使用$watch监控数据模型的变化-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-12T03:23:05.000Z">2016-05-12</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="使用-watch监控数据模型的变化"><a href="#使用-watch监控数据模型的变化" class="headerlink" title="使用$watch监控数据模型的变化"></a>使用$watch监控数据模型的变化</h3><p>在$scope内置的所有函数中，用得最多的可能就是$watch函数了，当你的数据模型中某一部分发生变化时，$watch函数可以向你发出通知。你可以监控单个对象的属性，也可以监控需要经过计算的结果（函数），实际上只要能够被当作属性访问到，或者可以当作一个JavaScript函数被计算出来，就可以被$watch函数监控。它的函数签名为：</p>
+<pre><code>$watch(watchFn, watchAction, deepWatch)
+</code></pre><p>其中每个参数的详细含义如下：</p>
+<h4 id="watchFn"><a href="#watchFn" class="headerlink" title="watchFn"></a>watchFn</h4><p>该参数是一个带有Angular表达式或者函数的字符串，它会返回被监控的数据模型的当前值。这个表达式将会被执行很多次，所以你要保证他不会产生其他副作用。也就是说，要保证它可以被调用很多次而不会改变状态。基于同样的原因，监控表达式应该很容易被计算出来。如果你使用字符串传递了一个Angular表达式，那么它将会针对调用它的那个作用域中的对象而执行。</p>
+<h4 id="watchAction"><a href="#watchAction" class="headerlink" title="watchAction"></a>watchAction</h4><p>这是一个函数或者表达式，当watchFn发生变化时会被调用。如果是函数的形式，它将会接收到watchFn的新旧两个值，以及作用域对象的引用。其函数签名为function(newValue, oldValue, scope)。</p>
+<h4 id="deepwatch"><a href="#deepwatch" class="headerlink" title="deepwatch"></a>deepwatch</h4><p>如果设置为true，这个可选的布尔型参数将会命令Angular去检查被监控对象的每个属性是否发生了变化。如果你想要监控数组中的元素，或者对象上的所有属性，而不只是监控一个简单的值，你就可以使用这个参数。由于Angular需要遍历数组或者对象，如果集合比较大，那么运算负担就会比较重。</p>
+<p>$watch函数会返回一个函数，当你不再需要接受变更通知时，可以用这个返回的函数注销监控器。</p>
+<p>如果我们需要监控一个属性，然后接着注销监控，我们可以使用一下代码：</p>
+<pre><code>...
+var dereg = $scope.$watch(&#39;someModel.someProperty&#39;, callbackOnChange());
+...
+dereg();
+</code></pre><p>我们再回到第一章的购物车案例，把它的功能扩充完整。例如，当用户添加到购物车中的商品价值超过100美元的时候，我们会给他10美元的折扣。我们将会使用下面这种模板：</p>
+<pre><code>&lt;div ng-controller=&quot;CartController&quot;&gt;
+    &lt;div ng-repeat=&quot;item in items&quot;&gt;
+        &lt;span&gt;{{item.title}}&lt;/span&gt;
+        &lt;input ng-model=&quot;item.quantity&quot;&gt;
+        &lt;span&gt;{{item.price | currency}}&lt;/span&gt;
+        &lt;span&gt;{{item.price * item.quantity | currency}}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;Total:{{totalCart() | currency}}&lt;/div&gt;
+    &lt;div&gt;Discount:{{bill.discount | currency}}&lt;/div&gt;
+    &lt;div&gt;Subtotal:{{subtotal() | currency}}&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>而CartController看起来可能像下面这样：</p>
+<pre><code>function CartController($scope){
+    $scope.bill = {};
+
+    $scope.items = [
+        {title: &#39;商品1&#39;, quantity: 1, price: 1},
+        {title: &#39;商品2&#39;, quantity: 2, price: 2},
+        {title: &#39;商品3&#39;, quantity: 3, price: 3}
+    ];
+
+    $scope.totalCart = function(){
+        var total = 0;
+        for(var i=0, len=$scope.items.length; i&lt;len; i++){
+            total = total + $scope.items[i].price * $scope.items[i].quantity;
+        }
+
+        return total;
+    };
+
+    $scope.subtotal  = function(){
+        return $scope.totalCart() - $scope.bill.discount;
+    };
+
+    function calculateDiscount(newValue, oldValue, scope){
+        $scope.bill.discount = newValue &gt;100 ? 10 : 0;
+    };
+
+    $scope.$watch($scope.totalCart, calculateDiscount);
+
+}
+</code></pre><p>注意：CartController的底部，我们再totalCart()的值上面设置了一个监控，用来计算此次购物的总价。只要这个值发生变化，监控器就会调用calculateDiscount()，然后我们就可以把折扣设置为相应的值。如果总价超过100美元，我们将会把折扣设置为10美元。否则，折扣为0。</p>
+<p>效果图如下：</p>
+<p><img src="http://7xtoaz.com2.z0.glb.clouddn.com/xigua_angular_006" alt=""></p>
+<p>完整代码如下：</p>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;带折扣的购物车&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body ng-app=&quot;myApp&quot; ng-controller=&quot;CartController&quot;&gt;
+        &lt;h1&gt;Your Order&lt;/h1&gt;
+        &lt;div ng-controller=&quot;CartController&quot;&gt;
+            &lt;div ng-repeat=&quot;item in items&quot;&gt;
+                &lt;span&gt;{{item.title}}&lt;/span&gt;
+                &lt;input ng-model=&quot;item.quantity&quot;&gt;
+                &lt;span&gt;{{item.price | currency}}&lt;/span&gt;
+                &lt;span&gt;{{item.price * item.quantity | currency}}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div&gt;Total:{{totalCart() | currency}}&lt;/div&gt;
+            &lt;div&gt;Discount:{{bill.discount | currency}}&lt;/div&gt;
+            &lt;div&gt;Subtotal:{{subtotal() | currency}}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            var app = angular.module(&#39;myApp&#39;, []);
+            app.controller(&#39;CartController&#39;, function CartController($scope) {
+                $scope.bill = {};
+
+                $scope.items = [
+                    {title: &#39;商品1&#39;, quantity: 1, price: 1},
+                    {title: &#39;商品2&#39;, quantity: 2, price: 2},
+                    {title: &#39;商品3&#39;, quantity: 3, price: 3}
+                ];
+
+                $scope.totalCart = function(){
+                    var total = 0;
+                    for(var i=0, len=$scope.items.length; i&lt;len; i++){
+                        total = total + $scope.items[i].price * $scope.items[i].quantity;
+                    }
+
+                    return total;
+                };
+
+                $scope.subtotal  = function(){
+                    return $scope.totalCart() - $scope.bill.discount;
+                };
+
+                function calculateDiscount(newValue, oldValue, scope){
+                    $scope.bill.discount = newValue &gt; 100 ? 10 : 0;
+                };
+
+                $scope.$watch($scope.totalCart, calculateDiscount);
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/12/angular-note-014/" data-addthis-title="014-使用$watch监控数据模型的变化-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-013/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-015/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/12/angular-note-014/" data-title="014-使用$watch监控数据模型的变化-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/12/angular-note-014/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

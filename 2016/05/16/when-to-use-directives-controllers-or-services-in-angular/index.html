@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>什么时候使用指令(Directive)、控制器(Controller)或服务(Service)？ | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="什么时候使用指令(Directive)、控制器(Controller)或服务(Service)？"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">什么时候使用指令(Directive)、控制器(Controller)或服务(Service)？</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-16T02:51:26.000Z">2016-05-16</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/翻译/">翻译</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src="http://kirkbushell.me/assets/img/logo-angularjs.png" alt=""></p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>本文讲述Angular中的指令、控制器、服务的应用场景。</p>
+<p>核心：</p>
+<ul>
+<li>指令：涉及到DOM操作的时候使用</li>
+<li>控制器：涉及到业务逻辑的时候使用</li>
+<li>服务：需要跨域共享数据的时候使用</li>
+</ul>
+<p>翻译自<a href="http://kirkbushell.me/when-to-use-directives-controllers-or-services-in-angular/">原文地址</a>。由于本人水平有限，如有任何问题，可以通过<a href="http://xiguaaxigua.cn/about/">各种方式</a>找到我。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>AngularJS是一个非常强大的前端MVC框架，它引入的很多陌生的概念，例如：</p>
+<ul>
+<li>指令(Directive)</li>
+<li>控制器(Controller)</li>
+<li>服务(Service)</li>
+</ul>
+<p>让我们来逐个分析，以理清这些概念是用来做什么的。我们来从最底层开始。</p>
+<h3 id="服务（Service"><a href="#服务（Service" class="headerlink" title="服务（Service)"></a>服务（Service)</h3><p>如果你已经使用AngularJS的话，你一定遇到过服务（Service）——Angular中一个很不错的定义不是吗？Service得定期传来传去，以确保你每次处理都是同一个对象，而不像工厂模式那样。通过这一点，我们可以做一些很酷的事情，例如：使用控制器和指令影响DOM的值。有一个很常见的问题是：你怎样在你的APP的代码块之间共享数据。我们来看怎么解决这个问题：</p>
+<p>首先，我们创建一个模块（整篇文章都会用到这个模块）。</p>
+<pre><code>var module = angular.module(&#39;my.new.module&#39;, []);
+</code></pre><p>然后，我们创建一个新服务，假设之前的模块的功能是用来管理书籍，那么，我们来创建一个书的服务，并配置一些假数据。</p>
+<pre><code>module.service( &#39;Book&#39;, [ &#39;$rootScope&#39;, function( $rootScope ) {
+    var service = {
+        books: [
+            { title: &quot;西游记&quot;, author: &quot;吴承恩&quot; },
+            { title: &quot;编程&quot;, author: &quot;沈从文&quot; }
+        ],
+
+        addBook: function ( book ) {
+            service.books.push( book );
+            $rootScope.$broadcast( &#39;books.update&#39; );
+        }
+    }
+    return service;
+}]);
+</code></pre><p>显然，这是一个非常简单的服务（但有时候这也是你所需要的），我们所要做的是管理“图书数组”，如果需要的话，也可以自定义一个方法添加书籍。这也向我们的APP中注入了一个事件，通过我们服务告诉APP所有的数据已经被更新——事实上，它们也应该被更新。现在，我们要做的是通过服务使用控制器、指令、过滤器或者其他需要的东西——它们可以访问到服务的方法和属性。下面看代码：</p>
+<pre><code>var ctrl = [ &#39;$scope&#39;, &#39;Book&#39;, function( scope, Book ) {
+    scope.$on( &#39;books.update&#39;, function( event ) {
+            scope.books = Book.books;
+        });
+
+        scope.books = Book.books;
+    }
+];
+
+module.controller( &quot;books.list&quot;, ctrl );
+</code></pre><p>显然，我们是在为我们的服务创建一个控制器。注意，我们做了什么？之前我们在Book服务创建的“图书数组”，讲道理应该叫做ctrl控制器的作用域对象，不是吗？</p>
+<p>这玩意儿有什么用呢？我们可以偷个懒，直接在控制器中创建数组。显而易见我们是对的，这样节省了很多时间，但如果我们想要在其他地方处理这个“图书数组”呢？通过作用域管理数据是不明智的，作用域很容易被其他东西（控制器、指令、模块等）污染和破坏。通过服务去操作数据不仅更加清洁（指不会污染$scope），也更容易控制app的增长（指app变得复杂）。这种方式让你的代码分成一块一块的，易于管理。每当有一个新项目加入的时候，你需要的是添加一个服务，而不是写各种控制器、指令、过滤器。</p>
+<p>那么，什么时候使用服务呢？答案是，<b>当我们需要跨域共享数据的时候</b>。此外，Angular的依赖注入机制让这两者变得简单和干净。</p>
+<h3 id="控制器-Controller"><a href="#控制器-Controller" class="headerlink" title="控制器(Controller)"></a>控制器(Controller)</h3><p>我们来谈一下控制器。</p>
+<p>如果你是一个服务器端程序员，而且没有搞过前端MVC的话，从服务器端转移到前端的会很揪心不是吗（指前端没有MVC一说）？前端的控制器虽然和服务器端有着类似的效果（处理业务逻辑），但是也不尽相同。Angular中的控制器本身不处理“请求”，但它可以处理“路由”（很多人通过创建一个控制器来管理路由）。讲真的，控制器是用来控制app界面的，每个控制器只控制界面的一小部分。(⊙﹏⊙)b…</p>
+<p>控制器应该被纯粹的用于管理服务、管理依赖和管理其他对象，并将它们传递给视图。当你的视图中有复杂的业务逻辑时，也应该使用控制器。在之前的Book例子中，并没有需要使用控制器的地方。</p>
+<p>如果我想要添加一本书呢？我应该在控制器中添加一个方法吗？不，这属于DOM交互/修改的部分，我们应该把它放在指令(Directive)中。</p>
+<h3 id="指令-Directive"><a href="#指令-Directive" class="headerlink" title="指令(Directive)"></a>指令(Directive)</h3><p>我已经使用Angular写了很多应用，到目前为止，app中最复杂的部分是指令。Angular中有很强大的修改DOM的工具，也就是这部分要讲的指令。我们将在上面提到的Book例子中添加一个按钮，让用户可以自己添加书籍。</p>
+<p>一个常见的错误是添加一个DOM交互控制器。Angular定义了很多指令去操作DOM。让我们通过这种方式扩展一下上面的例子。</p>
+<pre><code>module.directive( &quot;addBookButton&quot;, [ &#39;Book&#39;, function( Book ) {
+  return {
+    restrict: &quot;A&quot;,
+    link: function( scope, element, attrs ) {
+      element.bind( &quot;click&quot;, function() {
+        Book.addBook( { title: &quot;Star Wars&quot;, author: &quot;George Lucas&quot; } );
+      });
+    }
+  }
+}]);
+</code></pre><p>很明显，我们在创建一个指令，它唯一的目的是简单的添加一本书到“图书数组”。下面我们在视图中使用它：</p>
+<pre><code>&lt;button add-book-button&gt;添加&lt;/button&gt;
+</code></pre><p>正如你看到的，我们只是简单的讲指令添加到button的属性，每当我们点击这个按钮的时候，就会添加一本书（这里使用写死的数据“天龙八部”）。简单、容易、模块化又易于管理。</p>
+<p>来思考一个问题，我们为什么不像下面这段代码一样写一个addBook控制器呢？</p>
+<pre><code>$scope.addBook = function() {
+    Book.addBook( { title: &quot;天龙八部&quot;, author: &quot;金庸&quot; } );
+};
+</code></pre><p>这段代码也会达到同样的效果，不是吗？那如果在另外一个位置，也想要使用同样的功能呢？我是不是该copy一份？讲真的，绝逼不能这样。通过指令去创建的话，我们不用担心以后会不会用到，如果用到的话，在需要的地方加个add-book-button属性就可以了。当需要操作DOM的时候，通过创建指令，我们可以很容易处理逐渐复杂的应用程序。这简直太好了，我们不必纠结于怎么实现，而仅仅写个指令就ok。</p>
+<p>Angular模块化开发的理念，能帮助我们创建出优秀的应用，它让我们在写前端代码的时候，不至于掉进太多的坑。通过框架的形式，可能是Angular最大的优势。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/16/when-to-use-directives-controllers-or-services-in-angular/" data-addthis-title="什么时候使用指令(Directive)、控制器(Controller)或服务(Service)？">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/15/angular-note-023/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/18/Promise-in-Angular/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/16/when-to-use-directives-controllers-or-services-in-angular/" data-title="什么时候使用指令(Directive)、控制器(Controller)或服务(Service)？" data-url="http://xiguaaxigua.cn/2016/05/16/when-to-use-directives-controllers-or-services-in-angular/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

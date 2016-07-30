@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>移动端开发技巧 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="移动端开发技巧"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">移动端开发技巧</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-05T13:33:57.000Z">2016-07-05</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/移动端/">移动端</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="Part1-腾讯Alloyteam团队发布的移动开发规范"><a href="#Part1-腾讯Alloyteam团队发布的移动开发规范" class="headerlink" title="Part1.腾讯Alloyteam团队发布的移动开发规范"></a>Part1.腾讯Alloyteam团队发布的移动开发规范</h2><p>本文记录对该规范的理解，以及个人开发移动端的经验总结。<a href="http://alloyteam.github.io/Spirit/modules/Standard/index.html">点击访问官网地址</a></p>
+<p>另外一篇很不错的文章，<a href="http://tgideas.qq.com/webplat/info/news_version3/804/808/811/m579/201412/293834.shtml">移动前端系列——移动页面性能优化</a>。</p>
+<h3 id="字体设置"><a href="#字体设置" class="headerlink" title="字体设置"></a>字体设置</h3><p>使用无衬线字体：</p>
+<pre><code>body {
+    font-family: &quot;Helvetica Neue&quot;, Helvetica, STHeiTi, sans-serif;
+}
+
+&lt;!--
+Helvetica Neue 、 Helvetica    ···Mac默认字体，iOS 4.0+使用Helvetica Neue
+STHeiTi                        ···Mac中文：华文黑体STHeiTi
+sans-serif                     ···网页常用无衬线字体
+--&gt;
+</code></pre><p>TIP:<br>1.什么是无衬线字体？<br>衬线体（serif）和无衬线体（sans-serif）。像Times、Times New Roman等都是属于衬线体，而Arial、helvetica则是属于无衬线体。有衬线体和无衬线体从视觉上的区别如下：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Mobile-Development-Skills.jpg" alt=""></p>
+<p>可以通过这篇文章了解更多。<a href="https://www.douban.com/note/173404594/">衬线体和无衬线体</a></p>
+<p>2.为什么要使用无衬线字体？<br>也许是视觉的原因，并不懂？</p>
+<h3 id="基础交互"><a href="#基础交互" class="headerlink" title="基础交互"></a>基础交互</h3><p>设置全局的CSS样式，避免图中的长按弹出菜单与选中文本的行为</p>
+<p>禁止长按链接与图片弹出菜单：</p>
+<pre><code>a, img {
+    -webkit-touch-callout: none;
+}
+</code></pre><p>禁止选中文本（如无文本选中需求，此为必选项）</p>
+<pre><code>html, body {
+    -webkit-user-select: none; 
+    user-select: none;
+}
+</code></pre><h3 id="移动性能"><a href="#移动性能" class="headerlink" title="移动性能"></a>移动性能</h3><p>此部分各取所需。</p>
+<p>要考虑Android低端机与2G网络场景下性能。</p>
+<p>发布前必要检查项：</p>
+<ul>
+<li>所有图片必须有进行过压缩</li>
+<li>考虑适度的有损压缩，如转化为80%质量的jpg图片</li>
+<li>考虑把大图切成多张小图，常见在banner图过大的场景</li>
+</ul>
+<p>加载性能优化, 达到打开足够快</p>
+<ul>
+<li>数据离线化，考虑将数据缓存在<code>localStorage</code></li>
+<li>初始请求资源数<code>&lt;4</code></li>
+<li>图片使用<code>CSS Sprites</code>或<code>DataURI</code></li>
+<li>外链<code>CSS</code>中避免<code>@import</code>引入</li>
+<li>考虑内嵌小型的静态资源内容</li>
+<li>初始请求资源gzip后总体积<code>&lt;50kb</code></li>
+<li>静态资源(HTML/CSS/JS/Image)是否优化压缩？</li>
+<li>避免打包大型类库</li>
+<li>确保接入层已开启Gzip压缩（考虑提升Gzip级别，使用CPU开销换取加载时间）</li>
+<li>尽量使用CSS3代替图片</li>
+<li>初始首屏之外的静态资源（JS/CSS）延迟加载 ！</li>
+<li>初始首屏之外的图片资源按需加载（判断可视区域）</li>
+<li>单页面应用(SPA)考虑延迟加载非首屏业务模块</li>
+<li>开启<code>Keep-Alive</code>链路复用</li>
+</ul>
+<p>运行性能优化, 达到操作足够流畅</p>
+<ul>
+<li>避免<code>iOS 300+ms</code>点击延时问题</li>
+<li>缓存<code>DOM</code>选择与计算</li>
+<li>避免触发页面重绘的操作</li>
+<li>Debounce连续触发的事件(scroll / resize / touchmove等)，避免高频繁触发执行</li>
+<li>尽可能使用事件代理，避免批量绑定事件</li>
+<li>使用CSS3动画代替JS动画</li>
+<li>避免在低端机上使用大量CSS3渐变阴影效果，可考虑降级效果来提升流畅度</li>
+<li>HTML结构层级保持足够简单</li>
+<li>尽能少的使用CSS高级选择器与通配选择器</li>
+<li><code>Keep it simple</code></li>
+</ul>
+<p>在线性能检测评定工具使用指南</p>
+<ul>
+<li>访问<a href="http://developers.google.com/speed/pagespeed/insights/">Google PageSpeed</a>在线评定网站</li>
+<li>在地址栏输入目标URL地址，点击分析按钮开始检测</li>
+<li>按<code>PageSpeed</code>分析出的建议进行优化，优先解决红色类别的问题</li>
+</ul>
+<h3 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h3><ul>
+<li><a href="http://www.webperformancetoday.com/tag/mobile-web-performance/">移动WEB性能</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/caching">优化WEB缓存</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rtt">最小化RTT次数</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/payload">最小化请求负载</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/rendering">优化浏览器渲染</a></li>
+</ul>
+<h2 id="Part2-经验总结"><a href="#Part2-经验总结" class="headerlink" title="Part2.经验总结"></a>Part2.经验总结</h2><h3 id="webkit内核的meta标签"><a href="#webkit内核的meta标签" class="headerlink" title="webkit内核的meta标签"></a>webkit内核的meta标签</h3><pre><code>&lt;!--强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览--&gt;
+&lt;meta content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot; name=&quot;viewport&quot;&gt;
+
+&lt;!--iphone的私有标签，它表示：允许全屏模式浏览--&gt;
+&lt;meta content=&quot;yes&quot; name=&quot;apple-mobile-web-app-capable&quot;&gt;
+
+&lt;!--iphone的私有标签，指定的iphone中safari顶端的状态条的样式--&gt;
+&lt;meta content=&quot;black&quot; name=&quot;apple-mobile-web-app-status-bar-style&quot;&gt;
+
+&lt;!--告诉设备忽略将页面中的数字识别为电话号码--&gt;
+&lt;meta content=&quot;telephone=no&quot; name=&quot;format-detection&quot;&gt;
+
+&lt;!--告诉安卓设备忽略识别邮件地址，iphone不识别--&gt;
+&lt;meta content=&quot;email=no&quot; name=&quot;format-detection&quot; /&gt;
+</code></pre><h3 id="使用Zepto或者jQuery-Mobile而不是jQuery或者jQuery-UI"><a href="#使用Zepto或者jQuery-Mobile而不是jQuery或者jQuery-UI" class="headerlink" title="使用Zepto或者jQuery Mobile而不是jQuery或者jQuery-UI"></a>使用Zepto或者jQuery Mobile而不是jQuery或者jQuery-UI</h3><ul>
+<li>jQuery Mobile相当于PC端的jQueryUI，提供了很多页面的UI库。</li>
+<li>Zepto相当于PC端的jQuery。</li>
+<li>Zepto.js是一个专为mobile WebKit浏览器(如：Safari和Chrome)而开发的一个JavaScript框架。轻量、简约，语法借鉴并兼容jQuery。</li>
+</ul>
+<h3 id="使用tap事件，而不是click。"><a href="#使用tap事件，而不是click。" class="headerlink" title="使用tap事件，而不是click。"></a>使用tap事件，而不是click。</h3><p>在移动端请适当使用touchstart，touchend，touch等事件代替延迟比较大的click事件。Click之所以慢是因为mousedown导致的。<br><img src="http://ossweb-img.qq.com/upload/webplat/info/tgideas/20141205/1417746127669833.jpg" alt=""></p>
+<h3 id="避免使用Float。"><a href="#避免使用Float。" class="headerlink" title="避免使用Float。"></a>避免使用Float。</h3><p>貌似会影响页面，建议使用inline-block。</p>
+<h3 id="块级化a标签"><a href="#块级化a标签" class="headerlink" title="块级化a标签"></a>块级化a标签</h3><p>为了保证用户点击的范围足够大。</p>
+<h3 id="禁止自动识别电话和android自动识别邮箱"><a href="#禁止自动识别电话和android自动识别邮箱" class="headerlink" title="禁止自动识别电话和android自动识别邮箱"></a>禁止自动识别电话和android自动识别邮箱</h3><pre><code>&lt;meta content=&quot;telephone=no&quot; name=&quot;format-detection&quot; /&gt;
+&lt;meta content=&quot;email=no&quot; name=&quot;format-detection&quot; /&gt;
+</code></pre><h3 id="去除IOS和Android中的输入URL的控件条"><a href="#去除IOS和Android中的输入URL的控件条" class="headerlink" title="去除IOS和Android中的输入URL的控件条"></a>去除IOS和Android中的输入URL的控件条</h3><pre><code>$(function(){
+    setTimeout(scrollTo,0,0,0);
+})
+</code></pre><p>使用条件：</p>
+<ul>
+<li>页面载入时就运行这段脚本。</li>
+<li>当前文档的内容高度高于窗口的高度</li>
+</ul>
+<h3 id="关闭IOS中键盘自动大写"><a href="#关闭IOS中键盘自动大写" class="headerlink" title="关闭IOS中键盘自动大写"></a>关闭IOS中键盘自动大写</h3><pre><code>&lt;input type=&quot;text&quot; autocapitalize=&quot;off&quot;&gt;
+</code></pre><h3 id="IOS中如何禁止用户选中文字"><a href="#IOS中如何禁止用户选中文字" class="headerlink" title="IOS中如何禁止用户选中文字"></a>IOS中如何禁止用户选中文字</h3><pre><code>a{
+    -webkit-user-select:none;
+}
+</code></pre><h3 id="IOS中如何禁止用户保存图片"><a href="#IOS中如何禁止用户保存图片" class="headerlink" title="IOS中如何禁止用户保存图片"></a>IOS中如何禁止用户保存图片</h3><pre><code>img{
+    -webkit-touch-callout:none;
+}
+</code></pre><h3 id="解决IOS4-3版本中safari对页面中5位数字的自动识别和自动添加样式"><a href="#解决IOS4-3版本中safari对页面中5位数字的自动识别和自动添加样式" class="headerlink" title="解决IOS4.3版本中safari对页面中5位数字的自动识别和自动添加样式"></a>解决IOS4.3版本中safari对页面中5位数字的自动识别和自动添加样式</h3><pre><code>&lt;button class=&quot;t-balance&quot;style=&quot;background:none;padding:0;border:0;&quot;&gt;95009.00&lt;/button&gt;
+</code></pre><h3 id="手机拍照和上传图片"><a href="#手机拍照和上传图片" class="headerlink" title="手机拍照和上传图片"></a>手机拍照和上传图片</h3><pre><code>&lt;input type=file accept=&quot;image/*&quot;&gt;
+&lt;input type=file accept=&quot;video/*&quot;&gt;
+</code></pre><h3 id="避免使用dataURI"><a href="#避免使用dataURI" class="headerlink" title="避免使用dataURI"></a>避免使用dataURI</h3><p>dataURI在移动端并不如PC端吃香，而且速度比外链还慢。生成的代码文件相对图片文件体积没有减少反而增大，而且浏览器在对这种base64解码过程中需要消耗内存和cpu，这个在移动端坏处特别明显。</p>
+<p>关于DataURI的几篇文章：</p>
+<ul>
+<li><a href="http://aiyouu.net/data-uris-explained/">DataURI详解</a></li>
+<li><a href="http://www.cssforest.org/blog/index.php?id=152">Data URI的利弊</a></li>
+<li><a href="http://www.cnblogs.com/hongru/archive/2012/01/14/2321397.html">关于base64编码的原理及实现</a></li>
+<li><a href="http://www.qianduan.net/data-uris-are-slow-on-mobile.html">手机端DataURI比外链资源慢6倍</a></li>
+<li><a href="https://www.nczonline.net/blog/2009/10/27/data-uris-explained/">Data URIs explained</a></li>
+</ul>
+<h3 id="针对渲染过程的优化"><a href="#针对渲染过程的优化" class="headerlink" title="针对渲染过程的优化"></a>针对渲染过程的优化</h3><ul>
+<li>动画优化<ul>
+<li>尽量使用CSS3动画<ul>
+<li>CSS3动画不占JavaScript主线程</li>
+<li>可利用硬件加速</li>
+<li>浏览器可对动画做优化</li>
+<li>缺点：不支持中间状态监听</li>
+</ul>
+</li>
+<li>适当使用canvas动画</li>
+<li>合理使用RAF<ul>
+<li>能解决脚本问题引起的丢帧，卡顿问题</li>
+<li>支持中间状态监听</li>
+<li>缺点：兼容问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>结论：</p>
+<ul>
+<li>5个元素以内只用CSS3动画，超过使用canvas。</li>
+<li>不需要兼容android 4.3浏览器的情况下，使用RAF制作脚本动画</li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/05/Mobile-Terminal-Development-Skills/" data-addthis-title="移动端开发技巧">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/04/some-JavaScript-Issues/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/06/ES6-Notes-Part1/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/05/Mobile-Terminal-Development-Skills/" data-title="移动端开发技巧" data-url="http://xiguaaxigua.cn/2016/07/05/Mobile-Terminal-Development-Skills/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>编写你的第一个指令 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="编写你的第一个指令"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">编写你的第一个指令</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-21T02:47:48.000Z">2016-05-21</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/教程/">教程</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h2><video src="http://7xtoaz.com1.z0.glb.clouddn.com/10.Write%20Your%20First%20Directive.mp4" controls="true" width="100%"></video>
+
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="目录结构："><a href="#目录结构：" class="headerlink" title="目录结构："></a>目录结构：</h3><p>demo/<br>——app.js<br>——index.html</p>
+<h3 id="index-html的代码："><a href="#index-html的代码：" class="headerlink" title="index.html的代码："></a>index.html的代码：</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Write Your First Directive&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/angular.js/1.5.5/angular.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=&quot;egghead&quot; ng-controller=&quot;AppCtrl as app&quot;&gt;
+    &lt;div my-first-directive message=&quot;Angular&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="app-js的代码"><a href="#app-js的代码" class="headerlink" title="app.js的代码"></a>app.js的代码</h3><pre><code>var egghead = angular.module(&quot;egghead&quot;, []);
+
+egghead.controller(&quot;AppCtrl&quot;, function(){
+    var app = this;
+
+    app.message = &quot;Hello&quot;;
+});
+
+egghead.directive(&#39;myFirstDirective&#39;, function(){
+    return function(scope, element, attrs){
+        element.text(scope.app.message + &quot; &quot; + attrs.message);
+    }
+});
+</code></pre><p>TIPS：<br>1.app.js中定义指令的方式是小驼峰，但是在模板中调用指令的时候要使用“-”间隔。在上例中，myFirstDirective对应着模板中的my-first-directive。</p>
+<p>2.模板中，下面这两种方式是等价的。</p>
+<pre><code>&lt;div my-first-directive&gt;&lt;/div&gt;
+</code></pre><pre><code>&lt;div my-first-directive=&quot;&quot;&gt;&lt;/div&gt;
+</code></pre><p>3.在指令中传入element（当前元素）和attrs（属性），可以调用模板中存放指令位置的元素和当前元素的属性，类似于jQuery，看到这里不得不说，Angular好腻害♪(＾∀＾●)ﾉ。</p>
+<p>4.在模板中，<code>ng-controller=&quot;AppCtrl as app&quot;</code>是什么意思？</p>
+<p>答案是：别名。将app作为AppCtrl控制器的别名。</p>
+<p>在app.js中的AppCtrl中，可见：</p>
+<pre><code>var app = this;
+
+app.message = &quot;Hello&quot;;
+</code></pre><p>那为什么不用这种方式呢？</p>
+<pre><code>egghead.controller(&quot;AppCtrl&quot;, function($scope){
+    $scope.message = &quot;Hello&quot;;
+});
+</code></pre><p>答案是我也不知道，此处留个坑吧。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/21/Angular-Video-Tutorial-010/" data-addthis-title="编写你的第一个指令">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/20/Angular-Video-Tutorial-009/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/21/Angular-Video-Tutorial-011/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/21/Angular-Video-Tutorial-010/" data-title="编写你的第一个指令" data-url="http://xiguaaxigua.cn/2016/05/21/Angular-Video-Tutorial-010/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

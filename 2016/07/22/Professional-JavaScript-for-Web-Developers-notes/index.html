@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript高级程序设计（第3版）-读书笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="JavaScript高级程序设计（第3版）-读书笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">JavaScript高级程序设计（第3版）-读书笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-22T07:56:20.000Z">2016-07-22</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p>看书的过程中随手记下的知识点，内容杂乱无序。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>1.标识符：指变量、函数、属性的名字，或者函数的参数。标识符中的字母也可以包含扩展的ASCII或者Unicode字母，但是不推荐使用。</p>
+<p>2.ASCII：美国信息交换标准代码，是基于拉丁字母的一套电脑编码系统，主要用于显示现代英语和其他西欧语言。</p>
+<p>3.Unicode：计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。</p>
+<p>4.松散类型：可以用来保存任何类型的数据。</p>
+<p>5.不建议修改变量所保存的值的类型。</p>
+<pre><code>var message = &#39;hello&#39;;
+message = 10086; // 有效，但不推荐
+</code></pre><p>6.不推荐通过省略var操作符的方式定义全局变量。原因：</p>
+<ul>
+<li>难以维护；</li>
+<li>严格模式下报错。</li>
+</ul>
+<p>7.五种简单数据类型（也叫基本数据类型）：Undefined、Null、Boolean、Number、String。一种复杂数据类型：Object。</p>
+<p>8.不推荐显式地把变量设置为 <code>undefined</code> 。<code>undefined</code> 主要用于比较。</p>
+<p>9.null表示一个空对象指针。undefined表示未经初始化的变量。</p>
+<p>10.保存浮点数所需的内存空间是整数的两倍，JavaScript会不失时机的将浮点数转化为整数。</p>
+<pre><code>var num1 = 1.0;
+console.log(num1); // 1
+var num2 = 10.0;
+console.log(num2); // 10
+</code></pre><p>11.科学计数法（e表示法）：</p>
+<pre><code>console.log(3.1415e6); // 3141500 
+console.log(3e-6); // 0.000003
+</code></pre><p>12.不要测定某个特定的浮点数值。</p>
+<pre><code>console.log(0.1 + 0.2 == 0.3); // false
+</code></pre><p>浮点数值的最高精度是17为小数，但在进行算数计算时其精确度远远不如整数。例如，0.1加0.2的结果不是0.3而是0.30000000000000004。这个小小的摄入误差会导致无法测定特定的浮点数值。</p>
+<p>13.最小数值：Number.MIN_VALUE。最大数值：Number.MAX_VALUE。</p>
+<p>如果某次计算的结果得到了一个超出JavaScript数值范围的值，那么这个数值将被自动转换成特殊的Infinity值。正无穷：Infinity，负无穷：-Infinity。</p>
+<p>14.toString()方法可以接受参数：</p>
+<pre><code>var num = 10;
+console.log(num.toString(2)); // &quot;1010&quot;，二进制
+console.log(num.toString(8)); // &quot;12&quot;， 八进制
+console.log(num.toString(10)); // &quot;10&quot;， 十进制，默认。
+console.log(num.toString(16)); // &quot;a&quot;， 十六进制
+</code></pre><p>15.Number、Boolean、Object、String都有toString()方法。</p>
+<p>16.在不知道要转换的值是否为null或者undefined的情况下，可以使用转型函数String()。</p>
+<pre><code>var v1 = 10;
+var v2 = true;
+var v3 = {name: &#39;老王&#39;};
+var v4 = &#39;Hello&#39;;
+var v5 = null;
+var v6;
+console.log(String(v1)); // &quot;10&quot;
+console.log(String(v2)); // &quot;true&quot;
+console.log(String(v3)); // &quot;&quot;[object Object]&quot;&quot;
+console.log(String(v4)); // &quot;Hello&quot;
+console.log(String(v5)); // &quot;null&quot;
+console.log(String(v6)); // &quot;undefined&quot;
+</code></pre><p>17.Object的每个实例都具有以下属性和方法：</p>
+<ul>
+<li>Constructor：保存着用于创建当前对象的函数。</li>
+<li>hasOwnProperty：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。</li>
+<li>isPrototypeOf(obj)：用于检查传入的对象是否是另一个对象的原型。</li>
+<li>propertyIsEnumerable：用于检查给定的属性是否能够使用for-in语句来枚举。</li>
+<li>toLocaleString()：返回对象的字符串表示，该字符串与执行环境的地区对应。</li>
+<li>toString()：返回对象的字符串表示。</li>
+<li>valueOf()：返回对象的字符串、数值或者布尔值表示。通常与toString()方法的返回值相同。</li>
+</ul>
+<p>18.在函数体内可以通过arguments对象来访问传入该函数的参数：（这说明在JavaScript中参数命名只是为了方便，而不是必须的）</p>
+<pre><code>var a = 1;
+var b = 2;
+var c = 3;
+
+function getArguments(){
+    console.log(&#39;第一个参数是：&#39; + arguments[0]);
+    console.log(&#39;第二个参数是：&#39; + arguments[1]);
+    console.log(&#39;第三个参数是：&#39; + arguments[2]);
+}
+getArguments(a, b, c);
+</code></pre><p>19.JavaScript中的函数不能像传统意义那样实现重载。而在其他语言中，可以为一个函数编写两个定义，只要这两个函数的签名（接受的参数的类型和数量）不同即可。JavaScript中的函数没有签名，其参数由包含零个或多个值的数组来表示的，而没有签名的函数，真正的重载是不可能做到的。只能实现类似的重载：</p>
+<pre><code>function hello(){
+    if(arguments.length == 1){
+        // 代码体A
+    }else if(arguments.length == 2){
+        // 代码体B
+    }
+}
+</code></pre><p>如果在JavaScript中定义了两个名字相同的函数，后者会覆盖前者。</p>
+<pre><code>function hello(){
+    console.log(&#39;Hello FuncA&#39;);
+}
+
+function hello(){
+    console.log(&#39;Hello FuncB&#39;);
+}
+
+hello(); // Hello FuncB
+</code></pre><p>20.ECMAScript中包含了所有基本的语法、操作符、数据类型以及完成基本的计算任务所必须的对象，但没有对取得输入和产生输出的机制做出规定。理解ECMAScript及其纷繁复杂的细节，是理解其在Web浏览器中的实现——JavaScript的关键。</p>
+<p>ECMAScript中基本的要素：</p>
+<ul>
+<li>ECMAScript中的基本数据类型包括：Undefined、Null、Boolean、Number、String。</li>
+<li>与其他语言不同，ECMAScript没有为整数和浮点数值分别定义不同的数据类型，Number可用于表示所有数值。</li>
+<li>ECMAScript中也有一种复杂的数据类型，即Object类型，该类型是这门语言中所有对象的基础类型。</li>
+<li>严格模式为这门语言中容易出错的地方施加了限制。</li>
+<li>ECMAScript提供了很多与C及其他类C语言中相同的基本操作符，包括算数操作符、布尔操作符、关系操作符、相等操作符及赋值操作符等。</li>
+<li>ECMAScript从其他语言中借鉴了很多流控制语句，例如if语句、for语句、switch语句等。</li>
+</ul>
+<p>ECMAScript与其他语言也有很多不同之处：</p>
+<ul>
+<li>无需指定函数的返回值，因为任何ECMAScript函数都可以在任何时候返回任何值。</li>
+<li>实际上，未指定返回值的函数返回的是一个特殊的undefined值。</li>
+<li>ECMAScript中也没有函数签名的概念，因为其函数参数是以一个包含零个或多个值的数组的形式传递的。</li>
+<li>可以向ECMAScript函数传递任意数量的参数，并且可以通过arguments对象来访问这些参数。</li>
+<li>由于不存在函数签名的特性，ECMAScript函数不能重载。</li>
+</ul>
+<p>21.ECMAScript变量可能包含两种不同数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值只的是那些可能由多个值构成的对象。</p>
+<p>引用类型的值是保存在内存中的对象。与其他语言不同，JavaScript不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。在操作对象时，实际上实在操作对象的引用而不是实际的对象。为此，引用类型的值是按引用访问的。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/22/Professional-JavaScript-for-Web-Developers-notes/" data-addthis-title="JavaScript高级程序设计（第3版）-读书笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/21/Flexbox-notes/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/26/Thinking-in-CSS/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/22/Professional-JavaScript-for-Web-Developers-notes/" data-title="JavaScript高级程序设计（第3版）-读书笔记" data-url="http://xiguaaxigua.cn/2016/07/22/Professional-JavaScript-for-Web-Developers-notes/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

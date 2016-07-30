@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>记录一个遇到的关于浮动的BUG | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="记录一个遇到的关于浮动的BUG"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">记录一个遇到的关于浮动的BUG</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-02T08:03:44.000Z">2016-07-02</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/CSS/">CSS</a>, <a class="tag-a" href="/tags/HTML/">HTML</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>期待的效果如下图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/float0.jpg" alt=""></p>
+<p>实际情况如下图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/float2.jpg" alt=""></p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>显然，由于li的高度是由内容确定的，由于“新浪微博”这个li的内容相比其他li来说少，因此高度比其他的li低，造成该li之后的li卡在右侧，类似于当前浮动为right的假象。</p>
+<p>解决办法：设置一个最小高度，例如<code>min-height:40px;</code></p>
+<p>解决后的效果：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/float3.jpg" alt=""></p>
+<p><a href="http://7xtoaz.com1.z0.glb.clouddn.com/floatDemo.html">点击访问Demo页面</a></p>
+<p>附上Demo代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;一个浮动的bug&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix:after{
+            content:&quot;.&quot;;
+            display:block;
+            height:0;
+            clear:both;
+            visibility:hidden
+        }
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .box{
+            width: 100%;
+        }
+        h2{
+            margin-top: 100px;
+        }
+        .box li{
+            list-style-type: none;
+            float: left;
+            width: 240px;
+            margin: 5px;
+        }
+        .box1 li{
+            background: #FF5454;
+        }
+        .box2 li{
+            background: #00bcd4;
+        }
+        .box3 li{
+            background: #9c27b0;
+            min-height: 40px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h2&gt;期待的效果：&lt;/h2&gt;
+        &lt;div class=&quot;box box1&quot;&gt;
+            &lt;ul class=&quot;clearfix&quot;&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;微信&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;支付宝&lt;/h3&gt;
+                    &lt;p&gt;阿里的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;QQ&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;新浪微博&lt;/h3&gt;
+                    &lt;p&gt;网易的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;iPhone&lt;/h3&gt;
+                    &lt;p&gt;Apple的产品&lt;/p&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;h2&gt;遇到的问题：&lt;/h2&gt;
+        &lt;div class=&quot;box box2&quot;&gt;
+            &lt;ul class=&quot;clearfix&quot;&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;微信&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;支付宝&lt;/h3&gt;
+                    &lt;p&gt;阿里的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;QQ&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;新浪微博&lt;/h3&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;iPhone&lt;/h3&gt;
+                    &lt;p&gt;Apple的产品&lt;/p&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;h2&gt;解决后的效果：&lt;/h2&gt;
+        &lt;div class=&quot;box box3&quot;&gt;
+            &lt;ul class=&quot;clearfix&quot;&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;微信&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;支付宝&lt;/h3&gt;
+                    &lt;p&gt;阿里的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;QQ&lt;/h3&gt;
+                    &lt;p&gt;腾讯的产品&lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;新浪微博&lt;/h3&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;h3&gt;iPhone&lt;/h3&gt;
+                    &lt;p&gt;Apple的产品&lt;/p&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/02/a-Float-Bug/" data-addthis-title="记录一个遇到的关于浮动的BUG">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/02/Skills-in-the-Work/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/03/CSS-Skills/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/02/a-Float-Bug/" data-title="记录一个遇到的关于浮动的BUG" data-url="http://xiguaaxigua.cn/2016/07/02/a-Float-Bug/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

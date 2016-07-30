@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jade学习笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="jade学习笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">jade学习笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-08T07:26:12.000Z">2016-07-08</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/HTML/">HTML</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src='http://jade-lang.com/style/jade-logo-header.svg' style="width:30%;" /></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="什么是jade"><a href="#什么是jade" class="headerlink" title="什么是jade?"></a>什么是jade?</h3><p>jade是一款源于Node.js的HTML模板引擎。</p>
+<ul>
+<li>模板引擎</li>
+<li>依赖于JavaScript实现jade到HTML的转换</li>
+<li>供Node使用</li>
+</ul>
+<h3 id="安装和编译"><a href="#安装和编译" class="headerlink" title="安装和编译"></a>安装和编译</h3><pre><code>#安装
+npm install -g jade
+
+#编译
+jade demo.jade
+
+#编译后将在同级目录下生成demo.html
+</code></pre><h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
+<li><a href="http://jade-lang.com/">jade官网</a></li>
+<li><a href="http://html2jade.aaron-powell.com/">在线html转jade</a></li>
+<li>空格和缩进的问题可能导致编译失败，建议选择合适的编辑器，比如：WebStrom。</li>
+</ul>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="doctype"><a href="#doctype" class="headerlink" title="doctype"></a>doctype</h3><pre><code>doctype html
+</code></pre><p>编译后：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+</code></pre><p><strong>注意：</strong> <code>!!!</code> 这种简写方式已经废除。<br>可选值还有：</p>
+<ul>
+<li>xml</li>
+<li>transitional</li>
+<li>strict</li>
+<li>frameset</li>
+<li>1.1</li>
+<li>basic</li>
+<li>mobile</li>
+</ul>
+<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><pre><code>//jade
+doctype html
+html
+    head
+        meta(charset=&#39;utf-8&#39;)
+        title JadeNotes
+    body
+        h1 Hello Jade!
+</code></pre><p>编译后：</p>
+<pre><code>&lt;!--html--&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;JadeNotes&lt;/title&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello Jade!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><pre><code>//这行注释将被编译
+
+//- 这行注释不会被编译
+
+//
+    多行注释
+    多行注释
+    多行注释
+</code></pre><p>编译后：</p>
+<pre><code>&lt;!--这行注释将被编译--&gt;
+
+&lt;!--多行注释
+    多行注释
+    多行注释--&gt;
+</code></pre><h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><pre><code>p Hello Jade!
+</code></pre><p>编译后：</p>
+<pre><code>&lt;p&gt;Hello Jade!&lt;/p&gt;
+</code></pre><h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><pre><code>//类选择器
+p.red-txt
+
+//ID选择器
+p#blue-txt
+
+//一个ID多个Class
+p#yellow-text.high-txt.demo-txt
+</code></pre><p>编译后：</p>
+<pre><code>&lt;!--类选择器--&gt;
+&lt;p class=&quot;red-txt&quot;&gt;&lt;/p&gt;
+&lt;!--ID选择器--&gt;
+&lt;p id=&quot;blue-txt&quot;&gt;&lt;/p&gt;
+&lt;!--一个ID多个Class--&gt;
+&lt;p id=&quot;yellow-text&quot; class=&quot;high-txt demo-txt&quot;&gt;&lt;/p&gt;
+</code></pre><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><pre><code>input(type=&#39;text&#39;, placeholder=&#39;Input your Phone&#39;)
+</code></pre><p>编译后：</p>
+<pre><code>&lt;input type=&quot;text&quot; placeholder=&quot;Input your Phone&quot;&gt;
+</code></pre><h3 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h3><pre><code>ul#demo-ul
+    li.demo-li Hello
+    li.demo-li World
+</code></pre><p>编译后：</p>
+<pre><code>&lt;ul id=&quot;demo-ul&quot;&gt;
+    &lt;li class=&quot;demo-li&quot;&gt;Hello&lt;/li&gt;
+    &lt;li class=&quot;demo-li&quot;&gt;World&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><pre><code>- var welcome = &#39;Hello World&#39;
+
+p &#39;Xiguaaxigua, #{welcome}&#39;
+</code></pre><p>编译后：</p>
+<pre><code>&lt;p&gt;&#39;Xiguaaxigua, Hello World&#39;&lt;/p&gt;
+</code></pre><h3 id="标签中有大段的块内容"><a href="#标签中有大段的块内容" class="headerlink" title="标签中有大段的块内容"></a>标签中有大段的块内容</h3><pre><code>script.
+    console.log(&#39;Hello&#39;);
+    console.log(&#39;World&#39;);
+
+//或者
+script.
+    | console.log(&#39;Hello&#39;);
+    | console.log(&#39;World&#39;);
+</code></pre><p>编译后：</p>
+<pre><code>&lt;script&gt;
+console.log(&#39;Hello&#39;);
+console.log(&#39;World&#39;);
+&lt;/script&gt;
+&lt;!--或者--&gt;
+&lt;script&gt;
+console.log(&#39;Hello&#39;)
+console.log(&#39;World&#39;)
+&lt;/script&gt;
+</code></pre><h3 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h3><pre><code>- var welcome = &#39;Hello &lt;b&gt;Wrold&lt;/b&gt;&#39;
+
+p welcome
+p= welcome
+p!= welcome
+</code></pre><p>编译后：</p>
+<pre><code>&lt;p&gt;welcome&lt;/p&gt;
+&lt;p&gt;Hello &amp;lt;b&amp;gt;Wrold&amp;lt;/b&amp;gt;&lt;/p&gt;
+&lt;p&gt;Hello &lt;b&gt;Wrold&lt;/b&gt;&lt;/p&gt;
+</code></pre><p><code>=</code> 会转义内容，不想被转义可以加 <code>!=</code> 。</p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>使用each循环：</p>
+<pre><code>- var arr = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
+ul
+    each a in arr
+        li= a
+
+- var obj = {&#39;name&#39;: &#39;老王&#39;, &#39;age&#39;: &#39;33&#39;, &#39;money&#39;}
+table
+    each value, key in obj
+        tr
+            td #{key}
+            td #{value}
+</code></pre><p>编译后：</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;A&lt;/li&gt;
+    &lt;li&gt;B&lt;/li&gt;
+    &lt;li&gt;C&lt;/li&gt;
+    &lt;li&gt;D&lt;/li&gt;
+    &lt;li&gt;E&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;name&lt;/td&gt;
+        &lt;td&gt;老王&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;age&lt;/td&gt;
+        &lt;td&gt;33&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;money&lt;/td&gt;
+        &lt;td&gt;1000&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre><h3 id="case"><a href="#case" class="headerlink" title="case"></a>case</h3><p><code>case</code> 和JavaScript里的 <code>switch</code> 作用一样。</p>
+<pre><code>- var money = 1000
+case money
+    when 10000
+        h1 土豪
+    when 1000
+        h1 地主
+    when 100
+        h1 平民
+    when 1
+        h1 穷逼
+</code></pre><p>编译后：</p>
+<pre><code>&lt;h1&gt;地主&lt;/h1&gt;
+</code></pre><p>或者：</p>
+<pre><code>- var money = 10000000
+case money
+    when 10000: h1 土豪
+    when 1000: h1 地主
+    when 100: h1 平民
+    when 1: h1 穷逼
+    default: h1 你有多少钱？
+</code></pre><p>编译后：</p>
+<pre><code>&lt;h1&gt;你有多少钱？&lt;/h1&gt;
+</code></pre><h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>支持markdown。必须是安装了 <code>markdown-js</code> 或者 <code>node-discount</code> 。</p>
+<pre><code>#安装markdown-js
+npm install -g markdown-js
+
+#或者安装node-discount
+npm install -g node-discount
+</code></pre><p>例如：</p>
+<pre><code>:markdown
+    ### Hello Markdown!
+</code></pre><p>编译后：</p>
+<pre><code>&lt;h3&gt;Hello Markdown!&lt;/h3&gt;
+</code></pre><h3 id="mixin"><a href="#mixin" class="headerlink" title="mixin"></a>mixin</h3><h4 id="无参数的mixin："><a href="#无参数的mixin：" class="headerlink" title="无参数的mixin："></a>无参数的mixin：</h4><pre><code>mixin welcome
+    ul
+        li 为系统而生，为框架而死，为debug奋斗一辈子 
+        li 吃符号的亏，上大小写的当，最后死在需求上！
+        li Hello World!
+
++welcome()
+</code></pre><p>编译后：</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;为系统而生，为框架而死，为debug奋斗一辈子&lt;/li&gt;
+    &lt;li&gt;吃符号的亏，上大小写的当，最后死在需求上！&lt;/li&gt;
+    &lt;li&gt;Hello World!&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h4 id="有参数的mixin："><a href="#有参数的mixin：" class="headerlink" title="有参数的mixin："></a>有参数的mixin：</h4><pre><code>mixin welcome(param)
+    ul
+        li 为系统而生，为框架而死，为debug奋斗一辈子 
+        li 吃符号的亏，上大小写的当，最后死在需求上！
+        li Hello #{param}!
+
++welcome(&#39;Mixin&#39;)
+</code></pre><p>编译后：</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;为系统而生，为框架而死，为debug奋斗一辈子&lt;/li&gt;
+    &lt;li&gt;吃符号的亏，上大小写的当，最后死在需求上！&lt;/li&gt;
+    &lt;li&gt;Hello Mixin!&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h4 id="mixin中文支持block："><a href="#mixin中文支持block：" class="headerlink" title="mixin中文支持block："></a>mixin中文支持block：</h4><pre><code>mixin welcome(param)
+    ul
+        if block
+            block
+        else
+            li Nothing!
+        li Hello Wrold!
+
++welcome()
+    li 为系统而生，为框架而死，为debug奋斗一辈子 
+    li 吃符号的亏，上大小写的当，最后死在需求上！
+</code></pre><p>编译后：</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;Hello Wrold!&lt;/li&gt;
+    &lt;li&gt;为系统而生，为框架而死，为debug奋斗一辈子&lt;/li&gt;
+    &lt;li&gt;吃符号的亏，上大小写的当，最后死在需求上！&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h4 id="mixin支持attributes"><a href="#mixin支持attributes" class="headerlink" title="mixin支持attributes"></a>mixin支持attributes</h4><pre><code>mixin link(href, name)
+    a(class != attributes.class, title != attributes.title, href=href)= name
+
++link(&#39;xiguaaxigua.cn&#39;, &#39;xiguaaxigua&#39;)(class=&#39;main-link&#39;, title=&#39;Hello Xigua！&#39;)
+</code></pre><p>编译后：</p>
+<pre><code>&lt;a title=&quot;Hello Xigua！&quot; href=&quot;xiguaaxigua.cn&quot; class=&quot;main-link&quot;&gt;xiguaaxigua&lt;/a&gt;
+</code></pre><h3 id="包含"><a href="#包含" class="headerlink" title="包含"></a>包含</h3><p>有点类似freemaker，通过include来载入一些jade模板。</p>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>推荐文章：</p>
+<ul>
+<li><a href="http://www.w3cplus.com/html/jade.html">W3CPlus-jade学习</a></li>
+<li><a href="https://segmentfault.com/a/1190000000357534">Jade——源于Node.js的HTML模板引擎</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/">Jade Syntax Documentation</a></li>
+<li><a href="https://segmentfault.com/a/1190000000502743">10个最好的 JavaScript 模板引擎</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/08/Jade-Notes/" data-addthis-title="jade学习笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/07/ES6-Notes-Part2/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/09/Standards-in-Develop/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/08/Jade-Notes/" data-title="jade学习笔记" data-url="http://xiguaaxigua.cn/2016/07/08/Jade-Notes/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

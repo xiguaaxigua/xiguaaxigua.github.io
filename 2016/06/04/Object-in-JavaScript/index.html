@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>温习JavaScript中的对象 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="温习JavaScript中的对象"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">温习JavaScript中的对象</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-06-04T08:09:23.000Z">2016-06-04</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="温故而知新"><a href="#温故而知新" class="headerlink" title="温故而知新"></a>温故而知新</h3><p>博主始终相信学习是一个长期积累的结果，这篇文章结束以后，感觉对JavaScript的对象这块清晰了许多，也解开了之前的一些疑惑。“温故而知新，可以为师矣。”古人诚不欺我。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>JavaScript中的数据类型：</p>
+<ul>
+<li>原始类型</li>
+<li>对象类型</li>
+</ul>
+<p>原始类型包括：</p>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>Boolean</li>
+<li>特殊的原始值<ul>
+<li>Null</li>
+<li>Undefined</li>
+</ul>
+</li>
+</ul>
+<p>对象类型包括：</p>
+<ul>
+<li>Object</li>
+<li>特殊对象<ul>
+<li>Array</li>
+<li>Function</li>
+</ul>
+</li>
+</ul>
+<p>JavaScript中数据类型的另一种划分：</p>
+<ul>
+<li><p>可变类型（mutable）</p>
+<ul>
+<li>Object</li>
+<li>Array</li>
+</ul>
+</li>
+<li><p>不可变类型（immutable）</p>
+<ul>
+<li>Number</li>
+<li>Boolean</li>
+<li>Null</li>
+<li>Undefined</li>
+<li>String</li>
+</ul>
+</li>
+</ul>
+<p>JavaScript中的变量：</p>
+<ul>
+<li>全局变量：不在任何函数内声明的变量</li>
+<li>局部变量：在函数体内声明的变量，具有函数作用域，只在函数内可见</li>
+</ul>
+<p>JavaScript中的对象：</p>
+<ul>
+<li>对象是从字符串到值的映射</li>
+<li>并非“万物皆对象”</li>
+<li>除了Number、String、Boolean、Null、Undefined外，都是对象</li>
+<li>Number、String、Boolean的行为和不可变对象很类似</li>
+</ul>
+<p>对象的属性特性：</p>
+<ul>
+<li>可写（writable attibute）</li>
+<li>可枚举（enumerable attribute）</li>
+<li>可配置（configurable attribute）</li>
+</ul>
+<p>对象的对象特性：</p>
+<ul>
+<li>原型（prototype）</li>
+<li>类（class）</li>
+<li>扩展标记（extensible flag）：标识该对象是否可扩展，即是否可以向该对象添加新属性</li>
+</ul>
+<p>JavaScript中的三类对象和两类属性：</p>
+<ul>
+<li>三类对象<ul>
+<li>内置对象：JavaScript语言本身内置的对象。</li>
+<li>宿主对象：宿主环境定义的对象。</li>
+<li>自定义对象：用户自定义的对象。</li>
+</ul>
+</li>
+<li>两类属性<ul>
+<li>自有属性：该对象本身的属性，即在对象中定义的属性。</li>
+<li>继承属性：继承来的属性，即在该对象的原型中定义的属性。</li>
+</ul>
+</li>
+</ul>
+<p>此处应该有张脑图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Object-in-JavaScript-02" alt=""></p>
+<p>小贴士：</p>
+<ul>
+<li>用来初始化一个新对象的函数，成为构造函数。</li>
+<li>数组：表示带编号的值的集合。数组的使用频率很高，JavaScript单独将数组划分出来，是为了让数组拥有一些和普通对象不同的特性。</li>
+<li>函数：具有与它相关联的可执行代码的对象。和数组一样，函数也有和普通对象不同的特性。</li>
+<li>类：可以看做对象类型的子类型。JavaScript中的类有：Array类、Function类、Date类、RegExp类、Error类。</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>为什么Number、String是不可变类型？答：修改一个数字本身就是行不通的。字符串同理。</li>
+</ul>
+<h2 id="对象的常见用法"><a href="#对象的常见用法" class="headerlink" title="对象的常见用法"></a>对象的常见用法</h2><h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>创建对象的三种方式：</p>
+<ul>
+<li>对象直接量</li>
+<li>通过new关键字</li>
+<li>Object.create()方法</li>
+</ul>
+<p>演示：</p>
+<pre><code>//对象直接量
+var obj1 = {name: &#39;Xigua&#39;, sex: &#39;male&#39;};
+console.log(typeof obj1);//object
+
+//new关键字
+var obj2 = new Object();
+obj2.name = &#39;Xigua&#39;;
+obj2.sex = &#39;male&#39;;
+console.log(typeof obj2);//object
+
+//Object.create()方法
+var obj3 = Object.create({name: &#39;Xigua&#39;, sex: &#39;male&#39;});
+console.log(typeof obj3);//object
+</code></pre><p>小贴士：</p>
+<ul>
+<li>new关键字用于创建并初始化一个新对象。new关键字后的函数即构造函数。构造函数的作用是初始化新创建的对象，即：将构造函数的原型赋给新对象的原型。<b>JavaScript中的原始类型都包含内置构造函数</b>。</li>
+<li><b>通过对象直接量创建的对象都具有同一个原型对象</b>。即：通过这种方式创建的对象的prototype都指向<code>Object.prototype</code>。<br>```<br>//对象直接量<br>var obj1 = {name: ‘Xigua’, sex: ‘male’};<br>console.log(typeof obj1);//object</li>
+</ul>
+<p>console.log(obj1.<strong>proto</strong> === Object.prototype);//true<br>/<em><br>为什么这里不是console.log(obj1.prototype === Object.prototype);？<br>此处留作疑问，下面单独开个标题讨论prototype和<strong>proto</strong>的区别。
+</em>/</p>
+<pre><code>
+### 属性的查询和设置
+</code></pre><p>var obj1 = {name: ‘Xigua’, sex: ‘male’};</p>
+<p>//查询<br>console.log(obj1.name);//Xigua<br>//或者<br>console.log(obj1[‘name’]);//Xigua</p>
+<p>//设置<br>obj1.name = ‘Hello’;<br>//或者<br>obj1[‘name’] = ‘Hello’;<br>console.log(obj1.name);//Hello</p>
+<pre><code>注意：
++ 点运算符后的标识符不能是保留字。
++ 使用方括号时，方括号内的表达式必须返回字符串或者返回一个可以转换为字符串的值。
+
+### 继承
+JavaScript对象具有“自有属性”，也有一些属性是从原型对象继承而来的。
+
+假设要查询对象o的属性x，如果o中不存在x，那么将会继续在o的原型对象中查询属性x。如果原型对象中也没有x，但这个原型对象也有原型，那么继续在这个原型对象的原型上执行查询，直到找到x或者找到一个原型是null的对象为止。可以看到，对象的原型属性构成了一个“链”，也就是我们常说的“原型链”。通过原型链可以实现属性的继承。
+</code></pre><p>var o = {};//o从Object.prototype继承对象的方法<br>o.x = 1;//给o定义一个属性x<br>var p = inherit(o);//p继承o和Object.prototype<br>p.y = 2;//给p定义一个属性y<br>var q = inherit(p);//q继承p、o和Object.prototype<br>q.z = 3;//给q定义一个属性<br>var s = q.toString();//toString继承自Object.prototype<br>console.log(q.x + q.y);//3，x和y分别继承自o和p</p>
+<pre><code>
+现在假设给对象o的属性x赋值
++ 如果o中已经有了属性x（这个属性不是继承来的），那么这个赋值操作只改变这个已有属性x的值。
++ 如果o中不存在属性x，那么赋值操作给o添加一个新属性x。
++ 如果之前o继承自属性x，那么这个继承的属性就被新创建的同名属性覆盖了。
+
+属性赋值操作首先检查原型链，以此判定是否允许赋值操作。
+
+属性赋值要么失败、要么创建一个新属性、要么在原始对象中设置属性，但是有一个例外，如果o继承自属性x，而这个属性是一个具有setter方法的accessor属性，那么这是将调用setter方法而不是给o创建一个属性x。需要注意的是，setter方法是由对象o调用的，而不是定义这属性的原型对象调用的。因此如果setter方法定义任意属性，这个操作只是针对o本身，并不会修改原型链。
+
+### 删除属性
+
+delete运算符可以删除对象的属性。它的操作数应该是一个属性访问表达式。delete只是断开属性和宿主对象的联系，而不会去操作属性中的属性。
+
+delete运算符只能删除自有属性，不能删除继承属性（要删除继承属性必须从定义这个属性的原型对象上删除它，而且这会影响到所有继承自这个原型的对象）。
+
+当delete表达式删除成功或没有任何副作用（比如删除不存在的属性）时，它返回true。如果delete后不是一个属性访问表达式，delete同样返回true。
+</code></pre><p>var o = {x= 1};<br>delete o.x;//删除x,返回true<br>delete o.x;//什么都没做，x已经不存在了，返回true<br>delete o.toString;//什么都没做，toString是继承来的，返回true<br>delete 1;//无意义，返回true</p>
+<pre><code>
+delete不能删除那些可配置性为false的属性。某些内置对象的属性是不可配置的，比如通过变量声明和函数声明创建的全局对象的属性。在严格模式中，删除一个不可配置属性会报一个类型错误。在非严格模式中，在这些情况下的delete操作会返回false。
+</code></pre><p>delete Object.prototype;//不能删除，属性是不可配置的<br>var x = 1;//声明一个全局变量<br>delete this.x;//不能删除这个属性<br>function f(){};//声明一个全局函数<br>delete this.f;//不能删除全局函数</p>
+<pre><code>
+当在非严格模式中删除全局对象的可配置属性时，可以省略对全局对象的引用，直接在delete操作符后跟随要删除的属性名即可。
+</code></pre><p>this.x = 1;//创建一个可配置的全局属性（没有var）<br>delete x;//将它删除</p>
+<pre><code>
+然而在严格模式中，delete后跟随一个非法的操作数，则会报出一个语法错误，因此必须显式指定对象及其属性。
+</code></pre><p>delete x;//在严格模式下报语法错误<br>delete this.x;//在严格模式下正常工作</p>
+<pre><code>
+### 检测属性
+JavaScript对象可以看做属性的集合，我们经常会检测集合中成员的所属关系——判断某个属性是否存在于某个对象中。可以通过in运算符、hasOwnPreperty()和propertyIsEnumerable()方法来完成这个工作，甚至仅通过属性查询也可以做到这一点。
+</code></pre><p>//in运算符：检测左侧的属性名是否是对象的自有属性或者继承属性<br>var o = {x: 1};<br>console.log(“x” in o);//true<br>console.log(“y” in o);//false<br>console.log(“toString” in o);//true：o继承toString属性</p>
+<p>//hasOwnProperty：检测给定的名字是否是对象的自有属性<br>var o = {x: 1};<br>console.log(o.hasOwnProperty(“x”));//true<br>console.log(o.hasOwnProperty(“y”));//false<br>console.log(o.hasOwnProperty(“toString”));//false：toString是继承属性</p>
+<p>//propertyIsEnumerable：检测给定的名字是否是对象的自有属性，并且这个属性可枚举<br>var o = inherit({ y: 2});<br>o.x = 1;<br>console.log(o.propertyIsEnumerable(“x”));//true<br>console.log(o.propertyIsEnumerable(“y”));//false：y是继承来的<br>console.log(Object.prototype.propertyIsEnumerable(“toString”));//false：不可枚举</p>
+<p>//更简单的方法“!==”：用于判断一个属性是否是undefined<br>var o = {x: 1, z: undefined};<br>console.log(o.x !== undefined);//true<br>console.log(o.y !== undefined);//false<br>console.log(o.toString !== undefined);//true：o继承了toString属性<br>//注意：检测z是否存在只能用in，因为in可以区分不存在的属性和存在但是值为undefined的属性<br>console.log(“z” in o);//true<br>console.log(o.z !== undefined);//false：返回false，但是z属性存在</p>
+<p>//注意：上述代码中使用的是“!==”而不是“!=”，因为“!==”可以区分null和undefined</p>
+<pre><code>
+### 属性getter和setter
+
+我们知道，对象的属性是由属性名、属性值和一组特性组成。在ES5中，属性值可以用一个或两个方法替代，这两个方法就是getter和setter。由getter和setter定义的属性成为“存取器属性”。它不同于“数据属性”，数据属性只有一个简单的值。
+
+注意：
++ 存取器属性具有不可写性。
++ 如果属性同时具有getter和setter属性，那么它是一个读/写属性。
++ 如果属性只有getter属性，那么它是一个只读属性。
++ 如果属性只有setter属性，那么它是一个只写属性。读取只写属性只会返回undefined。
+</code></pre><p>//定义存取器属性最简单的方法是使用对象直接量语法的一种扩展写法<br>var o = {<br>    //普通的数据属性<br>    data_prop: value,</p>
+<pre><code>//存取器属性都是成对定义的函数
+//get accessor_prop(){/* 函数体 */}
+//set accessor_prop(){/* 函数体 */}
+</code></pre><p>};</p>
+<pre><code>
+存取器属性定义为一个或两个属性同名的函数，这个函数定义没有使用function关键字，而是使用get或set。注意，这里没有使用冒号将属性名和函数体分隔开，但在函数体的结束和下一个方法或数据属性之间有逗号分隔。
+
+&lt;i&gt;博主对这块不是太熟悉，有机会将会更深一步研究。&lt;/i&gt;
+
+### 对象的三个属性
+
+前面聊过每个对象都有与之相关的三个属性：原型、类、扩展标识。
+
+原型：
+
+对象的原型主要用来实现继承。
+
+要想检测一个对象是否是另一个对象的原型，应该使用isPrototypeOf()方法。
+</code></pre><p>var p = {x: 1};//定义一个原型对象<br>var o = Object.create(p);//使用这个原型创建一个对象<br>p.isPrototypeOf(o);//true<br>Object.prototype.isPrototypeOf(o);//true：p继承自Object.prototype</p>
+<pre><code>
+Mozilla、Chrome实现的JavaScript对外暴露了一个专门命名为`__proto__`的属性，用以直接查询/设置对象的原型。注意；有的浏览器可能不支持这个属性（待查）。
+
+类：
+
+对象的类属性是一个字符串，用以标识对象的类型信息。很鸡肋的一个属性，浏览器并未提供相应的方法去查询它
+
+可扩展性：
+
+对象的可扩展性用以表示是否可以给对象添加新属性。
++ 所有内置对象和自定义对象都是显式可扩展的，宿主对象的可扩展性由解析JavaScript的引擎决定。
++ 判断对象是否可扩展：Object.esExtensible()。
++ 将对象转换为不可扩展：Object.preventExtensions()。
++ 将对象设置为不可扩展并且将对象的所有自有属性都设置为不可配置的：Object.seal()。
++ 更严格的锁定对象，即冻结对象：Object.freeze()。
++ 检测对象是否被冻结：Object.isFrozen()。
+
+### 序列化对象
+
+对象序列化是指将对象的状态转换为字符串，也可将字符串还原为对象。即，对象和JSON数组的转换。此方法工作中经常用到。
+</code></pre><p>var o = {x: 1, y: 2, z: 3};<br>s = JSON.stringify(o);<br>p = JSON.parse(s);</p>
+<p>console.log(s);//得到一个JSON字符串：{“x”:1,”y”:2,”z”:3}<br>console.log(p);//得到一个对象：Object {x: 1, y: 2, z: 3}</p>
+<pre><code>
+### 对象的方法
+
+前面聊过，所有的JavaScript对象都从Object.prototype继承属性（除了那些不通过原型显式创建的对象）。这些继承属性主要是方法。前面聊过hasOwnProperty()、propertyIsEnumerable()、isPrototypeOf()这三个方法，以及Object构造函数里定义的静态函数Object.create()和Object.getPrototypeOf()等。除此之外还有一下几种常见的方法。
++ toString()
++ toLocalString()
++ toJSON()
++ valueOf()
+
+### prototype和`__proto__`的区别
+
+JavaScript中的内置构造器：
++ Number
++ Boolean
++ String
++ Object
++ Function
++ Array
++ RegExp
++ Error
++ Date
++ Global
++ Arguments
++ Math
++ JSON（ES5新增）
+
+
+#### 1.所有构造器/函数的`__proto__`都指向`Function.prototype`
+
+“所有构造器/函数”是指JavaScript中的构造器，和所有的函数（包括自定义函数）。
+</code></pre><p>console.log(Number.<strong>proto</strong> === Function.prototype);//true<br>console.log(Boolean.<strong>proto</strong> === Function.prototype);//true<br>console.log(String.<strong>proto</strong> === Function.prototype );//true<br>console.log(Object.<strong>proto</strong> === Function.prototype);//true<br>console.log(Function.<strong>proto</strong> === Function.prototype);//true<br>console.log(Array.<strong>proto</strong> === Function.prototype);//true<br>console.log(RegExp.<strong>proto</strong> === Function.prototype);//true<br>console.log(Error.<strong>proto</strong> === Function.prototype);//true<br>console.log(Date.<strong>proto</strong> === Function.prototype);//true</p>
+<p>/*<br>Global不能直接访问<br>Arguments仅在函数调用时由JavaScript引擎创建<br>Math、JSON是以对象的形式存在的，无需new。他们的<strong>proto</strong>指向Object.prototype</p>
+<p>console.log(Math.<strong>proto</strong> === Object.prototype);//true<br>console.log(JSON.<strong>proto</strong> === Object.prototype);//true<br>*/</p>
+<p>//自定义函数<br>function func1(){};</p>
+<p>var func2 = function(){};</p>
+<p>var func3 = new Function(“str”, “console.log(str)”);</p>
+<p>console.log(func1.<strong>proto</strong> === Function.prototype);//true<br>console.log(func2.<strong>proto</strong> === Function.prototype);//true<br>console.log(func3.<strong>proto</strong> === Function.prototype);//true</p>
+<pre><code>
+上例说明了什么问题呢？所有的构造器都来自于`Function.prototype`，包括根构造器Object和Function本身。所有构造器都继承了`Function.prototype`的属性和方法。
+
+`Function.prototype`也是唯一一个typeof XXX.prototype为 “function”的prototype。其它的构造器的prototype都是一个对象。如下：
+</code></pre><p>console.log(typeof Function.prototype); //function<br>console.log(typeof Object.prototype);//object<br>console.log(typeof Number.prototype);//object<br>console.log(typeof Boolean.prototype);//object<br>console.log(typeof String.prototype);//object<br>console.log(typeof Array.prototype);//object<br>console.log(typeof RegExp.prototype);//object<br>console.log(typeof Error.prototype);//object<br>console.log(typeof Date.prototype);//object<br>console.log(typeof Object.prototype);//object</p>
+<pre><code>
+我们alert(Function.prototype)试一下可以发现，`Function.prototype`是一个空函数。
+
+![](http://7xtoaz.com1.z0.glb.clouddn.com/Object-in-JavaScript-01)
+</code></pre><p>console.log(Function.prototype.<strong>proto</strong> === Object.prototype);//true</p>
+<pre><code>这说明所有的构造器都是普通的JavaScript对象，可以给构造器添加、删除属性等。同时它也继承了`Object.prototype`的所有方法，如：toString、valueOf、hasOwnProperty等。
+
+最后`Object.prototype`的原型是谁？
+</code></pre><p>console.log(Object.prototype.<strong>proto</strong> === null);//true</p>
+<pre><code>
+“无”生万物，到顶了，为null。
+
+#### 2.所有对象的`__proto__`都指向构造器的prototype
+
+上面测试了所有内置构造器及自定义构造器的`__proto__`，下面再看看所有这些构造器的实例对象的`__proto__`指向谁？
+</code></pre><p>var num = 1;<br>var bool = false;<br>var str = “Hello World”;<br>var obj = {name: ‘Xigua’};<br>var arr = [1,2,3];<br>var reg = /js/g<br>var date = new Date;<br>var err = new Error(“Something is Error”);</p>
+<p>console.log(num.<strong>proto</strong> === Number.prototype);//true<br>console.log(bool.<strong>proto</strong> === Boolean.prototype);//true<br>console.log(str.<strong>proto</strong> === String.prototype);//true<br>console.log(obj.<strong>proto</strong> === Object.prototype);//true<br>console.log(arr.<strong>proto</strong> === Array.prototype);//true<br>console.log(reg.<strong>proto</strong> === RegExp.prototype);//true<br>console.log(date.<strong>proto</strong> === Date.prototype);//true<br>console.log(err.<strong>proto</strong> === Error.prototype);//true</p>
+<p>//自定义的构造器<br>//function Animal(name){<br>    this.name = name;<br>};</p>
+<p>var a1 = new Animal(‘IT-Dog’);</p>
+<p>console.log(a1.<strong>proto</strong> === Animal.protype);//true</p>
+<p>//a1是Animal的一个实例对象，a1的<strong>proto</strong>总是指向其构造器的prototype</p>
+<pre><code>
+对上例中的自定义构造器修改一下：
+</code></pre><p>function Animal(name){<br>    this.name = name;<br>};</p>
+<p>//修改Animal的原型<br>Animal.prototype.getName = function(){};</p>
+<p>var a1 = new Animal(‘IT-Dog’);</p>
+<p>console.log(a1.<strong>proto</strong> === Animal.prototype);//true<br>console.log(a1.<strong>proto</strong> === a1.constructor.prototype);//true</p>
+<p>//可以看到，a1.<strong>proto</strong>、Animal.prototype、a1.constructor.prototype都指向同一个对象。</p>
+<pre><code>
+再来修改一下：
+</code></pre><p>//function Animal(name){<br>    this.name = name;<br>};</p>
+<p>//重写Animal的原型<br>Animal.prototype = {<br>    getName: function(){}<br>};</p>
+<p>var a1 = new Animal(‘IT-Dog’);</p>
+<p>console.log(a1.<strong>proto</strong> === Animal.prototype);//true<br>console.log(a1.<strong>proto</strong> === a1.constructor.prototype);//false</p>
+<p>这里重写了Animal的原型，发现a1.<strong>proto</strong>和a1.constructor.prototype不再相等。<br>这也很好理解，给Animal.prototype赋值的是一个对象直接量{getName: function(){}}，<br>使用对象直接量定义的对象构造器指向的是根构造器Object，<br>而Object.prototype的一个空对象{}，{}自然与{getName: function(){}}不相等。<br>```</p>
+<p>注意：</p>
+<ul>
+<li><code>__proto__</code>在IE6/7/8/9中都不支持。</li>
+<li>普通对象没有<code>prototype</code>属性，但有<code>__proto__</code>。</li>
+<li>原型链的形成依靠<code>__proto__</code>，而不是<code>prototype</code>。</li>
+<li><code>__proto__</code>和<code>prototype</code>不是一回事，两者的作用不同。</li>
+<li><code>__proto__</code>指向于它所对应的原型对象（Chrome、Firefox中名称为<code>__proto__</code>，并且可以被访问到）。</li>
+<li>JavsScript中的每个对象都和其他对象相关联（NULL除外）。</li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/06/04/Object-in-JavaScript/" data-addthis-title="温习JavaScript中的对象">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/06/03/Whats-VanillaJS/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/06/23/Configuring-Sass-In-WebStrom/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/06/04/Object-in-JavaScript/" data-title="温习JavaScript中的对象" data-url="http://xiguaaxigua.cn/2016/06/04/Object-in-JavaScript/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

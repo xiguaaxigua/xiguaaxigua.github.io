@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>004-实例：购物车-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="004-实例：购物车-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">004-实例：购物车-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-07T04:50:23.000Z">2016-05-07</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>简单购物车实例</li>
+<li>Angular常见指令<ul>
+<li>ng-app（声明Angular的控制区域）</li>
+<li>ng-model（数据）</li>
+<li>ng-controller（控制器）</li>
+<li>filter（修正器）</li>
+<li>ng-repeat（循环）</li>
+<li>ng-click（Angular里的click事件）</li>
+</ul>
+</li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>我们来看一个稍微大一点的例子，它将会展示Angular的更多特性。想象一下，我们打算内构建一款购物应用，需要在应用中的某个地方展示用户的购物车，并且用户能够对其进行编辑。我们直接跳到购物车这个部分：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;Your Shopping Cart&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body ng-app=&quot;myApp&quot; ng-controller=&quot;CartController&quot;&gt;
+        &lt;h1&gt;Your Order&lt;/h1&gt;
+        &lt;div ng-repeat=&quot;item in items&quot;&gt;
+            &lt;span&gt;{{item.title}}&lt;/span&gt;
+            &lt;input ng-model=&quot;item.quantity&quot;&gt;
+            &lt;span&gt;{{item.price | currency}}&lt;/span&gt;
+            &lt;span&gt;{{item.price * item.quantity | currency}}&lt;/span&gt;
+            &lt;button ng-click=&quot;remove($index)&quot;&gt;Remove&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            var app = angular.module(&#39;myApp&#39;, []);
+            app.controller(&#39;CartController&#39;, function CartController($scope) {
+                $scope.items = [
+                    {title: &#39;商品1&#39;, quantity: 8, price: 4},
+                    {title: &#39;商品2&#39;, quantity: 7, price: 3},
+                    {title: &#39;商品3&#39;, quantity: 6, price: 2}
+                ];
+
+                $scope.remove = function(index){
+                    $scope.items.splice(index, 1);
+                }
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>最终UI截屏如图所示：<br><img src="http://7xtoaz.com2.z0.glb.clouddn.com/xigua_angular_005" alt=""></p>
+<p>下面是对这段代码的一个概要解释，本书后续的内容将会对此做更深入的解析。</p>
+<p>我们从头开始：</p>
+<pre><code class="html">&lt;html ng-app&gt;
+</code></pre>
+<p>ng-app属性将用来告诉Angular页面中的哪一部分需要接受它的管理。既然我们把这个属性放在html标签上，那么就是在告诉Angular，我们希望它管理整个页面。通常情况下你只需要这么做就可以了，但是，如果你打算把Angular集成到一个现有的应用中，而这个应用使用了其他的方式来管理页面，那么你可能需要把ng-app属性放到应用中的一个div上。</p>
+<pre><code class="html">&lt;body ng-controller=&quot;CartController&quot;&gt;
+
+&lt;/body&gt;
+</code></pre>
+<p>在Angular中，你将会使用一种叫做控制器的JavaScript类来管理页面中的区域。在body标签中引入一个控制器，就是在声明CartController将会管理介于body和/body之间的所有内容。</p>
+<pre><code class="html">&lt;div ng-repeat=&quot;item in items&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>ng-repeat的意思是，对于items数组中的每一个元素，都把div中的DOM结构复制一份（<b>包括div本身</b>）。对于div的每一份拷贝，都会把一个叫做item的属性设置给它，这样我们就可以在模板中使用这份拷贝的元素了。如你所见，这样一来就会产生3个div，其中分别包含了产品的名称、数量、单价、总价，以及一个可以用来完全删除一个项目的按钮。</p>
+<pre><code class="html">&lt;span&gt;{{item.title}}&lt;/span&gt;
+</code></pre>
+<p>正如我们在“Hello World”那个例子中所展示的，通过</p>
+<pre><code>{{}}
+</code></pre><p>进行数据绑定让我们可以把变量的值插入到页面的一部分中，同时能够保证它会自动同步。完整的表达式</p>
+<pre><code>{{item.title}}
+</code></pre><p>将会获取到循环中的当前title，然后把这个item的title属性值插入到DOM中。</p>
+<pre><code class="html">&lt;input ng-model=&quot;item.quantity&quot;&gt;
+</code></pre>
+<p>定义ng-model将会在输入框和itme.quantity的值之间创建数据绑定的关系。</p>
+<p>span里面的</p>
+<pre><code>{{}}
+</code></pre><p>将会创建一个单向的关系，也就是说“在这里插入一个值”。这正是我们所要达到的效果，但是应用还需要知道用户何时修改了数量，这样它就可以修改总价了。</p>
+<p>使用ng-model我们就可以保持变更与模型同步了。ng-model声明将会把item.quantity的值插入到文本框中，同时，不管什么时候，只要用户输入了新的数值，它就会自动更新item.quantity的值。</p>
+<pre><code class="html">&lt;span&gt;{{item.price | currency}}&lt;/span&gt;
+&lt;span&gt;{{item.price * item.quantity | currency}}&lt;/span&gt;
+</code></pre>
+<p>我们想让单价和总价能够以美元的格式显示。Angular带有一种叫做过滤器（filter）的特性，我们可以用它来转换文本的格式，有一个内置过滤器叫做currency（货币），它可以为我们实现美元格式化。在下一章中我们将会看到关于过滤器的更多内容。</p>
+<pre><code>&lt;button ng-click=&quot;remove($index)&quot;&gt;Remove&lt;/button&gt;
+</code></pre><p>这个按钮可以让用户从他们的购物车中删除项目，点击产品旁边的Remove按钮即可，因为我们已经设置好了，点击这个按钮将会调用remove()函数。同时我们还会把$index传递过去，$index包含了ng-repeat过程中的循环计数，这样以来我们就知道要删除哪一个项目了。</p>
+<pre><code class="javascript">function CartController($scope){
+
+}
+</code></pre>
+<p>CartController将会负责管理购物车的业务逻辑。在函数的形参中放一个$scope就可以告诉Angular：控制器需要一个叫做$scope的东西。我们可以通过$scope把数据绑定到UI中的元素上。</p>
+<pre><code class="javascript">$scope.items = [
+    {title: &#39;商品1&#39;, quantity: 8, price: 4},
+    {title: &#39;商品2&#39;, quantity: 7, price: 3},
+    {title: &#39;商品3&#39;, quantity: 6, price: 2}
+];
+</code></pre>
+<p>通过定义$scope.items，我们创建了一个虚拟的hash型数据，用来表示用户购物车中的项目集合。我们想让这些项目能够对UI的数据绑定有效，所以我们要把它们设置到$scope上。</p>
+<p>当然，这个例子的真实版本不可能只是在内存里面运行，他还需要与服务端进行交互并正确的把数据持久化。我们将会在后续的章节中讨论这个话题。</p>
+<pre><code class="javascript">$scope.remove = function(index){
+    $scope.items.splice(index, 1);
+}
+</code></pre>
+<p>在绑定到UI的时候，我们希望remove()函数也有效，所以我们也需要把它设置到$scope上。对于购物车的纯内存版，remove()函数可以只从数组中删除元素。由于ng-repeat所创建的div列表都是绑定在数据上的，所以当数组中的项目消失时，这个列表将会自动收缩。记住，无论何时，只要用户点了Remove按钮，就会从UI中调用remove()函数。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/07/angular-note-004/" data-addthis-title="004-实例：购物车-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/05/native-js-summary/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/08/angular-note-005/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/07/angular-note-004/" data-title="004-实例：购物车-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/07/angular-note-004/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

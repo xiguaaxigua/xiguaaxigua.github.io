@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular中的ui-router | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="Angular中的ui-router"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">Angular中的ui-router</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-19T06:48:22.000Z">2016-05-19</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="什么是ui-router？"><a href="#什么是ui-router？" class="headerlink" title="什么是ui-router？"></a>什么是ui-router？</h3><p>ui-router是一个web客户端的解决方案，它最大的作用是将web界面分块。</p>
+<p>更多内容请移步<a href="https://angular-ui.github.io/ui-router/site/#/api/ui.router">官网</a>。</p>
+<p>最初的web访问模型，是这样的：<br><img src="http://img.blog.csdn.net/20150310095845292" alt=""></p>
+<p>我们访问page1，然后访问page2…. </p>
+<p>在新的模型中它变成了这个样子：  </p>
+<p><img src="http://img.blog.csdn.net/20150310095756886" alt=""></p>
+<p>访问效果是一样的，但是从设计上已经有了变化。它变成了：只有一张网页，在网页中有不同的区域，每个区域都可擦写。</p>
+<h3 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h3><p>1.下载js文件，例如：</p>
+<pre><code>&lt;script src=&quot;//cdn.bootcss.com/angular-ui-router/1.0.0-alpha0/angular-ui-router.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>2.在模板中添加注入位置，例如：</p>
+<pre><code>&lt;div ui-view&gt;&lt;/div&gt;
+</code></pre><p>或者：</p>
+<pre><code>&lt;ui-view&gt;&lt;/ui-view&gt;
+</code></pre><p>3.在模板中，添加触发器，例如：</p>
+<pre><code>&lt;div ui-sref=&quot;first&quot;&gt;&lt;/div&gt;
+</code></pre><p>4.在控制器中，配置路由参数，例如：</p>
+<pre><code>angular.module(&quot;app&quot;, [&quot;ui.router&quot;])
+
+    .config(function config($stateProvider){
+
+        $stateProvider.state(&quot;index&quot;, {
+            url: &quot;&quot;,
+            controller: &quot;FirstCtrl as first&quot;,
+            templateUrl: &quot;templates/first.html&quot;
+        })
+
+        $stateProvider.state(&quot;second&quot;, {
+            url: &quot;/second&quot;,
+            controller: &quot;SecondCtrl as second&quot;,
+            templateUrl: &quot;templates/second.html&quot;
+        })
+
+    })
+</code></pre><h3 id="完整案例"><a href="#完整案例" class="headerlink" title="完整案例"></a>完整案例</h3><pre><code>&lt;!doctype html&gt;
+&lt;html ng-app=&quot;app&quot;&gt;
+    &lt;head&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/angular.js/1.5.5/angular.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//cdn.bootcss.com/angular-ui-router/1.0.0-alpha0/angular-ui-router.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module(&quot;app&quot;, [&quot;ui.router&quot;])
+
+            .config(function config($stateProvider){
+
+                $stateProvider.state(&quot;index&quot;, {
+                    url: &quot;&quot;,
+                    controller: &quot;FirstCtrl as first&quot;,
+                    templateUrl: &quot;templates/first.html&quot;
+                })
+
+                $stateProvider.state(&quot;second&quot;, {
+                    url: &quot;/second&quot;,
+                    controller: &quot;SecondCtrl as second&quot;,
+                    templateUrl: &quot;templates/second.html&quot;
+                })
+
+            })
+    &lt;/script&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;ui-view&gt;&lt;/ui-view&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>templates下的first.html的代码：</p>
+<pre><code>&lt;div ui-sref=&quot;second&quot;&gt;
+    Go to Second
+&lt;/div&gt;
+</code></pre><p>templates下的second.html的代码：</p>
+<pre><code>Hello Ui-Router!
+</code></pre><h3 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h3><ul>
+<li><a href="http://www.oschina.net/translate/angularjs-ui-router-nested-routes?print">《AngularJS ui-router (嵌套路由)》</a></li>
+<li><a href="http://blog.csdn.net/fansongy/article/details/44162685">《angular 使用 ui-router 设计网页》</a></li>
+<li><a href="http://www.tuicool.com/articles/zeiy6ff">《Angular-UI-Router 学习笔记》</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/19/ui-router-angular/" data-addthis-title="Angular中的ui-router">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/19/Angular-Video-Tutorial-002/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/19/Angular-Video-Tutorial-003/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/19/ui-router-angular/" data-title="Angular中的ui-router" data-url="http://xiguaaxigua.cn/2016/05/19/ui-router-angular/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>005-初设Angular-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="005-初设Angular-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">005-初设Angular-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-08T04:45:32.000Z">2016-05-08</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>Angular的调用<ul>
+<li>使用CDN</li>
+<li>本机加载</li>
+</ul>
+</li>
+<li>ng-app的使用（标识Angular管理的DOM区域）</li>
+<li>浅谈模块机制（避免命名冲突）</li>
+<li>数据绑定机制</li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>使用典型的类库时，你可以选择并使用你所喜欢的功能：而对于Angular框架来说，你必须把它作为一个完整的套件来使用，框架中所有东西都包含在里面。在本章中，我们将会覆盖Angular的所有基础模块，这样你就可以理解他们是如何被装配到一起的。在后续的章节中，将会对这里涉及的很多模块做出更加详细的解析。</p>
+<h3 id="调用Angular"><a href="#调用Angular" class="headerlink" title="调用Angular"></a>调用Angular</h3><p>为了使用Angular，所有应用首先做两件事情：</p>
+<ul>
+<li>加载angular.js库。</li>
+<li>使用ng-app指令告诉Angular应该管理DOM中的哪一部分。</li>
+</ul>
+<h3 id="加载脚本"><a href="#加载脚本" class="headerlink" title="加载脚本"></a>加载脚本</h3><p>加载类库的操作非常简单，与其他JavaScript类库遵循同样的规则。你可以从Google的CDN（内容分发网络）中加载类库，示例如下：</p>
+<pre><code class="javascript">&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>我们推荐你使用Google的CDN，Google的服务器非常快，并且可以再多个应用之间缓存脚本库。也就是说，如果你的用户有多款应用使用了Angular，类库只要下载一次就可以了。同时，如果用户访问了其他站点，而该站点使用了Google的CDN链接来获取Angular库，那么用户在访问你的站点时，就不需要再次下载Angular库了。</p>
+<p>如果你更喜欢使用本地的主机，当然也可以，只需要在src属性中指定正确的地址即可。</p>
+<p><i>鉴于国内的特殊情况，不推荐使用Google的CDN。</i></p>
+<h3 id="使用ng-app声明Angular的边界"><a href="#使用ng-app声明Angular的边界" class="headerlink" title="使用ng-app声明Angular的边界"></a>使用ng-app声明Angular的边界</h3><p>你可以使用ng-app指令告诉Angular应该管理页面中的哪一块。如果你正在构建一款纯Angular应用，那么你应该把ng-app指令写在html标签中，示例如下：</p>
+<pre><code class="html">&lt;html ng-app&gt;
+    ...
+&lt;/html&gt;
+</code></pre>
+<p>这样就会告诉Angular去管理页面上的所有DOM元素。</p>
+<p>如果你有一款现有的应用，该应用正在用其他的一些技术来管理DOM，那么你可以让Angular只管理页面中的一部分，只要在页面中放入一些div之类的元素即可。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;div ng-app&gt;
+        ...
+    &lt;/div&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="Model-View-Controller"><a href="#Model-View-Controller" class="headerlink" title="Model View Controller"></a>Model View Controller</h3><p>在第一章中，我们曾经提到过Angular支持Model View Controller风格的应用设计。尽管设计Angular应用具有很大的灵活性，但是一下这些风格你将会经常涉及：</p>
+<ul>
+<li>用来容纳数据的模型，模型代表应用当前的状态。</li>
+<li>用来展示数据的一些视图。</li>
+<li>用来管理模型和视图之间关系的一些控制器。</li>
+</ul>
+<p>你将会使用对象的属性来创建数据模型，甚至只用基本数据类型来存储数据。模型属性并没有什么特殊的东西。如果你想要给用户展示一些文本，你可以使用字符串，示例如下：</p>
+<pre><code class="javascript">var someText = &#39;You have started your journey.&#39;;
+</code></pre>
+<p>你可编写一个HTML页面来创建视图，然后把它和你模型中的数据融合起来。正如我们前面所看到的，你可以在DOM中插入占位符，然后像下面这样设置其中的文本：</p>
+<pre><code class="html">&lt;p&gt;{{someText}}&lt;/p&gt;
+</code></pre>
+<p>我们把这叫做双花括号插值语法，因为它可以把新的内容插入到现有的模板中。</p>
+<p>控制器就是你所编写的类或者类型，它的作用是告诉Angular该模型是由哪些对象或者基本数据构成的，只要把这些对象或者基本数据设置到$scope对象上即可，$scope对象会被传递给控制器：</p>
+<pre><code class="javascript">function TextController($scope){
+    $scope.someText = someText;
+}
+</code></pre>
+<p>把以上所有东西整合起来，我们就获得了如下内容：</p>
+<pre><code class="html">&lt;html ng-app&gt;
+    &lt;body ng-controller=&quot;TextController&quot;&gt;
+        &lt;p&gt;{{someText}}&lt;/p&gt;
+        &lt;script src=&quot;angular.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            function TextController($scope){
+                $scope.someText = &#39;You have started your journey.&#39;;
+            }
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>把以上内容加载到浏览器中，你将会看到：<br>You have started your journey.<br>在很简单的情况下，以上使用个基本数据类型的模型工作得很好，但是对于大多数应用来说，你都需要创建模型对象类来容纳你的模型。我们来创建一个messages模型对象，然后用它来存储someText属性。所以模型不再是一下内容：</p>
+<pre><code class="html">$scope.someText = &#39;You have started your journey.&#39;;
+</code></pre>
+<p>而会这样编写：</p>
+<pre><code class="javascript">var messages={};
+messages.someText = &#39;You have started your journey.&#39;;
+function TextController($scope){
+    $scope.messages = messages;
+}
+</code></pre>
+<p>然后在你的模板中这样使用：</p>
+<pre><code class="html">&lt;p&gt;{{messages.someText}}&lt;/p&gt;
+</code></pre>
+<p>在稍后讨论$scope对象的时候我们将会看到，像这样创建模型对象的方法可以避免一些非预期的行为，这些行为可能是由$scope对象中的原型继承机制所导致的。</p>
+<p>在上一个例子中，我们在全局作用域中创建了一个TextController。虽然对于示例代码来说，这没有什么问题，但是其实定义控制器的正确方式是，把它定义成模块的  一部分，控制器可以为应用里面相关的部分提供命名空间机制。修改之后的代码看起来就像下面这样：</p>
+<pre><code class="html">&lt;html ng-app&gt;
+    &lt;body ng-controller=&quot;TextController&quot;&gt;
+        &lt;p&gt;{{someText.message}}&lt;/p&gt;
+        &lt;script src=&quot;angular.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            var myAppModule = angular.module(&#39;myApp&#39;, []);
+            myAppModule.controller(&#39;TextController&#39;, 
+                function TextController($scope){
+                    var someText = {};
+                    someText.message = &#39;You have started your journey.&#39;;
+                    $scope.someText = someText;
+                }
+            );
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>在这个版本中，我们把ng-app属性设置成了模块的名称myApp。然后我们再调用angular对象创建了一个名为myApp的模块，并且把控制器函数传递给了myApp模块的controller函数。</p>
+<p>稍后我们就会来解释什么是模块以及为什么要使用模块之类的问题。现在你只要记住，把东西从全局命名空间中隔离开是一件非常好的事情，而模块机制可以帮助我们实现这一点。</p>
+<h3 id="模板和数据绑定"><a href="#模板和数据绑定" class="headerlink" title="模板和数据绑定"></a>模板和数据绑定</h3><p>Angular应用中的模板只是一些HTML片段而已，我们可以从服务器商家在，或者在script标签中定义，处理方式与所有其他静态资源相同。如果你需要UI组件，你可以在模板中进行定义，使用标准的HTML加上Angular指令即可。</p>
+<p>模板一旦加载到浏览器之后，Angular将会把它和数据整合起来，然后再把这些模板展开到整个应用中。在第一章中，当我们显示购物车中的物品时，我们已经看到过这种例子：</p>
+<pre><code class="html">&lt;div ng-repeat=&quot;item in items&quot;&gt;
+    &lt;span&gt;{{item.title}}&lt;/span&gt;
+    ...
+&lt;/div&gt;
+</code></pre>
+<p>这里，对于items数组中的每一个元素，Angular将会给外出div生成一份拷贝，包括其中的所有内容。</p>
+<p>那么，这里的数据是从哪儿来的呢？在购物车实例中，我们只是在代码中的一个数组里定义了它。在你刚开始构建UI，并且只是想测试一下它的运行效果的时候，这样能工作得很好。但是，大多数应用都会用到服务端的一些持久化的数据。浏览器中的应用将会连接到服务端，请求用户当前加载页面所需要的数据，然后Angular再把这些数据和模板融合起来。</p>
+<p>基本的运作流程如下：</p>
+<ul>
+<li>1.用户请求应用起始页。</li>
+<li>2.用户的浏览器向服务器发起一次HTTP连接，然后加载index.html页面，这个页面里面包含了模板。</li>
+<li>3.Angular被加载到页面中，等待页面加载完成，然后查找ng-app指令，用来定义模板边界。</li>
+<li>4.Angular遍历模板，查找指令和绑定关系，这将触发一系列动作：注册监听器、执行一些DOM操作、从服务器获取初始化数据。这项工作的最后结果是，应用将会启动起来，并且模板被转换成了DOM视图。</li>
+<li>5.连接到服务器去加载需要展示给用户的其他数据。</li>
+</ul>
+<p>对于每一个Angular应用来说，步骤1到步骤3都是标准化的，步骤4和步骤5是可选的。这些步骤可以同步进行也可以异步进行。为了提升性能，对于应用中的第一个视图，你可以把视图和HTML模板一起加载进来，从而避免发起多次请求。</p>
+<p>使用Angular构建应用的时候，可以将应用中的模板和数据分离开来，这样就可以把这些模板缓存起来。在第一次请求之后，只需要把新的数据下载到浏览器中即可。与JavaScript、图片、CSS以及其他资源一样，把这些模板缓存起来可以提升应用的性能。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/08/angular-note-005/" data-addthis-title="005-初设Angular-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/07/angular-note-004/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/09/angular-note-006/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/08/angular-note-005/" data-title="005-初设Angular-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/08/angular-note-005/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

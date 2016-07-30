@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>020-使用指令修改DOM-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="020-使用指令修改DOM-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">020-使用指令修改DOM-《用AngularJS开发下一代Web应用》-笔记</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-05-14T05:42:01.000Z">2016-05-14</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>指令扩展了HTML语法，同时它也是使用自定义的元素和属性把行为和DOM转换关联到一起的方式。通过这些指令，你可以创建可复用的UI组件，配置你的应用，并且可以做到你能想象到的几乎所有事情，这些事情都可以在你的UI模板中实现。</p>
+<p>你可以使用Angular内置的指令来编写应用，但是也会遇到需要自己编写指令的情况。当你想要以某种方式处理浏览器事件或者修改DOM，而这些东西有没有内置指令可以支持时，你就会知道是时候深入理解指令体系了。你编写的代码将会位于你所编写的指令中，而不是控制器、服务或应用的其他地方。</p>
+<p>与服务一样，你可以通过模块对象的API来定义指令，只要调用模块实例的directive()函数即可，其中directiveFunction是一个工厂函数，用来定义指令的特性。</p>
+<pre><code>var appModule = angular.module(&#39;appModule&#39;, [...]);
+appModule.directive(&#39;directiveName&#39;, directiveFunction);
+</code></pre><p>编写指令工厂函数是一个非常深的领域，我们在本书中专门开辟了一整章的内容来讨论这一话题。我了充分调用你的兴趣，我们先来看一个简单的例子。</p>
+<p>HTML5中带有一个很棒的新属性，叫做autofocus，它可以把键盘的焦点定位到一个输入元素中。通过它，用户能够立即通过键盘和元素进行交互，而不必先点击元素。这一点很棒，因为他让你可以通过声明的方式来描述需要浏览器做什么，而没有必要编写任何JavaScript代码。但是，如果i想把焦点放到一些非交互性元素上，例如超链接或者div，应该怎么做呢？如果你想让这种机制在不支持HTML5的浏览器中也能工作，又应该怎么做呢？我们可以通过一个指令来实现。</p>
+<pre><code>var appModule = angular.module(&#39;app&#39;, []);
+appModule.directive(&#39;ngbkFocus&#39;, function(){
+
+    return {
+        link: function(scope, element, attrs, controller){
+            element[0].focus();
+        }
+    }
+});
+</code></pre><p>在上面的代码中，我们返回了指令的配置对象，其中带有特定的link函数。link函数会获取外层scope的引用、它所存在的DOM元素、传递给指令的一个属性数组，以及DOM元素上的控制器——如果有控制器存在的话。这里，我们只需要获取元素，然后调用它的focus()方法即可。</p>
+<p>然后我们就可以把它用到例子中，如下：</p>
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=&quot;myApp&quot; ng-controller=&quot;SomeController&quot;&gt;
+    &lt;button ng-click=&quot;clickUnFocused()&quot;&gt;
+        Not Focused
+    &lt;/button&gt;
+    &lt;button ng-click=&quot;clickFocused()&quot;&gt;
+        I`m very Focused!
+    &lt;/button&gt;
+    &lt;div&gt;{{message.text}}&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="controller-js"><a href="#controller-js" class="headerlink" title="controller.js"></a>controller.js</h3><pre><code>var app = angular.module(&#39;myApp&#39;, []);
+
+app.controller(&#39;SomeController&#39;, function($scope){
+    $scope.message = {text: &#39;Nothing clicked yes&#39;};
+
+    $scope.clickUnFocused = function(){
+        $scope.message.text = &#39;Unfocused button clicked&#39;;
+    }
+
+    $scope.clickFocused = function(){
+        $scope.message.text = &#39;Focused button clicked&#39;;
+    }
+});
+</code></pre><p>当页面加载完成之后，用户将会看到一个按钮，其标签为“I`m very Focused!”，他获得了高亮焦点。按下空格或者回车键江湖导致一次点击动作，并且会调用ng-click，它将会把div上的文本设置为“Focused button clicked”。在浏览器中打开这个例子，我们将会看到如下图所示效果：</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/xigua_angular_008" alt=""></p>
+<p>完整代码如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script src=&quot;../angular.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=&quot;myApp&quot; ng-controller=&quot;SomeController&quot;&gt;
+    &lt;button ng-click=&quot;clickUnFocused()&quot;&gt;
+        Not Focused
+    &lt;/button&gt;
+    &lt;button ng-click=&quot;clickFocused()&quot;&gt;
+        I`m very Focused!
+    &lt;/button&gt;
+    &lt;div&gt;{{message.text}}&lt;/div&gt;
+
+    &lt;script&gt;
+        var app = angular.module(&#39;myApp&#39;, []);
+
+        app.controller(&#39;SomeController&#39;, function($scope){
+            $scope.message = {text: &#39;Nothing clicked yes&#39;};
+
+            $scope.clickUnFocused = function(){
+                $scope.message.text = &#39;Unfocused button clicked&#39;;
+            }
+
+            $scope.clickFocused = function(){
+                $scope.message.text = &#39;Focused button clicked&#39;;
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/14/angular-note-020/" data-addthis-title="020-使用指令修改DOM-《用AngularJS开发下一代Web应用》-笔记">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/05/14/angular-note-019/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/05/14/angular-note-021/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/05/14/angular-note-020/" data-title="020-使用指令修改DOM-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/14/angular-note-020/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

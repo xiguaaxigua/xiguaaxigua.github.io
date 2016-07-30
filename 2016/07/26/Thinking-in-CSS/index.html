@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于CSS的思考 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="关于CSS的思考"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">关于CSS的思考</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-26T11:55:28.000Z">2016-07-26</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/CSS/">CSS</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><p>在命名CSS的时候掺杂语义，这样可以使代码的可读性更高，随之而来的问题是：</p>
+<ul>
+<li>浪费脑细胞，经常为了某个命名纠结半天；</li>
+<li>重用性很低，事实上语义越强烈的命名越没有重用性；</li>
+<li>命名冲突，个人的习惯直接决定了CSS的命名，一不留神就各种冲突；</li>
+<li>不利于团队协作，不得不说，同事们需要百度翻译才能理解我写的CSS是干嘛的。</li>
+</ul>
+<p>另外一个很弱智的问题是：当前项目使用SASS，由于个人经验不足，自以为是的各种嵌套，命名冲突解决了，随之而来的是更加致命的性能问题。很丢人的一件事情是今天才搞明白CSS的渲染机制。</p>
+<h2 id="浏览器是怎么渲染页面的"><a href="#浏览器是怎么渲染页面的" class="headerlink" title="浏览器是怎么渲染页面的"></a>浏览器是怎么渲染页面的</h2><h3 id="浏览器的上层结构"><a href="#浏览器的上层结构" class="headerlink" title="浏览器的上层结构"></a>浏览器的上层结构</h3><p>浏览器的主要概念：</p>
+<ul>
+<li>用户接口 – 包括地址栏，前进后退，书签菜单等窗口上除了网页显示区域以外的部分。</li>
+<li>浏览器引擎 – 查询与操作渲染引擎的接口。</li>
+<li>渲染引擎 – 负责显示请求的内容。比如请求到HTML, 它会负责解析HTML 与 CSS 并将结果显示到窗口中。</li>
+<li>网络 – 用于网络请求, 如HTTP请求。它包括平台无关的接口和各平台独立的实现。</li>
+<li>UI后端 – 绘制基础元件，如组合框与窗口。它提供平台无关的接口，内部使用操作系统的相应实现。</li>
+<li>JavaScript解释器。用于解析执行JavaScript代码。</li>
+<li>数据存储。这是一个持久层。浏览器需要把所有数据存到硬盘上，如cookies。新的HTML规范 (HTML5) 规定了一个完整（虽然轻量级）的浏览器中的数据库：’web database’。</li>
+</ul>
+<p>与其它浏览器不同，chrome使用多个渲染引擎实例，每个Tab一个，每个Tab都是一个独立进程。</p>
+<h3 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h3><p>常见的渲染引擎：</p>
+<ul>
+<li>Trident渲染引擎，使用该渲染引擎的浏览器有：<ul>
+<li>IE</li>
+<li>傲游</li>
+<li>世界之窗浏览器</li>
+<li>还有很多我没见过、没用过的浏览器…</li>
+</ul>
+</li>
+<li>Gecko渲染引擎，使用该渲染引擎的浏览器有：<ul>
+<li>Firefox</li>
+<li>更多我没见过、没用过的浏览器…</li>
+</ul>
+</li>
+<li>Webkit渲染引擎，使用该渲染引擎的浏览器有：<ul>
+<li>Chrome</li>
+<li>Safari</li>
+<li>没见过、没用过，你懂得…</li>
+</ul>
+</li>
+<li>Presto渲染引擎，使用该渲染引擎的浏览器有：<ul>
+<li>Opera</li>
+<li>任天堂DS浏览器，啊？任天堂也有浏览器？</li>
+</ul>
+</li>
+<li>Tasman渲染引擎，Mac中的IE浏览器使用该引擎，有Mac谁还有IE啊，真逗。</li>
+<li>还有一些其他的。</li>
+</ul>
+<p>基本的渲染过程如下图：（图是偷的，我想没有人会在意的）<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Thinking-in-CSS1.png" alt=""></p>
+<ul>
+<li>1.渲染引擎首先解析HTML，生成一颗DOM树；</li>
+<li>2.浏览器解析样式表，和HTML中的显示控制一起生成一颗渲染树；</li>
+<li>3.渲染树完成之后进行布局，确定每个节点在页面中的具体位置；</li>
+<li>4.绘制渲染树，遍历渲染树，并用UI后端层将每一个节点绘制出来。</li>
+</ul>
+<p>上面只是渲染引擎一般的渲染过程，不同渲染引擎的具体步骤有所不同。</p>
+<p>Webkit渲染引擎的渲染过程：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Thinking-in-CSS2.png" alt=""></p>
+<p>可以看到，Webkit同时解析HTML和CSS，将HTML解析为DOM树，将CSS解析为“样式规则（Styles Rules）”（可能是为了加快生成渲染树），渲染树的生成和渲染树的布局也是同时的，貌似可以理解为生成一个布局一个，最后绘制渲染树，显示页面。</p>
+<p>Gecko渲染引擎的渲染过程：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Thinking-in-CSS3.png" alt=""></p>
+<p>Gecko 里把格式化好的可视元素称做“帧树”（Frame tree）。每个元素就是一个帧（frame）。 Webkit 则使用”渲染树”这个术语，渲染树由”渲染对象”组成。Webkit 里使用”layout”表示元素的布局，Gecko则称为”Reflow”。Webkit使用”Attachment”来连接DOM节点与可视化信息以构建渲染树。一个非语义上的小差别是Gecko在HTML与DOM树之间有一个附加的层 ，称作”content sink”，是创建DOM对象的工厂。</p>
+<p>此处，我还想再深入一点，马克。</p>
+<h2 id="CSS的匹配规则"><a href="#CSS的匹配规则" class="headerlink" title="CSS的匹配规则"></a>CSS的匹配规则</h2><p>随便写一点代码：</p>
+<pre><code>.mod-div h3 span{
+    //样式
+}
+</code></pre><p>天真的我一直傻乎乎的以为浏览器解析CSS的规则是：先找class为mod-div的元素，再在当前找到的元素中找h3，再找span元素。这样的话，就像定位一样，先找到你是哪个省的，再找你是哪个市的，再找你。</p>
+<p>然而，并不是！而且从右到左比从左到右更加高效！</p>
+<p>CSS选择器的正确解析姿势是从右到左，先找到所有的span元素，然后沿着span的父元素查找h3，中途找到了符合规则的节点就加入结果集，如果直到根元素html都没有找到，则不再遍历这条路径，从下一个span元素开始重复这个过程。</p>
+<p>上述代码中的 <code>.mod-div h3 span</code> 构成一条索引树，树由上至下的节点是规则中从右到左的一个个选择符匹配的节点。<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Thinking-in-CSS4.png" alt=""></p>
+<p>假如DOM结构如上图，匹配规则是 <code>.mod-div h3 span</code> 。</p>
+<p>若从左到右匹配，过程是：</p>
+<p>从.mod-nav开始，遍历子节点header和子节点div，然后各自向子节点遍历。在右侧div的分支中，最后遍历到叶子节点a，发现不符合规则，需要回溯到ul节点，再遍历下一个li-a，假如有1000个li，则这1000次的遍历与回溯会损失很多性能。</p>
+<p>若从右到左匹配，过程是：</p>
+<p>先找到所有的最右节点span，对于每一个span，向上寻找节点h3，由h3再向上寻找class=mod-nav的节点，最后找到根元素html则结束这个分支的遍历。</p>
+<p>好吧，这下子我承认是我low逼，从右到左果然可以提高性能，也就是说，一定要减少选择器的嵌套层次！</p>
+<p>这也就解释了这种写法的原因，能用子选择器就不要用后代选择器。</p>
+<pre><code>// 优
+#test &gt; .test{
+    color: #000;
+}
+
+// 劣
+#test .test{
+    color: #000;
+}
+</code></pre><h2 id="简单的看一下巨头们的页面"><a href="#简单的看一下巨头们的页面" class="headerlink" title="简单的看一下巨头们的页面"></a>简单的看一下巨头们的页面</h2><p>淘宝：</p>
+<pre><code>.sea-fp-discover .module-wrap .discover-wrapper .discover .discover-item .item-desc h4{
+    margin-bottom: 12px;
+    font-weight: 100;
+    line-height: 13px;
+}
+</code></pre><p>Excuse me？比我还狠，嵌套七层！数年的维护，hack成对，淘宝的页面果然不太适合教学。</p>
+<p>京东：</p>
+<pre><code>.activity-list {
+    border-bottom:8px;
+    padding:0 0 0 9px;
+}
+.jd-auto-complete-list li,.jd-header-bar {
+    min-height:44px;
+    border-bottom:1px solid #bfbfbf;
+}
+.activity-list li {
+    display:block;
+    margin:0;
+    padding:0;
+    background:#fff;
+    line-height:0;
+    margin-top:8px;
+}
+.activity-list li a {
+    display:block;
+    width:auto;
+    padding:0;
+    margin:0;
+    margin-right:8px;
+}
+</code></pre><p>个人感觉京东的CSS写的很简洁，基本都是一层或两层嵌套，很少超过三成的。语义也很强，阅读起来很顺畅。但这样命名冲突应该是首当其冲的问题吧，真的很想知道京东具体是怎么解决的！</p>
+<p>Facebook:</p>
+<pre><code>._8o,._8o .img{display:block}._8r{margin-right:5px}._8s{margin-right:8px}._8t{margin-right:10px}
+._6a{display:inline-block}._6d{vertical-align:bottom}._6b{vertical-align:middle}._6e{vertical-align:top}._5u5j{width:100%}
+._4bl7{float:left;min-height:1px}._4bl8{float:right}._4bl9{overflow:hidden}._4bl7,._4bl9{word-wrap:break-word}
+._ohe{float:left}._ohf{float:right}
+</code></pre><p>一个大写的服！果然精简直接，一看就知道CSS这块绝逼不会拖慢网页的性能，可惜我看不懂，或许他们有一套自己的规则，又或许，我的水平之低还不足以发现FB的美。</p>
+<h2 id="“原子类”"><a href="#“原子类”" class="headerlink" title="“原子类”"></a>“原子类”</h2><p>当前项目中并不适用，留坑待填。</p>
+<h2 id="关于书写CSS的建议"><a href="#关于书写CSS的建议" class="headerlink" title="关于书写CSS的建议"></a>关于书写CSS的建议</h2><ul>
+<li>1.避免使用CSS表达式；</li>
+<li><p>2.能缩写尽量缩写；</p>
+<pre><code>  .test{
+      color: #000000;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      margin-left: 30px;
+
+      font-style: italic; 
+      font-variant: small-caps; 
+      font-weight: bold; 
+      font-size: 1em; 
+      fine-height: 140%; 
+      font-family: sans-serif;
+
+      background-color: #f00; 
+      background-image: url(background.gif); 
+      background-repeat: no-repeat; 
+      background-attachment: fixed; 
+      background-position: 0 0; 
+  }
+  // 简写为：
+  .text{
+      color: #000;
+      margin: 10px 0 20px 30px;
+      font: italic small-caps bold 1em 140% sans-serief; 
+      background: #f00 url(background.gif) no-repeat fixed 0 0;
+  }
+</code></pre></li>
+<li>3.避免使用*匹配符。</li>
+<li>4.避免使用通用规则，查找页面上的所有节点，如果有节点存在“hidden”属性，并且其属性值为“true”，则匹配成功。这是最耗时耗力的匹配，页面上的所有节点都需要进行匹配运算。<pre><code>  [hidden=&quot;true&quot;] {
+      // 样式
+  }
+</code></pre></li>
+<li><p>5.不要在class前再加上标签的名称，这样一点都不高雅，只会更慢。</p>
+<pre><code>  // 劣
+  button.btn{
+      background: #fff;
+  }
+
+  // 优
+  .btn{
+      background: #fff;
+  }
+</code></pre></li>
+<li>6.减少嵌套层次。</li>
+<li>7.避免使用后代选择器，尽量用子选择器替代。<pre><code>  // 劣
+  h1 a{
+      color: #000;
+  }
+  // 优
+  h1 &gt; a{
+      color: #000;
+  }
+</code></pre></li>
+<li>8.合理使用CSS的继承机制。</li>
+<li>9.避免过分重排（浏览器重新计算布局位置与大小），常见的重排元素：<ul>
+<li>width、height、min-height；</li>
+<li>padding、margin；</li>
+<li>top、right、bottom、left；</li>
+<li>display；</li>
+<li>postion、float；</li>
+<li>font-size、font-family、line-height、text-align、vertical-align；</li>
+<li>clear、white-space、overflow、overflow-y。</li>
+</ul>
+</li>
+<li><p>10.避免过分的重绘，常见的重绘元素：</p>
+<ul>
+<li>color、border-style、visibility；</li>
+<li>background、background-image、background-postion、background-repeat、background-size；</li>
+<li>outline、outline-color、outline-style、outline-width。</li>
+<li>border-radius、box-shadow。</li>
+</ul>
+</li>
+<li><p>10.慎重选择高性能的样式。高性能属性：</p>
+<ul>
+<li>box-shadow；</li>
+<li>border-radius；</li>
+<li>transforms、transparency；</li>
+<li>CSS filters（性能杀手）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ul>
+<li><a href="http://blog.csdn.net/wei_ge163/article/details/7631112">各种浏览器的页面渲染引擎简介</a></li>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm">How browsers work</a></li>
+<li><a href="http://ued.ctrip.com/blog/how-browsers-work-i-basic-knowledge.html">浏览器是怎样工作的（一）：基础知识</a></li>
+<li><a href="http://ued.ctrip.com/blog/how-browsers-work-rendering-engine-html-parsing-series-ii.html">浏览器是怎样工作的：渲染引擎，HTML解析（连载二）</a></li>
+<li><a href="http://www.cnblogs.com/web-ed2/archive/2011/08/03/2126748.html">css 原理及其优化</a></li>
+<li><a href="http://www.jiangweishan.com/article/%E7%B2%BE%E7%AE%80%E9%AB%98%E6%95%88%E7%9A%84CSS%E5%91%BD%E5%90%8D%E5%87%86%E5%88%99%2F%E6%96%B9%E6%B3%95.html">精简高效的CSS命名准则/方法</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/07/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%AF%B9%E7%BD%91%E7%AB%99css%E8%BF%9B%E8%A1%8C%E6%9E%B6%E6%9E%84%E7%9A%84/">我是如何对网站CSS进行架构的</a></li>
+<li><a href="http://w3help.org/zh-cn/standards/">W3C中文</a></li>
+<li><a href="http://v.youku.com/v_show/id_XMjMzMzU2NDc2.html">视频: 浏览器的背后</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/web/1109_zhouxiang_optcss/">提高 web 应用性能之 CSS 性能调优</a></li>
+<li><a href="https://www.w3.org/TR/CSS21/">W3C-CSS标准</a></li>
+<li><a href="https://www.w3.org/2015/Talks/0109-CSSConf-xq/">谈谈CSS性能</a></li>
+</ul>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>个人还是倾向于京东的做法，够简单够直接，嵌套层数少，渲染效率高，唯一的问题是命名不太容易。于是乎，我是这么干的：</p>
+<ul>
+<li>1.每个页面的所有内容都包含在一个特定的div中；</li>
+<li>2.在该div下保证所有的命名不冲突，这样嵌套也就两三层，算是半解决了当前的问题吧。</li>
+</ul>
+<p>例如这样：</p>
+<pre><code>// index.html文件的scss代码
+.index-box751{ // 751是我的工号，避免和其他同事冲突，
+
+    // index-box751中不会再出现XXX-box751类型的样式，避免冲突
+    .banner{
+        // 样式
+    }
+    .banner-content{ // 讲道理的话，应该嵌套在.banner751中，但是为了减少嵌套，单独拿出来
+        // 样式
+    }
+    .user-login{
+        // 样式
+    }
+    .user-login-tips{
+        // 样式
+    }
+    .confirm-terms{
+        // 样式
+    }
+}
+</code></pre><p>写完了发现，我并没有从根本上解决问题，只是减轻了命名冲突的难度，减少了嵌套的层数，保留了语义化的命名，增加了没有必要的DOM，虽然只有一个。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/26/Thinking-in-CSS/" data-addthis-title="关于CSS的思考">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/22/Professional-JavaScript-for-Web-Developers-notes/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/28/Gulp-Introduction/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/26/Thinking-in-CSS/" data-title="关于CSS的思考" data-url="http://xiguaaxigua.cn/2016/07/26/Thinking-in-CSS/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

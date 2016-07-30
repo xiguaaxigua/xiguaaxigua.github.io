@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何自定义checkbox？ | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="如何自定义checkbox？"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">如何自定义checkbox？</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-11T12:26:41.000Z">2016-07-11</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/html/">html</a>, <a class="tag-a" href="/tags/css/">css</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p><a href="http://7xtoaz.com1.z0.glb.clouddn.com/checkboxDemo.html">在线预览</a></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>1.隐藏原生的checkbox。</li>
+<li>2.添加label标签，通过for属性指向被隐藏checkbox，已达到checkbox本身复选的功能。</li>
+<li>3.通过after伪类及修改包裹checkbox的容器的样式，达到各种想要的效果。</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>HTML:</p>
+<pre><code>&lt;div class=&quot;checkbox1&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; value=&quot;0&quot; id=&quot;checkbox1&quot; name=&quot;&quot;&gt;
+    &lt;label for=&quot;checkbox1&quot;&gt;&lt;/label&gt;
+&lt;/div&gt;
+</code></pre><p>CSS:</p>
+<pre><code>.checkbox1
+{
+    position: relative;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 100%;
+}
+.checkbox1 input[type=checkbox]
+{
+    visibility: hidden;
+}
+.checkbox1 label
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    cursor: pointer;
+    -webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+         -o-transition: all .5s ease;
+            transition: all .5s ease;
+
+    border: 1px solid #c8c8c8;
+    border-radius: 100px;
+}
+
+.checkbox1 input[type=checkbox]:checked + label:after
+{
+    position: absolute;
+    top: 5px;
+    left: 3px;
+
+    width: 10px;
+    height: 4px;
+
+    content: &#39;&#39;;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+
+    opacity: 1;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+}
+.checkbox1 input[type=checkbox]:checked + label
+{
+    border: 1px solid #26ca28;
+    background: #26ca28;
+}
+</code></pre><h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>今日，突然发现很多之间的博文留下的坑没有填，这不是个好现象啊，要不订个计划每个月末专门填坑？</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/11/How-to-customize-checkbox/" data-addthis-title="如何自定义checkbox？">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/10/a-Flexible-Demo/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/12/Canvas-01/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/11/How-to-customize-checkbox/" data-title="如何自定义checkbox？" data-url="http://xiguaaxigua.cn/2016/07/11/How-to-customize-checkbox/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

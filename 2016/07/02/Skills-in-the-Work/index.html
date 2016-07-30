@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>工作中收集的小技巧 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="工作中收集的小技巧"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">工作中收集的小技巧</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-01T16:48:48.000Z">2016-07-02</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/HTML/">HTML</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="Safari浏览器下的label标签，在按住的时候出现灰色背景"><a href="#Safari浏览器下的label标签，在按住的时候出现灰色背景" class="headerlink" title="Safari浏览器下的label标签，在按住的时候出现灰色背景"></a>Safari浏览器下的label标签，在按住的时候出现灰色背景</h3><p>解决办法：</p>
+<pre><code>label{ cursor: default;}
+</code></pre><h3 id="不传之秘！"><a href="#不传之秘！" class="headerlink" title="不传之秘！"></a>不传之秘！</h3><p>无须解释，自行研究！</p>
+<pre><code>[].forEach.call($$(&quot;*&quot;),function(a){a.style.outline=&quot;1px solid #&quot;+(~~(Math.random()*(1&lt;&lt;24))).toString(16)})
+</code></pre><h3 id="查看页面DOM数目"><a href="#查看页面DOM数目" class="headerlink" title="查看页面DOM数目"></a>查看页面DOM数目</h3><pre><code>document.getElementByTagName(&#39;*&#39;).length;
+</code></pre><h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><pre><code>.clearfix:after{
+    content:&quot;.&quot;;
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden
+}
+</code></pre><h3 id="清除safari默认select样式"><a href="#清除safari默认select样式" class="headerlink" title="清除safari默认select样式"></a>清除safari默认select样式</h3><pre><code>.clear-safari-751{
+    -ms-progress-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+</code></pre><h3 id="超出显示省略号"><a href="#超出显示省略号" class="headerlink" title="超出显示省略号"></a>超出显示省略号</h3><p>单行：</p>
+<pre><code>    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+</code></pre><p>多行：</p>
+<pre><code>    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    overflow: hidden;
+</code></pre><h3 id="非闭合标签不支持伪类"><a href="#非闭合标签不支持伪类" class="headerlink" title="非闭合标签不支持伪类"></a>非闭合标签不支持伪类</h3><p>例如：input、img…</p>
+<h3 id="不关机重启电脑"><a href="#不关机重启电脑" class="headerlink" title="不关机重启电脑"></a>不关机重启电脑</h3><p>卸载某些驱动或者安装某些软件时，提示重启电脑生效。</p>
+<ul>
+<li>1.结束进程explorer</li>
+<li>2.新建进程explorer</li>
+</ul>
+<h3 id="position为fixed的元素居中"><a href="#position为fixed的元素居中" class="headerlink" title="position为fixed的元素居中"></a>position为fixed的元素居中</h3><pre><code>    position: fixed;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    bottom: 0;
+    width: 10rem;
+    height: 1.63rem;
+    background: #fff;
+    z-index: 2;
+    border-top: 1px solid #69be28;
+</code></pre><h3 id="position为absolute的元素居中"><a href="#position为absolute的元素居中" class="headerlink" title="position为absolute的元素居中"></a>position为absolute的元素居中</h3><pre><code>    &lt;!--水平--&gt;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    margin: auto;  
+
+    &lt;!--垂直--&gt;
+    position: absolute;
+    top: 0; 
+    bottom: 0;
+    left: 0; 
+    margin: auto;
+</code></pre><h3 id="position为relative的元素居中"><a href="#position为relative的元素居中" class="headerlink" title="position为relative的元素居中"></a>position为relative的元素居中</h3><pre><code>postion:relative;
+margin:0 auto;
+</code></pre><h3 id="禁止a链接一直点击"><a href="#禁止a链接一直点击" class="headerlink" title="禁止a链接一直点击"></a>禁止a链接一直点击</h3><pre><code>$(&quot;#wheel_btn&quot;).css(&#39;pointer-events&#39;,&#39;none&#39;);
+
+//jQuery的one:
+$(&quot;$wheel_btn&quot;).click(function(){});
+$(&quot;#wheel_btn&quot;).one(&#39;click&#39;,function(){});
+</code></pre><h3 id="防止动画累积"><a href="#防止动画累积" class="headerlink" title="防止动画累积"></a>防止动画累积</h3><p>is(“:animated”) 返回bool值,表示对象是否动画元素 防止动画累积</p>
+<h3 id="input自动补全"><a href="#input自动补全" class="headerlink" title="input自动补全"></a>input自动补全</h3><p>input 的属性 autocomplete设置为on</p>
+<h3 id="z-index失效"><a href="#z-index失效" class="headerlink" title="z-index失效"></a>z-index失效</h3><ul>
+<li>所有主流浏览器都支持 z-index 属性。</li>
+<li>任何的版本的 Internet Explorer （包括 IE8）都不支持属性值 “inherit”。</li>
+<li>元素可拥有负的 z-index 属性值。</li>
+<li>z-index 仅能在定位元素上奏效（例如 position:absolute;）</li>
+<li>一旦一个元素被包含在处于底部堆栈顺序的堆栈上下文中，那么就没有办法先出现于其他处于更高的堆栈顺序的不同堆栈上下文元素。</li>
+</ul>
+<h3 id="Sublime安装插件Package-Control插件"><a href="#Sublime安装插件Package-Control插件" class="headerlink" title="Sublime安装插件Package Control插件"></a>Sublime安装插件Package Control插件</h3><p>偶尔会重装Sublime，遇到过好几次了，每次都要找代码，现记录如下：</p>
+<p>Sublime Text2：</p>
+<pre><code>import urllib2,os; pf=&#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), &#39;wb&#39; ).write( urllib2.urlopen( &#39;http://sublime.wbond.net/&#39; +pf.replace( &#39; &#39;,&#39;%20&#39; )).read()); print( &#39;Please restart Sublime Text to finish installation&#39;)
+</code></pre><p>Sublime Text3：</p>
+<pre><code>import urllib.request,os; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &#39;wb&#39;).write(urllib.request.urlopen( &#39;http://sublime.wbond.net/&#39; + pf.replace(&#39; &#39;,&#39;%20&#39;)).read())
+</code></pre><p>常用插件：</p>
+<ul>
+<li>emmet</li>
+<li>git</li>
+<li>csscomb</li>
+<li>html/js/css prettify</li>
+</ul>
+<h3 id="height-100-无效"><a href="#height-100-无效" class="headerlink" title="height:100%无效"></a>height:100%无效</h3><p>解决办法：</p>
+<pre><code>html,body{
+    margin:0; 
+    height:100%;
+}
+</code></pre><h3 id="base-href"><a href="#base-href" class="headerlink" title="base href"></a>base href</h3><p>为页面上所有相对 URL 规定基准 URL：</p>
+<pre><code>&lt;head&gt;
+&lt;base href=&quot;http://www.w3school.com.cn/i/&quot; /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;img src=&quot;eg_smile.gif&quot; /&gt;
+&lt;/body&gt;
+</code></pre><h3 id="jQuery点击复制文字"><a href="#jQuery点击复制文字" class="headerlink" title="jQuery点击复制文字"></a>jQuery点击复制文字</h3><p><a href="http://www.html5cn.org/article-9449-1.html">点击访问</a></p>
+<h3 id="jQuery定制插件"><a href="#jQuery定制插件" class="headerlink" title="jQuery定制插件"></a>jQuery定制插件</h3><p>jquery插件开发模式：<br>1.通过$.extend()来扩展jquery<br>    相对简单，一般很少能独立开发复杂插件</p>
+<p>2.$.fn向jquery添加新的方法</p>
+<p>3.$.widget()应用jquery ui的部件工厂模式创建<br>    一种高级的开发模式</p>
+<p>插件开发，我们一般运动面向对象的思维方式。</p>
+<p>定义一个对象：<br>jquery中extend函数的用法：<a href="http://www.cnblogs.com/luckboy/archive/2009/06/25/1510870.html">点击访问</a></p>
+<pre><code>$.extend(Object)
+
+var MyPlugins = function(el, opt){
+    this.$element = el,
+    this.defaults = {
+        &#39;color&#39; : &#39;red&#39;,
+        &#39;fontSize&#39; : &#39;12px&#39;,
+        &#39;textDecoration&#39; : &#39;underline&#39;
+    },
+    this.options = $.extend({}, this.defaults, opt)
+}
+
+$.extend({}, this.defaults, opt)有{}主要是为了创建一个新对象，保留对象的默认值。
+
+MyPlugins.prototype = {
+    demoAction: function (){
+        return this.$element.css(
+            &#39;color&#39; : this.options.color,
+            &#39;fontSize&#39;: this.options.fontSize,
+            &#39;textDecoration&#39;: this.options.textDecoration
+        );
+    }
+}
+
+$.fn.myPlugin = function(options){
+
+    //创建MyPlugins的实体
+    var myPlugins = new MyPlugins(this, options);
+
+    //调用其方法
+    return MyPlugins.demoAction();
+}
+
+$(function(){
+
+    $(&#39;a&#39;).myPlugin({
+
+        &#39;color&#39; : &#39;#f00&#39;,
+        &#39;fontSize&#39; &#39;20px&#39;
+    });
+});
+</code></pre><p>为了避免MyPlugins在其他地方用到时冲突，包裹在自调用匿名函数中</p>
+<pre><code>;(function(){})()
+</code></pre><p>为了避免jquery和zepto.js冲突，将jquery的前缀$修改为jQuery</p>
+<pre><code>;(function($,window,document,undefined){
+    //我们的代码。。
+})(jQuery,window,document);
+</code></pre><p>###判断上一页的来源</p>
+<pre><code>javascript:document.referrer
+</code></pre><h3 id="设定打开页面的尺寸"><a href="#设定打开页面的尺寸" class="headerlink" title="设定打开页面的尺寸"></a>设定打开页面的尺寸</h3><pre><code>&lt;body onload=top.resizeTo(500, 500);&gt;
+
+//打开页面的位置
+&lt;body onload=top.moveBy(200, 200);&gt;
+</code></pre><h3 id="enter键让光标移动到下一个输入框"><a href="#enter键让光标移动到下一个输入框" class="headerlink" title="enter键让光标移动到下一个输入框"></a>enter键让光标移动到下一个输入框</h3><pre><code>&lt;!--按Enter的时候，替换键码为Tab键--&gt;
+&lt;input onkeydown=if(event.keyCode == 13) event.keyCode = 9&gt;
+</code></pre><h3 id="flexible布局，Sass字体宏"><a href="#flexible布局，Sass字体宏" class="headerlink" title="flexible布局，Sass字体宏"></a>flexible布局，Sass字体宏</h3><pre><code>@mixin font-dpr($font-size){
+  font-size: $font-size;
+
+  [data-dpr=&quot;2&quot;] &amp; {
+    font-size: $font-size * 2;
+  }
+
+  [data-dpr=&quot;3&quot;] &amp; {
+    font-size: $font-size * 3;
+  }
+}
+</code></pre><p>使用：</p>
+<pre><code>body{
+    @include font-dpr(12px);
+}
+</code></pre><h3 id="media-query"><a href="#media-query" class="headerlink" title="media query"></a>media query</h3><pre><code>@media screen and (min-width: 320px) {
+
+}
+</code></pre><h3 id="字符间和单词间的空白"><a href="#字符间和单词间的空白" class="headerlink" title="字符间和单词间的空白"></a>字符间和单词间的空白</h3><pre><code>&lt;!--单词之间的空白--&gt;
+.word{
+    word-spacing: -1px;
+}
+
+&lt;!--字符间的空白--&gt;
+.word{
+    letter-spacing: -1px;
+}
+</code></pre><h3 id="禁止长按链接与图片弹出菜单："><a href="#禁止长按链接与图片弹出菜单：" class="headerlink" title="禁止长按链接与图片弹出菜单："></a>禁止长按链接与图片弹出菜单：</h3><pre><code>a, img {
+    -webkit-touch-callout: none;
+}
+</code></pre><h3 id="禁止选中文本（如无文本选中需求，此为必选项）"><a href="#禁止选中文本（如无文本选中需求，此为必选项）" class="headerlink" title="禁止选中文本（如无文本选中需求，此为必选项）"></a>禁止选中文本（如无文本选中需求，此为必选项）</h3><p>```<br>html, body {<br>    -webkit-user-select: none;<br>    user-select: none;<br>}</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>工作不息，奋斗不止，持续更新…♪(＾∀＾●)ﾉ</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/02/Skills-in-the-Work/" data-addthis-title="工作中收集的小技巧">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/06/29/UTF-8-with-BOM-or-without-BOM/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/07/02/a-Float-Bug/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/02/Skills-in-the-Work/" data-title="工作中收集的小技巧" data-url="http://xiguaaxigua.cn/2016/07/02/Skills-in-the-Work/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我是怎么实现搜索补全、搜索历史的 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="我是怎么实现搜索补全、搜索历史的"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">我是怎么实现搜索补全、搜索历史的</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-06-25T08:03:40.000Z">2016-06-25</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/jQuery/">jQuery</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="胡说八道"><a href="#胡说八道" class="headerlink" title="胡说八道"></a>胡说八道</h3><blockquote>
+<p>你可以看不起一个学渣，但是你不能看不起他强烈的求知欲！</p>
+<p style="text-align: right">——Aisin Gioro Da Vinci</p>
+
+</blockquote>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>整个功能的具体需求如下：</p>
+<ul>
+<li>1.在搜索框输入关键字以后，显示关键字联想。</li>
+<li>2.显示分类搜索。</li>
+<li>3.用户点击搜索后，记录搜索历史。</li>
+<li>4.用户再次搜索时，显示历史记录。</li>
+<li>5.历史记录存储4条。</li>
+<li>6.不能重复记录搜索记录。</li>
+</ul>
+<p>UI妹子给的设计图：</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/search01.png" alt=""></p>
+<p>写的demo效果，演示而已，难免有出入(⊙ˍ⊙)：</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/search03.png" alt=""></p>
+<h3 id="实现的具体思路"><a href="#实现的具体思路" class="headerlink" title="实现的具体思路"></a>实现的具体思路</h3><ul>
+<li>1.使用到了jQuery的autocomplete插件。</li>
+<li>2.历史记录以数组的形式存储在localStorage中。</li>
+</ul>
+<p>目录结构：</p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/search02.png" alt=""></p>
+<h3 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h3><p>期待与你交流…</p>
+<h3 id="data-json"><a href="#data-json" class="headerlink" title="data.json"></a>data.json</h3><pre><code>[
+  &quot;ActionScript&quot;,
+  &quot;AppleScript&quot;,
+  &quot;Asp&quot;,
+  &quot;BASIC&quot;,
+  &quot;C&quot;,
+  &quot;C++&quot;,
+  &quot;Clojure&quot;
+]
+</code></pre><h3 id="demo-html"><a href="#demo-html" class="headerlink" title="demo.html"></a>demo.html</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;搜索Demo&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery-ui.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot;&gt;
+
+    &lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery-ui.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;demo.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container clearfix&quot;&gt;
+        &lt;div class=&quot;search-box&quot;&gt;
+            &lt;input type=&quot;text&quot; id=&quot;search-input&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;btn-box&quot; id=&quot;search-btn&quot;&gt;搜索&lt;/div&gt;
+        &lt;div class=&quot;history&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="demo-css"><a href="#demo-css" class="headerlink" title="demo.css"></a>demo.css</h3><pre><code>/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+    margin:0;padding:0;}
+.clear{ background: none; border: 0; clear: both; margin: 0; padding: 0;}
+.clearfix:after { content: &quot;.&quot;; display: block;height: 0; clear: both; visibility: hidden;}
+.clearfix{*+height:1%;}
+h1, h2, h3, h4, h5, h6, p, ul, li, dl, dt, dd {font-size:100%; font-weight: normal; margin:0px; padding:0px; list-style:none;}
+table{ border-collapse:collapse;border-spacing:0;}
+img,fieldset{ border:0; vertical-align:middle;}
+*:focus{ outline:0;}
+input.button,button{ cursor:pointer;overflow:visible;}
+textarea{ overflow:auto;}
+
+.container
+{
+    position: relative;
+
+    width: 500px;
+    margin: 10px auto 0 auto;
+
+    border: 1px solid #000;
+}
+.search-box,
+.btn-box
+{
+    line-height: 30px;
+
+    float: left;
+
+    height: 30px;
+
+    border: none;
+}
+.search-box
+{
+    position: relative;
+
+    width: 400px;
+}
+.search-box input
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+.btn-box
+{
+    width: 100px;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #fff;
+    background: #000;
+}
+
+/*自定义searchList样式*/
+#searchList
+{
+    width: 499px;
+    padding: 0 0 15px 0;
+
+    list-style-image: none;
+
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+#searchList li
+{
+    cursor: pointer;
+}
+#searchList li a
+{
+    color: #777;
+}
+#searchList li:first-child
+{
+    cursor: default;
+}
+#searchList li:first-child:hover
+{
+    background: none;
+}
+#searchList li:first-child a
+{
+    font-size: 13px;
+
+    color: #000;
+}
+#searchList li:hover
+{
+    line-height: 30px;
+
+    border-radius: 0;
+    background: #eee;
+}
+#searchList li a
+{
+    font-size: 14px;
+
+    margin: 0;
+
+    border: none!important;
+    background: none!important;
+}
+#searchList li a span
+{
+    color: #009c4c;
+}
+#searchList li.hr
+{
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    margin: 8px 0 4px 0;
+    padding: 0;
+
+    background: #ccc;
+}
+
+/*历史记录*/
+.history
+{
+    font-size: 14px;
+
+    position: absolute;
+    top: 31px;
+    left: -1px;
+
+    display: none;
+
+    width: 500px;
+    padding: 0;
+
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+.history li
+{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.history li a
+{
+    font-weight: normal;
+    line-height: 1.5;
+
+    display: block;
+
+    min-height: 0;
+    padding: 2px .4em;
+
+    text-decoration: none;
+
+    color: #777;
+}
+.history li:first-child
+{
+    cursor: default;
+}
+.history li:first-child:hover
+{
+    background: none;
+}
+.history li:first-child a
+{
+    font-size: 13px;
+
+    color: #000;
+}
+.history li:hover
+{
+    line-height: 30px;
+
+    border-radius: 0;
+    background: #eee;
+}
+</code></pre><h3 id="demo-js"><a href="#demo-js" class="headerlink" title="demo.js"></a>demo.js</h3><pre><code>;$(function(){
+    &quot;use strict&quot;;
+
+    //搜索框默认的文字提示
+    var _defaultSearchVal = &quot;搜点什么吧...&quot;;
+
+    //数据源的路径
+    var _dataJsonRoot = &quot;data.json&quot;;
+
+    //模拟分类搜索的数据
+    var cate = { keywords: [&quot;香蕉、草莓、番茄酱、芭芭拉辣酱&quot;, &quot;零食&quot;, &quot;小吃&quot;] };
+
+    //autocomplete部分
+    $(&quot;#search-input&quot;)
+        .attr(&quot;placeholder&quot;, _defaultSearchVal)
+        .focus(function(){
+            // console.log(&#39;Focusing!&#39;);
+            if($(this).val() == &#39;&#39;){
+                $(this).attr(&quot;placeholder&quot;, &#39;&#39;);                
+            }
+            if($(this).val() == &#39;&#39; || $(this).val() == _defaultSearchVal){
+                // console.log(&#39;Show History!&#39;);
+                showSearchInputHistory();
+            }else{
+                hideSearchInputHistory();
+            }
+        })
+        .blur(function(){
+            if($(this).val() == &#39;&#39;){
+                $(this).attr(&quot;placeholder&quot;, _defaultSearchVal);
+                // console.log(&#39;Show History!&#39;);
+                hideSearchInputHistory();
+            }
+        })
+        .autocomplete({
+            //autocomplete需要的数据源，即data.json
+            source: function(req, res){
+                $.getJSON(_dataJsonRoot, function(json){
+                    // console.log(json);
+                    res(json);
+                });
+            },
+
+            //autocomplete激活时的事件
+            open: function(){
+                resizeSearchList();
+            },
+
+            //autocomplete结束时的事件
+            close: function(){
+
+            },
+
+            //用户激活autocomplete需要的最少字符数目
+            minLength:1,
+
+            //用户选中autocomplete生成的数据时的事件
+            select: function(event, ui){
+                // console.log(ui.item.value);
+                console.log(&#39;Saving data...&#39;);
+                saveSearchInputHistory(ui.item.value);
+
+            }
+
+        })
+
+        //搜索框获取焦点
+        .focus(function(req, res){
+            //$.trim用于去掉字符串首尾的空白字符
+            var userInput = $.trim($(&quot;#search-input&quot;).val());
+            if(userInput !== _defaultSearchVal){
+                $(this).autocomplete(&quot;search&quot;);
+            }
+        })
+
+        //自定义显示样式
+        .data( &quot;ui-autocomplete&quot; )._renderItem = function( ul, item ) {
+            ul.attr(&quot;id&quot;, &quot;searchList&quot;);
+            var o = $(&quot;#searchList&quot;).offset();
+              return $( &quot;&lt;li&gt;&lt;/li&gt;&quot; )
+                .append( &quot;&lt;a&gt;&quot; + item.label + &quot;&lt;/a&gt;&quot; )
+                .appendTo( ul );
+        };
+
+    //点击搜索按钮
+    $(&quot;#search-btn&quot;).click(function(){
+        saveSearchInputHistory($(&quot;#search-input&quot;).val());
+    });
+
+    //为了和UI差不多，需要修改autocomplete默认的样式
+    function resizeSearchList(cate){
+        var userInput = $.trim($(&quot;#search-input&quot;).val());
+        var temp_str = &#39;&#39;;
+        temp_str = &#39;&lt;li class=&quot;ui-menu-item&quot; role=&quot;presentation&quot;&gt;&lt;a class=&quot;ui-corner-all&quot;&gt;&#39; + userInput + &#39;&lt;/a&gt;&lt;/li&gt;&#39;;
+        for (var i = 0; i &lt; cate.keywords.length; i++) {
+            temp_str += &#39;&lt;li class=&quot;ui-menu-item&quot; role=&quot;presentation&quot;&gt;&lt;a style=&quot;text-indent: 1em;&quot; class=&quot;ui-corner-all&quot; href=&quot;url&quot;&gt;在&lt;span&gt;&#39; + cate.keywords[i] + &#39;&lt;/span&gt;中搜索&lt;/a&gt;&lt;/li&gt;&#39;;
+        }
+        temp_str += &#39;&lt;li class=&quot;hr&quot;&gt;&lt;/li&gt;&#39;;
+        $(&quot;#searchList&quot;).prepend(temp_str);
+
+        //如果复杂的话可以写个function
+        var ulLeft = $(&quot;#searchList&quot;).css(&quot;left&quot;);
+        ulLeft = ulLeft.replace(&quot;px&quot;, &quot;&quot;);       
+        ulLeft = Number(ulLeft) - 1 + &#39;px&#39;;
+        $(&quot;#searchList&quot;).css(&quot;left&quot;, ulLeft);
+
+        var ulTop = $(&quot;#searchList&quot;).css(&quot;top&quot;);
+        ulTop = ulTop.replace(&quot;px&quot;, &quot;&quot;);       
+        ulTop = Number(ulTop) + 1 + &#39;px&#39;;
+        $(&quot;#searchList&quot;).css(&quot;top&quot;, ulTop);
+    }
+
+    //存储搜索记录
+    function saveSearchInputHistory(keywords) {
+        if (window.localStorage) {
+            var temp_arr = (&#39;searchHistory&#39; in window.localStorage) ? window.localStorage.searchHistory : &#39;&#39;;
+            temp_arr = temp_arr.split(&quot;,&quot;);
+            if (!temp_arr) {
+                //无记录
+                temp_arr.push(keywords);
+            } else {
+                //有记录
+                if (temp_arr.indexOf(keywords) == -1) {
+                    temp_arr.push(keywords);
+                }
+            }
+            temp_arr.splice(0, temp_arr.length - 4);
+            window.localStorage.searchHistory = temp_arr;
+        }
+    }
+
+    //展示搜索记录
+    function showSearchInputHistory() {
+        // console.log(&#39;Reading History&#39;);
+        var s_temp_arr = (&#39;searchHistory&#39; in window.localStorage) ? window.localStorage.searchHistory : &#39;,&#39;;
+        s_temp_arr = s_temp_arr.substr(1).split(&quot;,&quot;).reverse();
+
+        var temp_str = &#39;&#39;;
+        if((&#39;searchHistory&#39; in window.localStorage)){
+            temp_str += &#39;&lt;li&gt;&lt;a&gt;搜索历史&lt;/a&gt;&lt;/li&gt;&#39;;
+        }else{
+            temp_str += &#39;&lt;li&gt;&lt;a&gt;暂无历史&lt;/a&gt;&lt;/li&gt;&#39;;
+        }
+
+        for (var i = 0; i &lt; s_temp_arr.length; i++) {            
+            temp_str += &#39;&lt;li&gt;&lt;a href=&quot;url&quot;&gt;&#39; + s_temp_arr[i] + &#39;&lt;/a&gt;&lt;/li&gt;&#39;;
+        }
+        // console.log(temp_str);
+        $(&quot;.history&quot;).html(temp_str);
+        $(&quot;.history&quot;).show();
+    }
+
+    //隐藏搜索记录
+    function hideSearchInputHistory(){
+        $(&quot;.history&quot;).hide();
+    }
+});
+</code></pre><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><p>关于data.json：</p>
+<p>用户键入关键字后，应该对从后台拿到的数据做处理，demo中没有加此功能，另外如果数据太长的话，页面的滚动条会对效果造成一定的影响，故此demo中data.json的数据较少，自行研究吧。</p>
+<p>最后放个压缩包吧，万一有人需要呢？<a href="http://pan.baidu.com/s/1slH04xf">点击下载</a>（百度云，174KB，密码：lyuo）。</p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/06/25/How-did-I-Complete-Search-and-Save-it/" data-addthis-title="我是怎么实现搜索补全、搜索历史的">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/06/24/Version-Controller-And-Difference-Analysis/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/06/29/UTF-8-with-BOM-or-without-BOM/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/06/25/How-did-I-Complete-Search-and-Save-it/" data-title="我是怎么实现搜索补全、搜索历史的" data-url="http://xiguaaxigua.cn/2016/06/25/How-did-I-Complete-Search-and-Save-it/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
