@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>翻译《Understanding-ECMASctipt 6》 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="翻译《Understanding-ECMASctipt 6》"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">翻译《Understanding-ECMASctipt 6》</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-07-31T14:09:53.000Z">2016-07-31</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/翻译/">翻译</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Understanding-ECMAScript6.png" alt=""></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文是一篇翻译，也是一篇读书笔记，”他山之石,可以攻玉”，不是吗？</p>
+<p>本文是<a href="https://www.nczonline.net/">Nicholas C. Zakas</a>的一部著作——《Understanding-ECMASctipt 6》的译文，有条件的话可以考虑买一本，秉承着开源的精神，你也可以免费在线阅读此书的全部内容，<a href="https://leanpub.com/understandinges6/read">在线地址</a>。</p>
+<p>博主英文着实垃圾，很多地方都不甚明白，也并未完全按照原文翻译，很多地方更改为自己的理解，所以可借鉴性并不大，哈哈，权当看杂志吧，如有纰漏请务必指出，感激不尽。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>ECMAScript是由ECMA组织通过<a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA-262</a>标准化的脚本设计语言，我们所熟知的“浏览器中的JavaScript”和“Node.js”实际上是ECMAScript的超集，浏览器和Node.js通过额外的对象和方法扩展ECMAScript的功能。</p>
+<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>一直以来，对于JavaScript开发这来说，变量的声明是工作中很棘手的一部分。在大多数类C语言中，变量在声明时就被创建，然而在JavaScript中并不是这样。在JavaScript中变量什么时候被创建，取决于你怎么声明它。ES6提供了一些方法使作用域更容易控制。</p>
+<p>本章内容主要有：</p>
+<ul>
+<li>为什么使用传统的声明变量的方法（通过var关键字）会导致混乱；</li>
+<li>介绍ES6中的块级绑定；</li>
+<li>提供一些好的例子来练习。</li>
+</ul>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>变量提升：通过var关键字声明的变量，如果变量位于函数内部，将被视为在函数的最顶部被声明，而不管具体哪行代码声明了它，这种现象被称为“变量提升”。</p>
+<pre><code>function getValue(condition) {
+
+    if (condition) {
+        var value = &quot;blue&quot;;
+
+        // other code
+
+        return value;
+    } else {
+
+        // value exists here with a value of undefined
+
+        return null;
+    }
+
+    // value exists here with a value of undefined
+}
+</code></pre><p>如果你对JavaScript不熟悉的话，可能会认为只有在if条件成立的时候，才会声明变量value。而实际上，不管if条件成不成立，value都将被声明。就像下面这样：</p>
+<pre><code>function getValue(condition) {
+
+    var value;
+
+    if (condition) {
+        value = &quot;blue&quot;;
+
+        // other code
+
+        return value;
+    } else {
+
+        return null;
+    }
+}
+</code></pre><p>value变量的声明被提升到顶部，这意味着变量在脚本运行之前就已经存在了，只是未初始化（值为：undefined）。</p>
+<p>这种独特的行为经常导致意料之外的错误，尤其对于新手来说。出于这个原因，ES6引入了“块级作用域”这一概念，用来更容易的控制变量的生命周期。</p>
+<h3 id="块级声明"><a href="#块级声明" class="headerlink" title="块级声明"></a>块级声明</h3><p>块级作用域也叫“词法作用域”，块级作用域是独立的、“与世隔绝”的，外部无法访问块级作用域内的成员，块级作用域之间也无法互相访问。</p>
+<p>下边这两种方式都标志着进入一个块级作用域：</p>
+<ul>
+<li>函数内部；</li>
+<li>在一个块内部（使用’{}’包裹的部分）。</li>
+</ul>
+<p>块级作用域是很多类C语言的特性，ES6引入这一特性无疑会让JavaScript的作用域变得更加清晰明了、易于控制。</p>
+<h3 id="let关键字"><a href="#let关键字" class="headerlink" title="let关键字"></a>let关键字</h3><p>let关键字和var关键字的语法一样，基本上你可以直接使用let替换var，使用let声明的变量只在当前作用域有效，除此之外还有一些其他的差别。由于let声明的变量不会发生变量提升的现象，你可以始终在代码的顶部声明变量，这样就可以在整个作用域使用它。</p>
+<pre><code>function getValue(condition) {
+
+    if (condition) {
+        // 仅在当前作用域有效
+        let value = &quot;blue&quot;;
+
+        // other code
+
+        return value;
+    } else {
+        // value doesn&#39;t exist here
+
+        return null;
+    }
+
+    // value doesn&#39;t exist here
+}
+</code></pre><h3 id="不允许重定义"><a href="#不允许重定义" class="headerlink" title="不允许重定义"></a>不允许重定义</h3><p>如果某个变量在一个作用域中已经定义，那么在这个作用域中使用let关键字重定义同名变量将会报错。</p>
+<pre><code>var count = 30;
+
+// Syntax error
+let count = 40;
+</code></pre><p>在这个例子中，count变量被定义了两次，由于let不会重新定义已经存在于同一作用域的变量，因此将会报错。另一方面，如果在不同作用域内声明相同名称的变量将不会报错，例如：</p>
+<pre><code>var count = 30;
+
+// Does not throw an error
+if (condition) {
+
+    let count = 40;
+
+    // more code
+}
+</code></pre><h3 id="声明常量"><a href="#声明常量" class="headerlink" title="声明常量"></a>声明常量</h3><p>在ES6中可以通过const关键字声明常量，常量在声明的时候必须被初始化，并且初始化以后将无法修改。const声明的常量和let声明的变量一样，都具有块级作用域，在同一作用域重复声明将会报错。</p>
+<pre><code>// 声明并初始化一个常量
+const maxItems = 30;
+
+// 报错，声明但未初始化
+const name;
+
+// 报错，常量一经初始化，将不能被修改
+maxItems = 6;
+
+// 报错，重复声明常量
+const maxItems = 40;
+</code></pre><p>和其他类C语言一样，在ES6中常量一经定义将不能被修改，和其他类C语言不一样的是：如果在常量中存储一个Object，修改Object本身将会报错，修改Object的属性值将不会报错，这是因为常量禁止修改这一行为，根本上是禁止修改绑定，而不是绑定的值本身。</p>
+<pre><code>const person = {
+    name: &quot;Nicholas&quot;
+};
+
+// works
+person.name = &quot;Greg&quot;;
+
+// throws an error
+person = {
+    name: &quot;Greg&quot;
+};
+</code></pre><h3 id="TDZ——暂时性死区"><a href="#TDZ——暂时性死区" class="headerlink" title="TDZ——暂时性死区"></a>TDZ——暂时性死区</h3><p>暂时性死区（Temporal Dead Zone，简称TDZ）：在代码块内，使用let命令声明变量之前（let命令之前的区域即“TDZ”），该变量都是不可用的。这在语法上称为“暂时性死区”。</p>
+<pre><code>if (condition) {
+    console.log(typeof value); // ReferenceError!
+    let value = &quot;blue&quot;;
+}
+</code></pre><p>在上面这个例子中，使用let关键字声明并初始化了变量value，但该语句将不会被执行，因为上一行报错了。问题的原因是，在未定义value之前就已经使用了vaule（typeof value），此时value存在于TDZ中，在TDZ中使用未声明的变量将会报错。TDZ不是一个官方的术语，但它通常用来解释变量在未声明之前不可使用这一现象。</p>
+<pre><code>console.log(typeof value); // &quot;undefined&quot;
+
+if (condition) {
+    let value = &quot;blue&quot;;
+}
+</code></pre><p>上述代码中，typeof语句执行的时候并未在TDZ中，因为它执行在value声明的块级作用域之外。此时，value没有被声明，将会返回undefined。（<code>console.log(value)</code> 将会报错）。</p>
+<h3 id="循环中的块级作用域"><a href="#循环中的块级作用域" class="headerlink" title="循环中的块级作用域"></a>循环中的块级作用域</h3>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/31/The-translation-of-book-on-the-Understanding-ECMAScript-6/" data-addthis-title="翻译《Understanding-ECMASctipt 6》">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/07/30/Userful-Commond-in-Mac/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/07/31/The-translation-of-book-on-the-Understanding-ECMAScript-6/" data-title="翻译《Understanding-ECMASctipt 6》" data-url="http://xiguaaxigua.cn/2016/07/31/The-translation-of-book-on-the-Understanding-ECMAScript-6/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
