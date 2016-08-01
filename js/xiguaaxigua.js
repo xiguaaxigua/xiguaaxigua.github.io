@@ -10,8 +10,14 @@ $(function(){
         $this.wrap('<a href="' + $this.attr('src') + '"></a>');
     });
 
-    console.log("博主正在重构博客，敬请期待！");
-    /*index-menu color*/
+    // 控制台欢迎信息
+    var hello = "\n\n██╗  ██╗███████╗██╗     ██╗      ██████╗ ██╗\n██║  ██║██╔════╝██║     ██║     ██╔═══██╗██║\n███████║█████╗  ██║     ██║     ██║   ██║██║\n██╔══██║██╔══╝  ██║     ██║     ██║   ██║╚═╝\n██║  ██║███████╗███████╗███████╗╚██████╔╝██╗\n╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝ ╚═╝\n\n\n",
+        world = 'Glad to see u here!';
+
+    console.log(hello);
+    console.log('%c' + world, 'color: #1d9531');
+
+    // 首页 标签颜色
     var menuLength = $(".row .menu-post").length;
     for(var i=0; i<menuLength; i++){
         var aTxt = $(".row .menu-post").eq(i).find(".tag-a:first-child").html();
@@ -32,13 +38,4 @@ $(function(){
             $(".row .menu-post").eq(i).find(".tag-a").css("border-right-color", "#b9ab76");
         }
     }
-})
-;(function( $ ) {
-    $(function() {
-        $( '[data-js="google-search-form"]' ).on( 'submit', function( e ) {
-            e.preventDefault();
-            var inputVal = $( '[data-js="google-search-input"]' ).val();
-            window.location.href = $( this ).attr( 'data-action' ) + ' ' + inputVal;
-        });
-    });
-})( jQuery );
+});
