@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>分享一些Mac中常用的APP | Xiguaaxigua</title>
+  <title>Node常用命令 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="分享一些Mac中常用的APP"/>
+  <meta property="og:title" content="Node常用命令"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,27 +70,47 @@
   
     
   
-    <h1 class="title">分享一些Mac中常用的APP</h1>
+    <h1 class="title">Node常用命令</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-08-03T12:59:24.000Z">2016-08-03</time>
+      <time datetime="2016-08-04T10:17:15.000Z">2016-08-04</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/工具/">工具</a>
+    <a class="tag-a" href="/tags/Node-js/">Node.js</a>
   </div>
 
   
   <div class="post-content">
     
-      
+      </p>
+<h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><pre><code># 全局安装
+npm install &lt;name&gt; -g
+
+# 作为项目依赖
+npm install &lt;name&gt; --save-dev
+</code></pre><h3 id="新建package-json文件"><a href="#新建package-json文件" class="headerlink" title="新建package.json文件"></a>新建package.json文件</h3><pre><code>npm init
+</code></pre><h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><pre><code>npm update &lt;name&gt;
+</code></pre><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><pre><code>npm remove &lt;name&gt;
+</code></pre><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><pre><code>npm uninstall &lt;name&gt;
+</code></pre><h3 id="查看所有全局的包"><a href="#查看所有全局的包" class="headerlink" title="查看所有全局的包"></a>查看所有全局的包</h3><pre><code>npm ls
+</code></pre><h3 id="查看当前包的路径"><a href="#查看当前包的路径" class="headerlink" title="查看当前包的路径"></a>查看当前包的路径</h3><pre><code>npm root
+</code></pre><h3 id="查看全局包的路径"><a href="#查看全局包的路径" class="headerlink" title="查看全局包的路径"></a>查看全局包的路径</h3><pre><code>npm root -g
+</code></pre><h3 id="安装package-json文件中的依赖"><a href="#安装package-json文件中的依赖" class="headerlink" title="安装package.json文件中的依赖"></a>安装package.json文件中的依赖</h3><pre><code>#因为node的包相对庞大，不方便加入版本管理，因此将配置信息写去package.json并将其加入版本管理，其他开发者对应下载即可。
+
+# 下载所有的包
+npm install
+
+# 只下载dependencies节点的包
+npm install --production
+</code></pre>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/03/Share-some-applications-in-Mac/" data-addthis-title="分享一些Mac中常用的APP">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/04/Node-Commands/" data-addthis-title="Node常用命令">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -102,20 +122,20 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/03/Share-so
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/08/01/Configuring-Babel-In-WebStrom/">
+        <a class="btn btn-success" role="button" href="/2016/08/03/Share-some-applications-in-Mac/">
           上一篇
         </a></li>
       
       
         <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/08/04/Node-Commands/">
+        <a class="btn btn-success" role="button" href="/2016/08/04/Modular-JavaScript-Applications/">
           下一篇
         </a></li>
       
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/08/03/Share-some-applications-in-Mac/" data-title="分享一些Mac中常用的APP" data-url="http://xiguaaxigua.cn/2016/08/03/Share-some-applications-in-Mac/"></div>
+<div class="ds-thread" data-thread-key="2016/08/04/Node-Commands/" data-title="Node常用命令" data-url="http://xiguaaxigua.cn/2016/08/04/Node-Commands/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
