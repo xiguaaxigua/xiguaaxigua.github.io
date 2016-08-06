@@ -97,7 +97,9 @@ npm install &lt;name&gt; --save-dev
 </code></pre><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><pre><code>npm uninstall &lt;name&gt;
 </code></pre><h3 id="查看所有全局的包"><a href="#查看所有全局的包" class="headerlink" title="查看所有全局的包"></a>查看所有全局的包</h3><pre><code>npm ls
 </code></pre><h3 id="查看当前包的路径"><a href="#查看当前包的路径" class="headerlink" title="查看当前包的路径"></a>查看当前包的路径</h3><pre><code>npm root
+</code></pre><h3 id="搜索包"><a href="#搜索包" class="headerlink" title="搜索包"></a>搜索包</h3><pre><code>npm search &lt;name&gt;
 </code></pre><h3 id="查看全局包的路径"><a href="#查看全局包的路径" class="headerlink" title="查看全局包的路径"></a>查看全局包的路径</h3><pre><code>npm root -g
+</code></pre><h3 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h3><pre><code>npm publish
 </code></pre><h3 id="安装package-json文件中的依赖"><a href="#安装package-json文件中的依赖" class="headerlink" title="安装package.json文件中的依赖"></a>安装package.json文件中的依赖</h3><pre><code>#因为node的包相对庞大，不方便加入版本管理，因此将配置信息写去package.json并将其加入版本管理，其他开发者对应下载即可。
 
 # 下载所有的包
@@ -105,6 +107,8 @@ npm install
 
 # 只下载dependencies节点的包
 npm install --production
+</code></pre><h3 id="清空NPM本地缓存"><a href="#清空NPM本地缓存" class="headerlink" title="清空NPM本地缓存"></a>清空NPM本地缓存</h3><pre><code>npm clear cache
+</code></pre><h3 id="撤销发布自己发布过的某个版本的代码"><a href="#撤销发布自己发布过的某个版本的代码" class="headerlink" title="撤销发布自己发布过的某个版本的代码"></a>撤销发布自己发布过的某个版本的代码</h3><pre><code>npm unpublish &lt;package&gt;@&lt;version&gt;
 </code></pre>
     
   </div>

@@ -86,7 +86,39 @@
   <div class="post-content">
     
       </p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>1.NodeJS是一个JS脚本解析器，任何操作系统下安装NodeJS本质上做的事情都是把NodeJS执行程序复制到一个目录，然后保证这个目录在系统PATH环境变量下，以便于终端访问。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>NodeJS是一个JS脚本解析器，任何操作系统下安装NodeJS本质上做的事情都是把NodeJS执行程序复制到一个目录，然后保证这个目录在系统PATH环境变量下，以便于终端访问。</li>
+<li>终端下直接属兔node命令可进入命令交互模式，很适合用来测试一些JS代码片段，比如正则表达式。</li>
+<li>NodeJS遵循CMD模块规范，主模块作为程序入口点，所有模块在执行过程中只初始化一次。</li>
+<li>除非JS模块不能满足需求，否则不要轻易使用二进制模块。</li>
+</ul>
+<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>关于package.json的官方解释：<a href="http://www.mujiang.info/translation/npmjs/files/package.json.html">package.json</a>。</p>
+<p>需要注意的地方：</p>
+<ul>
+<li>package.json存储的内容必须是真正的json，而不是js对象。</li>
+<li>name和version是package.json中最重要的字段，他们有一定的规则。<ul>
+<li>name应该简短、意义清晰；</li>
+<li>查看可用的名字：<a href="http://registry.npmjs.org/">点击访问</a>；</li>
+<li>查看可用的version范围：<a href="https://npmjs.org/doc/misc/semver.html">点击访问</a>。</li>
+</ul>
+</li>
+<li>description：当前包的描述，当被搜索到是会显示；</li>
+<li>keywords：存放简介、关键字；</li>
+<li>homepage：当前项目的官方地址；</li>
+<li>bugs：当前项目遇到的问题及解决方法，差不多类似于下面这样：<pre><code>  { 
+      &quot;url&quot; : &quot;http://github.com/owner/project/issues&quot;, 
+      &quot;email&quot; : &quot;project@hostname.com&quot;
+  }
+</code></pre></li>
+<li>package.json中不能写注释。</li>
+<li>author - 包的作者姓名。</li>
+<li>contributors - 包的其他贡献者姓名。</li>
+<li>dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。</li>
+<li>repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。</li>
+<li>main - main 字段是一个模块ID，它是一个指向你程序的主要项目。就是说，如果你包的名字叫 express，然后用户安装它，然后require(“express”)。</li>
+<li>keywords - 关键字</li>
+</ul>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h2 id="创建一个服务器"><a href="#创建一个服务器" class="headerlink" title="创建一个服务器"></a>创建一个服务器</h2><h2 id="REPL（Read-Eval-Print-Loop）：交互式解析器"><a href="#REPL（Read-Eval-Print-Loop）：交互式解析器" class="headerlink" title="REPL（Read Eval Print Loop）：交互式解析器"></a>REPL（Read Eval Print Loop）：交互式解析器</h2>
     
   </div>
   
