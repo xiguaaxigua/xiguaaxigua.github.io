@@ -86,39 +86,141 @@
   <div class="post-content">
     
       </p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>NodeJS是一个JS脚本解析器，任何操作系统下安装NodeJS本质上做的事情都是把NodeJS执行程序复制到一个目录，然后保证这个目录在系统PATH环境变量下，以便于终端访问。</li>
-<li>终端下直接属兔node命令可进入命令交互模式，很适合用来测试一些JS代码片段，比如正则表达式。</li>
-<li>NodeJS遵循CMD模块规范，主模块作为程序入口点，所有模块在执行过程中只初始化一次。</li>
-<li>除非JS模块不能满足需求，否则不要轻易使用二进制模块。</li>
-</ul>
-<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>关于package.json的官方解释：<a href="http://www.mujiang.info/translation/npmjs/files/package.json.html">package.json</a>。</p>
-<p>需要注意的地方：</p>
-<ul>
-<li>package.json存储的内容必须是真正的json，而不是js对象。</li>
-<li>name和version是package.json中最重要的字段，他们有一定的规则。<ul>
-<li>name应该简短、意义清晰；</li>
-<li>查看可用的名字：<a href="http://registry.npmjs.org/">点击访问</a>；</li>
-<li>查看可用的version范围：<a href="https://npmjs.org/doc/misc/semver.html">点击访问</a>。</li>
+<h2 id="Node的特点"><a href="#Node的特点" class="headerlink" title="Node的特点"></a>Node的特点</h2><ul>
+<li>1.Node作为后端JavaScript运行平台，没有改写JavaScript语言本身，依旧基于作用域和原型链，区别在于Node将前端中广泛运用的思想迁移到了服务器端。</li>
+<li><p>2.异步I/O，在Node中绝大多数的操作都是以异步的形式进行调用，每个调用之间无需等待之前的I/O调用结束，极大的提升了运行效率。</p>
+<pre><code>  fs.readFile(&#39;/path1&#39;, function(err, file){
+      console.log(&#39;读取文件1完成！&#39;);
+  });
+
+  fs.readFile(&#39;/path2&#39;, function(err, file){
+      console.log(&#39;读取文件2完成！&#39;);
+  });
+</code></pre><p>  对于同步IO来说，这两个文件的读取任务耗时为两个任务的耗时之和，对于一部IO来说，为最慢的那个任务的耗时。</p>
+</li>
+<li>事件与回调函数，代码的执行顺序与编写顺序无关。</li>
+<li>单线程。单线程最大的好处是不用像多线程那样处处在意状态的同步问题，也没有线程上下文交换所带来的性能上的开销。单线程的坏处：<ul>
+<li>无法利用多核CPU；</li>
+<li>错误会引起整个应用退出；</li>
+<li>大量计算张勇CPU导致无法继续调用异步IO。</li>
 </ul>
 </li>
-<li>description：当前包的描述，当被搜索到是会显示；</li>
-<li>keywords：存放简介、关键字；</li>
-<li>homepage：当前项目的官方地址；</li>
-<li>bugs：当前项目遇到的问题及解决方法，差不多类似于下面这样：<pre><code>  { 
-      &quot;url&quot; : &quot;http://github.com/owner/project/issues&quot;, 
-      &quot;email&quot; : &quot;project@hostname.com&quot;
-  }
-</code></pre></li>
-<li>package.json中不能写注释。</li>
-<li>author - 包的作者姓名。</li>
-<li>contributors - 包的其他贡献者姓名。</li>
-<li>dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。</li>
-<li>repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。</li>
-<li>main - main 字段是一个模块ID，它是一个指向你程序的主要项目。就是说，如果你包的名字叫 express，然后用户安装它，然后require(“express”)。</li>
-<li>keywords - 关键字</li>
+<li>跨平台。</li>
 </ul>
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h2 id="创建一个服务器"><a href="#创建一个服务器" class="headerlink" title="创建一个服务器"></a>创建一个服务器</h2><h2 id="REPL（Read-Eval-Print-Loop）：交互式解析器"><a href="#REPL（Read-Eval-Print-Loop）：交互式解析器" class="headerlink" title="REPL（Read Eval Print Loop）：交互式解析器"></a>REPL（Read Eval Print Loop）：交互式解析器</h2>
+<h2 id="Node的应用场景"><a href="#Node的应用场景" class="headerlink" title="Node的应用场景"></a>Node的应用场景</h2><h2 id="Node的模块机制"><a href="#Node的模块机制" class="headerlink" title="Node的模块机制"></a>Node的模块机制</h2><p>Node遵循CommonJS规范。一张图很好的说明了Node与浏览器、W3C、CommonJS、ECMAScript之间的关系。</p>
+<h3 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h3><p>CommonJS对模块的定义十分简单，主要分为模块引用、模块定义和模块标识三个部分。<br>1.模块引用</p>
+<pre><code>var welcome = require(&#39;welcome&#39;);
+</code></pre><p>2.模块定义</p>
+<pre><code>// welcome.js
+exports.sayHello = function(name){
+    var name = name ? name : &#39;World&#39;,
+    return &#39;Hello &#39; + name;
+}
+
+// main.js
+var welcome = require(&#39;welcome&#39;);
+
+console.log(welcome.sayHello(&#39;xigua&#39;));
+</code></pre><p>3.模块标识<br>模块标识其实就是传递给 <code>require()</code> 的参数。它必须符合以下规则：</p>
+<ul>
+<li>小驼峰命名的字符串；</li>
+<li>相对路径；</li>
+<li>绝对路径；</li>
+<li>可以没有后缀名（<code>.js</code>）。</li>
+</ul>
+<h3 id="Node中模块的实现"><a href="#Node中模块的实现" class="headerlink" title="Node中模块的实现"></a>Node中模块的实现</h3><p>Node在实现模块化中并没有完全按照CommonJS规范，而是对规范进行了取舍，并增加了自身需要的特性。</p>
+<p>Node中的模块分为两类：</p>
+<ul>
+<li>Node提供的模块，称为核心模块；</li>
+<li>用户编写的模块，称为文件模块。</li>
+</ul>
+<p>Node中模块的加载分为以下步骤：</p>
+<ul>
+<li>1.分析模块的路径；</li>
+<li>2.文件定位；</li>
+<li>3.编译执行。</li>
+</ul>
+<p>其中，核心模块在Node源代码编译过程中，被编译进了二进制执行文件，更有部分模块被直接加载进内存中，这部分模块在引入时不再需要文件定位和编译执行两个步骤，因此核心模块的加载速度最快。而用户编写的文件模块则是在运行中动态加载，需要完成的路径分析、文件定位、编译执行过程，因此执行速度较慢。</p>
+<p>Node在加载模块时优先从缓存中加载，核心模块的加载次于缓存加载，不论核心模块还是文件模块，<code>require()</code> 方法对相同模块的二次执行都一律采用缓存有限的原则，不同之处在于核心模块的缓存检查先于文件模块的缓存检查。</p>
+<p>Node是基于模块标识符进行模块查找的，模块标识符主要分为以下几类：</p>
+<ul>
+<li>核心模块，如：<code>http</code> 、 <code>path</code> 、 <code>fs</code>等；</li>
+<li><code>.</code> 或者 <code>..</code> 开头的相对路径模块；</li>
+<li><code>/</code> 开头的绝对路径模块；</li>
+<li>非路径形式的文件模块。</li>
+</ul>
+<p>在不指定模块的后缀名时，Node会按照 <code>.js</code> 、 <code>.json</code> 、 <code>.node</code> 的顺序补充扩展名。由于Node是单线程的，所以这里可能会引起性能问题，一个小技巧是：如果是 <code>.json</code> 或者 <code>.node</code> 的文件，在传递给 <code>require()</code> 时加上扩展名会加快一点速度。</p>
+<p>在Node中，每个文件模块都是一个对象，它的定义如下：</p>
+<pre><code>function Module(id, parent){
+    this.id = id;
+    this.exports = {};
+    this.parent = parent;
+    if(parent &amp;&amp; parent.children){
+        parent.children.push(this);
+    }
+
+    this.filename = null;
+    this.loaded = false;
+    this.children = [];
+}
+</code></pre><p>编译和执行是引入文件模块的最后一个阶段。定位到具体文件后，Node会新建一个模块对象，然后根据路径载入并编译。对于不同的文件扩展名，其载入方法有所不同：</p>
+<ul>
+<li>.js文件，通过fs模块同步读取文件后编译执行；</li>
+<li>.json文件，通过fs模块同步读取文件后，用 <code>JSON.parse()</code> 解析返回结果；</li>
+<li>.node文件，这是用C/C++编写的扩展文件，通过 <code>dlopen()</code> 方法加载最后编译生成的文件；</li>
+<li>其余扩展名文件，都被当做.js文件载入。</li>
+</ul>
+<p>在编译.js文件时，Node会对获取到的JavaScript文件进行头尾包装。</p>
+<pre><code>// welcome.js
+var welcome = require(&#39;welcome&#39;);
+exports.sayHello = function(name){
+    return &#39;Hello &#39; + name;
+}
+
+// 将被包装为
+(function(exports, require, module, __filename, __dirname){
+    var welcome = require(&#39;welcome&#39;);
+    exports.sayHello = function(name){
+        return &#39;Hello &#39; + name;
+    }
+});
+</code></pre><p>这样每个模块之间都进行了作用域隔离。</p>
+<h2 id="Node中的包与NPM"><a href="#Node中的包与NPM" class="headerlink" title="Node中的包与NPM"></a>Node中的包与NPM</h2><p>包描述文件是一个JSON格式的文件——package.json，位于包的根目录下，是包的重要组成部分，而NPM的所有行为都与包描述文件息息相关。</p>
+<h3 id="包文件的书写规范"><a href="#包文件的书写规范" class="headerlink" title="包文件的书写规范"></a>包文件的书写规范</h3><p>package.json中的实际需要的参数：</p>
+<ul>
+<li>name，包的名字。</li>
+<li>description，包的描述。</li>
+<li>version，包的版本。</li>
+<li>author，包的作者。</li>
+<li>contributors，共享者，有name、email、web三个属性。</li>
+<li>dependencies，包所依赖的模块。</li>
+<li>devDependencies，一些模块只在开发时需要依赖，配置这个属性，可以提示包的后续开发者安装依赖包。</li>
+<li>keywords，包的关键字。</li>
+<li>repository，包的仓库地址。</li>
+<li>bin，一些包作者希望包可以作为命令行工具使用。配置好bin字段后，通过 <code>npm install package_name -g</code> 命令可以将脚本添加到执行路径中，之后可以在命令行中直接执行。</li>
+<li>main，模块引入方法 <code>require()</code> 在引入包时，会优先检查这个字段，并将其作为包中其余模块的入口，如果不存在这个字段，<code>require()</code> 方法会查找包目录下的index.js、index.node、index.json文件作为默认入口。</li>
+</ul>
+<h3 id="NPM常用指令"><a href="#NPM常用指令" class="headerlink" title="NPM常用指令"></a>NPM常用指令</h3><pre><code># 查看当前NPM的版本
+npm -v
+
+# 全局安装包
+npm install &lt;package_name&gt; -g
+
+# 作为项目依赖安装，将会同步更新package.json文件
+npm install &lt;package_name&gt; --save-dev
+
+# 初始化，通过提问式的交互生成一个package.json文件
+npm init
+
+# 注册包仓库账号，也是一个提问式的交互过程
+npm adduser
+
+# 上传包
+npm publish
+
+# 管理包权限
+npm owner ls eventproxy
+</code></pre>
     
   </div>
   

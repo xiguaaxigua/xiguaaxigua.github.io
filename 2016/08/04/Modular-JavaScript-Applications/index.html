@@ -86,6 +86,119 @@
   <div class="post-content">
     
       </p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文记录一下博主工作中的需求。</p>
+<h3 id="什么是gulp？"><a href="#什么是gulp？" class="headerlink" title="什么是gulp？"></a>什么是gulp？</h3><p><a href="http://gulpjs.com/">gulp</a>是一款基于流的自动化构建工具。</p>
+<p>本例中gulp主要用于以下几个方面：</p>
+<ul>
+<li>压缩合并JS、CSS文件；</li>
+<li>合并图标自动生成雪碧图；</li>
+<li>压缩HTML；</li>
+<li>检测JS语法。</li>
+</ul>
+<h3 id="什么是Babel？"><a href="#什么是Babel？" class="headerlink" title="什么是Babel？"></a>什么是Babel？</h3><p><a href="https://babeljs.io/">Babel</a>是一款将ES6语法的JS文件编译成ES5语法的编译器。本例中JS部分采用ES6语法，但由于各浏览器对ES6的支持程度不同，因此需要编译为ES5语法。</p>
+<p>相关文章：</p>
+<ul>
+<li><a href="http://xiguaaxigua.cn/2016/08/01/Configuring-Babel-In-WebStrom/">WebStrom配置Babel编译环境</a></li>
+</ul>
+<h3 id="什么是webpack？"><a href="#什么是webpack？" class="headerlink" title="什么是webpack？"></a>什么是webpack？</h3><p><a href="https://webpack.github.io/">webpack</a>是一款模块加载器兼打包工具。本例中使用Babel+webpack结合的方式，实时编译ES6以便于开发调试。</p>
+<p>相关文章：</p>
+<ul>
+<li><a href="http://xiguaaxigua.cn/2016/07/28/Gulp-Introduction/">gulp学习笔记</a></li>
+</ul>
+<h3 id="这篇文章的目的"><a href="#这篇文章的目的" class="headerlink" title="这篇文章的目的"></a>这篇文章的目的</h3><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>在学习的过程中踩过很多坑，思来想去，不如从零开始，将整个过程记录下来。</p>
+<h3 id="从一个空目录开始吧"><a href="#从一个空目录开始吧" class="headerlink" title="从一个空目录开始吧"></a>从一个空目录开始吧</h3><p>假设你已经知道node和npm怎么使用了。</p>
+<p>1.新建一个文件夹 <code>hello-world</code>。</p>
+<p>2.执行 <code>npm init</code>，创建一个package.json文件。按照提示配置，可能是下面这样的。注意：<code>.json</code> 文件中不能写注释。</p>
+<pre><code>{
+  &quot;name&quot;: &quot;hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Just a demo&quot;,
+  &quot;main&quot;: &quot;flash.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;xiguaaxigua&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre><h3 id="gulp篇"><a href="#gulp篇" class="headerlink" title="gulp篇"></a>gulp篇</h3><p>关于gulp入门知识可以参考另一篇博文《<a href="http://xiguaaxigua.cn/2016/07/28/Gulp-Introduction/">gulp学习笔记</a>》。</p>
+<p>1.安装gulp</p>
+<pre><code># 全局安装
+npm install gulp -g
+# 作为项目依赖安装
+npm install gulp --save-dev
+</code></pre><p>2.这时在 <code>hello-world</code> 文件夹下生成了 <code>node_modules</code> 目录，目录中包含 <code>gulp</code> 模块，现在只有一个模块，为了实现前文介绍的功能，下面将增加很多模块，同时 <code>package.json</code> 文件中自动加入了 <code>devDependencies</code> 配置项，此时的 <code>package.json</code> 文件可能是这样的：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Just a demo&quot;,
+  &quot;main&quot;: &quot;flash.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;xiguaaxigua&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;gulp&quot;: &quot;^3.9.1&quot;
+  }
+}
+</code></pre><p>3.先来试一下压缩HTML。该功能的实现依赖于 <code>gulp-htmlmin</code> 模块，点击访问Github上的<a href="https://github.com/jonschlinkert/gulp-htmlmin">项目地址</a>。事实上你可以在“全球最大的同性交友平台—Github”上发现很多有意思的项目。</p>
+<pre><code># 作为项目依赖安装gulp-htmlmin
+npm install gulp-htmlmin --save-dev
+</code></pre><p>同样的，这行命令将在 <code>package.json</code> 配置文件中自动增加相应的配置，此时你的 <code>package.json</code> 文件可能是这样的。</p>
+<pre><code>{
+  &quot;name&quot;: &quot;hello-world&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Just a demo&quot;,
+  &quot;main&quot;: &quot;flash.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;xiguaaxigua&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;gulp&quot;: &quot;^3.9.1&quot;,
+    &quot;gulp-htmlmin&quot;: &quot;^2.0.0&quot;
+  }
+}
+</code></pre><p>为了执行gulp任务，我们需要增加一个gulp配置文件，在项目根目录增加配置文件 <code>gulpfile.js</code> 。</p>
+<pre><code>// gulp配置文件 gulpfile.js
+var gulp = require(&#39;gulp&#39;),
+    htmlMin = require(&#39;gulp-htmlmin&#39;);
+
+// gulp任务
+// 压缩HTML
+gulp.task(&#39;t_htmlMin&#39;, function(){
+    gulp.src(&#39;src/*.html&#39;)
+        .pipe(htmlMin({collapseWhitespace: true}))
+        .pipe(gulp.dest(&#39;dist/html&#39;));
+});
+</code></pre><p>由于基于node的应用可能依赖很多第三方模块，将这些模块都加入版本控制是不合理的，因此有了</p>
+<p>相关文章：</p>
+<ul>
+<li><a href="http://gulpjs.com/">gulp官网</a>；</li>
+<li><a href="http://www.gulpjs.com.cn/">gulp中文站</a>；</li>
+<li><a href="http://xiguaaxigua.cn/2016/07/28/Gulp-Introduction/">gulp学习笔记</a>；</li>
+<li><a href="http://www.ydcss.com/archives/18">gulp详细入门教程</a>。</li>
+</ul>
+<h3 id="webpack篇"><a href="#webpack篇" class="headerlink" title="webpack篇"></a>webpack篇</h3><pre><code>module.exports = {
+    // 入口文件
+    entry: &quot;./entry.js&quot;,
+
+    // 输出配置
+    output: {
+        path: __dirname,
+        filename: &quot;bundle.js&quot;
+    },
+
+    // 模块
+    module: {
+        // 加载器
+        loaders: [
+            { test: /\.css$/, loader: &quot;style!css&quot; }
+        ]
+    }
+};
+</code></pre>
     
   </div>
   
