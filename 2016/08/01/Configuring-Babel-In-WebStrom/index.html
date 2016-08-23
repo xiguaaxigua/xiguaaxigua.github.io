@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>WebStrom配置Babel编译环境 | Xiguaaxigua</title>
+  <title>WebStorm配置Babel编译环境 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="WebStrom配置Babel编译环境"/>
+  <meta property="og:title" content="WebStorm配置Babel编译环境"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,7 +70,7 @@
   
     
   
-    <h1 class="title">WebStrom配置Babel编译环境</h1>
+    <h1 class="title">WebStorm配置Babel编译环境</h1>
   
 
     <div class="post-date">
@@ -86,14 +86,14 @@
   <div class="post-content">
     
       </p>
-<p>WebStrom支持ES6的很多版本，并使用<a href="https://github.com/google/traceur-compiler">Traceur</a>作为标准的转换器。</p>
-<p>这篇文章主要介绍怎么在WebStrom中配置<a href="https://babeljs.io/">Babel</a>（以前叫6to5）。因为Babel对ES6的支持程度比Traceur要高，并且Babel拥有完善的文档和一个很棒的<a href="https://babeljs.io/repl/">在线交互式环境</a>。</p>
+<p>WebStorm支持ES6的很多版本，并使用<a href="https://github.com/google/traceur-compiler">Traceur</a>作为标准的转换器。</p>
+<p>这篇文章主要介绍怎么在WebStorm中配置<a href="https://babeljs.io/">Babel</a>（以前叫6to5）。因为Babel对ES6的支持程度比Traceur要高，并且Babel拥有完善的文档和一个很棒的<a href="https://babeljs.io/repl/">在线交互式环境</a>。</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="通过npm安装Babel"><a href="#通过npm安装Babel" class="headerlink" title="通过npm安装Babel"></a>通过npm安装Babel</h3><pre><code># 注意：是babel-cli而不是babel
 npm install -g babel-cli
 </code></pre><h3 id="通过npm安装Babel的preset"><a href="#通过npm安装Babel的preset" class="headerlink" title="通过npm安装Babel的preset"></a>通过npm安装Babel的preset</h3><pre><code>npm install --save-dev babel-preset-es2015
-</code></pre><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>接下来的步骤将会演示将“main.es6”的文件（文件遵循ES6语法），通过WebStrom转换成遵循ES5语法的“main.js”的文件。</p>
+</code></pre><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>接下来的步骤将会演示将“main.es6”的文件（文件遵循ES6语法），通过WebStorm转换成遵循ES5语法的“main.js”的文件。</p>
 <h3 id="1-新建一个工程"><a href="#1-新建一个工程" class="headerlink" title="1.新建一个工程"></a>1.新建一个工程</h3><p>新建一个空白的工程，用于配置Babel。</p>
-<h3 id="2-更改WebStrom的JavaScript版本"><a href="#2-更改WebStrom的JavaScript版本" class="headerlink" title="2.更改WebStrom的JavaScript版本"></a>2.更改WebStrom的JavaScript版本</h3><p>这一步的目的是让WebStrom支持ES6的语法。</p>
+<h3 id="2-更改WebStorm的JavaScript版本"><a href="#2-更改WebStorm的JavaScript版本" class="headerlink" title="2.更改WebStorm的JavaScript版本"></a>2.更改WebStorm的JavaScript版本</h3><p>这一步的目的是让WebStorm支持ES6的语法。</p>
 <p>具体步骤：</p>
 <ul>
 <li>打开“Settings”；</li>
@@ -133,7 +133,7 @@ touch .babelrc
     &quot;es2015&quot;
   ]
 }
-</code></pre><h3 id="6-设置监听器"><a href="#6-设置监听器" class="headerlink" title="6.设置监听器"></a>6.设置监听器</h3><p>这一步的目的是让WebStrom监听“*.es6”文件的更改，并依据之前安装的“perset-2015”转换ES6文件的语法。</p>
+</code></pre><h3 id="6-设置监听器"><a href="#6-设置监听器" class="headerlink" title="6.设置监听器"></a>6.设置监听器</h3><p>这一步的目的是让WebStorm监听“*.es6”文件的更改，并依据之前安装的“perset-2015”转换ES6文件的语法。</p>
 <p>具体步骤：</p>
 <ul>
 <li>打开“Settings”；</li>
@@ -152,7 +152,7 @@ touch .babelrc
   $FileName$ -o $FileNameWithoutAllExtensions$.js -s
 </code></pre></li>
 </ul>
-<h3 id="7-只转换-es6的文件"><a href="#7-只转换-es6的文件" class="headerlink" title="7.只转换.es6的文件"></a>7.只转换.es6的文件</h3><p>现在基本上配置完成了，但这时WebStrom将会编译所有文件类型为JavaScript的文件，这其中也包括我们并不像被转换的文件。这一步的目的是过滤出后缀名为“.es6”的文件。</p>
+<h3 id="7-只转换-es6的文件"><a href="#7-只转换-es6的文件" class="headerlink" title="7.只转换.es6的文件"></a>7.只转换.es6的文件</h3><p>现在基本上配置完成了，但这时WebStorm将会编译所有文件类型为JavaScript的文件，这其中也包括我们并不像被转换的文件。这一步的目的是过滤出后缀名为“.es6”的文件。</p>
 <p>在第6步的基础上，点击“Scope”后的“…”符号，在弹出的选项中按照下图配置：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Configuring-Babel5.jpg" alt=""></p>
 <p>将“Scope”的值选择为刚才修改的“ES6”，保存当前修改。</p>
 <h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>自此，Babel的编辑环境安装成功，新建一个demo.es6的文件，并随便写一些ES6语法的脚本。如下图：<br><img src="http://7xtoaz.com1.z0.glb.clouddn.com/Configuring-Babel6.jpg" alt=""></p>
@@ -166,7 +166,7 @@ touch .babelrc
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/01/Configuring-Babel-In-WebStrom/" data-addthis-title="WebStrom配置Babel编译环境">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/01/Configuring-Babel-In-WebStrom/" data-addthis-title="WebStorm配置Babel编译环境">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -191,7 +191,7 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/08/01/Configur
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/08/01/Configuring-Babel-In-WebStrom/" data-title="WebStrom配置Babel编译环境" data-url="http://xiguaaxigua.cn/2016/08/01/Configuring-Babel-In-WebStrom/"></div>
+<div class="ds-thread" data-thread-key="2016/08/01/Configuring-Babel-In-WebStrom/" data-title="WebStorm配置Babel编译环境" data-url="http://xiguaaxigua.cn/2016/08/01/Configuring-Babel-In-WebStrom/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
