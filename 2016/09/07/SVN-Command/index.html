@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SVN命令 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="SVN命令"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">SVN命令</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-07T05:02:52.000Z">2016-09-07</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/工具/">工具</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="将文件checkout-到本地"><a href="#将文件checkout-到本地" class="headerlink" title="将文件checkout 到本地"></a>将文件checkout 到本地</h3><pre><code>svn checkout svn://192.168.1.6/fldnv/Public/WebSite/branches/0708
+</code></pre><h3 id="向版本库中新增文件"><a href="#向版本库中新增文件" class="headerlink" title="向版本库中新增文件"></a>向版本库中新增文件</h3><pre><code>svn add file
+</code></pre><h3 id="将改动的文件提交到版本库"><a href="#将改动的文件提交到版本库" class="headerlink" title="将改动的文件提交到版本库"></a>将改动的文件提交到版本库</h3><pre><code>svn commit -m &#39;注释&#39;
+</code></pre><h3 id="加锁-解锁"><a href="#加锁-解锁" class="headerlink" title="加锁/解锁"></a>加锁/解锁</h3><pre><code>svn lock -m &#39;注释&#39; 路径
+</code></pre><h3 id="更新到某个版本"><a href="#更新到某个版本" class="headerlink" title="更新到某个版本"></a>更新到某个版本</h3><pre><code>svn update -r 版本号 文件路径
+</code></pre><h3 id="查看文件或者目录状态"><a href="#查看文件或者目录状态" class="headerlink" title="查看文件或者目录状态"></a>查看文件或者目录状态</h3><pre><code>svn status 路径
+</code></pre><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><pre><code>svn delete path -m &#39;注释&#39;
+# 例如：
+svn delete svn://192.168.1.1/pro/domain/test.php -m &quot;delete test file&quot;
+</code></pre><h3 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h3><pre><code>svn log path
+</code></pre><h3 id="查看文件详细信息"><a href="#查看文件详细信息" class="headerlink" title="查看文件详细信息"></a>查看文件详细信息</h3><pre><code>svn info path
+</code></pre><h3 id="比较差异"><a href="#比较差异" class="headerlink" title="比较差异"></a>比较差异</h3><pre><code># 将修改文件与基础版本比较
+svn diff path
+
+# 比较同一文件版本m和版本n
+svn diff -r m:n path
+</code></pre><h3 id="将两个版本之间的差异合并到当前文件夹"><a href="#将两个版本之间的差异合并到当前文件夹" class="headerlink" title="将两个版本之间的差异合并到当前文件夹"></a>将两个版本之间的差异合并到当前文件夹</h3><pre><code>svn merge -r m:n path
+</code></pre><h3 id="svn-帮助信息"><a href="#svn-帮助信息" class="headerlink" title="svn 帮助信息"></a>svn 帮助信息</h3><pre><code>svn help
+</code></pre><h3 id="查看版本库下的文件和目录"><a href="#查看版本库下的文件和目录" class="headerlink" title="查看版本库下的文件和目录"></a>查看版本库下的文件和目录</h3><pre><code>svn list path
+</code></pre><h3 id="创建纳入版本控制的目录"><a href="#创建纳入版本控制的目录" class="headerlink" title="创建纳入版本控制的目录"></a>创建纳入版本控制的目录</h3><pre><code>svn mkdir dirName
+</code></pre><h3 id="恢复本地修改"><a href="#恢复本地修改" class="headerlink" title="恢复本地修改"></a>恢复本地修改</h3><pre><code>svn revert
+</code></pre><h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><pre><code># 移除目录或者文件的“冲突状态”
+svn resolved
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/07/SVN-Command/" data-addthis-title="SVN命令">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/08/19/install-mongoDB/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/09/07/Solve-the-problem-of-slow-PHPStorm-and-WebStorm/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/07/SVN-Command/" data-title="SVN命令" data-url="http://xiguaaxigua.cn/2016/09/07/SVN-Command/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解决PHPStorm和WebStorm运行卡顿的问题 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="解决PHPStorm和WebStorm运行卡顿的问题"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">解决PHPStorm和WebStorm运行卡顿的问题</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-07T05:06:05.000Z">2016-09-07</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/工具/">工具</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="配置-vmoptions文件"><a href="#配置-vmoptions文件" class="headerlink" title="配置*.vmoptions文件"></a>配置*.vmoptions文件</h2><p>对于OS X系统，文件位于：</p>
+<pre><code>/Applications/PhpStorm.app/Contents/bin/phpstorm.vmoptions
+</code></pre><p>修改*.vmoptions文件：</p>
+<ol>
+<li><p>2016.1版之后的版本：<br>将.vmoptions文件拷贝到 <code>~/Library/Preferences/PhpStorm/phpstorm.vmoptions</code>中。</p>
+</li>
+<li><p>早期的版本：<br>将.vmoptions文件拷贝到 <code>~/Library/Preferences/PhpStorm&lt;version&gt;/idea.vmoptions</code>中。</p>
+</li>
+</ol>
+<pre><code>sudo vim /Applications/PhpStorm.app/Contents/bin/phpstorm.vmoptions
+</code></pre><pre><code># 参照以下更改
+# 调整分配给PHPStorm的内存
+-Xms512m
+
+# 增加堆大小
+-Xmx2048m
+-XX:MaxPermSize=350m
+-XX:ReservedCodeCacheSize=240m
+-XX:+UseCompressedOops
+
+# 关闭源文件关键字渲染功能
+-Dawt.usesystemAAFontSettings=lcd
+-Dawt.java2d.opengl=true
+</code></pre><h2 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h2><ul>
+<li><p>1,从版本控制系统创建项目:<br>CVS -&gt; Checkout from Version Control</p>
+</li>
+<li><p>2, 关联DOC文档:<br>右键External Librariese -&gt; Configure PHP include paths</p>
+</li>
+<li><p>3, 去掉波浪线:<br>settings -&gt; Editor -&gt; Colors &amp; Fonts -&gt; General -&gt; TYPO-&gt;Effects</p>
+</li>
+<li><p>4, 显示行号:<br>settings -&gt; Editor-&gt;Appearance-&gt;Show line numbers</p>
+</li>
+<li><p>5,远程或本地同步文件:<br>Tools -&gt; Deploments -&gt; Configuration</p>
+</li>
+<li><p>6, 去掉右上角浏览器图标:<br>settings -&gt; tools -&gt; WebBrowsers</p>
+</li>
+<li><p>7, 添加VIM插件:<br>settings-&gt;editor -&gt;plugins-&gt;browse repositories -&gt;搜索VIM</p>
+</li>
+<li><p>8,启动的时候不打开工程文件<br>Settings-&gt;General去掉Reopen last project on startup.</p>
+</li>
+<li><p>9, 取消自动保存<br>appearance -&gt; system settings -&gt; save file的两个选项 去掉</p>
+</li>
+<li><p>10, 将编辑的文件加星号标识:<br>settings -&gt; editor -&gt; editor tabs -&gt; 勾选 mark modifed tabs…</p>
+</li>
+<li><p>11, 添加扩展名高亮显示:<br>settings -&gt; editor -&gt; file types</p>
+</li>
+</ul>
+<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><ul>
+<li>command + option + l    将代码格式化</li>
+<li>command + shift + u    切换大小写</li>
+<li>command + shift + + / command + shift + -     折叠/展开所有区块</li>
+<li>command + e     列出最后打开的文件</li>
+<li>control + tab  / control + shift + tab     切换打开的文件</li>
+<li>command + /     行注释</li>
+<li>ctrl + shift + /      块注释</li>
+<li>command + b     函数追踪,同command +单击</li>
+<li>command + alt + 左右箭头      操作动作前进/回退</li>
+<li>shift + command + r      按文件名搜索对应文件所在路径</li>
+<li>shift + command + t      按类名搜索对应文件所在路径</li>
+<li>shift + command + c      复制当前文件所在路径</li>
+<li>Command + Shift + O     打开文件</li>
+<li>Command + O          打开类</li>
+<li>alt + F1        定位编辑文件所在位置:</li>
+<li>alt + F12        打开命令行栏</li>
+<li>command + shift + f 全局搜索</li>
+</ul>
+<p>相关文章：</p>
+<ul>
+<li><a href="https://www.jetbrains.com/help/phpstorm/2016.2/tuning-phpstorm.html">Tuning PhpStorm</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/07/Solve-the-problem-of-slow-PHPStorm-and-WebStorm/" data-addthis-title="解决PHPStorm和WebStorm运行卡顿的问题">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/09/07/SVN-Command/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/07/Solve-the-problem-of-slow-PHPStorm-and-WebStorm/" data-title="解决PHPStorm和WebStorm运行卡顿的问题" data-url="http://xiguaaxigua.cn/2016/09/07/Solve-the-problem-of-slow-PHPStorm-and-WebStorm/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
