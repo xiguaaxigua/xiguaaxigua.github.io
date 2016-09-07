@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS BEM 命名规范 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="CSS BEM 命名规范"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">CSS BEM 命名规范</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-07T06:05:01.000Z">2016-09-07</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/CSS/">CSS</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<p><img src="http://xigua.image.alimmdn.com/BEM8.jpg?t=1473235691796" alt=""></p>
+<h2 id="BEM简介"><a href="#BEM简介" class="headerlink" title="BEM简介"></a>BEM简介</h2><h3 id="什么的BEM？"><a href="#什么的BEM？" class="headerlink" title="什么的BEM？"></a>什么的BEM？</h3><p>BEM是Block-Element-Modifier的缩写，是由<a href="https://yandex.com/company/">Yandex公司</a>推出的CSS命名规范，官方是这么描述的：</p>
+<blockquote>
+<ul>
+<li>BEM是一种命名方法，能够帮助你在前端开发中实现可复用的组件和代码共享。</li>
+</ul>
+</blockquote>
+<h3 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h3><p>BEM中的Block并不是 <code>inline-block</code> 中的block，而是逻辑上和功能上相对独立的组件，也就是我们常说的模块。</p>
+<p>Block的特点：</p>
+<ul>
+<li>实现嵌套；</li>
+<li>相对独立；</li>
+<li>可重用。</li>
+</ul>
+<p>下面一一说明：<br>一个Block中可以嵌套其他的Block，如下图，一个复杂的 <code>head block</code> 由 <code>menu block</code> 、 <code>auth block</code> 、 <code>logo block</code> 、 <code>search block</code>四个子模块共同组成。一个块是一个独立的实体，就像应用的一块“积木”，一个块既可以是简单的也可以是复合的。<br><img src="http://xigua.image.alimmdn.com/BEM1.png?t=1473232309137" alt=""></p>
+<p>Block是相对独立的，可以出现在页面中的任意位置，可以在不同页面甚至不同项目中运行良好。如下图，验证模块可以在左边也可以在右边。<br><img src="http://xigua.image.alimmdn.com/BEM4.png?t=1473233916793" alt=""><br><img src="http://xigua.image.alimmdn.com/BEM5.png?t=1473233939595" alt=""></p>
+<p>Block具有可重用性。如下图，一个页面中可以出现多个相同的Block。<br><img src="http://xigua.image.alimmdn.com/BEM6.png?t=1473234077771" alt=""><br>相关文章：</p>
+<ul>
+<li><a href="https://en.bem.info/methodology/key-concepts/#block">BEM官方-Block</a></li>
+</ul>
+<h3 id="Element"><a href="#Element" class="headerlink" title="Element"></a>Element</h3><p>元素是块的一部分，如下图，<code>menu block</code> 由不同的 <code>menu Element</code> 组成。<br><img src="http://xigua.image.alimmdn.com/BEM7.png?t=1473234439063" alt=""></p>
+<p>这里有一个误区：如果一个Element-son是另一个Element-father的子元素，那么写法应该是 <code>Block__Element-father__Element-son</code>，这样如果层级比较深的话，名字会很长。</p>
+<p>其实不是的，正确的思路是：一个Block下的所有的Element无论相互层级如何，都要摊开属于Block，所以 BEM 最多只有 <code>B+E+M</code> 三级,不可能出现 <code>B+E+E+..+E+M</code> 超长class名,也要求E不能同名。</p>
+<h3 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h3><p>修饰名即我们经常写的<code>.active</code> 、<code>.current</code>等表达状态。</p>
+<h3 id="BEM能解决什么问题？"><a href="#BEM能解决什么问题？" class="headerlink" title="BEM能解决什么问题？"></a>BEM能解决什么问题？</h3><p>css的样式应用是全局性的，没有作用域可言。考虑以下场景</p>
+<p>场景一：开发一个弹窗组件，在现有页面中测试都没问题，一段时间后，新需求新页面，该页面一打开这个弹窗组件，页面中样式都变样了，一查问题，原来是弹窗组件和该页面的样式相互覆盖了，接下来就是修改覆盖样式的选择器…又一段时间，又开发新页面，每次为元素命名都心惊胆战，求神拜佛，没写一条样式，F5都按多几次，每个组件都测试一遍…</p>
+<p>场景二：承接上文，由于页面和弹窗样式冲突了，所以把页面的冲突样式的选择器加上一些结构逻辑，比如子选择器、标签选择器，借此让选择器独一无二。一段时间后，新同事接手跟进需求，对样式进行修改，由于选择器是一连串的结构逻辑，看不过来，嫌麻烦，就干脆在样式文件最后用另一套选择器，加上了覆盖样式…接下来又有新的需求…最后的结果，一个元素对应多套样式，遍布整个样式文件…</p>
+<p>以往开发组件，我们都用“重名概率小”或者干脆起个“当时认为是独一无二的名字”来保证样式不冲突，这是不可靠的。</p>
+<p>理想的状态下，我们开发一套组件的过程中，我们应该可以随意的为其中元素进行命名，而不必担心它是否与组件以外的样式发生冲突。</p>
+<p>BEM解决这一问题的思路在于，由于项目开发中，每个组件都是唯一无二的，其名字也是独一无二的，组件内部元素的名字都加上组件名，并用元素的名字作为选择器，自然组件内的样式就不会与组件外的样式冲突了。</p>
+<p>这是通过组件名的唯一性来保证选择器的唯一性，从而保证样式不会污染到组件外。</p>
+<h2 id="使用BEM"><a href="#使用BEM" class="headerlink" title="使用BEM"></a>使用BEM</h2><h2 id="BEM案例"><a href="#BEM案例" class="headerlink" title="BEM案例"></a>BEM案例</h2><h2 id="使用BEM需要注意的地方"><a href="#使用BEM需要注意的地方" class="headerlink" title="使用BEM需要注意的地方"></a>使用BEM需要注意的地方</h2><h2 id="BEM的弊端"><a href="#BEM的弊端" class="headerlink" title="BEM的弊端"></a>BEM的弊端</h2><h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ul>
+<li><a href="https://en.bem.info/">BEM官网</a></li>
+<li><a href="http://getbem.com/">BEM宣传站</a></li>
+<li><a href="http://www.w3cplus.com/css/bem-definitions.html">BEM的定义</a></li>
+<li><a href="https://www.zybuluo.com/lxjwlt/note/155372">为什么我们要用BEM</a></li>
+<li><a href="http://glenmaddern.com/articles/css-modules">CSS Modules</a></li>
+<li><a href="https://github.com/yllziv/gold-miner/blob/0545680eecd9cf497309c3d4fdcd7d201e1f54b7/TODO/how-we-use-bem-to-modularise-our-css.md">使用 BEM 来模块化你的 CSS 代码</a></li>
+<li><a href="http://www.w3cplus.com/css/mindbemding-getting-your-head-round-bem-syntax.html">BEM思想之彻底弄清BEM语法</a></li>
+<li><a href="http://www.w3cplus.com/preprocessor/getting-sass-y-with-bem.html">如何更好的使用BEM</a></li>
+<li><a href="http://www.w3cplus.com/css/battling-bem-extended-edition-common-problems-and-how-to-avoid-them.html">关于BEM中常见的十个问题以及如何避免</a></li>
+<li><a href="https://www.smashingmagazine.com/2012/04/a-new-front-end-methodology-bem/">A New Front-End Methodology: BEM</a></li>
+<li><a href="https://www.zhihu.com/question/21935157">如何看待 CSS 中 BEM 的命名方式？</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/07/CSS-BEM-Naming/" data-addthis-title="CSS BEM 命名规范">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/08/24/SVN-Command/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/07/CSS-BEM-Naming/" data-title="CSS BEM 命名规范" data-url="http://xiguaaxigua.cn/2016/09/07/CSS-BEM-Naming/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>

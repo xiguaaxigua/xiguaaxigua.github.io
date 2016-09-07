@@ -21,10 +21,10 @@ $(function(){
     var menuLength = $(".row .menu-post").length;
     for(var i=0; i<menuLength; i++){
         var aTxt = $(".row .menu-post").eq(i).find(".tag-a:first-child").html();
-        if(aTxt == '教程' || aTxt == 'jQuery' || aTxt == '读书笔记'){
+        if(aTxt == '教程' || aTxt == 'jQuery' || aTxt == '读书笔记' || aTxt == 'Express'){
             $(".row .menu-post").eq(i).find(".menu-tag").css("background-color", "#89B84C");
             $(".row .menu-post").eq(i).find(".tag-a").css("border-right-color", "#a1cc6b");
-        }else if(aTxt == '工具' || aTxt == '框架' || aTxt == 'Yeoman'){
+        }else if(aTxt == '工具' || aTxt == '框架' || aTxt == 'Yeoman' || aTxt == '模板引擎'){
             $(".row .menu-post").eq(i).find(".menu-tag").css("background-color", "#6a847b");
             $(".row .menu-post").eq(i).find(".tag-a").css("border-right-color", "#a1afaa");
         }else if(aTxt == 'JavaScript' || aTxt == '文摘' || aTxt == '教程'){
