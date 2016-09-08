@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MongoDB命令收集 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="MongoDB命令收集"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">MongoDB命令收集</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-08T10:55:24.000Z">2016-09-08</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/MongoDB/">MongoDB</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="数据库常用命令"><a href="#数据库常用命令" class="headerlink" title="数据库常用命令"></a>数据库常用命令</h2><pre><code># 创建数据库, 如果有则进入， 如果没有则创建
+use demo_database;
+
+# 查看所有db
+show dbs;
+
+# 从指定主机上克隆数据库
+db.cloneDatabase(“127.0.0.1”);
+
+# 修复当前db
+db.repairDatabase();
+
+# 显示当前db的状态
+db.stats();
+
+# 查看当前db的链接机器地址
+db.getMongo();
+
+# 删除当前使用的db
+db.dropDatabase();
+
+# 查看当前db的版本
+db.version();
+</code></pre><h2 id="集合（Collection）常用命令"><a href="#集合（Collection）常用命令" class="headerlink" title="集合（Collection）常用命令"></a>集合（Collection）常用命令</h2><p>集合相对于关系型数据库中的表。</p>
+<pre><code>// 创建一个集合， 创建成功会显示{“ok”:1}
+db.createCollection(“account”, {size: 20, capped: 5, max: 100});
+
+// 判断集合是否为定容量
+db.collName.isCapped();
+
+// 查询集合
+db.getCollection(&quot;account&quot;);
+
+// 获取当前db下的所有集合
+db.getCollectionNames();
+// 或者
+show collections();
+
+// 显示当前db所有聚集索引的状态
+db.printCollectionStats();
+</code></pre><p>其中创建集合的语法为：</p>
+<pre><code>db.createCollection(name, options)
+</code></pre><p>name为集合的名字，options为参数（可选），指定有关内存大小和索引选项，options有以下几个选项：<br>| 字段        | 类型           | 描述  |<br>| ————- |:————-:| —–:|<br>| capped      | Boolean | （可选）如果为true，则启用封顶集合。封顶集合是固定大小的集合，会自动覆盖最早的条目，当它达到其最大大小。如果指定true，则需要也指定尺寸参数。 |<br>| autoIndexID      | Boolean      |  （可选）如果为true，自动创建索引_id字段的默认值是false。 |<br>| size | Number      |    （可选）指定最大大小字节封顶集合。如果封顶如果是 true，那么你还需要指定这个字段。 |<br>| max | Number      |    （可选）指定封顶集合允许在文件的最大数量。 |</p>
+<h2 id="用户相关的命令"><a href="#用户相关的命令" class="headerlink" title="用户相关的命令"></a>用户相关的命令</h2><pre><code># 添加用户
+db.addUser(&quot;userName&quot;);
+db.addUser(&quot;userName&quot;, &quot;pwd123&quot;, true); // 用户名、密码、是否只读
+
+# 数据库认证、安全模式
+db.auth(&quot;userName&quot;, &quot;123123&quot;);
+
+# 查看所有的用户
+show users;
+
+# 删除用户
+db.removeUser(&quot;userName&quot;);
+</code></pre><h2 id="添加、删除、修改相关"><a href="#添加、删除、修改相关" class="headerlink" title="添加、删除、修改相关"></a>添加、删除、修改相关</h2><pre><code># 添加数据
+db.account.save({&#39;name&#39;: &#39;xigua&#39;, age: &#39;23&#39;, &#39;location&#39;: &#39;China SH&#39;});
+
+# 修改数据
+ab.account.update({&#39;name&#39;: &#39;xigua&#39;}, {$set: {&#39;age&#39;: 24}}); // 相当于update account set age=24 where name=xigua
+
+# 删除数据
+db.account.remove({&#39;name&#39;: 22});
+</code></pre><h2 id="查询相关"><a href="#查询相关" class="headerlink" title="查询相关"></a>查询相关</h2><pre><code># 我们先插入一些数据以供查询
+for (var i=1; i&lt;100; i++) db.account.insert({&#39;name&#39;: i, &#39;age&#39;: i});
+
+# 查询所有记录，默认每页显示20条记录
+db.account.find(); // account为集合名，相比于关系型数据库来说，相当于select * from account
+
+# 设置查询时每页显示的记录数
+DBQuery.shellBatchSize= 50; // 输入it 显示更多
+
+# 过滤name字段相同的数据
+db.account.distinct(&quot;name&quot;); // 相比于关系型数据库来说，相当于select distinct name form account
+
+# 查询name=88的记录
+db.account.find({&#39;name&#39;: 88}); // 相当于select * from account where name = 88
+
+# 查询name&gt;88的记录
+db.account.find({&#39;name&#39;: {$gt: 22}}); // 相当于select * from account where name &gt; 88
+
+# 查询name&lt;88的记录
+db.account.find({&#39;name&#39;: {$lt: 22}}); // 相当于select * from account where name &lt; 88
+
+# 大于 $gt
+# 小于 $lt
+# 大于等于 $gte
+# 小于等于 $lte
+
+# 查询name中包含数字9的数据
+db.account.find({&#39;name&#39;: /9/});
+
+# 查询指定列的数据
+db.account.find({}, {name: 1, age: 1}); // 相当于select name, age from account 
+
+# 按照name升序排序
+db.account.find().sort({name: 1});
+
+# 按照name降序排序
+db.account.find().sort({name: -1});
+
+# 查询name = 1, age = 1的数据
+db.account.find({name: 1, age: 1}); // 相当于select * from account where name=1 and age=1;
+
+# 查询前五条数据
+db.account.find().limit(5); // 相当于select top 5 * from account
+
+# 查询20条以后的数据
+db.account.find().skip(10);
+
+# or
+db.account.find({$or: [{age: 10}, {age: 20}]}); // 相当于select * from account where age=10 or age=20;
+
+# 查询第一条数据
+db.account.findOne();
+
+# 查询某个结果集的记录条数
+db.account.find().count(); // 相当于select count(*) from account
+</code></pre><h2 id="简单的语句块操作"><a href="#简单的语句块操作" class="headerlink" title="简单的语句块操作"></a>简单的语句块操作</h2><pre><code># 打印
+print(&#39;Hello MongoDB!&#39;);
+
+# 将一个对象转换成json
+tojson(new Object());
+tojson(new Object(&#39;a&#39;));
+
+# 循环添加数据
+for (var i=1; i&lt;100; i++) {
+    db.account.insert({&#39;name&#39;: i, &#39;age&#39;: i});
+}
+
+# forEach迭代循环
+db.users.find().forEach(printjson);
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre><code># 查询之前的错误信息
+db.getPrevError();
+
+# 清楚错误信息
+db.resetError();
+</code></pre>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/08/MongoDB-Commands/" data-addthis-title="MongoDB命令收集">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/09/07/CSS-BEM-Naming/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/08/MongoDB-Commands/" data-title="MongoDB命令收集" data-url="http://xiguaaxigua.cn/2016/09/08/MongoDB-Commands/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
