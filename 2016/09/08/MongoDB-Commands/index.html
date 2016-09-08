@@ -128,7 +128,7 @@ show collections();
 db.printCollectionStats();
 </code></pre><p>其中创建集合的语法为：</p>
 <pre><code>db.createCollection(name, options)
-</code></pre><p>name为集合的名字，options为参数（可选），指定有关内存大小和索引选项，options有以下几个选项：<br>| 字段        | 类型           | 描述  |<br>| ————- |:————-:| —–:|<br>| capped      | Boolean | （可选）如果为true，则启用封顶集合。封顶集合是固定大小的集合，会自动覆盖最早的条目，当它达到其最大大小。如果指定true，则需要也指定尺寸参数。 |<br>| autoIndexID      | Boolean      |  （可选）如果为true，自动创建索引_id字段的默认值是false。 |<br>| size | Number      |    （可选）指定最大大小字节封顶集合。如果封顶如果是 true，那么你还需要指定这个字段。 |<br>| max | Number      |    （可选）指定封顶集合允许在文件的最大数量。 |</p>
+</code></pre><p>name为集合的名字，options为参数（可选），指定有关内存大小和索引选项，options有以下几个选项：<br><img src="http://xigua.image.alimmdn.com/mongodb1.png?t=1473332412615" alt=""></p>
 <h2 id="用户相关的命令"><a href="#用户相关的命令" class="headerlink" title="用户相关的命令"></a>用户相关的命令</h2><pre><code># 添加用户
 db.addUser(&quot;userName&quot;);
 db.addUser(&quot;userName&quot;, &quot;pwd123&quot;, true); // 用户名、密码、是否只读
