@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Console调试技巧 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="Console调试技巧"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">Console调试技巧</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-10T05:54:44.000Z">2016-09-10</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/工具/">工具</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h2><pre><code>&lt;script&gt;
+    console.log(&#39;Hello!&#39;);
+    console.info(&#39;信息&#39;);
+    console.error(&#39;错误&#39;);
+    console.warn(&#39;警告&#39;);
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console1.png?t=1473747190742" alt=""></p>
+<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><pre><code>&lt;script&gt;
+    console.log(&#39;%s你好&#39;, &#39;小明&#39;);
+    console.log(&#39;您需要支付%d元&#39;, 1000);
+    console.log(&#39;您需要支付%f元&#39;, 1.11);
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console2.png?t=1473747559070" alt=""></p>
+<h2 id="信息分组"><a href="#信息分组" class="headerlink" title="信息分组"></a>信息分组</h2><pre><code>&lt;script&gt;
+    console.group(&#39;中国人&#39;);
+        console.log(&#39;小明&#39;);
+        console.log(&#39;小红&#39;);
+    console.groupEnd();    
+    console.group(&#39;Foreigners&#39;);
+        console.log(&#39;MingXiao&#39;);
+        console.log(&#39;HongXiao&#39;);
+    console.groupEnd(); 
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console3.png?t=1473747787169" alt=""></p>
+<h2 id="查看对象的信息"><a href="#查看对象的信息" class="headerlink" title="查看对象的信息"></a>查看对象的信息</h2><pre><code>&lt;script&gt;
+    var userInfo = {
+        name: &#39;小明&#39;,
+        sex: &#39;性别&#39;,
+        age: 22
+    };
+    console.dir(userInfo);
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console4.png?t=1473747915341" alt=""></p>
+<h2 id="显示某个节点的内容"><a href="#显示某个节点的内容" class="headerlink" title="显示某个节点的内容"></a>显示某个节点的内容</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;demo&quot;&gt;
+        &lt;h3&gt;Hello World!&lt;/h3&gt;
+        &lt;p&gt;This is a demo!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    var demoBox = document.getElementById(&#39;demo&#39;);
+    console.dirxml(demoBox);
+&lt;/script&gt;
+&lt;/html&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console5.png?t=1473748143851" alt=""></p>
+<h2 id="判断变量是否是真"><a href="#判断变量是否是真" class="headerlink" title="判断变量是否是真"></a>判断变量是否是真</h2><p>console.assert()用来判断一个表达式或变量是否为真。如果结果为否，则在控制台输出一条相应信息，并且抛出一个异常。</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    var result = 1;
+    console.assert( result );
+    var year = 2014;
+    console.assert(year == 2018 );
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console6.png?t=1473748264552" alt=""></p>
+<h2 id="追踪函数的调用轨迹"><a href="#追踪函数的调用轨迹" class="headerlink" title="追踪函数的调用轨迹"></a>追踪函数的调用轨迹</h2><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+/*函数是如何被调用的，在其中加入console.trace()方法就可以了*/
+function add(a,b){
+    console.trace();
+    return a+b;
+}
+var x = add3(1,1);
+function add3(a,b){
+    return add2(a,b);
+}
+function add2(a,b){
+    return add1(a,b);
+}
+function add1(a,b){
+    return add(a,b);
+}
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console7.png?t=1473748406660" alt=""></p>
+<h2 id="计时功能"><a href="#计时功能" class="headerlink" title="计时功能"></a>计时功能</h2><p>console.time()和console.timeEnd()，用来显示代码的运行时间。</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+　　console.time(&quot;Start&quot;);
+　　for(var i=0;i&lt;1000;i++){
+　　　　for(var j=0;j&lt;1000;j++){}
+　　}
+　　console.timeEnd(&quot;End&quot;);
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console8.png?t=1473748534416" alt=""></p>
+<h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>性能分析（Profiler）就是分析程序各个部分的运行时间，找出瓶颈所在，使用的方法是console.profile()。</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+function All(){
+    alert(11);
+    for(var i=0;i&lt;10;i++){
+        funcA(1000);
+    }
+    funcB(10000);
+}
+
+function funcA(count){
+    for(var i=0;i&lt;count;i++){}
+}
+
+function funcB(count){
+    for(var i=0;i&lt;count;i++){}
+}
+
+console.profile(&#39;性能分析器&#39;);
+All();
+console.profileEnd();
+&lt;/script&gt;
+</code></pre><p>效果：<br><img src="http://xigua.image.alimmdn.com/console9.png?t=1473748684707" alt=""></p>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/10/Debugging-Skilles/" data-addthis-title="Console调试技巧">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/09/09/Collections-of-useful-regular-expression/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/09/12/Fn-standard/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/10/Debugging-Skilles/" data-title="Console调试技巧" data-url="http://xiguaaxigua.cn/2016/09/10/Debugging-Skilles/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
