@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端开发规范 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="前端开发规范"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">前端开发规范</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-13T09:20:24.000Z">2016-09-13</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/CSS/">CSS</a>, <a class="tag-a" href="/tags/HTML/">HTML</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="无规矩不成方圆"><a href="#无规矩不成方圆" class="headerlink" title="无规矩不成方圆"></a>无规矩不成方圆</h2><ul>
+<li>所有编码均遵循xhtml标准，标签、属性、属性命名必须由小写字母及减号数字组成，且所有标签必须闭合，包括br（<code>&lt;br /&gt;</code>），hr（<code>&lt;hr /&gt;</code>）等；</li>
+<li>属性值必须用双引号包括；</li>
+<li>充分利用无兼容性的HTML标签，比如：<code>span</code>、<code>em</code>、<code>strong</code>、<code>label</code>等；</li>
+<li>HTML元素的自定义属性以<code>data-</code>为前缀，例如：<code>data-product</code>；</li>
+<li>同一个页面只能有一个h1标签；</li>
+<li>内联元素不可嵌套块级元素；</li>
+<li>尽可能的减少div的嵌套；</li>
+<li>链接需在URL地址后边加<code>/</code>，例如：<pre><code>  &lt;a href=&quot;http://xiguaaxigua.cn/&quot;&gt;xiguaaxigua&lt;/a&gt;
+</code></pre></li>
+<li>在页面中应该尽量避免使用style属性；</li>
+<li>必须为含有描述性表单元素（input, textarea） 添加label，例如：<pre><code>  &lt;lable for=&quot;UserSex&quot;&gt;性别&lt;/label&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;UserSex&quot; checked /&gt;
+</code></pre></li>
+<li>不要使用section作为div的替代品；</li>
+<li>只在需要的时候使用header和hgroup；</li>
+<li>不要把所有列表式的链接放在nav里；</li>
+<li>不要使用不必要的type属性，在HTML5中，script和style元素不再需要type属性；</li>
+<li>注意form元素的布尔属性，例如：<ul>
+<li><code>&lt;input type=&quot;radio&quot; checked/&gt;</code> </li>
+</ul>
+</li>
+<li>能以背景图呈现的图片，尽量写入CSS样式中；</li>
+<li>重要图片必须加上alt属性，给重要的元素和截断元素添加title属性；</li>
+<li>给区块代码及重要功能添加注释，方便后台添加功能；</li>
+<li>特殊符号尽量使用代码替代，例如：<ul>
+<li><code>&amp;nbsp</code>  空格  </li>
+<li><code>&amp;amp</code>   &amp;</li>
+<li><code>&amp;lt</code>    &lt;</li>
+<li><code>&amp;gt</code>    &gt;</li>
+<li><code>&amp;quot</code>  “</li>
+<li><code>&amp;qpos</code>  ‘</li>
+</ul>
+</li>
+<li><code>.html</code>、<code>.js</code>、<code>.css</code>等文件统一采用 <code>utf-8</code> 编码；</li>
+<li>CSS的书写主要分为三个大的层次：全局样式、通用元素和结构布局、具体的块状表现区域。</li>
+<li>class与id的使用：id是唯一的并是父级的，class是可以重复的并是子级的，所以id仅使用在大的模块上，class可用在重复使用率高及子级中；id原则上尽量不用，为JavaScript预留钩子的除外。</li>
+<li>为JavaScript预留钩子的命名, 请以 <code>J_</code> 起始，比如: <code>J_ShowName</code>，<code>J_HideName</code>；</li>
+<li>class的命名要符合语义化，常见的写法：<ul>
+<li>从属写法；</li>
+<li>取父级元素class命名部分命名；</li>
+<li>驼峰法；</li>
+<li>BEM规范等。</li>
+</ul>
+</li>
+<li>css属性书写顺序, 建议遵循 布局定位属性–&gt;自身属性–&gt;文本属性–&gt;其他属性。<ul>
+<li>定位属性：<code>float</code>、<code>clear</code>、<code>position</code>、<code>top</code>、<code>right</code>、<code>bottom</code>、<code>left</code>、<code>display</code>、<code>visibility</code>、<code>overflow</code>等；</li>
+<li>自身属性：<code>width</code>、<code>height</code>、<code>margin</code>、<code>padding</code>、<code>background</code>、<code>border</code>等；</li>
+<li>文本属性：<code>font</code>、<code>color</code>、<code>text-align</code>、<code>vertical-align</code>、<code>text-decoration</code>、<code>text-indent</code>、<code>white-space</code>等；</li>
+<li>其他属性：<code>list-style</code>、<code>cursor</code>、<code>z-index</code>、<code>zoom</code>等。</li>
+</ul>
+</li>
+<li>减少使用影响性能的属性，比如<code>position:absolute</code>、<code>float</code>；</li>
+<li>书写代码前，考虑并提高样式重复使用率；</li>
+<li>充分利用html自身属性及样式继承原理减少代码量；</li>
+<li>样式表中中文字体名, 请务必转码成unicode码, 以避免编码错误时乱码；</li>
+<li>背景图片请尽可能使用sprite技术，减小http请求；</li>
+<li>使用table标签时（尽量避免使用table标签），请不要用width、height、cellspacing、cellpadding等table属性直接定义表现，应尽可能的利用table自身私有属性分离结构与表现；</li>
+<li>用png图片做图片时，要求图片格式为png-8格式,若png-8实在影响图片质量或其中有半透明效果，请为ie6单独定义背景；</li>
+<li>js书写时每行代码必须以分号结束；</li>
+<li>变量命名：小驼峰；</li>
+<li>类、函数命名：大驼峰；</li>
+<li>变量集中命名；</li>
+<li>避免污染全局空间；</li>
+<li>命名语义化，尽可能利用英文单词或其缩写；</li>
+<li>尽量避免使用存在兼容性及消耗资源的方法或属性，比如<code>eval()</code> 、<code>innerText</code>等；</li>
+<li>JavaScript非注释类中文字符须转换成unicode编码使用，以避免编码错误时乱码显示；</li>
+<li>注重与html分离，减小reflow，注重性能；</li>
+<li>所有页面元素类图片均放入img文件夹，测试用图片放于img/demoimg文件夹；</li>
+<li>图片格式仅限于<code>.gif</code>、<code>.png</code>、<code>.jpg</code>；</li>
+<li>命名全部用小写英文字母、数字、减号的组合，其中不得包含汉字、空格、特殊字符；</li>
+<li>在保证视觉效果的情况下选择最小的图片格式与图片质量，以减少加载时间；</li>
+<li>尽量避免使用半透明的png图片；</li>
+<li>运用css sprite技术集中小的背景图或图标，减小页面http请求，但注意，请务必在对应的sprite.psd源图中划参考线，并保存至psd目录下；</li>
+<li>减小沉冗代码，书写所有人都可以看的懂的代码，简洁易懂是一种美德，为用户着想，为服务器着想。</li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/13/standard/" data-addthis-title="前端开发规范">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/09/12/Fn-standard/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/13/standard/" data-title="前端开发规范" data-url="http://xiguaaxigua.cn/2016/09/13/standard/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
