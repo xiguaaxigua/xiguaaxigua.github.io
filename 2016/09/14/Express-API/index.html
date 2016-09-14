@@ -86,6 +86,221 @@
   <div class="post-content">
     
       </p>
+<h2 id="Express"><a href="#Express" class="headerlink" title="Express()"></a>Express()</h2><p>创建一个Express应用。express()方法是express模块导出的顶层方法。</p>
+<pre><code>var express = require(&#39;express&#39;);
+var app = express();
+</code></pre><h3 id="express-static-root-options"><a href="#express-static-root-options" class="headerlink" title="express.static(root, [options])"></a>express.static(root, [options])</h3><p><code>express.static</code> 是Express内置的唯一中间件，是基于 <a href="https://github.com/expressjs/serve-static?_ga=1.1179825.1201680737.1446005628"><code>serve-static</code></a> 开发的，负责托管Express应用内的静态资源。</p>
+<p>参数说明：</p>
+<ul>
+<li>root：必选，静态资源文件所在的根目录；</li>
+<li>options：可选，支持以下属性：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dotfiles</td>
+<td>是否响应点文件。供选择的值有”allow”，”deny”和”ignore”</td>
+<td>String</td>
+<td>“ignore”</td>
+</tr>
+<tr>
+<td>etag</td>
+<td>开启或者关闭etag</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+<tr>
+<td>extensions</td>
+<td>设置文件延期回退</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+<tr>
+<td>index</td>
+<td>发送目录索引文件。设置false将不发送。</td>
+<td>Mixed</td>
+<td>“index.html”</td>
+</tr>
+<tr>
+<td>lastModified</td>
+<td>设置文件在系统中的最后修改时间到Last-Modified头部。可能的取值有 <code>false</code> 和 <code>true</code>。</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+<tr>
+<td>maxAge</td>
+<td>在Cache-Control头部中设置max-age属性，精度为毫秒(ms)或则一段ms format的字符串</td>
+<td>Number</td>
+<td>0</td>
+</tr>
+<tr>
+<td>redirect</td>
+<td>当请求的pathname是一个目录的时候，重定向到尾随”/“</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+<tr>
+<td>setHeaders</td>
+<td>当响应静态文件请求时设置headers的方法</td>
+<td>Function</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>如果你想获得更多关于使用中间件的细节，你可以查阅<a href="http://expressjs.com/starter/static-files.html">Serving static files in Express</a>。</p>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application()"></a>Application()</h2><p><code>app</code> 对象一般用来表示Express程序。通过调用Express模块导出的顶层的 <code>express()</code> 方法来创建它：</p>
+<pre><code>var express = require(&#39;express&#39;);
+var app = express();
+
+app.get(&#39;/&#39;, function(req, res) {
+    res.send(&#39;hello world!&#39;);
+});
+
+app.listen(3000);
+</code></pre><p>挂在在 <code>app</code> 对象上的方法：</p>
+<ul>
+<li>路由HTTP请求；具体可以看<a href="http://expressjs.com/4x/api.html#app.METHOD">app.METHOD</a>和<a href="http://expressjs.com/4x/api.html#app.param">app.param</a>这两个例子。</li>
+<li>配置中间件；具体请看<a href="http://expressjs.com/4x/api.html#app.route">app.route</a>。</li>
+<li>渲染HTML视图；具体请看<a href="http://expressjs.com/4x/api.html#app.render">app.render</a>。</li>
+<li>注册模板引擎；具体请看<a href="http://expressjs.com/4x/api.html#app.engine">app.engine</a>。</li>
+</ul>
+<p>它还有一些属性设置，这些属性可以改变程序的行为。获得更多的信息，可以查阅<a href="http://expressjs.com/4x/api.html#app.settings.table">Application settings</a>。</p>
+<h3 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h3><h4 id="app-locals"><a href="#app-locals" class="headerlink" title="app.locals"></a>app.locals</h4><p><code>app.locals</code> 对象是一个javascript对象，它的属性就是程序本地的变量。</p>
+<pre><code>app.locals.title
+// =&gt; &#39;My App&#39;
+
+app.locals.email
+// =&gt; &#39;me@myapp.com&#39;
+</code></pre><p>一旦设定，<code>app.locals</code> 的各属性值将贯穿程序的整个生命周期，与其相反的是 <code>res.locals</code> ，它只在这次请求的生命周期中有效。</p>
+<p>在程序中，你可以在渲染模板时使用这些本地变量。它们是非常有用的，可以为模板提供一些有用的方法，以及 <code>app</code> 级别的数据。通过 <code>req.app.locals</code> (具体查看req.app)，Locals可以在中间件中使用。</p>
+<pre><code>app.locals.title = &#39;My App&#39;;
+app.locals.strftime = require(&#39;strftime&#39;);
+app.locals.email = &#39;me@myapp.com&#39;;
+</code></pre><h4 id="app-mountpath"><a href="#app-mountpath" class="headerlink" title="app.mountpath"></a>app.mountpath</h4><p><code>app.mountpath</code> 属性是子程序挂载的路径模式。</p>
+<p>一个子程序是一个express的实例，其可以被用来作为路由句柄来处理请求。</p>
+<pre><code>var express = require(&#39;express&#39;);
+var app = express(); // the main app
+var admin = express(); // the sub app
+admin.get(&#39;/&#39;, function(req, res) {
+    console.log(admin.mountpath); // /admin
+    res.send(&#39;Admin Homepage&#39;);
+});
+app.use(&#39;/admin&#39;, admin); // mount the sub app
+</code></pre><p>它和req对象的baseUrl属性比较相似，除了 <code>req.baseUrl</code> 是匹配的URL路径，而不是匹配的模式。如果一个子程序被挂载在多条路径模式，<code>app.mountpath</code> 就是一个关于挂载路径模式项的列表，如下面例子所示。</p>
+<pre><code>var admin = express();
+admin.get(&#39;/&#39;, function(req, res) {
+    console.log(admin.mountpath); // [&#39;adm*n&#39;, &#39;/manager&#39;] 
+    res.send(&#39;Admin Homepage&#39;);
+});
+
+var secret = express();
+secret.get(&#39;/&#39;, function(req, res) {
+    console.log(secret.mountpath); // /secr*t
+    res.send(&#39;Admin secret&#39;);
+});
+
+admin.use(&#39;secr*t&#39;, secret); // load the &#39;secret&#39; router on &#39;/secr*t&#39;, on the &#39;admin&#39; sub app
+app.use([&#39;/adm*n&#39;, &#39;/manager&#39;], admin); // load the &#39;admin&#39; router on &#39;/adm*n&#39; and  &#39;/manager&#39; , on the parent app
+</code></pre><h3 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h3><h4 id="app-on-‘mount’-callback-parent"><a href="#app-on-‘mount’-callback-parent" class="headerlink" title="app.on(‘mount’, callback(parent))"></a>app.on(‘mount’, callback(parent))</h4><p>当子程序被挂载到父程序时，<code>mount</code>事件被发射。父程序对象作为参数，传递给回调方法。</p>
+<pre><code>var admin = express();
+admin.on(&#39;mount&#39;, function(parent) {
+    console.log(&#39;Admin Mounted&#39;);
+    console.log(parent); // refers to the parent app
+});
+
+admin.get(&#39;/&#39;, function(req, res) {
+    res.send(&#39;Admin Homepage&#39;);
+});
+
+app.use(&#39;/admin&#39;, admin);
+</code></pre><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><h4 id="app-all-path-callback-callback-…"><a href="#app-all-path-callback-callback-…" class="headerlink" title="app.all(path, callback[, callback …]"></a>app.all(path, callback[, callback …]</h4><p>app.all方法和标准的app.METHOD()方法相似，除了它匹配所有的HTTP动词。 对于给一个特殊前缀映射一个全局的逻辑处理，或者无条件匹配，它是很有效的。例如，如果你把下面内容放在所有其他的路由定义的前面，它要求所有从这个点开始的路由需要认证和自动加载一个用户。记住这些回调并不是一定是终点:loadUser可以在完成了一个任务后，调用next()方法来继续匹配随后的路由。</p>
+<pre><code>app.all(&#39;*&#39;, requireAuthentication, loadUser);
+</code></pre><p>或者这种相等的形式:</p>
+<pre><code>app.all(&#39;*&#39;, requireAuthentication);
+app.all(&#39;*&#39;, loadUser);
+</code></pre><p>另一个例子是全局的白名单方法。这个例子和前面的很像，然而它只是限制以/api开头的路径。</p>
+<pre><code>app.all(&#39;/api/*&#39;, requireAuthentication);
+</code></pre><h4 id="app-delete-path-callback-callback-…"><a href="#app-delete-path-callback-callback-…" class="headerlink" title="app.delete(path, callback[, callback …])"></a>app.delete(path, callback[, callback …])</h4><p>路由<code>HTTP DELETE</code>请求到有特殊回调方法的特殊的路径。获取更多的信息，可以查阅<a href="http://expressjs.com/4x/api.html#app.settings.table">routing guide</a>。<br>你可以提供多个回调函数，它们的行为和中间件一样，除了这些回调可以通过调用<code>next(&#39;router&#39;)</code>来绕过剩余的路由回调。你可以使用这个机制来为一个路由设置一些前提条件，如果不能满足当前路由的处理条件，那么你可以传递控制到随后的路由。</p>
+<pre><code class="js">app.delete(&#39;/&#39;, function(req, res) {
+    res.send(&#39;DELETE request to homepage&#39;);
+});
+</code></pre>
+<h4 id="app-disable-name"><a href="#app-disable-name" class="headerlink" title="app.disable(name)"></a>app.disable(name)</h4><p>设置类型为布尔的设置名为<code>name</code>的值为<code>false</code>，此处的<code>name</code>是<a href="http://expressjs.com/4x/api.html#app.settings.table">app settings table</a>中各属性的一个。调用<code>app.set(&#39;foo&#39;, false)</code>和调用<code>app.disable(&#39;foo&#39;)</code>是等价的。<br>比如:</p>
+<pre><code class="js">app.disable(&#39;trust proxy&#39;);
+app.get(&#39;trust proxy&#39;);
+// =&gt; false
+</code></pre>
+<h4 id="app-disabled-name"><a href="#app-disabled-name" class="headerlink" title="app.disabled(name)"></a>app.disabled(name)</h4><p>返回<code>true</code>如果布尔类型的设置值<code>name</code>被禁用为<code>false</code>，此处的<code>name</code>是[app settings table][14]中各属性的一个。</p>
+<pre><code class="js">    app.disabled(&#39;trust proxy&#39;);
+    // =&gt; true
+    app.enable(&#39;trust proxy&#39;);
+    app.disabled(&#39;trust proxy&#39;);
+    // =&gt; false
+</code></pre>
+<h4 id="app-enable-name"><a href="#app-enable-name" class="headerlink" title="app.enable(name)"></a>app.enable(name)</h4><p>设置布尔类型的设置值<code>name</code>为<code>true</code>，此处的<code>name</code>是<a href="http://expressjs.com/4x/api.html#app.settings.table">app settings table</a>中各属性的一个。调用<code>app.set(&#39;foo&#39;, true)</code>和调用<code>app.enable(&#39;foo&#39;)</code>是等价的。</p>
+<pre><code class="js">    app.enable(&#39;trust proxy&#39;);
+    app.get(&#39;trust proxy&#39;);
+    // =&gt; true
+</code></pre>
+<h4 id="app-enabled-name"><a href="#app-enabled-name" class="headerlink" title="app.enabled(name)"></a>app.enabled(name)</h4><p>返回<code>true</code>如果布尔类型的设置值<code>name</code>被启动为<code>true</code>，此处的<code>name</code>是<a href="http://expressjs.com/4x/api.html#app.settings.table">app settings table</a>中各属性的一个。</p>
+<pre><code class="js">    app.enabled(&#39;trust proxy&#39;);
+    // =&gt; false
+    app.enable(&#39;trust proxy&#39;);
+    app.enabled(&#39;trust proxy&#39;);
+    // =&gt; true
+</code></pre>
+<h4 id="app-engine-ext-callback"><a href="#app-engine-ext-callback" class="headerlink" title="app.engine(ext, callback)"></a>app.engine(ext, callback)</h4><p>注册给定引擎的回调，用来渲染处理ext文件。<br>默认情况下，Express需要使用<code>require()</code>来加载基于文件扩展的引擎。例如，如果你尝试渲染一个<code>foo.jade</code>文件，Express在内部调用下面的内容，同时缓存<code>require()</code>结果供随后的调用，来加速性能。</p>
+<pre><code class="js">    app.engine(&#39;jade&#39;, require(&#39;jade&#39;).__express);
+</code></pre>
+<p>使用下面的方法对于那些没有提供开箱即用的<code>.__express</code>方法的模板，或者你希望使用不同的模板引擎扩展。<br>比如，使用EJS模板引擎来渲染<code>.html</code>文件：</p>
+<pre><code class="js">    app.engine(&#39;html&#39;, require(&#39;ejs&#39;).renderFile);
+</code></pre>
+<p>在这个例子中，EJS提供了一个<code>.renderFile</code>方法，这个方法满足了Express规定的签名规则：<code>(path, options, callback)</code>，然而记住在内部它只是<code>ejs.__express</code>的一个别名，所以你可以在不做任何事的情况下直接使用<code>.ejs</code>扩展。<br>一些模板引擎没有遵循这种规范，<a href="https://github.com/tj/consolidate.js?_ga=1.260760333.1201680737.1446005628">consolidate.js</a>库映射模板引擎以下面的使用方式，所以他们可以无缝的和Express工作。</p>
+<pre><code class="js">var engines = require(&#39;consolidate&#39;);
+app.engine(&#39;haml&#39;, engines.haml);
+app.engine(&#39;html&#39;, engines.hogan);
+</code></pre>
+<h4 id="app-get-name"><a href="#app-get-name" class="headerlink" title="app.get(name)"></a>app.get(name)</h4><p>获得设置名为<code>name</code>的app设置的值，此处的<code>name</code>是<a href="http://expressjs.com/4x/api.html#app.settings.table">app settings table</a>中各属性的一个。<br>如下：</p>
+<pre><code class="js">app.get(&#39;title&#39;);
+// =&gt; undefined
+
+app.set(&#39;title&#39;, &#39;My Site&#39;);
+app.get(&#39;title&#39;);
+// =&gt; &#39;My Site&#39;
+</code></pre>
+<h4 id="app-get-path-callback-callback-…"><a href="#app-get-path-callback-callback-…" class="headerlink" title="app.get(path, callback [, callback …])"></a>app.get(path, callback [, callback …])</h4><p>路由<code>HTTP GET</code>请求到有特殊回调的特殊路径。获取更多的信息，可以查阅<a href="http://expressjs.com/guide/routing.html">routing guide</a>。<br>你可以提供多个回调函数，它们的行为和中间件一样，除了这些回调可以通过调用<code>next(&#39;router&#39;)</code>来绕过剩余的路由回调。你可以使用这个机制来为一个路由设置一些前提条件，如果请求没能满足当前路由的处理条件，那么传递控制到随后的路由。</p>
+<pre><code class="js">    app.get(&#39;/&#39;, function(req, res) {
+        res.send(&#39;GET request to homepage&#39;);
+    });
+</code></pre>
+<h4 id="app-listen-port-hostname-backlog-callback"><a href="#app-listen-port-hostname-backlog-callback" class="headerlink" title="app.listen(port, [hostname], [backlog], [callback])"></a>app.listen(port, [hostname], [backlog], [callback])</h4><p>绑定程序监听端口到指定的主机和端口号。这个方法和<code>Node</code>中的<a href="http://nodejs.org/api/http.html#http_server_listen_port_hostname_backlog_callback">http.Server.listen()</a>是一样的。</p>
+<pre><code class="js">    var express = require(&#39;express&#39;);
+    var app = express();
+    app.listen(3000);
+</code></pre>
+<p>通过调用<code>express()</code>返回得到的<code>app</code>实际上是一个JavaScript的<code>Function</code>，被设计用来作为一个回调传递给<code>Node HTTP servers</code>来处理请求。这样，其就可以很简便的基于同一份代码提供http和https版本，所以app没有从这些继承(它只是一个简单的回调)。</p>
+<pre><code class="js">    var express = require(&#39;express&#39;);
+    var https = require(&#39;https&#39;);
+    var http = require(&#39;http&#39;);
+
+    http.createServer(app).listen(80);
+    https.createServer(options, app).listen(443);
+</code></pre>
+<p><code>app.listen()</code>方法是下面所示的一个便利的方法(只针对HTTP协议):</p>
+<pre><code class="js">    app.listen = function() {
+        var server = http.createServer(this);
+        return server.listen.apply(server, arguments);
+    };
+</code></pre>
+<h4 id="app-METHOD-path-callback-callback-…"><a href="#app-METHOD-path-callback-callback-…" class="headerlink" title="app.METHOD(path, callback [, callback …])"></a>app.METHOD(path, callback [, callback …])</h4><p>路由一个HTTP请求，<code>METHOD</code>是这个请求的HTTP方法，比如<code>GET</code>，<code>PUT</code>，<code>POST</code>等等，注意是小写的。所以，实际的方法是<code>app.get()</code>，<code>app.post()</code>，<code>app.put()</code>等等。下面有关于方法的完整的表。<br>获取更多信息，请看[routing guide][21]。</p>
     
   </div>
   
