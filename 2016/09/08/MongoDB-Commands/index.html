@@ -86,7 +86,59 @@
   <div class="post-content">
     
       </p>
-<h2 id="数据库常用命令"><a href="#数据库常用命令" class="headerlink" title="数据库常用命令"></a>数据库常用命令</h2><pre><code># 创建数据库, 如果有则进入， 如果没有则创建
+<h2 id="mongod参数说明"><a href="#mongod参数说明" class="headerlink" title="mongod参数说明"></a>mongod参数说明</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dbpath</td>
+<td>数据文件存放路径,每个数据库会在其中创建一个子目录,用于防止同一个实例多次运行的 mongod.lock 也保存在此目录中。</td>
+</tr>
+<tr>
+<td>logpath</td>
+<td>错误日志文件</td>
+</tr>
+<tr>
+<td>logappend</td>
+<td>错误日志采用追加模式，默认是覆写模式。</td>
+</tr>
+<tr>
+<td>bind_ip</td>
+<td>对外服务的绑定ip，一般设置为空,及绑定在本机所有可用 ip 上,如有需要可以单独指定。</td>
+</tr>
+<tr>
+<td>port</td>
+<td>对外服务端口。Web 管理端口在这个 port 的基础上+1000。</td>
+</tr>
+<tr>
+<td>fork</td>
+<td>以后台 Daemon 形式运行服务</td>
+</tr>
+<tr>
+<td>maxConns</td>
+<td>最大连接数</td>
+</tr>
+<tr>
+<td>directoryperdb</td>
+<td>每个 db 存放在单独的目录中,建议设置该参数。与 MySQL 的独立表空间类似。</td>
+</tr>
+<tr>
+<td>repairpath</td>
+<td>执行 repair 时的临时目录。在如果没有开启 journal,异常 down 机后重启,必须执行 repair 操作。</td>
+</tr>
+<tr>
+<td>syncdelay</td>
+<td>系统同步刷新磁盘的时间,单位为秒,默认是 60 秒。</td>
+</tr>
+</tbody>
+</table>
+<p>这么多参数,全面写在命令行中则容易杂乱而不好管理。因此,mongod 支持将参数写入到 一个配置文本文件中,然后通过 config 参数来引用此配置文件:</p>
+<pre><code>./mongod --config /etc/mongo.cnf
+</code></pre><h2 id="数据库常用命令"><a href="#数据库常用命令" class="headerlink" title="数据库常用命令"></a>数据库常用命令</h2><pre><code># 创建数据库, 如果有则进入， 如果没有则创建
 use demo_database;
 
 # 查看所有db
@@ -109,6 +161,9 @@ db.dropDatabase();
 
 # 查看当前db的版本
 db.version();
+
+# 关闭数据库连接
+shutdownServer();
 </code></pre><h2 id="集合（Collection）常用命令"><a href="#集合（Collection）常用命令" class="headerlink" title="集合（Collection）常用命令"></a>集合（Collection）常用命令</h2><p>集合相对于关系型数据库中的表。</p>
 <pre><code>// 创建一个集合， 创建成功会显示{“ok”:1}
 db.createCollection(“account”, {size: 20, capped: 5, max: 100});
@@ -128,7 +183,7 @@ show collections();
 db.printCollectionStats();
 </code></pre><p>其中创建集合的语法为：</p>
 <pre><code>db.createCollection(name, options)
-</code></pre><p>name为集合的名字，options为参数（可选），指定有关内存大小和索引选项，options有以下几个选项：<br><img src="http://xigua.image.alimmdn.com/mongodb1.png?t=1473332412615" alt=""></p>
+</code></pre><p>name为集合的名字，options为参数（可选），指定有关内存大小和索引选项，options有以下几个选项：<br>| 字段        | 类型           | 描述  |<br>| ————- |:————-:| —–:|<br>| capped      | Boolean | （可选）如果为true，则启用封顶集合。封顶集合是固定大小的集合，会自动覆盖最早的条目，当它达到其最大大小。如果指定true，则需要也指定尺寸参数。 |<br>| autoIndexID      | Boolean      |  （可选）如果为true，自动创建索引_id字段的默认值是false。 |<br>| size | Number      |    （可选）指定最大大小字节封顶集合。如果封顶如果是 true，那么你还需要指定这个字段。 |<br>| max | Number      |    （可选）指定封顶集合允许在文件的最大数量。 |</p>
 <h2 id="用户相关的命令"><a href="#用户相关的命令" class="headerlink" title="用户相关的命令"></a>用户相关的命令</h2><pre><code># 添加用户
 db.addUser(&quot;userName&quot;);
 db.addUser(&quot;userName&quot;, &quot;pwd123&quot;, true); // 用户名、密码、是否只读
