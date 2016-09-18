@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>WebStorm配置csscomb插件 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="WebStorm配置csscomb插件"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/history">历史</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">WebStorm配置csscomb插件</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-18T03:29:52.000Z">2016-09-18</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/工具/">工具</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h2 id="什么是csscomb？"><a href="#什么是csscomb？" class="headerlink" title="什么是csscomb？"></a>什么是csscomb？</h2><p>官网是这么介绍的：</p>
+<blockquote>
+<p>Make your code beautiful</p>
+</blockquote>
+<p>更准确的说是：Make your css code beautiful。就像下图所示一样，csscomb插件可以格式化你的css代码，看起来更加美观，更利于团队合作，同时运行效率更高。另外，csscomb不仅仅支持css还支持css的预处理器（SASS、LESS、Stylus等）。</p>
+<p><img src="http://xigua.image.alimmdn.com/csscomb3.png?t=1474166222529" alt=""></p>
+<p>csscomb支持Sublime Text 2/3、PhpStorm、WebStorm、IDEA、、PyCharm、RubyMine等IDE。</p>
+<h2 id="在Sublime中配置csscomb插件"><a href="#在Sublime中配置csscomb插件" class="headerlink" title="在Sublime中配置csscomb插件"></a>在Sublime中配置csscomb插件</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>1.先安装Package Control插件，如果已经安装的话，和安装其他插件一样，搜索csscomb即可。<br>2.<code>Ctrl + ~</code>调出控制台，复制以下内容到控制台中，回车执行：</p>
+<pre><code># Sublime Text2
+import urllib2,os,hashlib; h = &#39;2915d1851351e5ee549c20394736b442&#39; + &#39;8bc59f460fa1548d1514676163dafc88&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &#39;wb&#39; ).write(by) if dh == h else None; print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h) if dh != h else &#39;Please restart Sublime Text to finish installation&#39;)
+
+# Sublime Text 3
+import urllib.request,os,hashlib; h = &#39;2915d1851351e5ee549c20394736b442&#39; + &#39;8bc59f460fa1548d1514676163dafc88&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).write(by)
+</code></pre><ol>
+<li><p>按 <code>Command + Shift + P</code> ，键入 <code>install</code> 选择 <code>Package Control: Install Package</code>，回车。如下图：<br><img src="http://xigua.image.alimmdn.com/csscomb4.png?t=1474166937437" alt=""></p>
+</li>
+<li><p>键入 <code>csscomb</code> ，回车安装即可。</p>
+</li>
+</ol>
+<p>使用方法：<br>在你的css文件中 <code>Ctrl + A</code> 全选，右键选择 <code>Run Csscomb</code> 即可，当然你也可以自己指定快捷键。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>我们可以通过编辑 <code>Settings-User</code>，更改默认的配置。如下图：<br><img src="http://xigua.image.alimmdn.com/csscomb6.png?t=1474167403583" alt=""></p>
+<p><code>Settings-Default</code>中保存了默认的配置。大致配置项如下：</p>
+<pre><code>{
+    // node的路径
+    &quot;node-path&quot; : &quot;:/usr/local/bin&quot;,
+
+    // 配置项
+    &quot;config&quot;: {
+
+        // 属性值后是否添加分号
+        &quot;always-semicolon&quot;: true,
+
+        // 缩进
+        &quot;block-indent&quot;: &quot;    &quot;,
+
+        // 颜色值的大小写，例如：#f1f1f1
+        &quot;color-case&quot;: &quot;lower&quot;,
+
+        // 颜色值是否使用缩写，例如：#fff
+        &quot;color-shorthand&quot;: true,
+
+        // 选择器小写，例如：.demo{}
+        &quot;element-case&quot;: &quot;lower&quot;,
+
+        // csscomb会将属性分组，不同组的属性顺序不同，这个配置是说是否要在不同组的属性之间添加换行以区别他们
+        &quot;eof-newline&quot;: true,
+
+        // 为0的属性值是否需要单位，例如：top: 0;。
+        &quot;leading-zero&quot;: false,
+
+        // 单引号还是双引号
+        &quot;quotes&quot;: &quot;single&quot;,
+
+        // Remove all rulesets that contain nothing but spaces.
+        &quot;remove-empty-rulesets&quot;: true,
+
+        // Set space after `:` in declarations.
+        &quot;space-after-colon&quot;: &quot; &quot;,
+
+        // Set space after combinator (for example, in selectors like `p &gt; a`).
+        &quot;space-after-combinator&quot;: &quot; &quot;,
+
+        // Set space after `{`.
+        &quot;space-after-opening-brace&quot;: &quot;\n&quot;,
+
+        // Set space after selector delimiter.
+        &quot;space-after-selector-delimiter&quot;: &quot; &quot;,
+
+        // Set space before `}`.
+        &quot;space-before-closing-brace&quot;: &quot;\n&quot;,
+
+        // Set space before `:` in declarations.
+        &quot;space-before-colon&quot;: &quot;&quot;,
+
+        // Set space before combinator (for example, in selectors like `p &gt; a`).
+        &quot;space-before-combinator&quot;: &quot; &quot;,
+
+        // Set space before `{`.
+        &quot;space-before-opening-brace&quot;: &quot;&quot;,
+
+        // Set space before selector delimiter.
+        &quot;space-before-selector-delimiter&quot;: &quot;&quot;,
+
+        // Set space between declarations (i.e. `color: tomato`).
+        &quot;space-between-declarations&quot;: &quot;\n&quot;,
+
+        // Whether to trim trailing spaces.
+        &quot;strip-spaces&quot;: true,
+
+        // Whether to remove units in zero-valued dimensions.
+        &quot;unitless-zero&quot;: true,
+
+        // Whether to align prefixes in properties and values.
+        &quot;vendor-prefix-align&quot;: true,
+
+        // 分组
+        &quot;sort-order&quot;: [...]
+    }
+}
+</code></pre><h2 id="在WebStorm中安装csscomb插件"><a href="#在WebStorm中安装csscomb插件" class="headerlink" title="在WebStorm中安装csscomb插件"></a>在WebStorm中安装csscomb插件</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ol>
+<li><p>打开终端，下载csscomb。</p>
+<pre><code> # 下载
+ sudo npm install -g csscomb
+
+ # 查看csscomb的版本号，看到版本号即说明安装成功
+ csscomb -V
+
+ # 查看csscomb的安装位置，得到的结果填入Program中
+ which csscomb // =&gt; /usr/local/bin/csscomb
+</code></pre></li>
+<li><p><code>Command + ,</code> 打开配置，搜索 <code>External Tools</code>，点击加号添加一个插件。如下图：<br> <img src="http://xigua.image.alimmdn.com/csscomb1.png?t=1474166222811" alt=""></p>
+</li>
+<li><p>在弹出的编辑框中按照如下填写，在配置<code>Parameters</code> 和 <code>Work directory</code> 选项时，点击右侧 <code>Insert Macro..</code>选择自己需要的配置即可。<br> <img src="http://xigua.image.alimmdn.com/csscomb2.png?t=1474166222822" alt=""></p>
+</li>
+<li><p>建议不要勾选<code>Open console</code>。</p>
+</li>
+<li>为csscomb指定一个快捷键，如下图：<br> <img src="http://xigua.image.alimmdn.com/csscomb7.png?t=1474168742481" alt=""></li>
+</ol>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><p>在WebStorm中配置csscomb和sublime略有不同，我们需要在项目的目录中新建一个 <code>.csscomb.json</code> 文件，然后写入需要的配置，WebStorm会自动读取这个配置。</p>
+<p>比较简单的办法是到csscomb的官网按照提示，可视化的生成一个配置，<a href="http://csscomb.com/config">点击访问</a>，共有24个选项。将生成的配置拷贝到 <code>.csscomb.json</code> 文件中即可。</p>
+<p>注意：这里生成的配置中是不包含属性分组这个配置的，我们需要自行添加 <code>sort-order</code> 选项，<code>sort-order</code> 选项是一个二维数组。</p>
+<p>分享一份自己的配置，这里我在属性分组时，把 <code>display</code> 单独排在了最前边：</p>
+<pre><code>{
+    &quot;remove-empty-rulesets&quot;: true,
+    &quot;always-semicolon&quot;: true,
+    &quot;color-case&quot;: &quot;lower&quot;,
+    &quot;block-indent&quot;: &quot;\t&quot;,
+    &quot;color-shorthand&quot;: true,
+    &quot;element-case&quot;: &quot;lower&quot;,
+    &quot;eof-newline&quot;: true,
+    &quot;leading-zero&quot;: false,
+    &quot;quotes&quot;: &quot;single&quot;,
+    &quot;space-before-colon&quot;: &quot;&quot;,
+    &quot;space-after-colon&quot;: &quot; &quot;,
+    &quot;space-before-combinator&quot;: &quot; &quot;,
+    &quot;space-after-combinator&quot;: &quot; &quot;,
+    &quot;space-between-declarations&quot;: &quot;\n&quot;,
+    &quot;space-before-opening-brace&quot;: &quot; &quot;,
+    &quot;space-after-opening-brace&quot;: &quot;\n&quot;,
+    &quot;space-after-selector-delimiter&quot;: &quot; &quot;,
+    &quot;space-before-selector-delimiter&quot;: &quot;&quot;,
+    &quot;space-before-closing-brace&quot;: &quot;\n&quot;,
+    &quot;strip-spaces&quot;: true,
+    &quot;tab-size&quot;: true,
+    &quot;unitless-zero&quot;: true,
+    &quot;vendor-prefix-align&quot;: true,
+    &quot;sort-order&quot;: [
+        [
+            &quot;display&quot;
+        ],
+        [
+            &quot;font&quot;,
+            &quot;font-family&quot;,
+            &quot;font-size&quot;,
+            &quot;font-weight&quot;,
+            &quot;font-style&quot;,
+            &quot;font-variant&quot;,
+            &quot;font-size-adjust&quot;,
+            &quot;font-stretch&quot;,
+            &quot;font-effect&quot;,
+            &quot;font-emphasize&quot;,
+            &quot;font-emphasize-position&quot;,
+            &quot;font-emphasize-style&quot;,
+            &quot;font-smooth&quot;,
+            &quot;line-height&quot;
+        ],
+        [
+            &quot;position&quot;,
+            &quot;z-index&quot;,
+            &quot;top&quot;,
+            &quot;right&quot;,
+            &quot;bottom&quot;,
+            &quot;left&quot;
+        ],
+        [
+            &quot;visibility&quot;,
+            &quot;float&quot;,
+            &quot;clear&quot;,
+            &quot;overflow&quot;,
+            &quot;overflow-x&quot;,
+            &quot;overflow-y&quot;,
+            &quot;-ms-overflow-x&quot;,
+            &quot;-ms-overflow-y&quot;,
+            &quot;clip&quot;,
+            &quot;zoom&quot;,
+            &quot;flex-direction&quot;,
+            &quot;flex-order&quot;,
+            &quot;flex-pack&quot;,
+            &quot;flex-align&quot;
+        ],
+        [
+            &quot;-webkit-box-sizing&quot;,
+            &quot;-moz-box-sizing&quot;,
+            &quot;box-sizing&quot;,
+            &quot;width&quot;,
+            &quot;min-width&quot;,
+            &quot;max-width&quot;,
+            &quot;height&quot;,
+            &quot;min-height&quot;,
+            &quot;max-height&quot;,
+            &quot;margin&quot;,
+            &quot;margin-top&quot;,
+            &quot;margin-right&quot;,
+            &quot;margin-bottom&quot;,
+            &quot;margin-left&quot;,
+            &quot;padding&quot;,
+            &quot;padding-top&quot;,
+            &quot;padding-right&quot;,
+            &quot;padding-bottom&quot;,
+            &quot;padding-left&quot;
+        ],
+        [
+            &quot;table-layout&quot;,
+            &quot;empty-cells&quot;,
+            &quot;caption-side&quot;,
+            &quot;border-spacing&quot;,
+            &quot;border-collapse&quot;,
+            &quot;list-style&quot;,
+            &quot;list-style-position&quot;,
+            &quot;list-style-type&quot;,
+            &quot;list-style-image&quot;
+        ],
+        [
+            &quot;content&quot;,
+            &quot;quotes&quot;,
+            &quot;counter-reset&quot;,
+            &quot;counter-increment&quot;,
+            &quot;resize&quot;,
+            &quot;cursor&quot;,
+            &quot;-webkit-user-select&quot;,
+            &quot;-moz-user-select&quot;,
+            &quot;-ms-user-select&quot;,
+            &quot;user-select&quot;,
+            &quot;nav-index&quot;,
+            &quot;nav-up&quot;,
+            &quot;nav-right&quot;,
+            &quot;nav-down&quot;,
+            &quot;nav-left&quot;,
+            &quot;-webkit-transition&quot;,
+            &quot;-moz-transition&quot;,
+            &quot;-ms-transition&quot;,
+            &quot;-o-transition&quot;,
+            &quot;transition&quot;,
+            &quot;-webkit-transition-delay&quot;,
+            &quot;-moz-transition-delay&quot;,
+            &quot;-ms-transition-delay&quot;,
+            &quot;-o-transition-delay&quot;,
+            &quot;transition-delay&quot;,
+            &quot;-webkit-transition-timing-function&quot;,
+            &quot;-moz-transition-timing-function&quot;,
+            &quot;-ms-transition-timing-function&quot;,
+            &quot;-o-transition-timing-function&quot;,
+            &quot;transition-timing-function&quot;,
+            &quot;-webkit-transition-duration&quot;,
+            &quot;-moz-transition-duration&quot;,
+            &quot;-ms-transition-duration&quot;,
+            &quot;-o-transition-duration&quot;,
+            &quot;transition-duration&quot;,
+            &quot;-webkit-transition-property&quot;,
+            &quot;-moz-transition-property&quot;,
+            &quot;-ms-transition-property&quot;,
+            &quot;-o-transition-property&quot;,
+            &quot;transition-property&quot;,
+            &quot;-webkit-transform&quot;,
+            &quot;-moz-transform&quot;,
+            &quot;-ms-transform&quot;,
+            &quot;-o-transform&quot;,
+            &quot;transform&quot;,
+            &quot;-webkit-transform-origin&quot;,
+            &quot;-moz-transform-origin&quot;,
+            &quot;-ms-transform-origin&quot;,
+            &quot;-o-transform-origin&quot;,
+            &quot;transform-origin&quot;,
+            &quot;-webkit-animation&quot;,
+            &quot;-moz-animation&quot;,
+            &quot;-ms-animation&quot;,
+            &quot;-o-animation&quot;,
+            &quot;animation&quot;,
+            &quot;-webkit-animation-name&quot;,
+            &quot;-moz-animation-name&quot;,
+            &quot;-ms-animation-name&quot;,
+            &quot;-o-animation-name&quot;,
+            &quot;animation-name&quot;,
+            &quot;-webkit-animation-duration&quot;,
+            &quot;-moz-animation-duration&quot;,
+            &quot;-ms-animation-duration&quot;,
+            &quot;-o-animation-duration&quot;,
+            &quot;animation-duration&quot;,
+            &quot;-webkit-animation-play-state&quot;,
+            &quot;-moz-animation-play-state&quot;,
+            &quot;-ms-animation-play-state&quot;,
+            &quot;-o-animation-play-state&quot;,
+            &quot;animation-play-state&quot;,
+            &quot;-webkit-animation-timing-function&quot;,
+            &quot;-moz-animation-timing-function&quot;,
+            &quot;-ms-animation-timing-function&quot;,
+            &quot;-o-animation-timing-function&quot;,
+            &quot;animation-timing-function&quot;,
+            &quot;-webkit-animation-delay&quot;,
+            &quot;-moz-animation-delay&quot;,
+            &quot;-ms-animation-delay&quot;,
+            &quot;-o-animation-delay&quot;,
+            &quot;animation-delay&quot;,
+            &quot;-webkit-animation-iteration-count&quot;,
+            &quot;-moz-animation-iteration-count&quot;,
+            &quot;-ms-animation-iteration-count&quot;,
+            &quot;-o-animation-iteration-count&quot;,
+            &quot;animation-iteration-count&quot;,
+            &quot;-webkit-animation-direction&quot;,
+            &quot;-moz-animation-direction&quot;,
+            &quot;-ms-animation-direction&quot;,
+            &quot;-o-animation-direction&quot;,
+            &quot;animation-direction&quot;,
+            &quot;text-align&quot;,
+            &quot;-webkit-text-align-last&quot;,
+            &quot;-moz-text-align-last&quot;,
+            &quot;-ms-text-align-last&quot;,
+            &quot;text-align-last&quot;,
+            &quot;vertical-align&quot;,
+            &quot;white-space&quot;,
+            &quot;text-decoration&quot;,
+            &quot;text-emphasis&quot;,
+            &quot;text-emphasis-color&quot;,
+            &quot;text-emphasis-style&quot;,
+            &quot;text-emphasis-position&quot;,
+            &quot;text-indent&quot;,
+            &quot;-ms-text-justify&quot;,
+            &quot;text-justify&quot;,
+            &quot;letter-spacing&quot;,
+            &quot;word-spacing&quot;,
+            &quot;-ms-writing-mode&quot;,
+            &quot;text-outline&quot;,
+            &quot;text-transform&quot;,
+            &quot;text-wrap&quot;,
+            &quot;text-overflow&quot;,
+            &quot;-ms-text-overflow&quot;,
+            &quot;text-overflow-ellipsis&quot;,
+            &quot;text-overflow-mode&quot;,
+            &quot;-ms-word-wrap&quot;,
+            &quot;word-wrap&quot;,
+            &quot;word-break&quot;,
+            &quot;-ms-word-break&quot;,
+            &quot;-moz-tab-size&quot;,
+            &quot;-o-tab-size&quot;,
+            &quot;tab-size&quot;,
+            &quot;-webkit-hyphens&quot;,
+            &quot;-moz-hyphens&quot;,
+            &quot;hyphens&quot;,
+            &quot;pointer-events&quot;
+        ],
+        [
+            &quot;opacity&quot;,
+            &quot;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity&quot;,
+            &quot;-ms-filter:\\&#39;progid:DXImageTransform.Microsoft.Alpha&quot;,
+            &quot;-ms-interpolation-mode&quot;,
+            &quot;color&quot;,
+            &quot;border&quot;,
+            &quot;border-width&quot;,
+            &quot;border-style&quot;,
+            &quot;border-color&quot;,
+            &quot;border-top&quot;,
+            &quot;border-top-width&quot;,
+            &quot;border-top-style&quot;,
+            &quot;border-top-color&quot;,
+            &quot;border-right&quot;,
+            &quot;border-right-width&quot;,
+            &quot;border-right-style&quot;,
+            &quot;border-right-color&quot;,
+            &quot;border-bottom&quot;,
+            &quot;border-bottom-width&quot;,
+            &quot;border-bottom-style&quot;,
+            &quot;border-bottom-color&quot;,
+            &quot;border-left&quot;,
+            &quot;border-left-width&quot;,
+            &quot;border-left-style&quot;,
+            &quot;border-left-color&quot;,
+            &quot;-webkit-border-radius&quot;,
+            &quot;-moz-border-radius&quot;,
+            &quot;border-radius&quot;,
+            &quot;-webkit-border-top-left-radius&quot;,
+            &quot;-moz-border-radius-topleft&quot;,
+            &quot;border-top-left-radius&quot;,
+            &quot;-webkit-border-top-right-radius&quot;,
+            &quot;-moz-border-radius-topright&quot;,
+            &quot;border-top-right-radius&quot;,
+            &quot;-webkit-border-bottom-right-radius&quot;,
+            &quot;-moz-border-radius-bottomright&quot;,
+            &quot;border-bottom-right-radius&quot;,
+            &quot;-webkit-border-bottom-left-radius&quot;,
+            &quot;-moz-border-radius-bottomleft&quot;,
+            &quot;border-bottom-left-radius&quot;,
+            &quot;-webkit-border-image&quot;,
+            &quot;-moz-border-image&quot;,
+            &quot;-o-border-image&quot;,
+            &quot;border-image&quot;,
+            &quot;-webkit-border-image-source&quot;,
+            &quot;-moz-border-image-source&quot;,
+            &quot;-o-border-image-source&quot;,
+            &quot;border-image-source&quot;,
+            &quot;-webkit-border-image-slice&quot;,
+            &quot;-moz-border-image-slice&quot;,
+            &quot;-o-border-image-slice&quot;,
+            &quot;border-image-slice&quot;,
+            &quot;-webkit-border-image-width&quot;,
+            &quot;-moz-border-image-width&quot;,
+            &quot;-o-border-image-width&quot;,
+            &quot;border-image-width&quot;,
+            &quot;-webkit-border-image-outset&quot;,
+            &quot;-moz-border-image-outset&quot;,
+            &quot;-o-border-image-outset&quot;,
+            &quot;border-image-outset&quot;,
+            &quot;-webkit-border-image-repeat&quot;,
+            &quot;-moz-border-image-repeat&quot;,
+            &quot;-o-border-image-repeat&quot;,
+            &quot;border-image-repeat&quot;,
+            &quot;outline&quot;,
+            &quot;outline-width&quot;,
+            &quot;outline-style&quot;,
+            &quot;outline-color&quot;,
+            &quot;outline-offset&quot;,
+            &quot;background&quot;,
+            &quot;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader&quot;,
+            &quot;background-color&quot;,
+            &quot;background-image&quot;,
+            &quot;background-repeat&quot;,
+            &quot;background-attachment&quot;,
+            &quot;background-position&quot;,
+            &quot;background-position-x&quot;,
+            &quot;-ms-background-position-x&quot;,
+            &quot;background-position-y&quot;,
+            &quot;-ms-background-position-y&quot;,
+            &quot;-webkit-background-clip&quot;,
+            &quot;-moz-background-clip&quot;,
+            &quot;background-clip&quot;,
+            &quot;background-origin&quot;,
+            &quot;-webkit-background-size&quot;,
+            &quot;-moz-background-size&quot;,
+            &quot;-o-background-size&quot;,
+            &quot;background-size&quot;,
+            &quot;box-decoration-break&quot;,
+            &quot;-webkit-box-shadow&quot;,
+            &quot;-moz-box-shadow&quot;,
+            &quot;box-shadow&quot;,
+            &quot;filter:progid:DXImageTransform.Microsoft.gradient&quot;,
+            &quot;-ms-filter:\\&#39;progid:DXImageTransform.Microsoft.gradient&quot;,
+            &quot;text-shadow&quot;
+        ]
+    ]
+}
+</code></pre><h2 id="相关站点："><a href="#相关站点：" class="headerlink" title="相关站点："></a>相关站点：</h2><ul>
+<li><a href="http://csscomb.com/">csscomb官网</a></li>
+<li><a href="http://csscomb.com/online">在线编译</a></li>
+<li><a href="http://csscomb.com/config">生成csscomb配置文件</a></li>
+<li><a href="https://github.com/csscomb/jetbrains-csscomb">github地址</a></li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/18/Configuring-Csscomb-In-WebStorm/" data-addthis-title="WebStorm配置csscomb插件">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/09/14/Express-API/">
+          上一篇
+        </a></li>
+      
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/18/Configuring-Csscomb-In-WebStorm/" data-title="WebStorm配置csscomb插件" data-url="http://xiguaaxigua.cn/2016/09/18/Configuring-Csscomb-In-WebStorm/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
