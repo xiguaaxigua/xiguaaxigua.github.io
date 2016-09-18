@@ -259,6 +259,28 @@ db.account.findOne();
 
 # 查询某个结果集的记录条数
 db.account.find().count(); // 相当于select count(*) from account
+
+# 查询所有结果中不包含name的记录
+db.account.find({name: {$exists: false}});
+
+# 查询所有结果中对2取模为0的数据
+db.account.find({num: {$mode: [2, 0]}});
+
+# 查询结果中num值不等于3的数据
+db.account.find({num: {$ne: 3}})
+
+# 包含$in
+db.table.find({num: {$in: [1, 3, 5]}})
+
+# 不包含$nin
+db.table.find({num: {$nin: [1, 3, 5]}})
+
+# $size 数组元素个数
+# 对于{name: &#39;David&#39;, age: 26, favorite_number: [ 6, 7, 9 ] }记录 匹配 db.users.find({favorite_number: {$size: 3}});
+# 不匹配 db.users.find({favorite_number: {$size: 2}});
+
+# 正则匹配
+db.account.find({name: {$not: /^T.*/}});
 </code></pre><h2 id="简单的语句块操作"><a href="#简单的语句块操作" class="headerlink" title="简单的语句块操作"></a>简单的语句块操作</h2><pre><code># 打印
 print(&#39;Hello MongoDB!&#39;);
 
