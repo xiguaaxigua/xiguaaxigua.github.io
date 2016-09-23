@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>002-本书目录-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
+  <title>CSS媒体查询-代码片段 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="002-本书目录-《用AngularJS开发下一代Web应用》-笔记"/>
+  <meta property="og:title" content="CSS媒体查询-代码片段"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,30 +70,66 @@
   
     
   
-    <h1 class="title">002-本书目录-《用AngularJS开发下一代Web应用》-笔记</h1>
+    <h1 class="title">CSS媒体查询-代码片段</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-05-04T01:41:57.000Z">2016-05-04</time>
+      <time datetime="2016-09-23T08:06:40.000Z">2016-09-23</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+    <a class="tag-a" href="/tags/CSS/">CSS</a>
   </div>
 
   
   <div class="post-content">
     
       </p>
-<p>本书目录如下：</p>
-<h3 id="第一章-AngularJS简介"><a href="#第一章-AngularJS简介" class="headerlink" title="第一章 AngularJS简介"></a>第一章 AngularJS简介</h3><p><b><a href="http://www.xiguaaxigua.cn/2016/05/04/angular-note-003/">一些概念</a></b><br>– 客户端模板<br>– Model View Controller（MVC）<br>– 数据绑定<br>– 依赖注入<br>– 指令<br><b><a href="http://www.xiguaaxigua.cn/2016/05/07/angular-note-004/">实例：购物车</a></b></p>
-<h3 id="第二章-AngularJS应用骨架"><a href="#第二章-AngularJS应用骨架" class="headerlink" title="第二章 AngularJS应用骨架"></a>第二章 <a href="http://www.xiguaaxigua.cn/2016/05/07/angular-note-005/">AngularJS应用骨架</a></h3><p><b>调用Angular</b><br>– 加载脚本<br>– 使用ng-app声明AngularJS的边界<br><b>Model View Controller</b><br><b>模板和数据绑定</b><br>– 显示文本<br>– 表单输入<br>– 浅谈非侵入式JavaScript<br>– 列表、彪哥以及其他迭代型元素<br>– 隐藏和显示<br>– CSS类和样式<br>– 反思src和href属性<br>– 表达式<br>– 区分UI和控制器的职责<br>– 利用$scope暴露模型数据<br>– 使用$watch监控数据模型的变化<br>– watch()中的性能注意事项<br><b>使用Module（模块）组织依赖关系</b><br>– 我需要多少个模块呢<br><b>使用过滤器格式化数据</b><br><b>使用路由和$location切换视图</b><br>– index.html<br>– list.html<br>– detail.html<br>– controller.js<br><b>与服务器交互</b><br><b>使用指令修改DOM</b><br>– index.html<br>– controller.js<br><b>校验用户输入</b><br><b>继续前进</b></p>
+<p><img src="http://xigua.image.alimmdn.com/media-query1?t=1474617654667" alt=""></p>
+<h3 id="iphone5"><a href="#iphone5" class="headerlink" title="iphone5"></a>iphone5</h3><pre><code>@media screen and (device-aspect-ratio: 40/71) {  
+
+}  
+// or
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){  
+
+}
+</code></pre><h3 id="Blackberry-Touch"><a href="#Blackberry-Touch" class="headerlink" title="Blackberry Touch"></a>Blackberry Touch</h3><pre><code>@media screen and (max-device-width: 480px) {   
+
+}
+</code></pre><h3 id="Samsung-S3"><a href="#Samsung-S3" class="headerlink" title="Samsung S3"></a>Samsung S3</h3><pre><code>@media only screen and (-webkit-device-pixel-ratio: 2) {  
+
+}
+</code></pre><h3 id="Google-Nexus-7"><a href="#Google-Nexus-7" class="headerlink" title="Google Nexus 7"></a>Google Nexus 7</h3><pre><code>@media screen and (device-width: 600px) and (device-height: 905px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) { 
+
+}
+</code></pre><h3 id="iPad-Mini"><a href="#iPad-Mini" class="headerlink" title="iPad Mini"></a>iPad Mini</h3><pre><code>@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) {  
+
+}
+</code></pre><h3 id="iPad-3"><a href="#iPad-3" class="headerlink" title="iPad 3"></a>iPad 3</h3><pre><code>// 横向
+@media (max-device-width: 1024px) and (orientation: landscape) {   
+
+}  
+
+// 纵向
+@media (max-device-width: 768px) and (orientation: portrait) {   
+
+}
+</code></pre><h3 id="Galaxy-Tab-10-1"><a href="#Galaxy-Tab-10-1" class="headerlink" title="Galaxy Tab 10.1"></a>Galaxy Tab 10.1</h3><pre><code>// 横向
+@media (max-device-width: 1280px) and (orientation: landscape) {   
+
+} 
+
+// 纵向
+@media (max-device-width: 800px) and (orientation: portrait) {   
+
+}
+</code></pre>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/04/angular-note-002/" data-addthis-title="002-本书目录-《用AngularJS开发下一代Web应用》-笔记">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/23/CSS-Media-Query-Snippets/" data-addthis-title="CSS媒体查询-代码片段">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -105,20 +141,15 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/04/angular-
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/04/angular-note-001/">
+        <a class="btn btn-success" role="button" href="/2016/09/19/Basic-types-and-Reference-types/">
           上一篇
         </a></li>
       
       
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/04/angular-note-003/">
-          下一篇
-        </a></li>
-      
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/05/04/angular-note-002/" data-title="002-本书目录-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/04/angular-note-002/"></div>
+<div class="ds-thread" data-thread-key="2016/09/23/CSS-Media-Query-Snippets/" data-title="CSS媒体查询-代码片段" data-url="http://xiguaaxigua.cn/2016/09/23/CSS-Media-Query-Snippets/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
