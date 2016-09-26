@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CSS媒体查询-代码片段 | Xiguaaxigua</title>
+  <title>与Git分支操作相关的命令 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="CSS媒体查询-代码片段"/>
+  <meta property="og:title" content="与Git分支操作相关的命令"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,66 +70,70 @@
   
     
   
-    <h1 class="title">CSS媒体查询-代码片段</h1>
+    <h1 class="title">与Git分支操作相关的命令</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-09-23T08:06:40.000Z">2016-09-23</time>
+      <time datetime="2016-09-26T11:11:06.000Z">2016-09-26</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/CSS/">CSS</a>
+    <a class="tag-a" href="/tags/工具/">工具</a>
   </div>
 
   
   <div class="post-content">
     
       </p>
-<p><img src="http://xigua.image.alimmdn.com/media-query1?t=1474617654667" alt=""></p>
-<h3 id="iphone5"><a href="#iphone5" class="headerlink" title="iphone5"></a>iphone5</h3><pre><code>@media screen and (device-aspect-ratio: 40/71) {  
+<pre><code># 查看当前分支, *代表的分支为当前分支
+git branch 
 
-}  
-// or
-@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){  
+# 查看所有分支
+git branch -a
 
-}
-</code></pre><h3 id="Blackberry-Touch"><a href="#Blackberry-Touch" class="headerlink" title="Blackberry Touch"></a>Blackberry Touch</h3><pre><code>@media screen and (max-device-width: 480px) {   
+# 查看远程分支
 
-}
-</code></pre><h3 id="Samsung-S3"><a href="#Samsung-S3" class="headerlink" title="Samsung S3"></a>Samsung S3</h3><pre><code>@media only screen and (-webkit-device-pixel-ratio: 2) {  
+# 创建Hello分支
+git branch Hello
 
-}
-</code></pre><h3 id="Google-Nexus-7"><a href="#Google-Nexus-7" class="headerlink" title="Google Nexus 7"></a>Google Nexus 7</h3><pre><code>@media screen and (device-width: 600px) and (device-height: 905px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) { 
+# 切换到Hello分支
+git checkout Hello
 
-}
-</code></pre><h3 id="iPad-Mini"><a href="#iPad-Mini" class="headerlink" title="iPad Mini"></a>iPad Mini</h3><pre><code>@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) {  
+# 将Hello分支推送到远程仓库
+git add .
+git commit -m &#39;create Branch Hello&#39;
+git push origin master
 
-}
-</code></pre><h3 id="iPad-3"><a href="#iPad-3" class="headerlink" title="iPad 3"></a>iPad 3</h3><pre><code>// 横向
-@media (max-device-width: 1024px) and (orientation: landscape) {   
+# 删除Hello分支
+git branch -d Hello
 
-}  
+# 强制删除Hello分支
+git branch -D Hello
 
-// 纵向
-@media (max-device-width: 768px) and (orientation: portrait) {   
+# 查看冲突文件
+git diff
 
-}
-</code></pre><h3 id="Galaxy-Tab-10-1"><a href="#Galaxy-Tab-10-1" class="headerlink" title="Galaxy Tab 10.1"></a>Galaxy Tab 10.1</h3><pre><code>// 横向
-@media (max-device-width: 1280px) and (orientation: landscape) {   
+# 合并分支， master为主分支，Hello为临时分支，将Hello分支上的修改合并到master分支上
+git fetch origin Hello
 
-} 
+# 查看不同文件，决定是否要合并
+git diff Hello
 
-// 纵向
-@media (max-device-width: 800px) and (orientation: portrait) {   
+# 合并分支
+git merge  Hello
 
-}
+# 撤销合并
+git --reset --hard HEAD 
+
+# 或者你已经把合并后的代码提交，但还是想把他们撤销
+git --reset --hard ORIG_HEAD
 </code></pre>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/23/CSS-Media-Query-Snippets/" data-addthis-title="CSS媒体查询-代码片段">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/" data-addthis-title="与Git分支操作相关的命令">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -141,20 +145,15 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/23/CSS-Medi
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/09/19/Basic-types-and-Reference-types/">
+        <a class="btn btn-success" role="button" href="/2016/09/23/CSS-Media-Query-Snippets/">
           上一篇
         </a></li>
       
       
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/09/26/Git-Branch-Commands/">
-          下一篇
-        </a></li>
-      
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/09/23/CSS-Media-Query-Snippets/" data-title="CSS媒体查询-代码片段" data-url="http://xiguaaxigua.cn/2016/09/23/CSS-Media-Query-Snippets/"></div>
+<div class="ds-thread" data-thread-key="2016/09/26/Git-Branch-Commands/" data-title="与Git分支操作相关的命令" data-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
