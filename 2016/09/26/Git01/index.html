@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>与Git分支操作相关的命令 | Xiguaaxigua</title>
+  <title>Git起步 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="与Git分支操作相关的命令"/>
+  <meta property="og:title" content="Git起步"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,70 +70,31 @@
   
     
   
-    <h1 class="title">与Git分支操作相关的命令</h1>
+    <h1 class="title">Git起步</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-09-26T11:11:06.000Z">2016-09-26</time>
+      <time datetime="2016-09-26T11:16:21.000Z">2016-09-26</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/工具/">工具</a>
+    <a class="tag-a" href="/tags/文摘/">文摘</a>
   </div>
 
   
   <div class="post-content">
     
-      </p>
-<pre><code># 查看当前分支, *代表的分支为当前分支
-git branch 
-
-# 查看所有分支
-git branch -a
-
-# 查看远程分支
-
-# 创建Hello分支
-git branch Hello
-
-# 切换到Hello分支
-git checkout Hello
-
-# 将Hello分支推送到远程仓库
-git add .
-git commit -m &#39;create Branch Hello&#39;
-git push origin master
-
-# 删除Hello分支
-git branch -d Hello
-
-# 强制删除Hello分支
-git branch -D Hello
-
-# 查看冲突文件
-git diff
-
-# 合并分支， master为主分支，Hello为临时分支，将Hello分支上的修改合并到master分支上
-git fetch origin Hello
-
-# 查看不同文件，决定是否要合并
-git diff Hello
-
-# 合并分支
-git merge  Hello
-
-# 撤销合并
-git --reset --hard HEAD 
-
-# 或者你已经把合并后的代码提交，但还是想把他们撤销
-git --reset --hard ORIG_HEAD
-</code></pre>
+      <h2 id="1-1关于版本控制"><a href="#1-1关于版本控制" class="headerlink" title="1.1关于版本控制"></a>1.1关于版本控制</h2><p>什么是版本控制？我为什么要关心它呢？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。在本书所展示的例子中，我们仅对保存着软件源代码的文本文件作版本控制管理，但实际上，你可以对任何类型的文件进行版本控制。</p>
+<p>如果你是位图形或网页设计师，可能会需要保存某一幅图片或页面布局文件的所有修订版本（这或许是你非常渴望拥有的功能）。采用版本控制系统（VCS）是个明智的选择。有了它你就可以将某个文件回溯到之前的状态，甚至将整个项目都回退到过去某个时间点的状态。你可以比较文件的变化细节，查出最后是谁修改了哪个地方，从而找出导致怪异问题出现的原因，又是谁在何时报告了某个功能缺陷等等。使用版本控制系统通常还意味着，就算你乱来一气把整个项目中的文件改的改删的删，你也照样可以轻松恢复到原先的样子。但额外增加的工作量却微乎其微。</p>
+<p>本地版本控制系统</p>
+<p>许多人习惯用复制整个项目目录的方式来保存不同的版本，或许还会改名加上备份时间以示区别。这么做唯一的好处就是简单。不过坏处也不少：有时候会混淆所在的工作目录，一旦弄错文件丢了数据就没法撤销恢复。</p>
+<p>为了解决这个问题，人们很久以前就开发了许多种本地版本控制系统，大多都是采用某种简单的数据库来记录文件的历次更新差异如下图：<br><img src="http://xigua.image.alimmdn.com/git01.png?t=1474888778275" alt=""></p>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/" data-addthis-title="与Git分支操作相关的命令">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git01/" data-addthis-title="Git起步">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -145,20 +106,20 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git-Bran
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/09/23/CSS-Media-Query-Snippets/">
+        <a class="btn btn-success" role="button" href="/2016/09/26/Git-Branch-Commands/">
           上一篇
         </a></li>
       
       
         <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/09/26/Git01/">
+        <a class="btn btn-success" role="button" href="/2016/09/27/Npm-Commands/">
           下一篇
         </a></li>
       
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/09/26/Git-Branch-Commands/" data-title="与Git分支操作相关的命令" data-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/"></div>
+<div class="ds-thread" data-thread-key="2016/09/26/Git01/" data-title="Git起步" data-url="http://xiguaaxigua.cn/2016/09/26/Git01/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {

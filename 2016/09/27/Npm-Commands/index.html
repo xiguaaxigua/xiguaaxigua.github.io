@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>与Git分支操作相关的命令 | Xiguaaxigua</title>
+  <title>Npm常用命令 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术,web开发,交流分享,javascript,hexo,blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="与Git分支操作相关的命令"/>
+  <meta property="og:title" content="Npm常用命令"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -70,70 +70,106 @@
   
     
   
-    <h1 class="title">与Git分支操作相关的命令</h1>
+    <h1 class="title">Npm常用命令</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-09-26T11:11:06.000Z">2016-09-26</time>
+      <time datetime="2016-09-27T02:08:05.000Z">2016-09-27</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/工具/">工具</a>
+    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
   </div>
 
   
   <div class="post-content">
     
       </p>
-<pre><code># 查看当前分支, *代表的分支为当前分支
-git branch 
+<pre><code># 创建一个package.json文件
+npm init
 
-# 查看所有分支
-git branch -a
+# 查看当前包的安装路径
+npm root
 
-# 查看远程分支
+# 安装包
+npm install ModuleName
 
-# 创建Hello分支
-git branch Hello
+# 全局安装
+npm install ModuleName -g 
 
-# 切换到Hello分支
-git checkout Hello
+# 安装包的同时，将信息写入到package.json中的 dependencies 配置中
+npm install ModuleName --save
 
-# 将Hello分支推送到远程仓库
-git add .
-git commit -m &#39;create Branch Hello&#39;
-git push origin master
+# 安装包的同时，将信息写入到package.json中的 devDependencies 配置中
+npm install ModuleName --save-dev
 
-# 删除Hello分支
-git branch -d Hello
+# 配置安装模式
+npm set global=true # 全局模式
+npm set global=false # 本地模式
 
-# 强制删除Hello分支
-git branch -D Hello
+# 查看当前安装模式，将会得到一个布尔值
+npm get global
 
-# 查看冲突文件
-git diff
+# 查看npm的版本
+npm -v
 
-# 合并分支， master为主分支，Hello为临时分支，将Hello分支上的修改合并到master分支上
-git fetch origin Hello
+# 查看所有全局安装的包
+npm ls -g
 
-# 查看不同文件，决定是否要合并
-git diff Hello
+# 查看本地项目中安装的包
+npm ls
 
-# 合并分支
-git merge  Hello
+# 查看包的 package.json文件
+npm view ModuleName
 
-# 撤销合并
-git --reset --hard HEAD 
+# 查看包的依赖关系
+npm view ModuleName dependencies
 
-# 或者你已经把合并后的代码提交，但还是想把他们撤销
-git --reset --hard ORIG_HEAD
+# 查看包的源文件地址
+npm view ModuleName repository.url
+
+# 查看包所依赖的node版本
+npm view ModuleName engines
+
+# 查看npm所使用的文件夹
+npm help folders
+
+# 更改包内容后进行重建
+npm rebuild ModuleName
+
+# 检查包是否已经过时，此命令会列出所有已经过时的包，可以及时进行包的更新
+npm outdated
+
+# 更新当前目录下node_modules子目录里的包
+npm update ModuleName
+
+# 全局更新
+npm update ModuleName
+
+# 卸载包
+npm uninstall ModuleName
+
+# 访问npm的json文件，此命令将会打开一个网页
+npm help json
+
+# 发布一个包的时候，需要检验某个包名是否存在
+npm search ModuleName
+
+# 清空npm缓存
+npm cache clear
+
+# 撤销自己发布过的某个版本代码
+npm unpublish &lt;package&gt; &lt;version&gt;
+
+# 使用淘宝镜像
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 </code></pre>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/" data-addthis-title="与Git分支操作相关的命令">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/27/Npm-Commands/" data-addthis-title="Npm常用命令">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -145,20 +181,15 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git-Bran
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/09/23/CSS-Media-Query-Snippets/">
+        <a class="btn btn-success" role="button" href="/2016/09/26/Git01/">
           上一篇
         </a></li>
       
       
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/09/26/Git01/">
-          下一篇
-        </a></li>
-      
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/09/26/Git-Branch-Commands/" data-title="与Git分支操作相关的命令" data-url="http://xiguaaxigua.cn/2016/09/26/Git-Branch-Commands/"></div>
+<div class="ds-thread" data-thread-key="2016/09/27/Npm-Commands/" data-title="Npm常用命令" data-url="http://xiguaaxigua.cn/2016/09/27/Npm-Commands/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
