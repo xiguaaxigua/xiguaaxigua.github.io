@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Npm常用命令 | Xiguaaxigua</title>
+  <title>CSS中的CurrentColor变量 | Xiguaaxigua</title>
   <meta name="author" content="Zhiyuan.liu">
   
   <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="Npm常用命令"/>
+  <meta property="og:title" content="CSS中的CurrentColor变量"/>
   <meta property="og:site_name" content="Xiguaaxigua"/>
   
   <meta property="og:image" content="undefined"/>
@@ -68,106 +68,38 @@
   
     
   
-    <h1 class="title">Npm常用命令</h1>
+    <h1 class="title">CSS中的CurrentColor变量</h1>
   
 
     <div class="post-date">
-      <time datetime="2016-09-27T02:08:05.000Z">2016-09-27</time>
+      <time datetime="2016-09-28T05:31:45.000Z">2016-09-28</time>
     </div>
     
   
   <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+    <a class="tag-a" href="/tags/CSS/">CSS</a>
   </div>
 
   
   <div class="post-content">
     
       </p>
-<pre><code># 创建一个package.json文件
-npm init
-
-# 查看当前包的安装路径
-npm root
-
-# 安装包
-npm install ModuleName
-
-# 全局安装
-npm install ModuleName -g 
-
-# 安装包的同时，将信息写入到package.json中的 dependencies 配置中
-npm install ModuleName --save
-
-# 安装包的同时，将信息写入到package.json中的 devDependencies 配置中
-npm install ModuleName --save-dev
-
-# 配置安装模式
-npm set global=true # 全局模式
-npm set global=false # 本地模式
-
-# 查看当前安装模式，将会得到一个布尔值
-npm get global
-
-# 查看npm的版本
-npm -v
-
-# 查看所有全局安装的包
-npm ls -g
-
-# 查看本地项目中安装的包
-npm ls
-
-# 查看包的 package.json文件
-npm view ModuleName
-
-# 查看包的依赖关系
-npm view ModuleName dependencies
-
-# 查看包的源文件地址
-npm view ModuleName repository.url
-
-# 查看包所依赖的node版本
-npm view ModuleName engines
-
-# 查看npm所使用的文件夹
-npm help folders
-
-# 更改包内容后进行重建
-npm rebuild ModuleName
-
-# 检查包是否已经过时，此命令会列出所有已经过时的包，可以及时进行包的更新
-npm outdated
-
-# 更新当前目录下node_modules子目录里的包
-npm update ModuleName
-
-# 全局更新
-npm update ModuleName
-
-# 卸载包
-npm uninstall ModuleName
-
-# 访问npm的json文件，此命令将会打开一个网页
-npm help json
-
-# 发布一个包的时候，需要检验某个包名是否存在
-npm search ModuleName
-
-# 清空npm缓存
-npm cache clear
-
-# 撤销自己发布过的某个版本代码
-npm unpublish &lt;package&gt; &lt;version&gt;
-
-# 使用淘宝镜像
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-</code></pre>
+<blockquote>
+<p>currentColor代表了当前元素被应用上的color颜色值。 使用它可以将当前这个颜色值应用到其他属性上，或者嵌套元素的其他属性上。</p>
+</blockquote>
+<p>也可以这么理解：CSS里你可以在任何需要写颜色的地方使用currentColor这个变量，这个变量的值是当前元素的color值。如果当前元素没有在CSS里显示地指定一个color值，那它的颜色值就遵从CSS规则，从父级元素继承而来。</p>
+<p>在<a href="http://w3.org/TR/css3-color"> CSS 颜色(第三版)</a>规范中,增加了 很多新的颜色关键字,比如 <code>lightgoldenrodyellow</code> 等,其实并不是很常 用。但是,我们还得到了一个特殊的颜色关键字 <code>currentColor</code>,它是从 SVG 那里借鉴来的。这个关键字并没有绑定到一个固定的颜色值,而是一 直被解析为 color。实际上,这个特性让它成为了 CSS 中有史以来的第一个变量。虽然功能很有限,但它真的是个变量。</p>
+<p>举个例子,假设我们想让所有的水平分割线(所有 <code>&lt;hr&gt;</code> 元素)自动与 文本的颜色保持一致。有了 currentColor 之后,我们只需要这样写:</p>
+<pre><code>hr{
+    height: 0.5em;
+    background: currentColor;
+}
+</code></pre><p>你可能已经注意到了,很多已有的属性也具有类似的行为。举例来 说,如果你没有给边框指定颜色,它就会自动地从文本颜色那里得到颜 色。这是因为 <code>currentColor</code> 本身就是很多 CSS 颜色属性的初始值,比如 <code>border-color</code> 和 <code>outline-color</code> ,以及 <code>text-shadow</code> 和 <code>box-shadow</code> 的颜 色值,等等。</p>
     
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/27/Npm-Commands/" data-addthis-title="Npm常用命令">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/28/Css-CurrentColor/" data-addthis-title="CSS中的CurrentColor变量">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -179,20 +111,15 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/27/Npm-Comm
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/09/26/Git01/">
+        <a class="btn btn-success" role="button" href="/2016/09/27/Npm-Commands/">
           上一篇
         </a></li>
       
       
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/09/28/Css-CurrentColor/">
-          下一篇
-        </a></li>
-      
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/09/27/Npm-Commands/" data-title="Npm常用命令" data-url="http://xiguaaxigua.cn/2016/09/27/Npm-Commands/"></div>
+<div class="ds-thread" data-thread-key="2016/09/28/Css-CurrentColor/" data-title="CSS中的CurrentColor变量" data-url="http://xiguaaxigua.cn/2016/09/28/Css-CurrentColor/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
