@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS技巧 | Xiguaaxigua</title>
+  <meta name="author" content="Zhiyuan.liu">
+  
+  <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta property="og:title" content="CSS技巧"/>
+  <meta property="og:site_name" content="Xiguaaxigua"/>
+  
+  <meta property="og:image" content="undefined"/>
+  
+  <link href="/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
+  <link href="/css/site.css" rel="stylesheet">
+  <link href="/css/captionjs.min.css" rel="stylesheet"/>
+  <link href="/css/prettify.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+  
+</head>
+
+<body>
+  
+
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav">
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives">归档</a></li>
+        
+          <li><a href="/messages">留言</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+      
+      
+      
+      
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><article class="post">
+  
+    
+  
+    <h1 class="title">CSS技巧</h1>
+  
+
+    <div class="post-date">
+      <time datetime="2016-09-03T06:55:14.000Z">2016-09-03</time>
+    </div>
+    
+  
+  <div class="tags">
+    <a class="tag-a" href="/tags/CSS/">CSS</a>
+  </div>
+
+  
+  <div class="post-content">
+    
+      </p>
+<h3 id="尽量减少代码的重复"><a href="#尽量减少代码的重复" class="headerlink" title="尽量减少代码的重复"></a>尽量减少代码的重复</h3><ul>
+<li>代码可维护性的最大要素是<strong>尽量减少改动时要编辑的地方</strong>。</li>
+<li><p>当某些值相互依赖时，我们应该把他们的相互关系用代码表达出来。</p>
+<pre><code>  // 优
+  .font{
+      font-size: 20px;
+      line-height: 1.5;
+  }
+  // 劣
+  .font{
+      font-size: 20px;
+      line-height: 30px;  
+  }
+</code></pre></li>
+<li><p>代码易维护和代码精简，两者不可兼得，根据实际情况选择。</p>
+<pre><code>  // 易维护
+  .box{
+      border-width: 10px;
+      border-left: 0;
+  }
+  // 精简，但如果border宽度改为20px时，需要改动三个值
+  .box{
+      border-width: 10px 10px 10px 0;
+  }
+</code></pre></li>
+<li><p>善用继承 <code>inherit</code> ，减少代码量。</p>
+<pre><code>  .box{
+      color: #f00;
+  }
+  .box a{
+      color: inherit;
+  }
+</code></pre></li>
+<li><p>相信眼睛，而不是数字。这里讲的是视觉的错误对UI的影响。如下图：<br>  <img src="http://xigua.image.alimmdn.com/css1.jpg?t=1475041889042" alt=""></p>
+</li>
+<li><p>每个媒体查询都会增加成本，你添加的媒体查询越多，<strong>你的CSS代码就会变得越来越经不起折腾</strong>。总的来说，响应式网页设计时，我们应<strong>尽最大努力实现弹性可伸缩的布局,并在媒体查询的各个断点区间内指定相应的尺寸</strong>。下面列举一些可以替代媒体查询的技巧：</p>
+<ul>
+<li>1.使用百分比长度来取代固定长度；</li>
+<li>2.当你需要在较大的分辨率下得到固定宽度时，使用 <code>max-width</code> 而不是 <code>width</code> ，因为它可以适应较小的分辨率，而无需使用媒体查询。</li>
+<li>3.不要忘记为替换元素（如：img、object、video、iframe等）设置一个 <code>max-width: 100%;</code>。</li>
+<li>4.假如背景图片需要完整的铺满一个容器，不管容器的尺寸如何变化，<code>background-size: cover;</code>这个属性都可以做到。</li>
+<li>5.但图片（或者其他元素）以行列式进行布局时，让视口的宽度来决定列的数量。弹性盒布局（即flexbox）或者 <code>display: inline-block;</code> 加上常规的文本折行行为，都可以实现这一点。 ==注意：UC浏览器不支持弹性盒，如果项目需要适配UC的话，还是换个方法实现吧。==</li>
+<li>6.在使用多列文本时,指定column-width(列宽)而不是指定 column-count(列数),这样它就可以在较小的屏幕上自动显示为单 列布局。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Tips：如果你发现自己需要一大堆媒体查询才能让设计适应大大小小的屏幕, 那么不妨后退一步,重新审视你的代码结构。因为在所有的情况下,响应式 都不是唯一需要考虑的问题。</p>
+</blockquote>
+<ul>
+<li><p>合理使用简写。两者各有优缺点，应视情况决定。</p>
+<pre><code>  // 简写属性，此时，背景一定是红色
+  .box{
+      background: #f00;
+  }
+  // 展开式属性，此时，背景可能会被background-image等属性破坏
+  .box{
+      background-color: #f00;
+  }
+</code></pre></li>
+<li><p>关于CSS预处理器（比如：<a href="http://www.stylus.com/">Stylus</a>、<a href="http://sass-lang.com/">SASS</a>、<a href="http://lesscss.org/">LESS</a>等），他们为CSS的编写提供了一些便利，比如变量、mixin、函数、嵌套、颜色处理等，使用得当的话可以让代码更加灵活，但也可能使代码变得庞大、维护性差。并且很有可能会被滥用，比如无限嵌套，无疑降低了代码的运行速度。</p>
+</li>
+<li>RGBA（红Red、绿Green、蓝Blue、透明度Alpha）和HSLA（色调Hue、饱和度Saturation、亮度Lightness、透明度Alpha）。</li>
+<li><p><code>box-shadow</code>的叠加，实现多重边框的效果。</p>
+<pre><code>  .box{
+      width: 100px;
+      height: 100px;
+      border: 10px solid rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 0 10px #655, 
+                  0 0 0 20px green,
+                  0 2px 5px 30px hsla(360, 100%, 50%, 0.5);
+  }
+</code></pre><p>  效果图如下：</p>
+<p>  <img src="http://xigua.image.alimmdn.com/css2.jpg?t=1475043862200" alt=""></p>
+</li>
+<li><p>outline，描边。outline和border的区别在于outline不影响布局。有一段调试页面的代码如下，实现思路就是给每个元素添加outline属性。</p>
+<pre><code>  [].forEach.call($$(&quot;*&quot;),function(a){a.style.outline=&quot;1px solid #&quot;+(~~(Math.random()*(1&lt;&lt;24))).toString(16)})
+</code></pre></li>
+<li><p><strong><code>calc()</code> 函数内部的运算符的两侧各加一个空格。</strong>否则会产生解析错误，这个规则是为了向前兼容，未来在 <code>calc()</code> 内部可能会允许使用关键字。</p>
+</li>
+<li><p>边框内圆角效果：</p>
+<pre><code>  .box {
+      width: 100px;
+      height: 50px;
+      border-radius: 0.8em;
+      padding: 1em;
+      background: tan;
+      outline: 0.6em solid #655;
+      box-shadow: 0 0 0 .3em #655;
+  }
+</code></pre><p>  效果图如下：</p>
+<p>  <img src="http://xigua.image.alimmdn.com/css3.jpg?t=1475044722697" alt=""></p>
+</li>
+<li><p>渐变（IE10+支持）。 <strong><em>这个属性有很多玩法，自行百度吧。</em></strong> 默认从上到下渐变，即从#f00到#000渐变。可以通过设置 <code>linear-gradient()</code> 的第一个参数，共有以下选项：</p>
+<ul>
+<li>to top</li>
+<li>to bottom // 默认</li>
+<li>to right </li>
+<li>to left</li>
+<li><p>接受一个角度，例如： <code>45deg</code></p>
+<pre><code>.box{
+  background: linear-gradient(#f00, #000);
+}
+</code></pre><p>效果图如下：</p>
+<p><img src="http://xigua.image.alimmdn.com/css4.jpg?t=1475044842865" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+    
+  </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/03/CSS-Decrypt/" data-addthis-title="CSS技巧">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+    <ul class="next_prev">
+      
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2016/08/27/standard/">
+          上一篇
+        </a></li>
+      
+      
+        <li class="next">
+        <a class="btn btn-success" role="button" href="/2016/09/07/CSS-BEM-Naming/">
+          下一篇
+        </a></li>
+      
+    </ul>
+  
+  
+<div class="ds-thread" data-thread-key="2016/09/03/CSS-Decrypt/" data-title="CSS技巧" data-url="http://xiguaaxigua.cn/2016/09/03/CSS-Decrypt/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+</article></div>
+    </div>
+  </div>
+  <div id="push"></div>
+  <div class="navbar navbar-footer">
+  <div class="container">
+    <p class="navbar-center navbar-text">
+      
+      &copy; 2016 Zhiyuan.liu
+      
+    </p>
+    <p class="navbar-center navbar-text" style="margin-top: 0;">
+      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    </p>
+  </div>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
