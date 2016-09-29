@@ -16,7 +16,7 @@ $(function(){
 
     console.log(hello);
     console.log('%c' + world, 'color: #1d9531');
-
+/*
     // 首页 标签颜色
     var menuLength = $(".row .menu-post").length;
     for (var i = 0; i < menuLength; i++) {
@@ -37,5 +37,5 @@ $(function(){
             $(".row .menu-post").eq(i).find(".menu-tag").css("background-color", "#4b4221");
             $(".row .menu-post").eq(i).find(".tag-a").css("border-right-color", "#b9ab76");
         }
-    }
+    }*/
 });

@@ -1,518 +1,230 @@
 <!DOCTYPE html>
-<html>
+<html id="top">
 <head>
-  <meta charset="utf-8">
-  
-  <title>第 4 页 | Xiguaaxigua</title>
-  <meta name="author" content="Zhiyuan.liu">
-  
-  <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
-  <meta property="og:site_name" content="Xiguaaxigua"/>
-  
-  <meta property="og:image" content="undefined"/>
-  
-  <link href="/favicon.png" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
-  <link href="/css/site.css" rel="stylesheet">
-  <link href="/css/captionjs.min.css" rel="stylesheet"/>
-  <link href="/css/prettify.css" rel="stylesheet">
-  <script type="text/javascript" src="/js/prettify.js"></script>
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
-  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+    <meta charset="utf-8">
+    
+    <title>第 4 页 | Xiguaaxigua</title>
+    
+    <meta name="author" content="Zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
 
-  
+    
 </head>
 
 <body>
-
-
-<div class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+<header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Home</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
     </div>
-    <div class="collapse navbar-collapse navbar-right">
-      <ul class="nav navbar-nav">
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/archives">归档</a></li>
-        
-          <li><a href="/messages">留言</a></li>
-        
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-      
-      
-      
-      
-      </ul>
-    </div>
-  </div>
-</div>
+</header>
 
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-9">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-sm-11 col-md-11">
-						
-						<article class="menu-post">
+
+<ul class="index">
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/28/Gulp-Introduction/"><h2 class="index-title">gulp学习笔记</h2></a>
+            
+            <time class="index-date" datetime="2016-07-28T13:25:45.000Z">07/28/2016</time>
+            
+                <p>gulp从拼写到精通。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/27/Patience-and-concentration/"><h2 class="index-title">小猴子下山</h2></a>
+            
+            <time class="index-date" datetime="2016-07-27T12:58:18.000Z">07/27/2016</time>
+            
+                <p>分享一则人教版小学一年级下册《小猴子下山》的故事。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/26/Thinking-in-CSS/"><h2 class="index-title">关于CSS的思考</h2></a>
+            
+            <time class="index-date" datetime="2016-07-26T11:55:28.000Z">07/26/2016</time>
+            
+                <p>CSS命名应该最简单、最直接，直捣黄龙。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/25/Improve-Canvas-Performance/"><h2 class="index-title">提高Canvas的性能</h2></a>
+            
+            <time class="index-date" datetime="2016-07-25T09:10:14.000Z">07/25/2016</time>
+            
+                <a id="more"></a>
+<p>1.使用预渲染显示。</p>
+<pre><code>var canvas = document.createElement(&#39;canvas&#39;);
+var context = canvas.getContext(&#39;2d&#39;);
+var sprite = document.createElement(&#39;sprite&#39;);//精灵绘制
+
+(function render(){
+  context.drawImage(sprite, 0, 0);
+  requestAnimationFrame(render);
+})();
+</code></pre><p>2.一次性写入到画布</p>
+<pre><code>context.beginPath();
+for (var i = 0; i &lt; points.length - 1; i++) {
+  var p1 = points[i];
+  var p2 = points[i+1];
+  context.moveTo(p1.x, p1.y);
+  context.lineTo(p2.x, p2.y);
+}
+context.stroke();
+</code></pre><p>3.优化canvas状态机：一样的颜色先规划好区域后面一次填充。</p>
+<pre><code>context.fillStyle = COLOR1;
+for (var i = 0; i &lt; STRIPES/2; i++) {
+  context.fillRect((i*2) * GAP, 0, GAP, 480);
+}
+context.fillStyle = COLOR2;
+for (var i = 0; i &lt; STRIPES/2; i++) {
+  context.fillRect((i*2+1) * GAP, 0, GAP, 480);
+}
+</code></pre><p>4.除非必要不要清理全部画布。</p>
+<pre><code>context.fillRect(0, 0, canvas.width, canvas.height); //slow
+context.fillRect(last.x, last.y, last.width, last.height);  //fast
+</code></pre><p>5.多canvas绘制，如背景不动的区域或者帧数低的区域可以分开单独渲染。</p>
+<pre><code>&lt;canvas id=&quot;bg&quot; style=&quot;z-index: 0&quot;&gt;&lt;/canvas&gt;
+&lt;canvas id=&quot;fg&quot; style=&quot;z-index: 1&quot;&gt;&lt;/canvas&gt;
+</code></pre><p>6.少用阴影</p>
+<pre><code>context.shadowOffsetX = 5;
+context.shadowOffsetY = 5;
+context.shadowBlur = 4;
+context.shadowColor = &#39;rgba(255, 0, 0, 0.5)&#39;;
+context.fillRect(20, 20, 150, 100);
+</code></pre><p>7.不要用过大的尺寸画布</p>
+
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/24/Canvas-Basics/"><h2 class="index-title">Canvas-基础</h2></a>
+            
+            <time class="index-date" datetime="2016-07-24T08:54:10.000Z">07/24/2016</time>
+            
+                <p>大多是《HTML5Canvas核心技术》一书的笔记。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/23/Articles-About-ECMAScript6/"><h2 class="index-title">在Github Mark的关于ES6的文章</h2></a>
+            
+            <time class="index-date" datetime="2016-07-23T13:58:01.000Z">07/23/2016</time>
+            
+                <p>基本上全是老外的文章,需翻墙。先马后看。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/22/Professional-JavaScript-for-Web-Developers-notes/"><h2 class="index-title">JavaScript高级程序设计（第3版）-读书笔记</h2></a>
+            
+            <time class="index-date" datetime="2016-07-22T07:56:20.000Z">07/22/2016</time>
+            
+                <p>记录一下那些年错过的“爱情”（知识点）。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/21/Flexbox-notes/"><h2 class="index-title">Flex伸缩布局</h2></a>
+            
+            <time class="index-date" datetime="2016-07-21T12:17:04.000Z">07/21/2016</time>
+            
+                <p>一篇文章搞懂伸缩布局。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/20/Canvas-Minions/"><h2 class="index-title">第四个Canvas—小黄人</h2></a>
+            
+            <time class="index-date" datetime="2016-07-20T13:11:22.000Z">07/20/2016</time>
+            
+                <p>画个小黄人哄女友。嘿嘿嘿。<br>
+            
+        </li>
+    
+        <li class="index-item">
+            
+                <a href="/2016/07/19/JavaScript-module/"><h2 class="index-title">前端模块化</h2></a>
+            
+            <time class="index-date" datetime="2016-07-19T11:17:30.000Z">07/19/2016</time>
+            
+                <p>前端为什么要模块化？<br>
+            
+        </li>
     
     
-  
-    <h1 class="title"><a href="/2016/07/28/Gulp-Introduction/">gulp学习笔记</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/工具/">工具</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-28T13:25:45.000Z">2016-07-28</time>
-    </div>
-    <div class="menu-excerpt"><p>gulp从拼写到精通。<br></div>
+<p class="pager clearfix">
     
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
+    <a href="/ page/3/" class="alignleft prev"><button type="button" class="previous btn">上一页</button></a>
     
     
-  
-    <h1 class="title"><a href="/2016/07/27/Patience-and-concentration/">小猴子下山</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/小情绪/">小情绪</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-27T12:58:18.000Z">2016-07-27</time>
-    </div>
-    <div class="menu-excerpt"><p>分享一则人教版小学一年级下册《小猴子下山》的故事。<br></div>
+    <a href="/ page/5/" class="alignright next">
+        <button type="button" class="next btn">下一页</button>
+    </a>
     
+</p>
 
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/26/Thinking-in-CSS/">关于CSS的思考</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/CSS/">CSS</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-26T11:55:28.000Z">2016-07-26</time>
-    </div>
-    <div class="menu-excerpt"><p>CSS命名应该最简单、最直接，直捣黄龙。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/25/Improve-Canvas-Performance/">提高Canvas的性能</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Canvas/">Canvas</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-25T09:10:14.000Z">2016-07-25</time>
-    </div>
-    <div class="menu-excerpt"></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/24/Canvas-Basics/">Canvas-基础</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Canvas/">Canvas</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-24T08:54:10.000Z">2016-07-24</time>
-    </div>
-    <div class="menu-excerpt"><p>大多是《HTML5Canvas核心技术》一书的笔记。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/23/Articles-About-ECMAScript6/">在Github Mark的关于ES6的文章</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/文摘/">文摘</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-23T13:58:01.000Z">2016-07-23</time>
-    </div>
-    <div class="menu-excerpt"><p>基本上全是老外的文章,需翻墙。先马后看。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/22/Professional-JavaScript-for-Web-Developers-notes/">JavaScript高级程序设计（第3版）-读书笔记</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-22T07:56:20.000Z">2016-07-22</time>
-    </div>
-    <div class="menu-excerpt"><p>记录一下那些年错过的“爱情”（知识点）。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/21/Flexbox-notes/">Flex伸缩布局</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/CSS/">CSS</a>, <a class="tag-a" href="/tags/HTML/">HTML</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-21T12:17:04.000Z">2016-07-21</time>
-    </div>
-    <div class="menu-excerpt"><p>一篇文章搞懂伸缩布局。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/20/Canvas-Minions/">第四个Canvas—小黄人</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Canvas/">Canvas</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-20T13:11:22.000Z">2016-07-20</time>
-    </div>
-    <div class="menu-excerpt"><p>画个小黄人哄女友。嘿嘿嘿。<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						<article class="menu-post">
-    
-    
-  
-    <h1 class="title"><a href="/2016/07/19/JavaScript-module/">前端模块化</a></h1>
-  
-
-    <div class="menu-tag">
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/文摘/">文摘</a>
-  </div>
-</div>
-    <div class="menu-post-date">
-        <time datetime="2016-07-19T11:17:30.000Z">2016-07-19</time>
-    </div>
-    <div class="menu-excerpt"><p>前端为什么要模块化？<br></div>
-    
-
-    
-
-    
-
-    
-</article>
-						
-						
-<ul class="pager">
-  
-    <li class="previous"><a href="/page/3/" class="alignleft prev">上一页</a></li>
-  
-  
-    <li class="next"><a href="/page/5/" class="alignright next">下一页</a></li>
-  
-</ul>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--<div class="col-md-3"></div>-->
-		<div class="col-md-3 hidden-sm hidden-xs"><div class="sidebar-nav">
-
-  <div class="widget">
-  	
-<h3>标签</h3>
-<ul class="list-group">
-
-  
-  <li class="list-group-item">
-    <span class="badge">45</span>
-    <a href="/tags/Angular/">Angular</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">9</span>
-    <a href="/tags/CSS/">CSS</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">6</span>
-    <a href="/tags/Canvas/">Canvas</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">3</span>
-    <a href="/tags/Express/">Express</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">6</span>
-    <a href="/tags/HTML/">HTML</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">21</span>
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </li>
-  
-
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">3</span>
-    <a href="/tags/Node-js/">Node.js</a>
-  </li>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">2</span>
-    <a href="/tags/小情绪/">小情绪</a>
-  </li>
-  
-
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">15</span>
-    <a href="/tags/工具/">工具</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">16</span>
-    <a href="/tags/教程/">教程</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">7</span>
-    <a href="/tags/文摘/">文摘</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">7</span>
-    <a href="/tags/框架/">框架</a>
-  </li>
-  
-
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">3</span>
-    <a href="/tags/移动端/">移动端</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">2</span>
-    <a href="/tags/翻译/">翻译</a>
-  </li>
-  
-
-  
-  <li class="list-group-item">
-    <span class="badge">26</span>
-    <a href="/tags/读书笔记/">读书笔记</a>
-  </li>
-  
 
 </ul>
 
-
-  </div>
-
-  <div class="widget">
-  	<h3>友情链接</h3>
-<ul class="list-group">
-
-  <li class="list-group-item">
-    <a href="http://www.cnblogs.com/humin/">幻天芒</a>
-  </li>
-
-  <li class="list-group-item">
-    <a href="http://crackerme.github.io/">愛尚丨輕博客</a>
-  </li>
-
-</ul>
-
-  </div>
-
-</div>
-</div>
-	</div>
-</div>
-<div id="push"></div>
-<div class="navbar navbar-footer">
-  <div class="container">
-    <p class="navbar-center navbar-text">
-      
-      &copy; 2016 Zhiyuan.liu
-      
+<div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 Zhiyuan.liu
+        
     </p>
-    <p class="navbar-center navbar-text" style="margin-top: 0;">
-      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv"></i>位访问者</span>
     </p>
-  </div>
 </div>
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
 
 
 

@@ -1,65 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html id="top">
 <head>
-  <meta charset="utf-8">
-  
-  <title>Git起步 | Xiguaaxigua</title>
-  <meta name="author" content="Zhiyuan.liu">
-  
-  <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="Git起步"/>
-  <meta property="og:site_name" content="Xiguaaxigua"/>
-  
-  <meta property="og:image" content="undefined"/>
-  
-  <link href="/favicon.png" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="Xiguaaxigua" type="application/atom+xml">
-  <link href="/css/site.css" rel="stylesheet">
-  <link href="/css/captionjs.min.css" rel="stylesheet"/>
-  <link href="/css/prettify.css" rel="stylesheet">
-  <script type="text/javascript" src="/js/prettify.js"></script>
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
-  <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+    <meta charset="utf-8">
+    
+    <title>Git Chinese version | Xiguaaxigua</title>
+    
+    <meta name="author" content="Zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="Git Chinese version"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
 
-  
+    
 </head>
 
 <body>
-  
-
-<div class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><span class="text-primary">Xiguaaxigua</span></a>
+  <header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Home</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
     </div>
-    <div class="collapse navbar-collapse navbar-right">
-      <ul class="nav navbar-nav">
-        
-          <li><a href="/">首页</a></li>
-        
-          <li><a href="/archives">归档</a></li>
-        
-          <li><a href="/messages">留言</a></li>
-        
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-      
-      
-      
-      
-      </ul>
-    </div>
-  </div>
-</div>
+</header>
 
 
   <div class="container">
@@ -67,12 +58,8 @@
       <div class="col-md-12"><article class="post">
   
     
-  
-    <h1 class="title">Git起步</h1>
-  
-
     <div class="post-date">
-      <time datetime="2016-09-26T11:16:21.000Z">2016-09-26</time>
+      <time datetime="2016-09-26T11:16:21.000Z">09/26/2016</time>
     </div>
     
   
@@ -83,7 +70,8 @@
   
   <div class="post-content">
     
-      <h2 id="1-1关于版本控制"><a href="#1-1关于版本控制" class="headerlink" title="1.1关于版本控制"></a>1.1关于版本控制</h2><p>什么是版本控制？我为什么要关心它呢？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。在本书所展示的例子中，我们仅对保存着软件源代码的文本文件作版本控制管理，但实际上，你可以对任何类型的文件进行版本控制。</p>
+      </p>
+<h2 id="1-1关于版本控制"><a href="#1-1关于版本控制" class="headerlink" title="1.1关于版本控制"></a>1.1关于版本控制</h2><p>什么是版本控制？我为什么要关心它呢？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。在本书所展示的例子中，我们仅对保存着软件源代码的文本文件作版本控制管理，但实际上，你可以对任何类型的文件进行版本控制。</p>
 <p>如果你是位图形或网页设计师，可能会需要保存某一幅图片或页面布局文件的所有修订版本（这或许是你非常渴望拥有的功能）。采用版本控制系统（VCS）是个明智的选择。有了它你就可以将某个文件回溯到之前的状态，甚至将整个项目都回退到过去某个时间点的状态。你可以比较文件的变化细节，查出最后是谁修改了哪个地方，从而找出导致怪异问题出现的原因，又是谁在何时报告了某个功能缺陷等等。使用版本控制系统通常还意味着，就算你乱来一气把整个项目中的文件改的改删的删，你也照样可以轻松恢复到原先的样子。但额外增加的工作量却微乎其微。</p>
 <p>本地版本控制系统</p>
 <p>许多人习惯用复制整个项目目录的方式来保存不同的版本，或许还会改名加上备份时间以示区别。这么做唯一的好处就是简单。不过坏处也不少：有时候会混淆所在的工作目录，一旦弄错文件丢了数据就没法撤销恢复。</p>
@@ -92,7 +80,7 @@
   </div>
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git01/" data-addthis-title="Git起步">
+addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git01/" data-addthis-title="Git Chinese version">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -117,7 +105,7 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git01/" 
     </ul>
   
   
-<div class="ds-thread" data-thread-key="2016/09/26/Git01/" data-title="Git起步" data-url="http://xiguaaxigua.cn/2016/09/26/Git01/"></div>
+<div class="ds-thread" data-thread-key="2016/09/26/Git01/" data-title="Git Chinese version" data-url="http://xiguaaxigua.cn/2016/09/26/Git01/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
     (function() {
@@ -134,17 +122,15 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/26/Git01/" 
     </div>
   </div>
   <div id="push"></div>
-  <div class="navbar navbar-footer">
-  <div class="container">
-    <p class="navbar-center navbar-text">
-      
-      &copy; 2016 Zhiyuan.liu
-      
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 Zhiyuan.liu
+        
     </p>
-    <p class="navbar-center navbar-text" style="margin-top: 0;">
-      <span id="busuanzi_container_site_pv">Hello World！您是本站第<span style="color:#1d9531;padding: 0 5px;" id="busuanzi_value_site_pv"></span>位访问者</span>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv"></i>位访问者</span>
     </p>
-  </div>
 </div>
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
