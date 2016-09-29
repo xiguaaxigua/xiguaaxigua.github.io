@@ -5,7 +5,7 @@
     
     <title>温习Zepto | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">温习Zepto</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-07-15T12:08:58.000Z">07/15/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-07-15T12:08:58.000Z">07/15/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/框架/">框架</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/框架/">框架</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <p><img src="http://7xtoaz.com1.z0.glb.clouddn.com/zepto.jpg" alt=""></p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>由于工作原因，不得已暂停Canvas大计。</p>
 <p>jQuery玩的多了，有时候在移动端顺手就写下了各种click事件，然而，click事件在移动端有两三百毫秒的延迟。至于这个延迟是怎么来的，可以参考这篇文章，<a href="http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay">What Exactly Is….. The 300ms Click Delay</a>。简单的说：Safari为了区分单击和双击，在用户点击页面后，会等待300ms，以判断用户是否点击第二次（在300ms内再次点击即为双击）。</p>
@@ -396,35 +393,8 @@ $(&#39;.demo&#39;).longTap(function(){
 <h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><p>Build自己的zepto的方法。<br>1.从github下载完整安装包，<a href="https://github.com/madrobby/zepto/archive/master.zip">点击下载</a>。<br>2.找到安装包里的make文件，修改下边这行代码，填入自己想要的模块。</p>
 <pre><code>modules = (env[&#39;MODULES&#39;] || &#39;zepto event ajax form ie detect fx_methods data selector touch&#39;).split(&#39; &#39;)
 </code></pre><p>3.运行<code>npm run-script dist</code> ，然后你就可以在dist文件夹下找到你的zepto版本。</p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/15/Zepto-review/" data-addthis-title="温习Zepto">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/07/14/Canvas-03/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/07/16/some-confusions-in-developing-plugins/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/07/15/Zepto-review/" data-title="温习Zepto" data-url="http://xiguaaxigua.cn/2016/07/15/Zepto-review/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -438,14 +408,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/07/15/Zepto-re
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

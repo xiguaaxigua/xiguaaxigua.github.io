@@ -5,7 +5,7 @@
     
     <title>“有BOM的UTF-8”和“无BOM的UTF-8” | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">“有BOM的UTF-8”和“无BOM的UTF-8”</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-06-29T12:51:55.000Z">06/29/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-06-29T12:51:55.000Z">06/29/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/教程/">教程</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/教程/">教程</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <p>BOM，Byte Order Mark，即“字节顺序标记”。偶然在知乎上看到（<a href="https://www.zhihu.com/question/20167122">点击访问</a>），研究了一下，记录如下：</p>
 <h3 id="维基百科的解释"><a href="#维基百科的解释" class="headerlink" title="维基百科的解释"></a>维基百科的解释</h3><p>摘录如下：（<a href="https://en.wikipedia.org/wiki/Byte_order_mark">点击访问</a>）</p>
 <p>The byte order mark (BOM) is a Unicode character, U+FEFF BYTE ORDER MARK (BOM), whose appearance as a magic number at the start of a text stream can signal several things to a program consuming the text.</p>
@@ -93,35 +90,8 @@
 <h3 id="BOM-和-PHP"><a href="#BOM-和-PHP" class="headerlink" title="BOM 和 PHP"></a>BOM 和 PHP</h3><p>PHP并不会忽略BOM，所以在读取、包含或者引用这些文件时，会把BOM作为该文件开头正文的一部分。根据嵌入式语言的特点，这串字符将被直接执行（显示）出来。由此造成即使页面的padding-top设置为0，也无法让整个网页紧贴浏览器顶部，因为在html一开头有这3个字符呢！</p>
 <p>windows总是自做聪明的做一些别人无法理解的事情，UTF-8并不需要BOM头啊！</p>
 <p>显然，对于网页编程来说，BOM还是去掉的比较好。</p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/06/29/UTF-8-with-BOM-or-without-BOM/" data-addthis-title="“有BOM的UTF-8”和“无BOM的UTF-8”">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/06/25/How-did-I-Complete-Search-and-Save-it/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/07/02/Skills-in-the-Work/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/06/29/UTF-8-with-BOM-or-without-BOM/" data-title="“有BOM的UTF-8”和“无BOM的UTF-8”" data-url="http://xiguaaxigua.cn/2016/06/29/UTF-8-with-BOM-or-without-BOM/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -135,14 +105,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/06/29/UTF-8-wi
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

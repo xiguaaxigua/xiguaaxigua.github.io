@@ -5,7 +5,7 @@
     
     <title>007-浅谈非入侵式JavaScript-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">007-浅谈非入侵式JavaScript-《用AngularJS开发下一代Web应用》-笔记</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-09T02:49:56.000Z">05/09/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-09T02:49:56.000Z">05/09/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h3 id="浅谈非入侵式JavaScript"><a href="#浅谈非入侵式JavaScript" class="headerlink" title="浅谈非入侵式JavaScript"></a>浅谈非入侵式JavaScript</h3><p>在你JavaScript开发生涯中的某个时间点上，某人可能会告诉你，你应该编写“非入侵式的JavaScript”，在HTML中使用click、mousedown以及其他内联的事件处理器是一种非常糟糕的处理方式。他是对的。</p>
 <p>非入侵式JavaScript的观点可以从很多角度进行解读，大体是针对以下几个观点：</p>
 <ul>
@@ -119,35 +116,8 @@ function ContentController($scope){
 <p>是的，在Angular中我们可以编写包含业务逻辑的控制器，而无须引用DOM。问题不是出在事件处理器上，而是之前我们编写JavaScript的方式有问题。请注意，到目前为止，我们所编写的所有控制器中个，都没有在任何地方引用DOM或者DOM事件。所有定位元素和处理事件的工作都是在Angular内部完成的。</p>
 <p>在编写单元测试的时候这一点很重要。如果你需要DOM，你就需要在测试用例中首先创建DOM，这就增加了测试的复杂性。并且，当你的页面发生变化时，还有更多的维护工作要做，你需要为测试用例同步修改DOM。最后，访问DOM的操作非常慢。很慢的测试意味着很慢的反馈，甚至很慢的交付。而Angular的控制器测试就不会有这些问题。</p>
 <p>最后，你可以很开心的使用Angular的声明式事件处理器，同时又能保持简单性和可读性，所以没有必要为违反最佳实践而感到内疚。</p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/09/angular-note-007/" data-addthis-title="007-浅谈非入侵式JavaScript-《用AngularJS开发下一代Web应用》-笔记">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/09/angular-note-006/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/09/angular-note-008/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/09/angular-note-007/" data-title="007-浅谈非入侵式JavaScript-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/09/angular-note-007/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -161,14 +131,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/09/angular-
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

@@ -5,7 +5,7 @@
     
     <title>018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-13T04:24:26.000Z">05/13/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-13T04:24:26.000Z">05/13/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>虽然从技术上来说AJAX应用确实是单页面应用（即在第一个请求时加载一个HTML页面，后面只刷新DOM中的局部区域），但是很多时候，出于各种原因，我们需要为用户展示或者隐藏一些子页面视图。</p>
 <p>我们可以利用Angular的$route服务来管理这种场景。你可以利用路由服务来定义这样一种东西：对于浏览器所指向的特定URL，Angular将会加载并显示一个模板，并实例化一个控制器来为模板提供内容。</p>
 <p>在应用中，你可以通过调用$routeProvider服务上的函数来创建路由，把需要创建的路由当成一个配置块传递给这些函数即可。创建过程类似下面的伪代码：</p>
@@ -199,35 +196,8 @@ function DetailController($scope, $routeParams){
     $scope.message = messages[$routeParams.id];
 }
 </code></pre><p>我们已经为应用搭好了基本的框架，这款应用带有很多视图，可以通过修改URL的方式来切换视图。这意味着对用户来说前进和后退按钮能够真正运行起来了。用户可以把应用内部的视图链接加入书签或者通过邮件发送出去，而实际上这里只有唯一一个真实的HTML页面。</p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/13/angular-note-018/" data-addthis-title="018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/13/angular-note-017/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/14/angular-note-019/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/13/angular-note-018/" data-title="018-使用路由和$location切换视图-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/13/angular-note-018/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -241,14 +211,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/13/angular-
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

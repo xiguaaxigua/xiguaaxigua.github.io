@@ -5,7 +5,7 @@
     
     <title>025-菜谱应用中的控制器-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">025-菜谱应用中的控制器-《用AngularJS开发下一代Web应用》-笔记</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-19T02:52:29.000Z">05/19/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-19T02:52:29.000Z">05/19/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>本文讲述菜谱中用到的控制器。</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>菜谱应用中我们用到了5个控制器。控制器位于app/scripts/controllers/controller.js中，我们一个一个来看。首先来看第一个控制器，也就是List控制器，它的职责是显示系统中的所有菜谱。</p>
 <pre><code>app.controller(&#39;ListCtrl&#39;, [&#39;$scope&#39;, &#39;recipes&#39;,
@@ -236,35 +233,8 @@ app.controller(&#39;IngredientsCtrl&#39;, [&#39;$scope&#39;,
 <p>然后结果会被作为参数传递给构造函数（参数名将会成为对象的字段名）。</p>
 <p>最后，otherwise函数提供了一个默认的URL，当没有匹配到任何路由时，就会跳转到这个URL。</p>
 <p><i>你可能已经注意到了，Edit和New这两个控制器的路由都指向了相同的模板URL——views/recipeForm.html，是怎么回事呢？因为我们在重用编辑模板。根据关联的控制器不同，在菜谱编辑模板中会显示不同的元素。</i></p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/19/angular-note-025/" data-addthis-title="025-菜谱应用中的控制器-《用AngularJS开发下一代Web应用》-笔记">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/18/angular-note-024/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/19/Angular-Video-Tutorial-index/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/19/angular-note-025/" data-title="025-菜谱应用中的控制器-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/19/angular-note-025/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -278,14 +248,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/19/angular-
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

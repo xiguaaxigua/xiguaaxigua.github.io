@@ -9,6 +9,7 @@
 
 	color: #525252;
 	background-color: #fdfaf7;
+	text-shadow: #fff 1px 2px;
 }
 .clear {
 	clear: both;
@@ -31,7 +32,8 @@
 	content: ".";
 }
 html {
-	background: #fdfaf7;
+	background: url("../img/bg.jpg");
+	background-color: #69befe;
 }
 h1 {
 	font-size: 2em;
@@ -47,12 +49,14 @@ li {
 a {
 	text-decoration: none;
 
-	color: #5c85d6;
+	color: #1a0dab;
 	&:visited {
-		color: #7a8fb8;
+		color: #609;
 	}
 	&:hover {
-		color: #85a3e0;
+		text-decoration: underline;
+
+		color: #1a0dab;
 	}
 	&:active {
 		color: #36c;
@@ -62,9 +66,16 @@ a {
 body {
 	position: relative;
 
-	max-width: 36em;
+	max-width: 40em;
 	margin: 0 auto;
 	padding: 0 5vw;
+}
+blockquote {
+	margin: 0;
+	padding: 1em 1em 1em 40px;
+
+	border-left: 5px solid #ddd;
+	background: #fafbfc;
 }
 .btn {
 	display: inline-block;
@@ -85,8 +96,8 @@ body {
 	vertical-align: middle;
 	white-space: nowrap;
 
-	color: #8f8f8f;
-	border: 1px solid #8f8f8f;
+	color: #525252;
+	border: 1px solid #525252;
 	border-radius: 4px;
 	background: transparent;
 
@@ -97,13 +108,11 @@ body {
 	}
 }
 .header {
-	font-weight: 300;
-
 	margin: 12vmin 0;
 
 	text-align: center;
 
-	color: #8f8f8f;
+	color: #4d4e53;
 	a {
 		display: inline-block;
 	}
@@ -136,7 +145,10 @@ body {
 
 		content: "";
 
-		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1), transparent);
+		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), transparent);
+	}
+	a:hover {
+		text-decoration: none;
 	}
 }
 .nav-group {
@@ -153,10 +165,10 @@ body {
 
 	color: inherit;
 	&:visited {
-		color: #8f8f8f;
+		color: #4d4e53;
 	}
 	&:hover {
-		color: #8f8f8f;
+		color: #000;
 	}
 	&:active {
 		color: #ccc;
@@ -177,6 +189,11 @@ body {
 	padding: 0;
 
 	list-style-type: none;
+	> a {
+		text-decoration: none;
+
+		color: #000;
+	}
 }
 .index-title {
 	font-size: 1.6em;
@@ -193,13 +210,53 @@ body {
 
 	margin-right: .5em;
 
-	color: #8f8f8f;
+	color: #4d4e53;
 }
 .archives {
 	list-style-type: none;
 }
 .archives-time {
 	margin-right: 1em;
+}
+.post {
+	font-size: 15px;
+}
+.post-title {
+	text-align: center;
+}
+.post-info {
+	line-height: 16px;
+
+	text-align: center;
+
+	color: #525252;
+	a {
+		color: inherit;
+	}
+}
+.post-content {
+	margin: 2em 0;
+}
+.icon {
+	display: inline-block;
+
+	width: 16px;
+	height: 16px;
+	margin: 2px 3px 0 3px;
+}
+.icon-tag {
+	margin-left: 2em;
+
+	background: url("../img/tag.png") no-repeat;
+}
+.icon-clock {
+	background: url("../img/clock.png") no-repeat;
+}
+.linenums {
+	li {
+		margin: 0;
+		padding: 5px 0;
+	}
 }
 .footer {
 	font-weight: 300;
@@ -210,7 +267,7 @@ body {
 
 		content: "";
 
-		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1), transparent);
+		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), transparent);
 	}
 	span {
 		font-weight: inherit;
@@ -222,12 +279,10 @@ body {
 
 		text-align: center;
 
-		color: #989898;
+		color: #525252;
 	}
 	i {
 		margin: 0 .5em;
-
-		color: #4d4e53;
 	}
 }
 // 分页

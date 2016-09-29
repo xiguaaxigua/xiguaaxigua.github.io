@@ -5,7 +5,7 @@
     
     <title>013-利用$scope暴露模型数据-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">013-利用$scope暴露模型数据-《用AngularJS开发下一代Web应用》-笔记</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-12T03:13:52.000Z">05/12/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-12T03:13:52.000Z">05/12/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h3 id="利用-scope暴露模型数据"><a href="#利用-scope暴露模型数据" class="headerlink" title="利用$scope暴露模型数据"></a>利用$scope暴露模型数据</h3><p>利用向控制器传递$scope对象的机制，可以把模型数据暴露给视图。在你的应用中可能还有其他数据，但是只有通过$scope触及这些数据，Angular才会把它当成数据模型的一部分。你可以把$scope当成一个上下文环境，它让数据模型上的变化变得可以观察。对于显式地创建$scope属性我们已经看到过很多例子了，例如$scope.count = 5。还可以间接地通过模板自身创建数据模型。你可以通过以下几种方式来实现这一点。</p>
 <p>1.通过表达式。</p>
 <p>既然表达式是在控制器的$scope环境中执行的，而这个$scope与它们所管理的元素有关，那么在表达式中设置属性值就和设置控制器的$scope属性值是一样的。也就是说，这样做：</p>
@@ -87,35 +84,8 @@
 }
 </code></pre><p>2.在表单输入项上使用ng-model。</p>
 <p>与表达式类似，ng-model上指定的模型参数同样工作在外层控制器内。唯一的不同点在于，这样会在表单项和指定的模型之间建立双向绑定关系。</p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/12/angular-note-013/" data-addthis-title="013-利用$scope暴露模型数据-《用AngularJS开发下一代Web应用》-笔记">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-012/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-014/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/12/angular-note-013/" data-title="013-利用$scope暴露模型数据-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/12/angular-note-013/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -129,14 +99,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/12/angular-
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

@@ -5,7 +5,7 @@
     
     <title>016-使用Module(模块)组织依赖关系-《用AngularJS开发下一代Web应用》-笔记 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">016-使用Module(模块)组织依赖关系-《用AngularJS开发下一代Web应用》-笔记</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-12T13:24:58.000Z">05/12/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-12T13:24:58.000Z">05/12/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/Angular/">Angular</a>, <a class="tag-a" href="/tags/读书笔记/">读书笔记</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h3 id="使用Module-模块-组织依赖关系"><a href="#使用Module-模块-组织依赖关系" class="headerlink" title="使用Module(模块)组织依赖关系"></a>使用Module(模块)组织依赖关系</h3><p>开发任何一款优秀的应用都会面临一项非常困难的工作，那就是找到一种方式把代码组织在合适的功能范围内。我们已经看到控制器的处理方式，它会提供一块空间，把正确的数据模型和函数暴露给视图模板。但是其他那些用来支撑我们应用的代码应该怎么办呢？有一块最明显的可以放这些代码的地方，那就是控制器中的函数。</p>
 <p>这种做法对于小型的应用和例子来说可以工作得很好，我们已经看到过很多这样的例子，但是在真实的应用中，这种做法很快就会使代码变得无法维护。控制器将会变成一个垃圾场，我们要做的所有东西都会倒在里面。它们会非常难以理解，并且非常难以修改。</p>
 <p>我们来看模块。它们提供了一种方法，可以用来组织应用中一块功能区域的依赖关系；同时还提供了一种机制，可以自动解析依赖关系（又叫做依赖注入）。一般来说，我们把这些叫做依赖服务，因为它们会负责为应用提供特殊的服务。</p>
@@ -143,35 +140,8 @@ shoppingModule.factory(&#39;Items&#39;, function(){
     &lt;/table&gt;
 &lt;/body&gt;
 </code></pre>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/12/angular-note-016/" data-addthis-title="016-使用Module(模块)组织依赖关系-《用AngularJS开发下一代Web应用》-笔记">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/05/12/angular-note-015/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/13/angular-note-017/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/12/angular-note-016/" data-title="016-使用Module(模块)组织依赖关系-《用AngularJS开发下一代Web应用》-笔记" data-url="http://xiguaaxigua.cn/2016/05/12/angular-note-016/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -185,14 +155,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/12/angular-
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

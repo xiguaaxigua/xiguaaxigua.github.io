@@ -5,7 +5,7 @@
     
     <title>Basic types and Reference types in JavaScript | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">Basic types and Reference types in JavaScript</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-09-19T12:30:22.000Z">09/19/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-09-19T12:30:22.000Z">09/19/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <p>ECMAScript变量可能包含两种不同数据类型的值：基本类型值和引用类型值。基本类型指的是简单的数据段，而引用类型值指那些可能由多个值构成的对象。</p>
 <p>在将一个值赋给变量时，解析器必须确定这个值是基本类型值还是引用类型值。5中基本数据类型是按值访问的，因为可以操作保存在变量中的实际的值。</p>
 <p>引用类型的值是保存在内存中的对象。与其他语言不同，JavaScript不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。</p>
@@ -94,35 +91,8 @@ var obj2 = obj1;
 obj1.name = &#39;Xigua&#39;;
 console.log(obj2.name); // Xigua
 </code></pre><p>首先，变量 <code>obj1</code> 保存了一个对象的新实例。然后，这个值被复制到 <code>obj2</code> 中；换句话说，<code>obj1</code> 和 <code>obj2</code> 都指向同一个对象。这样，但为 <code>obj1</code> 添加name属性后，可以通过 <code>obj2</code> 来访问这个属性，因为这两个变量引用的都是同一个对象，如下图：<br><img src="http://xigua.image.alimmdn.com/value2.jpg?t=1474287549073" alt=""></p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/19/Basic-types-and-Reference-types/" data-addthis-title="Basic types and Reference types in JavaScript">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-        <li class="prev">
-        <a class="btn btn-success" role="button" href="/2016/09/18/Configuring-Csscomb-In-WebStorm/">
-          上一篇
-        </a></li>
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/09/22/How-to-learn-JavaScript/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/09/19/Basic-types-and-Reference-types/" data-title="Basic types and Reference types in JavaScript" data-url="http://xiguaaxigua.cn/2016/09/19/Basic-types-and-Reference-types/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -136,14 +106,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/09/19/Basic-ty
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>

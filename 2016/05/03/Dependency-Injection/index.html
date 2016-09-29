@@ -5,7 +5,7 @@
     
     <title>依赖注入 | Xiguaaxigua</title>
     
-    <meta name="author" content="Zhiyuan.liu">
+    <meta name="author" content="zhiyuan.liu">
     
     
     <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
@@ -53,24 +53,21 @@
 </header>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"><article class="post">
-  
+  <div class="post">
+      
+<h2 class="post-title">依赖注入</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-05-03T03:01:04.000Z">05/03/2016</time>
     
-    <div class="post-date">
-      <time datetime="2016-05-03T03:01:04.000Z">05/03/2016</time>
-    </div>
-    
-  
-  <div class="tags">
-    <a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/Angular/">Angular</a>
-  </div>
 
-  
-  <div class="post-content">
-    
-      </p>
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-a" href="/tags/Angular/">Angular</a>
+
+</p>
+
+<div class="post-content">
+    </p>
 <h2 id="什么是依赖注入"><a href="#什么是依赖注入" class="headerlink" title="什么是依赖注入"></a>什么是依赖注入</h2><h3 id="依赖注入是一种模式"><a href="#依赖注入是一种模式" class="headerlink" title="依赖注入是一种模式"></a>依赖注入是一种模式</h3><p>首先，依赖注入是一种设计模式，因为他解决的是一类问题。</p>
 <p><b><a href="http://baike.baidu.com/link?url=SFiSGjteeq27Y6W33cqx1Mai0YGjmuiWomdhiuyD_cZPc4MsbIFfcvErfV6JQMPczMiIjIF6eljxKBJ0vxP8Uq">什么是设计模式?</a></b><br>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
 <h3 id="依赖注入的作用域"><a href="#依赖注入的作用域" class="headerlink" title="依赖注入的作用域"></a>依赖注入的作用域</h3><p>要知道依赖注入是解决什么问题，最好先了解一个原则：<br><b>依赖倒转原则(Dependence Inversion Priciple, DIP)</b>提倡：</p>
@@ -282,30 +279,8 @@ var moduleC = require(&#39;path/to/moduleC&#39;);
 <p>没错，require就是一个服务定位模式<br>所谓的服务定位模式就是把所有服务（模块）资源的管理都放到一个定位者那里<br>所有需要服务的模块都找它要就行了，就是这么简单<br>服务定位模式也能解决依赖注入的作用域问题<br>服务定位者负责初始化服务，它也提供服务资源<br>只是依赖注入是被动，服务定位模式需要模块自己主动去请求，详见【3. 依赖注入的作用】<br>对于前端来说，<br>服务定位模式肯定更常见，它的优点就是简单，缺点是所有模块都需要依赖定位者<br>依赖注入模式的优点是控制反转，更利于组件化，缺点是不是前端的基础能力（谁让require是基础。。。）</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>依赖注入模式并不神秘，也不是什么高大上<br>Java时代的Spring就已经把依赖注入推向顶峰<br>本文只想向前端同学传达：依赖注入的思想非常值得学习</p>
 <p style="text-align: right;"><a href="http://imweb.io/topic/571b567505637d4c67ae3f64">原文地址</a></p>
-    
-  </div>
-  
-  <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/03/Dependency-Injection/" data-addthis-title="依赖注入">
-<a class="addthis_button_preferred_1"></a>
-<a class="addthis_button_preferred_2"></a>
-<a class="addthis_button_preferred_3"></a>
-<a class="addthis_button_preferred_4"></a>
-<a class="addthis_button_compact"></a>
-<a class="addthis_counter addthis_bubble_style"></a>
 </div>
-  
-    <ul class="next_prev">
-      
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2016/05/04/angular-note-001/">
-          下一篇
-        </a></li>
-      
-    </ul>
-  
-  
+
 <div class="ds-thread" data-thread-key="2016/05/03/Dependency-Injection/" data-title="依赖注入" data-url="http://xiguaaxigua.cn/2016/05/03/Dependency-Injection/"></div>
 <script type="text/javascript">
     var duoshuoQuery = {short_name:"xiguaaxigua"};
@@ -319,14 +294,11 @@ addthis_32x32_style" data-addthis-url="http://xiguaaxigua.cn/2016/05/03/Dependen
     })();
 </script>
 
-</article></div>
-    </div>
   </div>
-  <div id="push"></div>
   <div class="footer">
     <p class="copyright">
         
-        &copy; 2016 Zhiyuan.liu
+        &copy; 2016 zhiyuan.liu
         
     </p>
     <p>
