@@ -32,7 +32,6 @@
 	content: ".";
 }
 html {
-	background: url("../img/bg.jpg");
 	background-color: #69befe;
 }
 h1 {
@@ -49,14 +48,14 @@ li {
 a {
 	text-decoration: none;
 
-	color: #1a0dab;
+	color: #5c85d6;
 	&:visited {
-		color: #609;
+		color: #7a8fb8;
 	}
 	&:hover {
 		text-decoration: underline;
 
-		color: #1a0dab;
+		color: #85a3e0;
 	}
 	&:active {
 		color: #36c;
@@ -66,7 +65,7 @@ a {
 body {
 	position: relative;
 
-	max-width: 40em;
+	max-width: 36em;
 	margin: 0 auto;
 	padding: 0 5vw;
 }
@@ -77,42 +76,14 @@ blockquote {
 	border-left: 5px solid #ddd;
 	background: #fafbfc;
 }
-.btn {
-	display: inline-block;
-
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1.42857143;
-
-	margin-bottom: 0;
-	padding: 6px 12px;
-
-	cursor: pointer;
-	-webkit-user-select: none;
-	   -moz-user-select: none;
-	    -ms-user-select: none;
-	        user-select: none;
-	text-align: center;
-	vertical-align: middle;
-	white-space: nowrap;
-
-	color: #525252;
-	border: 1px solid #525252;
-	border-radius: 4px;
-	background: transparent;
-
-	-ms-touch-action: manipulation;
-	    touch-action: manipulation;
-	&.disabled {
-		cursor: not-allowed;
-	}
-}
 .header {
+	font-weight: 300;
+
 	margin: 12vmin 0;
 
 	text-align: center;
 
-	color: #4d4e53;
+	color: #8f8f8f;
 	a {
 		display: inline-block;
 	}
@@ -145,7 +116,7 @@ blockquote {
 
 		content: "";
 
-		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), transparent);
+		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1), transparent);
 	}
 	a:hover {
 		text-decoration: none;
@@ -165,10 +136,10 @@ blockquote {
 
 	color: inherit;
 	&:visited {
-		color: #4d4e53;
+		color: inherit;
 	}
 	&:hover {
-		color: #000;
+		color: #525252;
 	}
 	&:active {
 		color: #ccc;
@@ -259,6 +230,7 @@ blockquote {
 	}
 }
 .footer {
+	font-size: 16px;
 	font-weight: 300;
 	&:before {
 		display: block;
@@ -267,7 +239,7 @@ blockquote {
 
 		content: "";
 
-		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), transparent);
+		background: linear-gradient(to right, transparent, rgba(0, 0, 0, .1), rgba(0, 0, 0, .1), transparent);
 	}
 	span {
 		font-weight: inherit;
@@ -287,15 +259,35 @@ blockquote {
 }
 // 分页
 .pager {
-	list-style-type: none;
-	li {
+	margin-bottom: 4em;
+
+	text-align: center;
+	button {
 		display: inline-block;
-	}
-	.next {
-		float: right;
-	}
-	.previous {
-		float: left;
+
+		font-size: 1em;
+		line-height: 3em;
+
+		-moz-box-sizing: border-box;
+		     box-sizing: border-box;
+		width: 3em;
+		height: 3em;
+		margin: 0 1em;
+		padding: 0 1em;
+
+		cursor: pointer;
+
+		color: #8f8f8f;
+		border: 1px solid #8f8f8f;
+		border-radius: 3em;
+		background: transparent;
+		&.disabled {
+			cursor: not-allowed;
+		}
+		&:not(.disabled):hover {
+			color: #0e2231;
+			border-color: #0e2231;
+		}
 	}
 }
 // 折叠按钮
