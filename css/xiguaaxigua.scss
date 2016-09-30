@@ -191,6 +191,9 @@ blockquote {
 }
 .post {
 	font-size: 15px;
+	table, img {
+		max-width: 100%;
+	}
 }
 .post-title {
 	text-align: center;
