@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>The API of the Echarts framework. | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="The API of the Echarts framework."/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">The API of the Echarts framework.</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-03T13:25:59.000Z">10/03/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
+<h2 id="标题组件title"><a href="#标题组件title" class="headerlink" title="标题组件title"></a>标题组件title</h2><p>标题组件, 包含主标题和副标题.</p>
+<p><em>在Echarts2.X中单个图表中只能包含一个标题组件, 但是在Echarts3中可以存在多个标题组件, 这在需要标题进行排版, 或者单个图标中的多个图标都需要标题是会比较有用.</em></p>
+<pre><code>var myCharts = echarts.init(document.getElementById(&#39;myCharts&#39;));
+myCharts.setOption({
+    title: {
+        show: true, // 是否显示标题组件, 默认为true
+        text: &#39;主标题&#39;, // 主标题
+        link: &#39;主标题链接&#39;, // 默认为空
+        target: &#39;self&#39;, // 指定窗口打开链接, self当前窗口打开, blank新窗口打开, 默认blank
+        textStyle: { // 标题文字样式
+            color: &#39;#f00&#39;, // 颜色, 默认#333
+            fontStyle: &#39;italic&#39;, // 风格, 默认normal, 可选: normal/italic/oblique
+            fontWeight: &#39;bold&#39;, // 粗细, 默认normal, 可选: normal/bold/bolder/lighter/100|200|300|400...
+            fontFamily: &#39;sans-serif&#39;, // 文字系列, 默认sans-serif
+            fontSize: 18 // 大小, 默认18
+        },
+        textAlign: &#39;center&#39;, // 标题文本水平对齐方式, 默认根据标题位置决定, 可选值: left/center/right
+        textBaseline: &#39;middle&#39;, // 标题文本垂直对齐方式, 默认根据标题位置决定, 可选值: top/middle/bottom
+        subtext: &#39;副标题&#39;, // 副标题
+        sublink: &#39;副标题链接&#39;, // 副标题链接
+        subtarget: &#39;self&#39;, // 副标题窗口打开方式, 默认blank
+        subtextStyle: {
+            ... // 和textStyle参数一致
+        },
+        itemGap: 10, // 主副标题之间的间距, 默认10
+        zlevel: 0, // 所有图形的zlevel值, 用于canvas分层, zlevel 大的 Canvas 会放在 zlevel 小的 Canvas 的上面。
+        z: 2, // 组件所有图形的z值, 控制图形的先后顺序, z值小的图形会被z值大的图形覆盖
+        left: &#39;auto&#39;, // 组件距离容器左侧的距离, 默认值为auto, 值可以具体的像素值, 也可以为百分比, 也可以为left/center/right
+        top: &#39;auto&#39;, // 组件距离容器顶部的距离
+        right: &#39;auto&#39;, // 组件距离容器右侧的距离
+        bottom: &#39;auto&#39;, // 组件距离容器底部的距离
+        backgroundColor: &#39;transparent&#39;, // 背景色, 默认透明, 颜色可以使用RGBA表示
+        borderColor: &#39;#ccc&#39;, // 边框颜色, 默认为#ccc
+        borderWidth: 0, // 边框粗细
+        shadowBlur: 10, // 图形阴影的模糊大小, 该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。注意：此配置项生效的前提是，设置了 show: true 以及值不为 tranparent 的背景色 backgroundColor
+        shadowColor: &#39;#ccc&#39;, // 阴影颜色
+        shadowOffsetX: 0, // 阴影水平方向上的偏移距离.此配置项生效的前提是,设置了 show: true。
+        shadowOffsetY: 0 // 阴影垂直方向上的偏移距离.此配置项生效的前提是,设置了 show: true。
+    }
+});
+</code></pre><h2 id="图例组件legend"><a href="#图例组件legend" class="headerlink" title="图例组件legend"></a>图例组件legend</h2><p>图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。</p>
+<pre><code>var myCharts = echarts.init(document.getElementById(&#39;myCharts&#39;));
+myCharts.setOption({
+    show: true, // 是否显示
+    zlevel: 0, // 所有图形的zlevel值
+    z: 2, // 左右图形的z值
+    left: &#39;auto&#39;, // 组件距离容器顶部的距离
+    top: &#39;auto&#39;,
+    right: &#39;auto&#39;,
+    bottom: &#39;auto&#39;,
+    width: &#39;auto&#39;,
+    height: &#39;auto&#39;,
+    orient: &#39;auto&#39;,
+    aligh: &#39;auto&#39;,
+    padding: 5,
+    itemGap: 10,
+    itemWidth: 255,
+    itemHeight: 14,
+    formatter: null, // 图例文本的内容格式器，支持字符串模板和回调函数两种形式。默认为null
+    selectedMode: true, // 图例选择的模式, 默认开启图例选择, 可以设置成false关闭
+    inacticeColor: &#39;#ccc&#39;, //图例关闭时的颜色
+    selected: { // 图例选中状态表
+        &#39;系列1&#39;: true, // 选中
+        &#39;系列2&#39;: false // 不选中
+    },
+    textStyle: { // 组件公用的文本样式
+
+    },
+    tooltip: { // 默认不显示
+        show: true
+    },
+    data: [{ // 组件的数据数组
+
+    }],
+    backgroundColor: &#39;transparent&#39;, // 背景色, 默认透明
+    borderColor: &#39;#ccc&#39;, // 边框颜色
+    borderWidth: 1, // 边框粗细
+    shadowBlur: 1, // 阴影模糊大小
+    shadowColor: &#39;#f00&#39;, // 阴影模糊颜色
+    shadowOffsetX: 1, // 阴影水平方向上的偏移距离
+    shadowOffsetY: 1 // 阴影垂直方向上的偏移距离
+});
+</code></pre>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/03/echarts-API/" data-title="The API of the Echarts framework." data-url="http://xiguaaxigua.cn/2016/10/03/echarts-API/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <!--<p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv"></i>位访问者</span>
+    </p>-->
+</div>
+<!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
