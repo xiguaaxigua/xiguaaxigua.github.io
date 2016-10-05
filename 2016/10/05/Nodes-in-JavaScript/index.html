@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Nodes in JavaScript | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="Nodes in JavaScript"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">Nodes in JavaScript</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-05T12:48:35.000Z">10/05/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
+<h2 id="Document对象"><a href="#Document对象" class="headerlink" title="Document对象"></a>Document对象</h2><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>==注意大小写。==</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+<th>读写性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Attributes</td>
+<td>存储节点的属性列表</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>childNodes</td>
+<td>存储节点的子节点列表</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>返回此节点的数据类型</td>
+<td></td>
+</tr>
+<tr>
+<td>Definition</td>
+<td>以DTD或XML模式给出的节点的定义</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>Doctype</td>
+<td>指定文档类型节点</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>documentElement</td>
+<td>返回文档的根元素</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>firstChild</td>
+<td>返回当前节点的第一个子节点</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>lastChild</td>
+<td>返回当前节点的最后一个子节点</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>返回XMLDOMImplementation对象</td>
+<td></td>
+</tr>
+<tr>
+<td>nextSibling</td>
+<td>返回当前节点的下一个兄弟节点</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>nodeName</td>
+<td>返回节点的名字</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>nodeType</td>
+<td>返回节点的类型</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>nodeValue</td>
+<td>返回节点的值</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>nodeTypeValue</td>
+<td>存储节点值</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>ownerDocument</td>
+<td>返回包含此节点的根文档</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>parentNode</td>
+<td>返回父节点</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>Parsed</td>
+<td>返回此节点及其子节点是否已经被解析</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>Prefix</td>
+<td>返回名称空间前缀</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>preserveWhiteSpace</td>
+<td>指定是否保留空白</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>previousSibling</td>
+<td>返回此节点的前一个兄弟节点</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>返回此节点及其后代的文本内容</td>
+<td>可读写</td>
+</tr>
+<tr>
+<td>url</td>
+<td>返回最近载入的XML文档的URL</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>Xml</td>
+<td>返回节点及其后代的XML表示</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appendChild</td>
+<td>为当前节点添加一个新的子节点，放在最后的子节点后。</td>
+</tr>
+<tr>
+<td>cloneChild</td>
+<td>返回当前节点的拷贝。</td>
+</tr>
+<tr>
+<td>createAttribute</td>
+<td>创建新属性。</td>
+</tr>
+<tr>
+<td>createCDATASection</td>
+<td>创建包含给定数据的CDATA段。</td>
+</tr>
+<tr>
+<td>createComment</td>
+<td>创建一个注释节点。</td>
+</tr>
+<tr>
+<td>createDocumentFragment</td>
+<td>创建DocumentFragment对象。</td>
+</tr>
+<tr>
+<td>createElement</td>
+<td>创建一个元素节点。</td>
+</tr>
+<tr>
+<td>createEntityReference</td>
+<td>创建EntityReference对象。</td>
+</tr>
+<tr>
+<td>createNode</td>
+<td>创建给定类型、名字和空间的节点。</td>
+</tr>
+<tr>
+<td>createPorcessingInstruction</td>
+<td>创建操作指令节点</td>
+</tr>
+<tr>
+<td>createTextNode</td>
+<td>创建包括给定数据的文本节点</td>
+</tr>
+<tr>
+<td>getElementsByTagName</td>
+<td>返回指定名字的元素集合</td>
+</tr>
+<tr>
+<td>hasChildNodes</td>
+<td>返回当前节点是否有子节点</td>
+</tr>
+<tr>
+<td>insertBefore</td>
+<td>在指定节点前插入子节点</td>
+</tr>
+<tr>
+<td>Load</td>
+<td>导入指定位置的XML文档</td>
+</tr>
+<tr>
+<td>loadXML</td>
+<td>导入指定字符串的XML文档</td>
+</tr>
+<tr>
+<td>removeChild</td>
+<td>从子结点列表中删除指定的子节点</td>
+</tr>
+<tr>
+<td>replaceChild</td>
+<td>从子节点列表中替换指定的子节点</td>
+</tr>
+<tr>
+<td>Save</td>
+<td>把XML文件存到指定节点</td>
+</tr>
+<tr>
+<td>selectNodes</td>
+<td>对节点进行指定的匹配,并返回匹配节点列表</td>
+</tr>
+<tr>
+<td>selectSingleNode</td>
+<td>对节点进行指定的匹配,并返回第一个匹配节点</td>
+</tr>
+<tr>
+<td>transformNode</td>
+<td>使用指定的样式表对节点及其后代进行转换</td>
+</tr>
+<tr>
+<td>transformNodeToObject</td>
+<td>使用指定的样式表将节点及其后代转换为对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="根节点"><a href="#根节点" class="headerlink" title="根节点"></a>根节点</h3><p>DOM把层次中的每一个对象都称为节点（node），以HTML为例：整个文档的一个根就是 <code>&lt;html&gt;&lt;/html&gt;</code> 元素，可以使用 <code>document.getElement</code> 来访问根元素，它就是整个节点树的根。</p>
+<h3 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h3><p>一般意义上的节点，根节点以下最大子节点就是主文档区 <code>&lt;body&gt;&lt;/body&gt;</code>了，可以通过 <code>document.body</code> 来访问主文档区。</p>
+<p><code>&lt;body&gt;&lt;/body&gt;</code> 区以内所有的文本及html标签都是文档的节点，分别称为：元素节点、文本节点。大家都知道HTML说到底只是文本而已，不论怎样的网页必然由这两个节点组成，也只能由这两个节点组成。</p>
+<h3 id="节点的引用"><a href="#节点的引用" class="headerlink" title="节点的引用"></a>节点的引用</h3><p>节点的绝对引用：<br>方法 | 解释<br>—|—<br>document.getElement | 返回文档的根节点<br>document.activeElement | 返回当前文档中被激活的标签节点<br>event.fromElement | 返回鼠标移出的源节点<br>event.toElement | 返回鼠标移入的源节点<br>event.srcElement | 返回激活事件的源节点</p>
+<p>节点的相对引用：<br>方法 | 解释<br>—|—<br>node.parentNode | 返回父节点<br>node.parentElement | 返回父节点<br>node.childNodes | 返回子节点集合（包含文本节点和元素节点）<br>node.children | 返回子元素节点集合<br>node.textNodes | 返回子文本节点集合<br>node.firstChild | 返回第一个子节点<br>node.lastChild | 返回最后一个子节点<br>node.nextSibling | 返回同属下一个子节点<br>node.previousSibling | 返回同属上一个子节点</p>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/05/Nodes-in-JavaScript/" data-title="Nodes in JavaScript" data-url="http://xiguaaxigua.cn/2016/10/05/Nodes-in-JavaScript/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv">1231232</i>位访问者 </span>
+    </p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
