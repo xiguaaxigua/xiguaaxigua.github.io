@@ -300,8 +300,84 @@
 <h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="根节点"><a href="#根节点" class="headerlink" title="根节点"></a>根节点</h3><p>DOM把层次中的每一个对象都称为节点（node），以HTML为例：整个文档的一个根就是 <code>&lt;html&gt;&lt;/html&gt;</code> 元素，可以使用 <code>document.getElement</code> 来访问根元素，它就是整个节点树的根。</p>
 <h3 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h3><p>一般意义上的节点，根节点以下最大子节点就是主文档区 <code>&lt;body&gt;&lt;/body&gt;</code>了，可以通过 <code>document.body</code> 来访问主文档区。</p>
 <p><code>&lt;body&gt;&lt;/body&gt;</code> 区以内所有的文本及html标签都是文档的节点，分别称为：元素节点、文本节点。大家都知道HTML说到底只是文本而已，不论怎样的网页必然由这两个节点组成，也只能由这两个节点组成。</p>
-<h3 id="节点的引用"><a href="#节点的引用" class="headerlink" title="节点的引用"></a>节点的引用</h3><p>节点的绝对引用：<br>方法 | 解释<br>—|—<br>document.getElement | 返回文档的根节点<br>document.activeElement | 返回当前文档中被激活的标签节点<br>event.fromElement | 返回鼠标移出的源节点<br>event.toElement | 返回鼠标移入的源节点<br>event.srcElement | 返回激活事件的源节点</p>
-<p>节点的相对引用：<br>方法 | 解释<br>—|—<br>node.parentNode | 返回父节点<br>node.parentElement | 返回父节点<br>node.childNodes | 返回子节点集合（包含文本节点和元素节点）<br>node.children | 返回子元素节点集合<br>node.textNodes | 返回子文本节点集合<br>node.firstChild | 返回第一个子节点<br>node.lastChild | 返回最后一个子节点<br>node.nextSibling | 返回同属下一个子节点<br>node.previousSibling | 返回同属上一个子节点</p>
+<h3 id="节点的引用"><a href="#节点的引用" class="headerlink" title="节点的引用"></a>节点的引用</h3><p>节点的绝对引用：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document.getElement</td>
+<td>返回文档的根节点</td>
+</tr>
+<tr>
+<td>document.activeElement</td>
+<td>返回当前文档中被激活的标签节点</td>
+</tr>
+<tr>
+<td>event.fromElement</td>
+<td>返回鼠标移出的源节点</td>
+</tr>
+<tr>
+<td>event.toElement</td>
+<td>返回鼠标移入的源节点</td>
+</tr>
+<tr>
+<td>event.srcElement</td>
+<td>返回激活事件的源节点</td>
+</tr>
+</tbody>
+</table>
+<p>节点的相对引用：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node.parentNode</td>
+<td>返回父节点</td>
+</tr>
+<tr>
+<td>node.parentElement</td>
+<td>返回父节点</td>
+</tr>
+<tr>
+<td>node.childNodes</td>
+<td>返回子节点集合（包含文本节点和元素节点）</td>
+</tr>
+<tr>
+<td>node.children</td>
+<td>返回子元素节点集合</td>
+</tr>
+<tr>
+<td>node.textNodes</td>
+<td>返回子文本节点集合</td>
+</tr>
+<tr>
+<td>node.firstChild</td>
+<td>返回第一个子节点</td>
+</tr>
+<tr>
+<td>node.lastChild</td>
+<td>返回最后一个子节点</td>
+</tr>
+<tr>
+<td>node.nextSibling</td>
+<td>返回同属下一个子节点</td>
+</tr>
+<tr>
+<td>node.previousSibling</td>
+<td>返回同属上一个子节点</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 <div class="ds-thread" data-thread-key="2016/10/05/Nodes-in-JavaScript/" data-title="Nodes in JavaScript" data-url="http://xiguaaxigua.cn/2016/10/05/Nodes-in-JavaScript/"></div>
