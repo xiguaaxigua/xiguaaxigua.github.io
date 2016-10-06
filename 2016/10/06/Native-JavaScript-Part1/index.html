@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Native JavaScript Part1 | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="Native JavaScript Part1"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">Native JavaScript Part1</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-06T05:27:17.000Z">10/06/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
+<h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><p>节点的分类</p>
+<ul>
+<li>元素节点 (element node) nodeType值为1</li>
+<li>属性节点 (attribute node)， nodeType值为2</li>
+<li>文本节点 (text node) 换行和空格属于文本节点， nodeType值为3</li>
+</ul>
+<h3 id="DOM相关"><a href="#DOM相关" class="headerlink" title="DOM相关"></a>DOM相关</h3><pre><code># id选择器 &lt;i id=&quot;J_DemoId&quot;&gt;&lt;/i&gt; 返回一个对象
+document.getElementById(&#39;J_DemoId&#39;);
+
+# 标签选择器 &lt;p&gt;&lt;/p&gt; 返回对象数组
+document.getElementByTagName(&#39;p&#39;);
+
+# 类选择器 &lt;i class=&quot;demo-class&quot;&gt;&lt;/i&gt; 返回对象数组
+document.getElementsByClassName(&#39;demo-class&#39;);
+
+# 类选择器选中有多个class的元素 &lt;i class=&quot;demo1 demo2&quot;&gt;&lt;/i&gt;
+document.getElementsByClassName(&#39;demo1 demo2&#39;);
+
+# 获取属性 &lt;i id=&quot;J_I&quot; title=&quot;This is i&quot;&gt;&lt;/i&gt;
+var i = document.getElementById(&#39;J_I&#39;);
+console.log(i.getAttribute(&#39;title&#39;)); // This is i
+
+# 设置属性
+i.setAttribute(&#39;title&#39;, &#39;This is another i&#39;); // 通用
+i.title = &#39;This is another method to set attribute&#39;; // 简单
+
+# 获取子节点 返回对象数组
+var bodyEle = document.getElementsByTagName(&#39;body&#39;)[0];
+console.log(bodyEle.childNodes.length);
+
+# 获取节点属性
+node.nodeType;
+
+# 获取文本节点的值，非文本节点将返回null &lt;p id=&quot;demo&quot;&gt;Hello World&lt;/p&gt;
+var pEle = document.getElementById(&#39;demo&#39;);
+console.log(pEle.nodeValue); // null，pEle为元素节点
+console.log(pEle[0].nodeValue); // Hello World
+
+# firstChild 和 childNodes[0] 等价 &lt;p id=&quot;demo&quot;&gt;Hello World&lt;/p&gt;
+var pEle = document.getElementById(&#39;demo&#39;);
+console.log(pEle.firstChild); // Hello World
+console.log(pEle.childNodes[0]); // Hello World
+
+# lastChild 和 childNodes[node.childNodes.length - 1] 等价
+</code></pre><h3 id="window-open-url-name-feature"><a href="#window-open-url-name-feature" class="headerlink" title="window.open(url, name, feature)"></a>window.open(url, name, feature)</h3><ul>
+<li>url: 链接</li>
+<li>name: 新窗口的名字</li>
+<li>feature: 配置新窗口，以逗号分隔的字符串，宽度、高度、工具条、菜单条、初始显示位置等。</li>
+</ul>
+<pre><code>&lt;p id=&quot;demo&quot; onclick=&quot;openNewWindow()&quot;&gt;Hello World&lt;/p&gt;
+&lt;script&gt;
+    function openNewWindow(){
+        var url = &#39;http://xiguaaxigua.cn/&#39;;
+        var name = &#39;博客&#39;;
+        var feature = &#39;width=500, height=500, toolbar=no, location=no, directories=no, menubar=no, scrollbars=yes, resizable=no, status=no&#39;;
+        window.open(url, name, feature)
+    }
+&lt;/script&gt;
+</code></pre><h3 id="伪协议——javascript"><a href="#伪协议——javascript" class="headerlink" title="伪协议——javascript:"></a>伪协议——javascript:</h3><p>真协议：用来在因特网上的计算机之间传输数据包，如HTTP协议（ <code>http://</code> ）、FTP协议（ <code>ftp://</code> ）等。</p>
+<p>伪协议：非标准化的协议，但是可以正确执行。 <strong>在HTML文档中通过伪协议调用JavaScript代码的做法非常不好，也不利于SEO。</strong></p>
+<p>经常见到的一种写法：（事实上这样是不友好的做法）</p>
+<pre><code>&lt;a href=&quot;javascript: void(0);&quot;&gt;使链接失效&lt;/a&gt;
+</code></pre><h3 id="尽量少的访问DOM和尽量减少标记"><a href="#尽量少的访问DOM和尽量减少标记" class="headerlink" title="尽量少的访问DOM和尽量减少标记"></a>尽量少的访问DOM和尽量减少标记</h3><p>访问DOM的方式对脚本性能会产生非常大的影响。重复使用到的DOM应该存在一个变量中缓存起来。</p>
+<p>过多不必要的元素只会增加DOM树的规模，进而增加便利DOM树以查找特定元素的时间。</p>
+<h3 id="函数应该只有一个入口和出口"><a href="#函数应该只有一个入口和出口" class="headerlink" title="函数应该只有一个入口和出口"></a>函数应该只有一个入口和出口</h3><p>比较以下代码：</p>
+<pre><code>var isPhone = true;
+var isEmail = true;
+var isUser = true;
+
+function checkUser(){
+    if(!isPhone){
+        return false;
+    }
+    if(!isEmail){
+        return false;
+    }
+    if(!isUser){
+        return false;
+    }
+}
+</code></pre><p>很明显下面的代码优于上面的代码，个人表示从来没有注意过这一点。–！</p>
+<pre><code>var isPhone = true;
+var isEmail = true;
+var isUser = true;
+
+function checkUser(){
+    if(!isPhone){
+        if(!isEmail){
+            if(!isUser){
+                return false;
+            }
+        }
+    }
+}
+</code></pre><h3 id="页面加载完毕后执行"><a href="#页面加载完毕后执行" class="headerlink" title="页面加载完毕后执行"></a>页面加载完毕后执行</h3><pre><code>window.onload = function(){
+    // your codes
+}
+</code></pre><h3 id="在处理onclick事件时也一定要处理onkeypress事件"><a href="#在处理onclick事件时也一定要处理onkeypress事件" class="headerlink" title="在处理onclick事件时也一定要处理onkeypress事件"></a>在处理onclick事件时也一定要处理onkeypress事件</h3><h3 id="DOM-Core-和-HTML-DOM"><a href="#DOM-Core-和-HTML-DOM" class="headerlink" title="DOM-Core 和 HTML-DOM"></a>DOM-Core 和 HTML-DOM</h3><h4 id="什么是DOM？"><a href="#什么是DOM？" class="headerlink" title="什么是DOM？"></a>什么是DOM？</h4><p>DOM是文档对象模型的缩写（Document Object Model），和语言无关，它提供了访问、动态修改结构文档的接口，W3C制定了DOM规范，主流浏览器都支持它。</p>
+<h4 id="DOM的组成？"><a href="#DOM的组成？" class="headerlink" title="DOM的组成？"></a>DOM的组成？</h4><p>DOM由三部分组成，分别为：DOM-Core、XML-DOM和HTML-DOM。</p>
+<ul>
+<li>DOM-Core：也称为核心DOM，定义了一套标准的针对任何结构化文档的对象，包括HTML、XHTML和XML。</li>
+<li>XML-DOM：定义了一套标准的针对XML文档的对象。</li>
+<li>HTML-DOM：定义了一套标准的针对HTML文档的对象。</li>
+</ul>
+<p>DOM-Core常用的几个方法：（这些方法并不专属于JavaScript，支持DOM的任何一种程序设计语言都可以使用它们）</p>
+<ul>
+<li><code>getElementById()</code></li>
+<li><code>getElementByTagName()</code></li>
+<li><code>getAttribute()</code></li>
+<li><code>setAttribute()</code></li>
+<li><code>createElement()</code></li>
+<li><code>createTextNode()</code></li>
+<li><code>cloneNode()</code></li>
+<li><code>appendChild()</code></li>
+<li><code>insertBefore()</code></li>
+<li><code>removeChild()</code></li>
+<li><code>replaceChild()</code></li>
+<li><code>hasChildNode()</code></li>
+</ul>
+<p>DOM-Core常见的属性：</p>
+<ul>
+<li><code>node.childNodes</code></li>
+<li><code>node.firstChild</code></li>
+<li><code>node.lastChild</code></li>
+<li><code>node.nextSibling</code></li>
+<li><code>node.previousSibling</code></li>
+<li><code>node.parentNode</code></li>
+</ul>
+<pre><code># DOM-Core
+document.getElementsByTagName(&#39;form&#39;);
+# HTML-DOM
+document.forms;
+
+var link = document.getElementById(&#39;link&#39;);
+# DOM-Core
+var linkUrl = link.getAttribute(&#39;href&#39;);
+# HTML-DOM
+var linkUrl = link.href;
+</code></pre><h3 id="动态创建标记"><a href="#动态创建标记" class="headerlink" title="动态创建标记"></a>动态创建标记</h3><p>传统方法：</p>
+<pre><code># document.write
+&lt;script&gt;
+    document.write(&#39;Hello World!&#39;);
+&lt;/script&gt;
+
+# innerHTML
+&lt;script&gt;
+    var body = document.getElementsByTagName(&#39;body&#39;)[0];
+    body.innerHTML = &#39;&lt;h1&gt;Hello World!&lt;/h1&gt;&#39;;
+&lt;/script&gt;
+</code></pre><p>DOM方法：</p>
+<pre><code># createElement
+&lt;script&gt;
+    var body = document.getElementsByTagName(&#39;body&#39;)[0];
+    var createP = document.createElement(&#39;p&#39;);
+    createP.innerHTML = &#39;Hello World!&#39;;
+    body.appendChild(createP);
+&lt;/script&gt;
+
+# createTextNode
+&lt;script&gt;
+    var body = document.getElementsByTagName(&#39;body&#39;)[0];
+    var createText = document.createTextNode(&#39;Hello World!&#39;);
+    body.appendChild(createText);
+&lt;/script&gt;
+
+# insertBefore 外部插入 &lt;p id=&quot;world&quot;&gt; World!&lt;/p&gt;
+&lt;script&gt;
+    var world = document.getElementById(&#39;world&#39;);
+    var hello = document.createElement(&#39;b&#39;);
+    var text = document.createTextNode(&#39;Hello, &#39;);
+    hello.appendChild(text);
+    world.parentNode.insertBefore(hello, world);
+&lt;/script&gt;
+
+# insertAfter 注意，DOM并没有提供这个方法，不过我们可以自己实现
+&lt;script&gt;
+    function insertAfter(newEle, targetEle){
+        var parent = targetEle.parentNode;
+        if(parent.lastChild == targetEle){
+            parent.appendChild(newEle);
+        }else{
+            parent.insertBefore(newEle, targetEle.nextSibling);
+        }
+    }
+    var world = document.getElementById(&#39;world&#39;);
+    var hello = document.createElement(&#39;b&#39;);
+    var text = document.createTextNode(&#39;Hello, &#39;);
+    hello.appendChild(text);
+    insertAfter(hello, world);
+&lt;/script&gt;
+</code></pre><h3 id="AJAX的核心——XMLHttpRequest对象"><a href="#AJAX的核心——XMLHttpRequest对象" class="headerlink" title="AJAX的核心——XMLHttpRequest对象"></a>AJAX的核心——XMLHttpRequest对象</h3><p>ajax的请求过程：创建XMLHttpRequest对象、连接服务器、发送请求、接受相应数据。</p>
+<p>下面模仿jQuery中发送ajax请求的方式封装一个自己的函数：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;JavaScript XMLHttpRequest&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;p id=&quot;btn&quot;&gt;Click me to send AJAX&lt;/p&gt;
+    &lt;script&gt;
+    var btn = document.getElementById(&#39;btn&#39;);
+    btn.onclick = function() {
+
+        ajax({
+            url: &#39;demo.php&#39;, // 请求地址
+            type: &#39;POST&#39;, // 请求方法
+            data: {
+                name: &#39;xigua&#39;,
+                age: 22
+            },
+            dateType: &#39;json&#39;,
+            success: function() {
+                // success callback
+                console.info(&#39;success&#39;);
+            },
+            error: function() {
+                // error callback
+                console.error(&#39;error&#39;)
+            }
+        });
+    };
+
+    function ajax(options) {
+        options = options || {};
+        options.type = (options.type || &quot;GET&quot;).toUpperCase();
+        options.dataType = options.dataType || &quot;json&quot;;
+        var params = formatParams(options.data);
+
+        //创建 - 非IE6 - 第一步
+        if (window.XMLHttpRequest) {
+            var xhr = new XMLHttpRequest();
+        } else { //IE6及其以下版本浏览器
+            var xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);
+        }
+
+        //接收 - 第三步
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                var status = xhr.status;
+                if (status &gt;= 200 &amp;&amp; status &lt; 300) {
+                    options.success &amp;&amp; options.success(xhr.responseText, xhr.responseXML);
+                } else {
+                    options.fail &amp;&amp; options.fail(status);
+                }
+            }
+        }
+
+        //连接 和 发送 - 第二步
+        if (options.type == &quot;GET&quot;) {
+            xhr.open(&quot;GET&quot;, options.url + &quot;?&quot; + params, true);
+            xhr.send(null);
+        } else if (options.type == &quot;POST&quot;) {
+            xhr.open(&quot;POST&quot;, options.url, true);
+            //设置表单提交时的内容类型
+            xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+            xhr.send(params);
+        }
+    }
+    //格式化参数
+    function formatParams(data) {
+        var arr = [];
+        for (var name in data) {
+            arr.push(encodeURIComponent(name) + &quot;=&quot; + encodeURIComponent(data[name]));
+        }
+        arr.push((&quot;v=&quot; + Math.random()).replace(&quot;.&quot;, &quot;&quot;));
+        return arr.join(&quot;&amp;&quot;);
+    }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre><p>demo.php里的代码很简单：</p>
+<pre><code>&lt;?php
+    $post = $_POST;
+    print_r($post);
+?&gt;
+</code></pre>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/06/Native-JavaScript-Part1/" data-title="Native JavaScript Part1" data-url="http://xiguaaxigua.cn/2016/10/06/Native-JavaScript-Part1/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv">1231232</i>位访问者 </span>
+    </p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
