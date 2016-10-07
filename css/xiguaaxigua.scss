@@ -321,8 +321,11 @@ blockquote {
 
 		color: #525252;
 	}
-	i {
-		margin: 0 .5em;
+	i:first-child {
+		margin-left: .5em;
+	}
+	i:last-child {
+		margin-right: .5em;
 	}
 }
 
