@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>10 Snippets in JavaScript Object Oriented Programming | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="10 Snippets in JavaScript Object Oriented Programming"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="http://xigua.image.alimmdn.com/Xigua-about-me.jpg?t=1470201154036" alt="">
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title">Xiguaaxigua</h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">10 Snippets in JavaScript Object Oriented Programming</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-07T09:16:48.000Z">10/07/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    <h2 id="Snippet-1"><a href="#Snippet-1" class="headerlink" title="Snippet 1"></a>Snippet 1</h2><pre><code>function checkName(){
+    // 检测姓名
+}
+function checkEmail(){
+    // 检测邮箱
+}
+</code></pre><h2 id="Snippet-2"><a href="#Snippet-2" class="headerlink" title="Snippet 2"></a>Snippet 2</h2><pre><code>var checkName = function(){
+    // 检测姓名
+};
+
+var checkEmail = function(){
+    // 检测邮箱
+};
+</code></pre><h2 id="Snippet-3"><a href="#Snippet-3" class="headerlink" title="Snippet 3"></a>Snippet 3</h2><pre><code>var CheckObj = {
+    checkName: function(){
+        // 检测姓名
+    },
+    checkEmail: function(){
+        // 检测邮箱
+    }
+};
+</code></pre><h2 id="Snippet-4"><a href="#Snippet-4" class="headerlink" title="Snippet 4"></a>Snippet 4</h2><pre><code>var CheckObj = function(){};
+CheckObj.checkName = function(){
+    // 检测姓名
+};
+CheckObj.checkEmail = function(){
+    // 检测邮箱
+};
+</code></pre><h2 id="Snippet-5"><a href="#Snippet-5" class="headerlink" title="Snippet 5"></a>Snippet 5</h2><pre><code>var CheckObj = function(){
+    return {
+        checkName: funciton(){
+            // 检测姓名
+        },
+        checkEmail: function(){
+            // 检测邮箱
+        }
+    }
+};
+</code></pre><h2 id="Snippet-6"><a href="#Snippet-6" class="headerlink" title="Snippet 6"></a>Snippet 6</h2><pre><code>var CheckObj = function(){
+    this.checkName = function(){
+        // 检测姓名
+    };
+    this.checkEmail = function(){
+        // 检测邮箱
+    };
+};
+</code></pre><h2 id="Snippet-7"><a href="#Snippet-7" class="headerlink" title="Snippet 7"></a>Snippet 7</h2><pre><code>var CheckObj = function(){};
+CheckObj.prototype.checkName = function(){
+    // 检测姓名
+};
+CheckObj.prototype.checkEmail = function(){
+    // 检测邮箱
+};
+</code></pre><h2 id="Snippet-8"><a href="#Snippet-8" class="headerlink" title="Snippet 8"></a>Snippet 8</h2><pre><code>var CheckObj = function(){};
+CheckObj.prototype = {
+    checkName: function(){
+        // 检测姓名
+    },
+    checkEmail: function(){
+        // 检测邮箱
+    }
+};
+</code></pre><h2 id="Snippet-9"><a href="#Snippet-9" class="headerlink" title="Snippet 9"></a>Snippet 9</h2><pre><code>var CheckObj = function(){
+    checkName: function(){
+        // 检测姓名
+        return this;
+    },
+    checkEmail: function(){
+        // 检测邮箱
+        return this;
+    }
+};
+</code></pre><h2 id="Snippet-10"><a href="#Snippet-10" class="headerlink" title="Snippet 10"></a>Snippet 10</h2><pre><code>var CheckObj = function(){};
+CheckObj.prototype = function(){
+    checkName: function(){
+        // 检测姓名
+        return this;
+    },
+    checkEmail: function(){
+        // 检测邮箱
+        return this;
+    }
+}
+</code></pre>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/07/10-Snippets-in-JavaScript-Object-Oriented-Programming/" data-title="10 Snippets in JavaScript Object Oriented Programming" data-url="http://xiguaaxigua.cn/2016/10/07/10-Snippets-in-JavaScript-Object-Oriented-Programming/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i id="busuanzi_value_site_pv">1231232</i>位访问者 </span>
+    </p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
