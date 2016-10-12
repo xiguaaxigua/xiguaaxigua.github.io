@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Hello yum! | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="Hello yum!"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <a class="logo" href="/"></a>
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title"><a href="/">Xiguaaxigua</a></h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">Hello yum!</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-12T06:27:40.000Z">10/12/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
+<p>yum即 Shell前端软件包管理器（<code>Yellow dog Updater, Modified</code>），类似于<code>npm</code> （<code>Node Package Manager</code>）是一个包管理器，<code>yum</code> 基于 <code>RPM</code> （<code>RPM Package Manager</code>）。</p>
+<p><code>yum</code> 常用命令：</p>
+<pre><code># 安装
+yum install foo-x.x.x.rpm
+
+# 删除
+yum remove foo-x.x.x.rpm
+# 或者
+yum erase foo-x.x.x.rpm
+
+# 更新
+yum upgrade foo
+
+# 查看信息
+yum info foo
+
+# 搜索（以包含foo字段为例）
+yum search foo
+
+# 显示包依赖关系
+yum deplist foo
+</code></pre><p><code>yum</code> 常见参数：</p>
+<pre><code># 静默执行
+-e
+
+# 忽略错误
+-t
+
+# 设置等待时间
+-R[分钟]
+
+# 自动应答（yes）
+-y 
+
+# 忽略验证问题
+--skip-broken
+　
+# 忽略GPG验证
+--nogpgcheck 
+
+# 检查可更新的包
+check-update 
+
+# 清除全部
+clearn 
+
+# 清除临时包文件（/var/cache/yum 下文件）
+clean packages
+
+# 清除rpm头文件
+clearn headers 
+
+# 清除旧的rpm头文件
+clean oldheaders 
+
+# 列出包的依赖
+deplist 
+
+# 可安装和可更新的RPM包
+list 
+
+# 已安装的包
+list installed
+
+# 已安装且不在资源库的包
+list extras 
+
+# 可安装和可更新的RPM包 信息
+info 
+
+# 已安装包的信息(-qa 参数相似)
+info installed 
+
+# 安装包
+install[RPM包] 
+
+# 安装本地的 RPM包
+localinstall
+
+# 更新包
+update[RPM包] 
+
+# 升级系统
+upgrade 
+
+# 搜索包
+search[关键词] 
+
+# 搜索特定包文件名
+provides[关键词] 
+
+# 重新安装包
+reinstall[RPM包] 
+
+# 显示资源库的配置
+repolist
+
+# 指定依赖
+resolvedep
+
+# 卸载包
+remove[RPM包]
+</code></pre>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/12/Hello-yum/" data-title="Hello yum!" data-url="http://xiguaaxigua.cn/2016/10/12/Hello-yum/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i>2</i><i id="busuanzi_value_site_pv">...</i>位访问者 </span>
+    </p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
