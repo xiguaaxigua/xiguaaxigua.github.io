@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html id="top">
+<head>
+    <meta charset="utf-8">
+    
+    <title>腾讯云部署博客 | Xiguaaxigua</title>
+    
+    <meta name="author" content="zhiyuan.liu">
+    
+    
+    <meta name="description" content="前端技术, web开发, 交流分享, javascript, hexo, blog">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta property="og:title" content="腾讯云部署博客"/>
+    
+    <meta property="og:site_name" content="Xiguaaxigua"/>
+    
+    <meta property="og:image" content="undefined"/>
+    
+    <link href="http://xigua.image.alimmdn.com/favicon.ico?t=1475142583830" rel="shortcut icon">
+    <link href="/css/xiguaaxigua.css" rel="stylesheet">
+    <link href="/css/captionjs.min.css" rel="stylesheet"/>
+    <link href="/css/prettify.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.caption.min.js"></script>
+    <script type="text/javascript" src="/js/xiguaaxigua.js"></script>
+
+    
+</head>
+
+<body>
+  <header class="header">
+    <a class="logo" href="/"></a>
+    <a class="fold" href="#top"></a>
+    <div class="menu">
+        <h1 class="header-title"><a href="/">Xiguaaxigua</a></h1>
+        <p class="header-desc">Web Developer and Obsessive</p>
+        <nav class="nav">
+            <div class="nav-group">
+                
+                <a class="nav-item" href="/">Blog</a>
+                
+                <a class="nav-item" href="/archives">Archives</a>
+                
+                <a class="nav-item" href="/messages">Messages</a>
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="post">
+      
+<h2 class="post-title">腾讯云部署博客</h2>
+<p class="post-info">
+    <i class="icon icon-clock"></i>
+    <time datetime="2016-10-13T06:31:13.000Z">10/13/2016</time>
+    
+
+<i class="icon icon-tag"></i>
+<a class="tag-a" href="/tags/JavaScript/">JavaScript</a>
+
+</p>
+
+<div class="post-content">
+    </p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这里以腾讯云为例，部署一下自己的node项目（博客）。腾讯云服务器的购买、使用等问题这里就不再赘述了。</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><pre><code>Login: root
+Password: Liuzhiyuan1993**
+</code></pre><h2 id="更新yum"><a href="#更新yum" class="headerlink" title="更新yum"></a>更新yum</h2><p>yum是linux下的包管理器，想了解更多的话，可以查看我的另一篇博文《<a href="http://xiguaaxigua.cn/2016/10/12/Hello-yum/">Hello yum!</a>》。</p>
+<pre><code>yum -y update
+</code></pre><h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><p><a href="https://nodejs.org/en/download/package-manager/">各平台参考官网</a>，这里以 <code>CentOS</code> 为例。</p>
+<pre><code># CentOS
+curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+
+# 安装
+yum -y install nodejs
+</code></pre><p>如下图所示，看到 <code>node</code> 和 <code>npm</code> 的版本号，表示安装成功。<br><img src="http://xigua.image.alimmdn.com/CentOS1.png?t=1476252166642" alt=""></p>
+<h2 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h2><pre><code>npm install -g pm2
+</code></pre><p>如下图所示，看到 <code>pm2</code> 的版本号，表示安装成功。<br><img src="http://xigua.image.alimmdn.com/CentOS2.png?t=1476252242503" alt=""></p>
+<h2 id="安装MongoDB"><a href="#安装MongoDB" class="headerlink" title="安装MongoDB"></a>安装MongoDB</h2><p>这里以 <code>MongoDB</code> 的3.2.10版本为例，你可以通过访问<a href="https://www.mongodb.com/download-center?jmp=nav#community">MongoDB官网</a>查看最新的版本。</p>
+<p>相关文章：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html">关于wget命令</a>。<br>```<h1 id="程序一般存储在-usr-src中"><a href="#程序一般存储在-usr-src中" class="headerlink" title="程序一般存储在/usr/src中"></a>程序一般存储在/usr/src中</h1>cd /usr/src</li>
+</ul>
+<h1 id="wget是linux命令（World-Wide-Web-get），用于从网络上下载资源，没有指定目录，下载资源回默认目录"><a href="#wget是linux命令（World-Wide-Web-get），用于从网络上下载资源，没有指定目录，下载资源回默认目录" class="headerlink" title="wget是linux命令（World Wide Web get），用于从网络上下载资源，没有指定目录，下载资源回默认目录"></a>wget是linux命令（World Wide Web get），用于从网络上下载资源，没有指定目录，下载资源回默认目录</h1><h1 id="查看wget的版本"><a href="#查看wget的版本" class="headerlink" title="查看wget的版本"></a>查看wget的版本</h1><p>wget -V</p>
+<h1 id="下载mongodb，由于网速原因，这一步的执行速度可能略有不同（我很慢）"><a href="#下载mongodb，由于网速原因，这一步的执行速度可能略有不同（我很慢）" class="headerlink" title="下载mongodb，由于网速原因，这一步的执行速度可能略有不同（我很慢）"></a>下载mongodb，由于网速原因，这一步的执行速度可能略有不同（我很慢）</h1><p>wget <a href="https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.2.10.tgz">https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.2.10.tgz</a></p>
+<h1 id="下载成功后解压"><a href="#下载成功后解压" class="headerlink" title="下载成功后解压"></a>下载成功后解压</h1><p>tar zxvf mongodb-linux-x86_64-amazon-3.2.10.tgz</p>
+<h1 id="将解压后的文件夹移动到mongodb中"><a href="#将解压后的文件夹移动到mongodb中" class="headerlink" title="将解压后的文件夹移动到mongodb中"></a>将解压后的文件夹移动到mongodb中</h1><p>mv mongodb-linux-x86_64-amazon-3.2.10.tgz mongodb</p>
+<h1 id="创建var文件，存放mongodb的配置"><a href="#创建var文件，存放mongodb的配置" class="headerlink" title="创建var文件，存放mongodb的配置"></a>创建var文件，存放mongodb的配置</h1><p>mkdir /var/mongodb<br>mkdir /var/mongodb/data<br>mkdir /var/mongodb/logs</p>
+<h1 id="编辑-etc-rc-d-rc-local文件，将mongodb的启动命令加入到CentOS的启动项中"><a href="#编辑-etc-rc-d-rc-local文件，将mongodb的启动命令加入到CentOS的启动项中" class="headerlink" title="编辑/etc/rc.d/rc.local文件，将mongodb的启动命令加入到CentOS的启动项中"></a>编辑/etc/rc.d/rc.local文件，将mongodb的启动命令加入到CentOS的启动项中</h1><p>vim /etc/rc.d/rc.local</p>
+<h1 id="将下面这行代码插入到rc-local文件中"><a href="#将下面这行代码插入到rc-local文件中" class="headerlink" title="将下面这行代码插入到rc.local文件中"></a>将下面这行代码插入到rc.local文件中</h1><p>/usr/local/mongodb/bin/mongod –dbpath=/var/mongodb/data –logpath /var/mongodb/logs/log.log -fork</p>
+<pre><code>
+配置如下图：
+
+![](http://xigua.image.alimmdn.com/CentOS3.png?t=1476258013344)
+
+运行以下命令，来查看mongodb是否配置完毕：
+</code></pre><p>/usr/local/mongodb/bin/mongod –dbpath=/var/mongodb/data –logpath /var/mongodb/logs/log.log -fork</p>
+<pre><code>
+当看到下图所示时表示配置成功：
+
+![](http://xigua.image.alimmdn.com/CentOS4.png?t=1476258013346)
+
+## 搭建svn服务器，自动同步代码
+
+### 安装svn
+</code></pre><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>yum install -y subversion</p>
+<h1 id="查看版本号"><a href="#查看版本号" class="headerlink" title="查看版本号"></a>查看版本号</h1><p>svnserve –version</p>
+<pre><code>
+当返回以下结果时表示安装成功：
+
+![](http://xigua.image.alimmdn.com/CentOS5.png?t=1476258196520)
+
+### 创建版本库
+</code></pre><h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><p>mkdir /var/svn</p>
+<h1 id="xigua为我的项目名称，你可以随便取"><a href="#xigua为我的项目名称，你可以随便取" class="headerlink" title="xigua为我的项目名称，你可以随便取"></a>xigua为我的项目名称，你可以随便取</h1><p>mkdir /var/svn/xigua</p>
+<p>cd /var/svn/xigua</p>
+<pre><code>
+可以看到，自动生成了以下文件：
+
+![](http://xigua.image.alimmdn.com/CentOS6.png?t=1476258302312)
+
+### 创建authz
+</code></pre><h1 id="进入conf"><a href="#进入conf" class="headerlink" title="进入conf"></a>进入conf</h1><p>cd conf</p>
+<h1 id="编辑authz文件，该文件为权限配置文件"><a href="#编辑authz文件，该文件为权限配置文件" class="headerlink" title="编辑authz文件，该文件为权限配置文件"></a>编辑authz文件，该文件为权限配置文件</h1><p>vim authz</p>
+<pre><code>
+如下图：
+
+![](http://xigua.image.alimmdn.com/CentOS10.png?t=1476266243040)
+
+### 配置passwd
+</code></pre><p>vim passwd</p>
+<pre><code>
+如下图：
+![](http://xigua.image.alimmdn.com/CentOS11.png?t=1476266211432)
+
+### 配置svnserve.conf
+注意：这里所有的配置项需要前不能有空格，否则会报错的。
+</code></pre><p>vim svnserve.conf</p>
+<pre><code>
+如下图：
+
+![](http://xigua.image.alimmdn.com/CentOS12.png?t=1476266211441)
+
+### 启动svn和终结svn进程
+</code></pre><h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>svnserve -d -r /home/svn</p>
+<h1 id="终结进程"><a href="#终结进程" class="headerlink" title="终结进程"></a>终结进程</h1><p>killall svnserve</p>
+<pre><code>### 测试一下
+我们先在服务器上添加一个文件：
+</code></pre><h1 id="cd到项目目录"><a href="#cd到项目目录" class="headerlink" title="cd到项目目录"></a>cd到项目目录</h1><p>cd /home/www/xigua</p>
+<h1 id="创建新文件"><a href="#创建新文件" class="headerlink" title="创建新文件"></a>创建新文件</h1><p>touch demo.txt</p>
+<pre><code>
+然后再本机上拉一下代码：
+</code></pre><h1 id="xxx-xxx-xxx-xxx为你的服务器的ip"><a href="#xxx-xxx-xxx-xxx为你的服务器的ip" class="headerlink" title="xxx.xxx.xxx.xxx为你的服务器的ip"></a>xxx.xxx.xxx.xxx为你的服务器的ip</h1><p>svn checkout <a href="http://xxx.xxx.xxx.xxx/xigua">http://xxx.xxx.xxx.xxx/xigua</a></p>
+<p>cd xigua<br>ll</p>
+<h1 id="可以看到代码已经拉到本地"><a href="#可以看到代码已经拉到本地" class="headerlink" title="可以看到代码已经拉到本地"></a>可以看到代码已经拉到本地</h1><h1 id="在本机新建文件上传到服务器"><a href="#在本机新建文件上传到服务器" class="headerlink" title="在本机新建文件上传到服务器"></a>在本机新建文件上传到服务器</h1><p>touch test.txt<br>svn ci -m ‘test’</p>
+<h1 id="在服务器中通过svn-up可以拉去到刚才上传的test-txt"><a href="#在服务器中通过svn-up可以拉去到刚才上传的test-txt" class="headerlink" title="在服务器中通过svn up可以拉去到刚才上传的test.txt"></a>在服务器中通过svn up可以拉去到刚才上传的test.txt</h1><pre><code>
+### 同步代码
+到现在为止我们可以在本地修改代码上传到服务器上，但是需要在服务器上拉去以后用户才可以访问到。下面我们来做一个钩子来自动更新代码。
+</code></pre><h1 id="进去hooks中"><a href="#进去hooks中" class="headerlink" title="进去hooks中"></a>进去hooks中</h1><p>cd /var/svn/xigua/hooks</p>
+<h1 id="创建post-commit-文件"><a href="#创建post-commit-文件" class="headerlink" title="创建post-commit 文件"></a>创建post-commit 文件</h1><p>touch post-coommit</p>
+<h1 id="编辑post-commit"><a href="#编辑post-commit" class="headerlink" title="编辑post-commit"></a>编辑post-commit</h1><p>vim post-comimt</p>
+<pre><code>
+post-commit 的配置如下图：
+
+![](http://xigua.image.alimmdn.com/CentOS13.png?t=1476266976531)
+</code></pre><h1 id="修改post-commit用户为www目录用户"><a href="#修改post-commit用户为www目录用户" class="headerlink" title="修改post-commit用户为www目录用户"></a>修改post-commit用户为www目录用户</h1><p>chown root:root post-commit  </p>
+<h1 id="给post-commit-执行权限"><a href="#给post-commit-执行权限" class="headerlink" title="给post-commit 执行权限"></a>给post-commit 执行权限</h1><p>chmod 755 post-commit</p>
+<pre><code>
+### 再来测试一下
+现在我们在本地通过以下命令新建hello.txt文件并上传：
+</code></pre><p>touch hello.txt<br>svn add hello.txt<br>svn ci -m ‘hello’</p>
+<pre><code>
+然后在服务器上：
+</code></pre><p>cd /home/www/xigua<br>ls</p>
+<pre><code>
+可以看到以下结果，说明我们的钩子已经成功。
+
+![](http://xigua.image.alimmdn.com/CentOS14.png?t=1476268236953)
+
+### 最后来吧SVN的启动命令加入到服务器的启动项中
+
+
+## 配置Redis
+</code></pre><h1 id="首先安装gcc编译器"><a href="#首先安装gcc编译器" class="headerlink" title="首先安装gcc编译器"></a>首先安装gcc编译器</h1><p>yum install gcc</p>
+<h1 id="下载redis"><a href="#下载redis" class="headerlink" title="下载redis"></a>下载redis</h1><p>wget <a href="http://download.redis.io/releases/redis-3.2.4.tar.gz">http://download.redis.io/releases/redis-3.2.4.tar.gz</a></p>
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><p>tar xzf redis-3.2.4.tar.gz</p>
+<h1 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h1><p>cd redis-3.2.4<br>```</p>
+</div>
+
+<div class="ds-thread" data-thread-key="2016/10/13/deploy-blog-in-Tencent/" data-title="腾讯云部署博客" data-url="http://xiguaaxigua.cn/2016/10/13/deploy-blog-in-Tencent/"></div>
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiguaaxigua"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+  </div>
+  <div class="footer">
+    <p class="copyright">
+        
+        &copy; 2016 zhiyuan.liu
+        
+    </p>
+    <p>
+        <span class="count" id="busuanzi_container_site_pv">Hello World！您是本站第<i>2</i><i id="busuanzi_value_site_pv">...</i>位访问者 </span>
+    </p>
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+</html>
